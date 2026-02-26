@@ -321,6 +321,7 @@ return [
             'branding' => 'Márkajelzés',
             'logging' => 'Naplózás',
             'attachments' => 'Mellékletek',
+            'auth_emails' => 'Auth e-mailek',
         ],
 
         'sections' => [
@@ -340,6 +341,8 @@ return [
             'cleanup_description' => 'Régi elküldött e-mail bejegyzések automatikus törlése ütemezetten.',
             'attachment_rules' => 'Melléklet szabályok',
             'attachment_rules_description' => 'Fájlmellékletek korlátainak beállítása a szerkesztett e-mailekhez.',
+            'auth_emails' => 'Auth e-mail felülírások',
+            'auth_emails_description' => 'A Laravel alapértelmezett hitelesítési e-mailjeinek felülírása egyéni sablonokkal.',
         ],
 
         'fields' => [
@@ -383,6 +386,12 @@ return [
             'allowed_extensions' => 'Engedélyezett kiterjesztések',
             'allowed_extensions_placeholder' => 'Kiterjesztés hozzáadása (pl. pdf)',
             'allowed_extensions_helper' => 'Feltöltéshez engedélyezett fájlkiterjesztések.',
+            'override_verification' => 'E-mail-megerősítés felülírása',
+            'override_verification_helper' => 'A „user-verify-email" sablon használata a Laravel alapértelmezett megerősítő e-mailje helyett.',
+            'override_password_reset' => 'Jelszó-visszaállítás felülírása',
+            'override_password_reset_helper' => 'A „user-password-reset" sablon használata a Laravel alapértelmezett jelszó-visszaállító e-mailje helyett.',
+            'override_welcome' => 'Üdvözlő e-mail felülírása',
+            'override_welcome_helper' => 'Üdvözlő e-mail küldése a „user-welcome" sablonnal új felhasználó regisztrálásakor.',
         ],
     ],
 

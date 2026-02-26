@@ -321,6 +321,7 @@ return [
             'branding' => 'Branding',
             'logging' => 'Protokollierung',
             'attachments' => 'Anhänge',
+            'auth_emails' => 'Auth-E-Mails',
         ],
 
         'sections' => [
@@ -340,6 +341,8 @@ return [
             'cleanup_description' => 'Alte gesendete E-Mail-Einträge automatisch nach Zeitplan löschen.',
             'attachment_rules' => 'Anhang-Regeln',
             'attachment_rules_description' => 'Beschränkungen für Dateianhänge in verfassten E-Mails konfigurieren.',
+            'auth_emails' => 'Auth-E-Mail-Überschreibungen',
+            'auth_emails_description' => 'Laravels Standard-Authentifizierungs-E-Mails durch Ihre benutzerdefinierten Vorlagen ersetzen.',
         ],
 
         'fields' => [
@@ -383,6 +386,12 @@ return [
             'allowed_extensions' => 'Erlaubte Dateierweiterungen',
             'allowed_extensions_placeholder' => 'Erweiterung hinzufügen (z.B. pdf)',
             'allowed_extensions_helper' => 'Erlaubte Dateierweiterungen für den Upload.',
+            'override_verification' => 'E-Mail-Verifizierung überschreiben',
+            'override_verification_helper' => 'Die Vorlage „user-verify-email" anstelle der Laravel-Standard-Verifizierungs-E-Mail verwenden.',
+            'override_password_reset' => 'Passwort-Zurücksetzung überschreiben',
+            'override_password_reset_helper' => 'Die Vorlage „user-password-reset" anstelle der Laravel-Standard-Passwort-Zurücksetzungs-E-Mail verwenden.',
+            'override_welcome' => 'Willkommens-E-Mail überschreiben',
+            'override_welcome_helper' => 'Eine Willkommens-E-Mail mit der Vorlage „user-welcome" senden, wenn sich ein neuer Benutzer registriert.',
         ],
     ],
 

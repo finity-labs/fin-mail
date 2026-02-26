@@ -33,6 +33,7 @@ class UninstallCommand extends Command
         'create_branding_settings.php',
         'create_logging_settings.php',
         'create_general_settings.php',
+        'create_auth_email_settings.php',
     ];
 
     protected $signature = 'fin-mail:uninstall';

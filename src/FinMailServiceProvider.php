@@ -29,6 +29,7 @@ class FinMailServiceProvider extends PackageServiceProvider
                 '../settings/create_branding_settings',
                 '../settings/create_logging_settings',
                 '../settings/create_general_settings',
+                '../settings/create_auth_email_settings',
             ])
             ->hasCommands([
                 Commands\InstallCommand::class,
@@ -55,22 +56,32 @@ class FinMailServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        if (config('fin-mail.auth_emails.override_verification')) {
-            $this->registerVerificationOverride();
-        }
-
-        if (config('fin-mail.auth_emails.override_password_reset')) {
-            $this->registerPasswordResetOverride();
-        }
-
-        if (config('fin-mail.auth_emails.override_welcome')) {
-            \Illuminate\Support\Facades\Event::listen(
-                \Illuminate\Auth\Events\Registered::class,
-                Listeners\SendWelcomeEmail::class,
-            );
-        }
-
+        $this->registerAuthEmailOverrides();
         $this->registerScheduledCommands();
+    }
+
+    protected function registerAuthEmailOverrides(): void
+    {
+        try {
+            $authEmails = app(Settings\AuthEmailSettings::class);
+
+            if ($authEmails->override_verification) {
+                $this->registerVerificationOverride();
+            }
+
+            if ($authEmails->override_password_reset) {
+                $this->registerPasswordResetOverride();
+            }
+
+            if ($authEmails->override_welcome) {
+                \Illuminate\Support\Facades\Event::listen(
+                    \Illuminate\Auth\Events\Registered::class,
+                    Listeners\SendWelcomeEmail::class,
+                );
+            }
+        } catch (\Throwable) {
+            // Settings table may not exist yet (pre-migration).
+        }
     }
 
     protected function registerScheduledCommands(): void

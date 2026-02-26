@@ -101,7 +101,7 @@ class InstallCommand extends Command
 
         $this->table(['Next Steps', 'Details'], [
             ['Configure settings', 'Visit the FinMail settings page in Filament admin'],
-            ['Auth overrides', 'Set auth_emails options to true in config/fin-mail.php'],
+            ['Auth overrides', 'Enable auth email overrides in Settings → Auth Emails'],
         ]);
 
         return self::SUCCESS;

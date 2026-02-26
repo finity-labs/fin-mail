@@ -58,21 +58,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Auth Email Overrides
-    |--------------------------------------------------------------------------
-    |
-    | When enabled, the plugin will automatically override Laravel's default
-    | auth emails (verification, password reset, welcome) without manual setup.
-    |
-    */
-    'auth_emails' => [
-        'override_verification' => false,
-        'override_password_reset' => false,
-        'override_welcome' => false,
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Attachments Disk
     |--------------------------------------------------------------------------
     */
@@ -98,17 +83,4 @@ return [
         'open' => '{{',
         'close' => '}}',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Navigation
-    |--------------------------------------------------------------------------
-    */
-    'navigation' => [
-        'enabled' => true,
-        'group' => 'Email',
-        'icon' => 'heroicon-o-envelope',
-        'sort' => 50,
-    ],
-
 ];
