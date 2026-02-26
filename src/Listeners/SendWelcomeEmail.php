@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace FinityLabs\FinMail\Listeners;
 
+use Filament\Auth\Events\Registered;
 use FinityLabs\FinMail\Mail\TemplateMail;
 use FinityLabs\FinMail\Models\EmailTemplate;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
 
 class SendWelcomeEmail
 {
     public function handle(Registered $event): void
     {
-        $user = $event->user;
+        $user = $event->getUser();
 
         $template = EmailTemplate::findByKey('user-welcome');
 

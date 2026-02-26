@@ -75,7 +75,7 @@ class FinMailServiceProvider extends PackageServiceProvider
 
             if ($authEmails->override_welcome) {
                 \Illuminate\Support\Facades\Event::listen(
-                    \Illuminate\Auth\Events\Registered::class,
+                    \Filament\Auth\Events\Registered::class,
                     Listeners\SendWelcomeEmail::class,
                 );
             }
