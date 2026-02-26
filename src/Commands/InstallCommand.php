@@ -60,10 +60,7 @@ class InstallCommand extends Command
         $this->callSilently('vendor:publish', [
             '--tag' => 'fin-mail-migrations',
         ]);
-        $this->callSilently('vendor:publish', [
-            '--tag' => 'fin-mail-settings-migrations',
-        ]);
-        $this->info('  Migrations published (database + settings)');
+        $this->info('  Migrations published');
 
         if ($this->confirm('Run migrations now?', true)) {
             $this->comment('Running migrations...');

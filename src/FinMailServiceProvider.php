@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace FinityLabs\FinMail;
 
+use Carbon\Carbon;
 use FinityLabs\FinMail\Contracts\EditorContract;
 use FinityLabs\FinMail\Editors\DefaultEditor;
+use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -25,25 +27,16 @@ class FinMailServiceProvider extends PackageServiceProvider
                 'create_email_templates_table',
                 'create_email_template_versions_table',
                 'create_sent_emails_table',
+                '../settings/create_attachment_settings',
+                '../settings/create_branding_settings',
+                '../settings/create_logging_settings',
+                '../settings/create_mail_settings',
             ])
             ->hasCommands([
                 Commands\InstallCommand::class,
                 Commands\UninstallCommand::class,
                 Commands\CleanupSentEmails::class,
             ]);
-
-        $this->registerSettingsMigrations();
-    }
-
-    protected function registerSettingsMigrations(): void
-    {
-        $settingsPath = __DIR__.'/../database/settings';
-
-        $this->loadMigrationsFrom($settingsPath);
-
-        $this->publishes([
-            $settingsPath => database_path('settings'),
-        ], 'fin-mail-settings-migrations');
     }
 
     public function packageRegistered(): void
@@ -84,15 +77,19 @@ class FinMailServiceProvider extends PackageServiceProvider
 
     protected function registerScheduledCommands(): void
     {
-        $logging = app(Settings\LoggingSettings::class);
-
-        if (! $logging->cleanup_enabled) {
-            return;
-        }
-
         $this->app->afterResolving(
             \Illuminate\Console\Scheduling\Schedule::class,
-            function (\Illuminate\Console\Scheduling\Schedule $schedule) use ($logging): void {
+            function (\Illuminate\Console\Scheduling\Schedule $schedule): void {
+                try {
+                    $logging = app(Settings\LoggingSettings::class);
+                } catch (\Throwable) {
+                    return;
+                }
+
+                if (! $logging->cleanup_enabled) {
+                    return;
+                }
+
                 $event = $schedule->command('fin-mail:cleanup')
                     ->description('Clean up old sent email records');
 

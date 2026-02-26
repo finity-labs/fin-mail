@@ -29,10 +29,10 @@ class UninstallCommand extends Command
     ];
 
     private const SETTINGS_MIGRATION_FILES = [
-        'create_mail_settings.php',
+        'create_attachment_settings.php',
+        'create_branding_settings.php',
         'create_logging_settings.php',
-        'create_notification_settings.php',
-        'create_template_settings.php',
+        'create_mail_settings.php',
     ];
 
     protected $signature = 'fin-mail:uninstall';
@@ -50,6 +50,7 @@ class UninstallCommand extends Command
         $this->cleanupPublishedConfig();
         $this->cleanupPublishedViews();
         $this->cleanupPublishedTranslations();
+        $this->clearCaches();
 
         $this->newLine();
         $this->info('FinMail plugin uninstalled. You can now run: composer remove finity-labs/fin-mail');
@@ -101,6 +102,27 @@ class UninstallCommand extends Command
 
             if ($deleted > 0) {
                 $this->info("  Removed {$deleted} settings entries");
+            }
+        }
+
+        // Clean up migrations table entries
+        if (Schema::hasTable('migrations')) {
+            $allMigrations = [...self::MIGRATION_FILES, ...self::SETTINGS_MIGRATION_FILES];
+            $migrationNames = array_map(
+                fn (string $file) => pathinfo($file, PATHINFO_FILENAME),
+                $allMigrations,
+            );
+
+            $deleted = \Illuminate\Support\Facades\DB::table('migrations')
+                ->where(function ($query) use ($migrationNames): void {
+                    foreach ($migrationNames as $name) {
+                        $query->orWhere('migration', 'like', "%{$name}");
+                    }
+                })
+                ->delete();
+
+            if ($deleted > 0) {
+                $this->info("  Removed {$deleted} migration records");
             }
         }
     }
@@ -206,6 +228,17 @@ class UninstallCommand extends Command
 
         $this->deleteDirectory($translationsPath);
         $this->info('  Deleted: lang/vendor/fin-mail/');
+    }
+
+    protected function clearCaches(): void
+    {
+        $this->comment('Clearing caches...');
+
+        $this->callSilently('settings:clear-cache');
+        $this->info('  Settings cache cleared');
+
+        $this->callSilently('cache:clear');
+        $this->info('  Application cache cleared');
     }
 
     protected function deleteDirectory(string $directory): void
