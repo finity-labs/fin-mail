@@ -102,7 +102,7 @@ class EmailTemplateSeeder extends Seeder
                 'de' => 'Neuen Benutzer begrüßen',
                 'hu' => 'Új felhasználó üdvözlése',
             ],
-            'category' => 'transactional',
+            'category' => 'system',
             'subject' => [
                 'en' => 'Welcome to {{ config.app.name }}, {{ user.name }}!',
                 'de' => 'Willkommen bei {{ config.app.name }}, {{ user.name }}!',

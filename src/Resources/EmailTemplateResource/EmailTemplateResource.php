@@ -12,6 +12,7 @@ use Filament\Tables\Table;
 use FinityLabs\FinMail\Enums\NavigationGroup;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\Schemas\EmailTemplateForm;
+use FinityLabs\FinMail\Resources\EmailTemplateResource\Schemas\EmailTemplateInfolist;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\Tables\EmailTemplatesTable;
 use UnitEnum;
 
@@ -37,6 +38,11 @@ class EmailTemplateResource extends Resource
         return EmailTemplateForm::configure($schema);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return EmailTemplateInfolist::configure($schema);
+    }
+
     public static function table(Table $table): Table
     {
         return EmailTemplatesTable::configure($table);
@@ -52,6 +58,7 @@ class EmailTemplateResource extends Resource
         return [
             'index' => Pages\ListEmailTemplates::route('/'),
             'create' => Pages\CreateEmailTemplate::route('/create'),
+            'view' => Pages\ViewEmailTemplate::route('/{record}'),
             'edit' => Pages\EditEmailTemplate::route('/{record}/edit'),
             'compose' => Pages\ComposeEmail::route('/{record}/compose'),
         ];
