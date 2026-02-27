@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FinityLabs\FinMail\Resources\EmailTemplateResource\Tables;
 
+use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -64,7 +65,7 @@ class EmailTemplatesTable
 
                 IconColumn::make('is_locked')
                     ->label(__('fin-mail::fin-mail.template.columns.locked'))
-                    ->icon(fn (bool $state): ?string => $state ? 'heroicon-s-lock-closed' : null)
+                    ->icon(fn (bool $state): string|BackedEnum|null => $state ? Heroicon::LockClosed : null)
                     ->color(fn (bool $state): ?string => $state ? 'warning' : null)
                     ->tooltip(fn (bool $state): ?string => $state ? __('fin-mail::fin-mail.template.tooltips.locked') : null),
 

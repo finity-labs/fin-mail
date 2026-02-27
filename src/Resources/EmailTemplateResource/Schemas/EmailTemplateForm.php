@@ -37,7 +37,7 @@ class EmailTemplateForm
                         ->schema([
                             TextEntry::make('locked_notice')
                                 ->label('')
-                                ->icon('heroicon-s-lock-closed')
+                                ->icon(Heroicon::LockClosed)
                                 ->iconColor('warning')
                                 ->state(__('fin-mail::fin-mail.template.notices.locked'))
                                 ->visible(fn (?EmailTemplate $record): bool => (bool) $record?->is_locked)
