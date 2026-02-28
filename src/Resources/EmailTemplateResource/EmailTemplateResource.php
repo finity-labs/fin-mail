@@ -38,6 +38,16 @@ class EmailTemplateResource extends Resource
         return $plugin->getEmailTemplateNavigationGroup();
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('fin-mail::fin-mail.models.email_template');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('fin-mail::fin-mail.models.email_templates');
+    }
+
     public static function getNavigationLabel(): string
     {
         return __('fin-mail::fin-mail.navigation.templates');

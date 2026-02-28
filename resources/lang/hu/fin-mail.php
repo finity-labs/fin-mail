@@ -18,6 +18,15 @@ return [
         'settings' => 'Beállítások',
     ],
 
+    'models' => [
+        'email_template' => 'E-mail sablon',
+        'email_templates' => 'E-mail sablonok',
+        'email_theme' => 'E-mail téma',
+        'email_themes' => 'E-mail témák',
+        'sent_email' => 'Elküldött e-mail',
+        'sent_emails' => 'Elküldött e-mailek',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Email Template Resource
@@ -368,7 +377,7 @@ return [
             'attachment_rules' => 'Melléklet szabályok',
             'attachment_rules_description' => 'Fájlmellékletek korlátainak beállítása a szerkesztett e-mailekhez.',
             'auth_emails' => 'Auth e-mail felülírások',
-            'auth_emails_description' => 'A Laravel alapértelmezett hitelesítési e-mailjeinek felülírása egyéni sablonokkal.',
+            'auth_emails_description' => 'Az alkalmazás alapértelmezett hitelesítési e-mailjeinek felülírása egyéni sablonokkal.',
         ],
 
         'fields' => [
@@ -413,9 +422,9 @@ return [
             'allowed_extensions_placeholder' => 'Kiterjesztés hozzáadása (pl. pdf)',
             'allowed_extensions_helper' => 'Feltöltéshez engedélyezett fájlkiterjesztések.',
             'override_verification' => 'E-mail-megerősítés felülírása',
-            'override_verification_helper' => 'A „user-verify-email" sablon használata a Laravel alapértelmezett megerősítő e-mailje helyett.',
+            'override_verification_helper' => 'A „user-verify-email" sablon használata az alkalmazás alapértelmezett megerősítő e-mailje helyett.',
             'override_password_reset' => 'Jelszó-visszaállítás felülírása',
-            'override_password_reset_helper' => 'A „user-password-reset" sablon használata a Laravel alapértelmezett jelszó-visszaállító e-mailje helyett.',
+            'override_password_reset_helper' => 'A „user-password-reset" sablon használata az alkalmazás alapértelmezett jelszó-visszaállító e-mailje helyett.',
             'override_welcome' => 'Üdvözlő e-mail felülírása',
             'override_welcome_helper' => 'Üdvözlő e-mail küldése a „user-welcome" sablonnal új felhasználó regisztrálásakor.',
         ],

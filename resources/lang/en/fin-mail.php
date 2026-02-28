@@ -18,6 +18,15 @@ return [
         'settings' => 'Settings',
     ],
 
+    'models' => [
+        'email_template' => 'Email template',
+        'email_templates' => 'Email templates',
+        'email_theme' => 'Email theme',
+        'email_themes' => 'Email themes',
+        'sent_email' => 'Sent email',
+        'sent_emails' => 'Sent emails',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Email Template Resource
@@ -368,7 +377,7 @@ return [
             'attachment_rules' => 'Attachment Rules',
             'attachment_rules_description' => 'Configure limits for file attachments in composed emails.',
             'auth_emails' => 'Auth Email Overrides',
-            'auth_emails_description' => 'Override Laravel\'s default authentication emails with your custom templates.',
+            'auth_emails_description' => 'Override the application\'s default authentication emails with your custom templates.',
         ],
 
         'fields' => [
@@ -413,9 +422,9 @@ return [
             'allowed_extensions_placeholder' => 'Add extension (e.g., pdf)',
             'allowed_extensions_helper' => 'File extensions allowed for upload.',
             'override_verification' => 'Override Email Verification',
-            'override_verification_helper' => 'Use the "user-verify-email" template instead of Laravel\'s default verification email.',
+            'override_verification_helper' => 'Use the "user-verify-email" template instead of the application\'s default verification email.',
             'override_password_reset' => 'Override Password Reset',
-            'override_password_reset_helper' => 'Use the "user-password-reset" template instead of Laravel\'s default password reset email.',
+            'override_password_reset_helper' => 'Use the "user-password-reset" template instead of the application\'s default password reset email.',
             'override_welcome' => 'Override Welcome Email',
             'override_welcome_helper' => 'Send a welcome email using the "user-welcome" template when a new user registers.',
         ],

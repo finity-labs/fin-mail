@@ -18,6 +18,15 @@ return [
         'settings' => 'Einstellungen',
     ],
 
+    'models' => [
+        'email_template' => 'E-Mail-Vorlage',
+        'email_templates' => 'E-Mail-Vorlagen',
+        'email_theme' => 'E-Mail-Design',
+        'email_themes' => 'E-Mail-Designs',
+        'sent_email' => 'Gesendete E-Mail',
+        'sent_emails' => 'Gesendete E-Mails',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Email Template Resource
@@ -368,7 +377,7 @@ return [
             'attachment_rules' => 'Anhang-Regeln',
             'attachment_rules_description' => 'Beschränkungen für Dateianhänge in verfassten E-Mails konfigurieren.',
             'auth_emails' => 'Auth-E-Mail-Überschreibungen',
-            'auth_emails_description' => 'Laravels Standard-Authentifizierungs-E-Mails durch Ihre benutzerdefinierten Vorlagen ersetzen.',
+            'auth_emails_description' => 'Die Standard-Authentifizierungs-E-Mails der Anwendung durch Ihre benutzerdefinierten Vorlagen ersetzen.',
         ],
 
         'fields' => [
@@ -413,9 +422,9 @@ return [
             'allowed_extensions_placeholder' => 'Erweiterung hinzufügen (z.B. pdf)',
             'allowed_extensions_helper' => 'Erlaubte Dateierweiterungen für den Upload.',
             'override_verification' => 'E-Mail-Verifizierung überschreiben',
-            'override_verification_helper' => 'Die Vorlage „user-verify-email" anstelle der Laravel-Standard-Verifizierungs-E-Mail verwenden.',
+            'override_verification_helper' => 'Die Vorlage „user-verify-email" anstelle der Standard-Verifizierungs-E-Mail der Anwendung verwenden.',
             'override_password_reset' => 'Passwort-Zurücksetzung überschreiben',
-            'override_password_reset_helper' => 'Die Vorlage „user-password-reset" anstelle der Laravel-Standard-Passwort-Zurücksetzungs-E-Mail verwenden.',
+            'override_password_reset_helper' => 'Die Vorlage „user-password-reset" anstelle der Standard-Passwort-Zurücksetzungs-E-Mail der Anwendung verwenden.',
             'override_welcome' => 'Willkommens-E-Mail überschreiben',
             'override_welcome_helper' => 'Eine Willkommens-E-Mail mit der Vorlage „user-welcome" senden, wenn sich ein neuer Benutzer registriert.',
         ],

@@ -19,6 +19,12 @@ class EditEmailTheme extends EditRecord
     {
         return [
             DeleteAction::make()
+                ->visible(function (): bool {
+                    /** @var \FinityLabs\FinMail\FinMailPlugin $plugin */
+                    $plugin = filament('fin-mail');
+
+                    return $plugin->hasDeleteActionOnEditPage();
+                })
                 ->before(function (): void {
                     $this->record->templates()->update(['email_theme_id' => null]);
                 }),

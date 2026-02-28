@@ -38,6 +38,16 @@ class EmailThemeResource extends Resource
         return $plugin->getEmailThemeNavigationGroup();
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('fin-mail::fin-mail.models.email_theme');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('fin-mail::fin-mail.models.email_themes');
+    }
+
     public static function getNavigationLabel(): string
     {
         return __('fin-mail::fin-mail.navigation.themes');

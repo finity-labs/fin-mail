@@ -36,6 +36,16 @@ class SentEmailResource extends Resource
         return $plugin->getSentEmailNavigationGroup();
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('fin-mail::fin-mail.models.sent_email');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('fin-mail::fin-mail.models.sent_emails');
+    }
+
     public static function getNavigationLabel(): string
     {
         return __('fin-mail::fin-mail.navigation.sent-emails');

@@ -103,7 +103,12 @@ class EditEmailTemplate extends EditRecord
                 ->visible(fn (): bool => (bool) config('fin-mail.versioning.enabled')),
 
             DeleteAction::make()
-                ->visible(fn (): bool => $this->record->isDeletable()),
+                ->visible(function (): bool {
+                    /** @var \FinityLabs\FinMail\FinMailPlugin $plugin */
+                    $plugin = filament('fin-mail');
+
+                    return $plugin->hasDeleteActionOnEditPage() && $this->record->isDeletable();
+                }),
         ];
     }
 

@@ -18,6 +18,8 @@ class FinMailPlugin implements Plugin
 {
     use EvaluatesClosures;
 
+    protected bool|Closure $deleteActionOnEditPage = false;
+
     protected bool|Closure $sentEmailsEnabled = true;
 
     protected bool|Closure $themesEnabled = true;
@@ -76,6 +78,18 @@ class FinMailPlugin implements Plugin
     public function boot(Panel $panel): void
     {
         //
+    }
+
+    public function deleteActionOnEditPage(bool|Closure $enabled = true): static
+    {
+        $this->deleteActionOnEditPage = $enabled;
+
+        return $this;
+    }
+
+    public function hasDeleteActionOnEditPage(): bool
+    {
+        return $this->evaluate($this->deleteActionOnEditPage);
     }
 
     public function enableSentEmails(bool|Closure $enabled = true): static
