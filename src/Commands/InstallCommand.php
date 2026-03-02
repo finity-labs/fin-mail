@@ -13,6 +13,7 @@ use Illuminate\Console\Command;
 
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\select;
+use function Laravel\Prompts\text;
 
 use Symfony\Component\Process\Process;
 
@@ -92,6 +93,7 @@ class InstallCommand extends Command
     protected $signature = 'fin-mail:install
                             {--panel= : Panel ID to register the plugin in}
                             {--seed : Seed default email templates}
+                            {--locales= : Comma-separated locale codes to activate (e.g. en,hu,de)}
                             {--force : Overwrite existing config file}';
 
     protected $description = 'Install the FinMail plugin.';
@@ -170,22 +172,13 @@ class InstallCommand extends Command
 
     protected function configureLocales(): void
     {
-        $detected = $this->detectLocales();
+        $localesOption = $this->option('locales');
 
-        $options = [];
-        foreach ($detected as $code) {
-            $meta = self::LOCALE_MAP[$code] ?? ['display' => strtoupper($code), 'flag-icon' => $code];
-            $options[$code] = "{$meta['display']} ({$code})";
+        if (is_string($localesOption) && $localesOption !== '') {
+            $selected = $this->parseLocalesOption($localesOption);
+        } else {
+            $selected = $this->promptLocales();
         }
-
-        $this->comment('Detected locales: '.implode(', ', $detected));
-
-        $selected = multiselect(
-            label: 'Which locales should FinMail support for email templates?',
-            options: $options,
-            default: $detected,
-            required: true,
-        );
 
         $languages = [];
         foreach ($selected as $code) {
@@ -204,6 +197,78 @@ class InstallCommand extends Command
         } catch (\Throwable) {
             $this->components->warn('Could not save locale settings. Configure them manually in the admin panel.');
         }
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function parseLocalesOption(string $value): array
+    {
+        $codes = array_map('trim', explode(',', $value));
+        $codes = array_filter($codes, fn (string $code): bool => $code !== '');
+
+        $invalid = array_diff($codes, array_keys(self::LOCALE_MAP));
+
+        if (! empty($invalid)) {
+            $this->components->warn('Unknown locale codes ignored: '.implode(', ', $invalid));
+            $codes = array_intersect($codes, array_keys(self::LOCALE_MAP));
+        }
+
+        if (empty($codes)) {
+            $this->components->warn('No valid locales provided. Falling back to interactive selection.');
+
+            return $this->promptLocales();
+        }
+
+        $this->comment('Locales from --locales option: '.implode(', ', $codes));
+
+        return $codes;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function promptLocales(): array
+    {
+        $detected = $this->detectLocales();
+
+        $options = [];
+        foreach ($detected as $code) {
+            $meta = self::LOCALE_MAP[$code] ?? ['display' => strtoupper($code), 'flag-icon' => $code];
+            $options[$code] = "{$meta['display']} ({$code})";
+        }
+
+        $options['other'] = 'Other (enter locale codes manually)';
+
+        $this->comment('Detected locales: '.implode(', ', $detected));
+
+        $selected = multiselect(
+            label: 'Which locales should FinMail support for email templates?',
+            options: $options,
+            default: $detected,
+            required: true,
+        );
+
+        /** @var array<int, string> $selected */
+        $selected = array_values($selected);
+
+        if (! in_array('other', $selected, true)) {
+            return $selected;
+        }
+
+        $selected = array_filter($selected, fn (string $code): bool => $code !== 'other');
+
+        $availableCodes = implode(', ', array_keys(self::LOCALE_MAP));
+        $extra = text(
+            label: 'Enter additional locale codes (comma-separated)',
+            placeholder: 'e.g. ja,ko,zh_CN',
+            hint: "Available: {$availableCodes}",
+            required: true,
+        );
+
+        $extraCodes = $this->parseLocalesOption($extra);
+
+        return array_values(array_unique([...$selected, ...$extraCodes]));
     }
 
     /**

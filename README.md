@@ -45,10 +45,21 @@ php artisan fin-mail:install
 
 The install command will:
 - Publish config and migrations
+- Configure supported locales (auto-detects from your `lang/` directory)
 - Optionally run migrations and seed default templates
 - Optionally register the plugin in your Filament panel
 - Optionally configure [Filament Shield](#filament-shield-integration) permissions
 - Optionally configure scheduled cleanup of old sent emails
+
+#### Non-interactive install
+
+Pass `--locales` to skip the interactive locale prompt (useful for CI or scripted setups):
+
+```bash
+php artisan fin-mail:install --locales=en,hu,de --seed
+```
+
+During interactive install, choose **"Other"** from the locale list to manually enter any of the 59 supported locale codes.
 
 ### Register the plugin
 
