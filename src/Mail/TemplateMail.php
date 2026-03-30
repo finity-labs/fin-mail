@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FinityLabs\FinMail\Mail;
 
+use FinityLabs\FinMail\Helpers\TokenReplacer;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Models\EmailTheme;
 use FinityLabs\FinMail\Models\SentEmail;
@@ -163,7 +164,12 @@ class TemplateMail extends Mailable implements ShouldQueue
         return new Content(
             view: 'fin-mail::email.default',
             with: [
-                'body' => $this->overrideBody ?? $rendered['body'],
+                'body' => $this->overrideBody
+                    ? app(TokenReplacer::class)->replace(
+                        $this->stripMergeTagSpans($this->overrideBody),
+                        $this->models,
+                    )
+                    : $rendered['body'],
                 'preheader' => $rendered['preheader'],
                 'theme' => $theme?->resolvedColors() ?? EmailTheme::defaultColors(),
                 'branding' => $this->resolveBranding(),
@@ -257,5 +263,26 @@ class TemplateMail extends Mailable implements ShouldQueue
     public function getTemplate(): EmailTemplate
     {
         return $this->emailTemplate;
+    }
+
+    protected function stripMergeTagSpans(string $html): string
+    {
+        return preg_replace_callback(
+            '/<span\s[^>]*data-type="mergeTag"[^>]*>(.*?)<\/span>/s',
+            function (array $matches): string {
+                $inner = trim($matches[1]);
+
+                if ($inner !== '') {
+                    return $inner;
+                }
+
+                if (preg_match('/data-id="([^"]+)"/', $matches[0], $idMatch)) {
+                    return '{{ '.$idMatch[1].' }}';
+                }
+
+                return '';
+            },
+            $html,
+        ) ?? $html;
     }
 }

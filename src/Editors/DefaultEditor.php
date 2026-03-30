@@ -18,7 +18,8 @@ class DefaultEditor implements EditorContract
                 'h2', 'h3',
                 'bulletList', 'orderedList',
                 'link', 'blockquote',
-                'codeBlock', 'redo', 'undo',
+                'codeBlock', 'mergeTags',
+                'redo', 'undo',
             ])
             ->columnSpanFull();
     }

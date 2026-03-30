@@ -16,7 +16,7 @@ use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\Schemas\ComposeEmailForm;
 use FinityLabs\FinMail\Settings\GeneralSettings;
-use Filament\Forms\Components\RichEditor\RichContentRenderer;
+use FinityLabs\FinMail\Helpers\TipTapConverter;
 
 /**
  * Full-page compose screen.
@@ -94,11 +94,7 @@ class ComposeEmail extends Page
         $body = $this->data['body'] ?? '';
 
         if (is_array($body)) {
-            $document = isset($body['type']) ? $body : ['type' => 'doc', 'content' => $body];
-
-            return RichContentRenderer::make()
-                ->content($document)
-                ->toUnsafeHtml();
+            return TipTapConverter::toHtml($body);
         }
 
         return $body;

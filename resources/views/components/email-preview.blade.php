@@ -4,10 +4,7 @@
     if (is_array($content)) {
         // Tiptap JSON document (has 'type' key) — convert to HTML via Filament's renderer
         if (isset($content['type']) || (isset($content[0]['type']))) {
-            $document = isset($content['type']) ? $content : ['type' => 'doc', 'content' => $content];
-            $content = \Filament\Forms\Components\RichEditor\RichContentRenderer::make()
-                ->content($document)
-                ->toUnsafeHtml();
+            $content = \FinityLabs\FinMail\Helpers\TipTapConverter::toHtml($content);
         } else {
             // Translatable array — pick current locale
             $content = $content[app()->getLocale()] ?? reset($content) ?: '';

@@ -182,8 +182,34 @@ class EmailTemplate extends Model
         return [
             'subject' => $replacer->replace($this->subject, $models),
             'preheader' => $replacer->replace($this->preheader ?? '', $models),
-            'body' => $replacer->replace($this->body, $models),
+            'body' => $replacer->replace(self::stripMergeTagSpans($this->body), $models),
         ];
+    }
+
+    /**
+     * Strip merge tag span wrappers left by the TipTap editor,
+     * keeping only the inner token text.
+     */
+    protected static function stripMergeTagSpans(string $html): string
+    {
+        return preg_replace_callback(
+            '/<span\s[^>]*data-type="mergeTag"[^>]*>(.*?)<\/span>/s',
+            function (array $matches): string {
+                $inner = trim($matches[1]);
+
+                if ($inner !== '') {
+                    return $inner;
+                }
+
+                // Atom node with no content — reconstruct {{ token }} from data-id
+                if (preg_match('/data-id="([^"]+)"/', $matches[0], $idMatch)) {
+                    return '{{ '.$idMatch[1].' }}';
+                }
+
+                return '';
+            },
+            $html,
+        ) ?? $html;
     }
 
     /**

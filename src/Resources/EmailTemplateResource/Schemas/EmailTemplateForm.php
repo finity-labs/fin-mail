@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FinityLabs\FinMail\Resources\EmailTemplateResource\Schemas;
 
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
@@ -93,9 +94,16 @@ class EmailTemplateForm
                                 ->helperText(__('fin-mail::fin-mail.template.fields.preheader_helper'))
                                 ->columnSpanFull(),
 
-                            $editor->make('body')
-                                ->label(__('fin-mail::fin-mail.template.fields.body'))
-                                ->required(),
+                            self::applyMergeTags(
+                                $editor->make('body')
+                                    ->label(__('fin-mail::fin-mail.template.fields.body'))
+                                    ->required(),
+                                fn (callable $get): array => collect($get('token_schema') ?? [])
+                                    ->pluck('token')
+                                    ->filter()
+                                    ->values()
+                                    ->all(),
+                            ),
                         ]),
 
                     Tab::make(__('fin-mail::fin-mail.template.tabs.settings'))
@@ -163,5 +171,14 @@ class EmailTemplateForm
                 ])
                 ->columnSpanFull(),
         ]);
+    }
+
+    protected static function applyMergeTags(mixed $component, array|\Closure $tags): mixed
+    {
+        if ($component instanceof RichEditor) {
+            $component->mergeTags($tags);
+        }
+
+        return $component;
     }
 }
