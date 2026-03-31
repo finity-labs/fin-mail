@@ -19,7 +19,7 @@ A powerful email template manager and composer for Filament. Build, manage, and 
 - **Token Replacement** — `{{ user.name }}`, `{{ config.app.name }}`, conditionals `{% if user.is_premium %}`, and fallbacks `{{ user.name | 'Customer' }}`
 - **Merge Tags** — Tokens are available as merge tags directly in the RichEditor toolbar for easy insertion
 - **CTA Button Block** — Insert styled call-to-action buttons from the editor with configurable label, URL, and alignment
-- **Template Versioning** — Automatic version history with compare and restore
+- **Template Versioning** — Automatic version history with preview and one-click restore
 - **Email Logging** — Every sent email is logged with status tracking, rendered body storage, and polymorphic model association
 - **Translatable** — Templates support multiple languages via `spatie/laravel-translatable`, all locales stored in a single record
 - **Theme System** — Create color themes and apply them to templates, with live preview that updates as you change colors
@@ -350,6 +350,22 @@ Other publish tags:
 | `fin-mail-migrations` | Database migrations |
 | `fin-mail-settings-migrations` | Spatie Settings migrations |
 | `fin-mail-views` | Email template views |
+
+## Upgrading
+
+When upgrading from a previous version, run the upgrade command to apply any data migrations:
+
+```bash
+php artisan fin-mail:upgrade
+```
+
+This checks locked templates in the database against the latest seeder definitions and updates any that are outdated. The command is idempotent and safe to run multiple times.
+
+Preview changes without applying them:
+
+```bash
+php artisan fin-mail:upgrade --dry-run
+```
 
 ## Uninstalling
 

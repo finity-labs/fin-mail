@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-03-31
+
+### Added
+
+- **Version History UI** — Version history now displays in a proper Filament table with per-row preview and restore actions
+- **Version Preview** — Preview any version's email content directly from the version history modal
+- **Version Restore** — Restore any previous version with one click; current content is automatically saved as a new version first
+- **Upgrade Command** — New `php artisan fin-mail:upgrade` command to migrate existing data after package updates (supports `--dry-run`)
+
+### Fixed
+
+- **Versioning not working** — Version cleanup query was deleting all versions instead of keeping the most recent ones
+- **Version history crash** — Subject column was passed as an array to `Str::limit()`, causing a TypeError
+- **Seeded template buttons stripped by editor** — Inline-styled `<a>` tags in seeded templates (Password Reset, Verify Email) were stripped by TipTap due to `font-weight: 600` conflicting with the link mark; buttons now use the native `customBlock` format
+- **Custom blocks not rendered in previews** — Button blocks stored as `<div data-type="customBlock">` were not converted to visible HTML in the View page preview and Compose page preview
+- **Button preview ignores theme colors** — Button block preview in the RichEditor now reflects the selected template theme instead of hardcoded colors; updates live when changing the theme dropdown
+
+### Changed
+
+- **Translations** — Added `blocks` and `versioning` translation keys for all 59 supported languages
+- Button block default label and preview label now use translation keys instead of hardcoded English
+- `renderCustomBlocks()` is now public for use by preview components
+- Versions relationship eager-loads `createdBy` to prevent lazy loading violations
+
+### Upgrading from 1.1.0
+
+If you have existing seeded templates with buttons (Password Reset, Verify Email), run the upgrade command to convert them to the new format:
+
+```bash
+php artisan fin-mail:upgrade
+```
+
+You can preview what would change first with `--dry-run`:
+
+```bash
+php artisan fin-mail:upgrade --dry-run
+```
+
 ## [1.1.0] - 2026-03-30
 
 ### Added

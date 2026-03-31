@@ -79,15 +79,15 @@ return [
         ],
 
         'blocks' => [
-            'button' => "Կոճակ",
-            'button_heading' => "Տեղադրել կոճակ",
-            'button_label' => "Կոճակի տեքստ",
+            'button' => 'Կոճակ',
+            'button_heading' => 'Տեղադրել կոճակ',
+            'button_label' => 'Կոճակի տեքստ',
             'button_url' => 'URL',
-            'button_align' => "Հավասարեցում",
-            'align_left' => "Ձախ",
-            'align_center' => "Կենտրոն",
-            'align_right' => "Աջ",
-            'button_default_label' => "Սեղմեք այստեղ",
+            'button_align' => 'Հավասարեցում',
+            'align_left' => 'Ձախ',
+            'align_center' => 'Կենտրոն',
+            'align_right' => 'Աջ',
+            'button_default_label' => 'Սեղմեք այստեղ',
         ],
 
         'columns' => [

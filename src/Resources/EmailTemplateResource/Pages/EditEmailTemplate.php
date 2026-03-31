@@ -125,7 +125,7 @@ class EditEmailTemplate extends EditRecord
                         ])
                         ->schema([
                             TextEntry::make('version')
-                                ->prefixAction(function(EmailTemplateVersion $record) {
+                                ->prefixAction(function (EmailTemplateVersion $record) {
                                     return
                                         Action::make('preview')
                                             ->icon(Heroicon::OutlinedEye)
@@ -179,6 +179,7 @@ class EditEmailTemplate extends EditRecord
                 ->modal()
                 ->modalHeading(fn (): string => __('fin-mail::fin-mail.template.actions.preview').' — v'.$this->previewVersionNumber)
                 ->modalContent(function () {
+                    /** @var EmailTemplateVersion|null $version */
                     $version = $this->record->versions()->where('version', $this->previewVersionNumber)->first();
 
                     if (! $version) {
