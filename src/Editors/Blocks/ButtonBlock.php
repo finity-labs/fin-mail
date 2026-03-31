@@ -12,6 +12,13 @@ use FinityLabs\FinMail\Models\EmailTheme;
 
 class ButtonBlock extends RichContentCustomBlock
 {
+    protected static ?array $previewTheme = null;
+
+    public static function setPreviewTheme(?array $theme): void
+    {
+        static::$previewTheme = $theme;
+    }
+
     public static function getId(): string
     {
         return 'emailButton';
@@ -61,9 +68,13 @@ class ButtonBlock extends RichContentCustomBlock
         $label = e($config['label'] ?? 'Click here');
         $align = $config['align'] ?? 'center';
 
+        $theme = static::$previewTheme ?? EmailTheme::getDefault()?->resolvedColors() ?? EmailTheme::defaultColors();
+        $buttonBg = $theme['button_bg'] ?? '#4F46E5';
+        $buttonText = $theme['button_text'] ?? '#ffffff';
+
         return <<<HTML
         <div style="text-align: {$align}; padding: 8px 0;">
-            <span style="display: inline-block; background-color: #4F46E5; color: #ffffff; padding: 12px 24px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none;">
+            <span style="display: inline-block; background-color: {$buttonBg}; color: {$buttonText}; padding: 12px 24px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none;">
                 {$label}
             </span>
         </div>

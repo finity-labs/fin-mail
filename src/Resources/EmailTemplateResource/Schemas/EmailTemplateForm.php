@@ -18,7 +18,9 @@ use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use FinityLabs\FinMail\Contracts\EditorContract;
+use FinityLabs\FinMail\Editors\Blocks\ButtonBlock;
 use FinityLabs\FinMail\Models\EmailTemplate;
+use FinityLabs\FinMail\Models\EmailTheme;
 use FinityLabs\FinMail\Settings\GeneralSettings;
 use Livewire\Component as LivewireComponent;
 
@@ -115,7 +117,13 @@ class EmailTemplateForm
                                     ->relationship('theme', 'name')
                                     ->placeholder(__('fin-mail::fin-mail.template.fields.theme_placeholder'))
                                     ->native(false)
-                                    ->preload(),
+                                    ->preload()
+                                    ->live()
+                                    ->afterStateUpdated(function (?string $state) {
+                                        ButtonBlock::setPreviewTheme(
+                                            $state ? EmailTheme::find($state)?->resolvedColors() : null
+                                        );
+                                    }),
 
                                 Toggle::make('is_active')
                                     ->label(__('fin-mail::fin-mail.template.fields.is_active'))

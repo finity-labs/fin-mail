@@ -190,11 +190,7 @@ HTML,
 <h2>Verify your email address</h2>
 <p>Hi {{ user.name }},</p>
 <p>Please click the button below to verify your email address.</p>
-<p style="text-align: center; margin: 30px 0;">
-    <a href="{{ url }}" style="display: inline-block; background-color: #4F46E5; color: #ffffff; padding: 12px 32px; border-radius: 6px; text-decoration: none; font-weight: 600;">
-        Verify Email Address
-    </a>
-</p>
+<div data-type="customBlock" data-id="emailButton" data-config="{&quot;label&quot;:&quot;Verify Email Address&quot;,&quot;url&quot;:&quot;{{ url }}&quot;,&quot;align&quot;:&quot;center&quot;}"></div>
 <p>If you did not create an account, no further action is required.</p>
 <p>Thanks,<br>{{ config.app.name }}</p>
 HTML,
@@ -202,11 +198,7 @@ HTML,
 <h2>Bestätigen Sie Ihre E-Mail-Adresse</h2>
 <p>Hallo {{ user.name }},</p>
 <p>Bitte klicken Sie auf die Schaltfläche unten, um Ihre E-Mail-Adresse zu bestätigen.</p>
-<p style="text-align: center; margin: 30px 0;">
-    <a href="{{ url }}" style="display: inline-block; background-color: #4F46E5; color: #ffffff; padding: 12px 32px; border-radius: 6px; text-decoration: none; font-weight: 600;">
-        E-Mail bestätigen
-    </a>
-</p>
+<div data-type="customBlock" data-id="emailButton" data-config="{&quot;label&quot;:&quot;E-Mail bestätigen&quot;,&quot;url&quot;:&quot;{{ url }}&quot;,&quot;align&quot;:&quot;center&quot;}"></div>
 <p>Wenn Sie kein Konto erstellt haben, ist keine weitere Aktion erforderlich.</p>
 <p>Mit freundlichen Grüßen,<br>{{ config.app.name }}</p>
 HTML,
@@ -214,11 +206,7 @@ HTML,
 <h2>Erősítse meg az e-mail címét</h2>
 <p>Kedves {{ user.name }},</p>
 <p>Kérjük, kattintson az alábbi gombra az e-mail címe megerősítéséhez.</p>
-<p style="text-align: center; margin: 30px 0;">
-    <a href="{{ url }}" style="display: inline-block; background-color: #4F46E5; color: #ffffff; padding: 12px 32px; border-radius: 6px; text-decoration: none; font-weight: 600;">
-        E-mail megerősítése
-    </a>
-</p>
+<div data-type="customBlock" data-id="emailButton" data-config="{&quot;label&quot;:&quot;E-mail megerősítése&quot;,&quot;url&quot;:&quot;{{ url }}&quot;,&quot;align&quot;:&quot;center&quot;}"></div>
 <p>Ha nem Ön hozta létre a fiókot, nincs további teendője.</p>
 <p>Üdvözlettel,<br>{{ config.app.name }}</p>
 HTML,
@@ -260,11 +248,7 @@ HTML,
 <h2>Reset your password</h2>
 <p>Hi {{ user.name }},</p>
 <p>We received a request to reset your password. Click the button below to choose a new one.</p>
-<p style="text-align: center; margin: 30px 0;">
-    <a href="{{ url }}" style="display: inline-block; background-color: #4F46E5; color: #ffffff; padding: 12px 32px; border-radius: 6px; text-decoration: none; font-weight: 600;">
-        Reset Password
-    </a>
-</p>
+<div data-type="customBlock" data-id="emailButton" data-config="{&quot;label&quot;:&quot;Reset Password&quot;,&quot;url&quot;:&quot;{{ url }}&quot;,&quot;align&quot;:&quot;center&quot;}"></div>
 <p>This link will expire in 60 minutes.</p>
 <p>If you didn't request this, you can safely ignore this email.</p>
 <p>Thanks,<br>{{ config.app.name }}</p>
@@ -273,11 +257,7 @@ HTML,
 <h2>Passwort zurücksetzen</h2>
 <p>Hallo {{ user.name }},</p>
 <p>Wir haben eine Anfrage zum Zurücksetzen Ihres Passworts erhalten. Klicken Sie auf die Schaltfläche unten, um ein neues Passwort zu wählen.</p>
-<p style="text-align: center; margin: 30px 0;">
-    <a href="{{ url }}" style="display: inline-block; background-color: #4F46E5; color: #ffffff; padding: 12px 32px; border-radius: 6px; text-decoration: none; font-weight: 600;">
-        Passwort zurücksetzen
-    </a>
-</p>
+<div data-type="customBlock" data-id="emailButton" data-config="{&quot;label&quot;:&quot;Passwort zurücksetzen&quot;,&quot;url&quot;:&quot;{{ url }}&quot;,&quot;align&quot;:&quot;center&quot;}"></div>
 <p>Dieser Link läuft in 60 Minuten ab.</p>
 <p>Wenn Sie dies nicht angefordert haben, können Sie diese E-Mail ignorieren.</p>
 <p>Mit freundlichen Grüßen,<br>{{ config.app.name }}</p>
@@ -286,11 +266,7 @@ HTML,
 <h2>Jelszó visszaállítása</h2>
 <p>Kedves {{ user.name }},</p>
 <p>Kaptunk egy kérést a jelszava visszaállítására. Kattintson az alábbi gombra egy új jelszó választásához.</p>
-<p style="text-align: center; margin: 30px 0;">
-    <a href="{{ url }}" style="display: inline-block; background-color: #4F46E5; color: #ffffff; padding: 12px 32px; border-radius: 6px; text-decoration: none; font-weight: 600;">
-        Jelszó visszaállítása
-    </a>
-</p>
+<div data-type="customBlock" data-id="emailButton" data-config="{&quot;label&quot;:&quot;Jelszó visszaállítása&quot;,&quot;url&quot;:&quot;{{ url }}&quot;,&quot;align&quot;:&quot;center&quot;}"></div>
 <p>Ez a link 60 perc múlva lejár.</p>
 <p>Ha nem Ön kérte ezt, nyugodtan hagyja figyelmen kívül ezt az e-mailt.</p>
 <p>Üdvözlettel,<br>{{ config.app.name }}</p>

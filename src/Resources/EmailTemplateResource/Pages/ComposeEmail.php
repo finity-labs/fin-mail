@@ -12,6 +12,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use FinityLabs\FinMail\Actions\EmailSender;
+use FinityLabs\FinMail\Editors\Blocks\ButtonBlock;
 use FinityLabs\FinMail\Helpers\TipTapConverter;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
@@ -48,6 +49,8 @@ class ComposeEmail extends Page
 
         $locale = app()->getLocale();
         $rendered = $record->render([], $locale);
+
+        ButtonBlock::setPreviewTheme($record->theme?->resolvedColors());
 
         $this->form->fill([
             'template_key' => $record->key,

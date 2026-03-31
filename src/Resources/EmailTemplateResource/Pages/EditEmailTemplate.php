@@ -10,6 +10,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
+use FinityLabs\FinMail\Editors\Blocks\ButtonBlock;
 use FinityLabs\FinMail\FinMailPlugin;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Models\EmailTheme;
@@ -30,6 +31,8 @@ class EditEmailTemplate extends EditRecord
         $this->activeLocale = app(GeneralSettings::class)->default_locale;
 
         parent::mount($record);
+
+        $this->syncButtonPreviewTheme();
     }
 
     protected function fillForm(): void
@@ -121,6 +124,15 @@ class EditEmailTemplate extends EditRecord
                     return $plugin->hasDeleteActionOnEditPage() && $this->record->isDeletable();
                 }),
         ];
+    }
+
+    protected function syncButtonPreviewTheme(): void
+    {
+        $themeId = $this->data['email_theme_id'] ?? $this->record->email_theme_id ?? null;
+
+        ButtonBlock::setPreviewTheme(
+            $themeId ? EmailTheme::find($themeId)?->resolvedColors() : null
+        );
     }
 
     protected function beforeSave(): void
