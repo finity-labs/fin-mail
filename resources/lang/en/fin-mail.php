@@ -87,6 +87,7 @@ return [
             'align_left' => 'Left',
             'align_center' => 'Center',
             'align_right' => 'Right',
+            'button_default_label' => 'Click here',
         ],
 
         'columns' => [

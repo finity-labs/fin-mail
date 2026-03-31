@@ -38,7 +38,7 @@ class ButtonBlock extends RichContentCustomBlock
                     ->label(__('fin-mail::fin-mail.template.blocks.button_label'))
                     ->required()
                     ->maxLength(255)
-                    ->default('Click here'),
+                    ->default(__('fin-mail::fin-mail.template.blocks.button_default_label')),
 
                 TextInput::make('url')
                     ->label(__('fin-mail::fin-mail.template.blocks.button_url'))
@@ -60,12 +60,12 @@ class ButtonBlock extends RichContentCustomBlock
 
     public static function getPreviewLabel(array $config): string
     {
-        return $config['label'] ?? 'Button';
+        return $config['label'] ?? __('fin-mail::fin-mail.template.blocks.button');
     }
 
     public static function toPreviewHtml(array $config): ?string
     {
-        $label = e($config['label'] ?? 'Click here');
+        $label = e($config['label'] ?? __('fin-mail::fin-mail.template.blocks.button_default_label'));
         $align = $config['align'] ?? 'center';
 
         $theme = static::$previewTheme ?? EmailTheme::getDefault()?->resolvedColors() ?? EmailTheme::defaultColors();
@@ -83,7 +83,7 @@ class ButtonBlock extends RichContentCustomBlock
 
     public static function toHtml(array $config, array $data): ?string
     {
-        $label = e($config['label'] ?? 'Click here');
+        $label = e($config['label'] ?? __('fin-mail::fin-mail.template.blocks.button_default_label'));
         $url = e($config['url'] ?? '#');
         $align = $config['align'] ?? 'center';
 
