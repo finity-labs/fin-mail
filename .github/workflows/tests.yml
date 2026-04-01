@@ -44,6 +44,7 @@ jobs:
           composer require "filament/filament:${{ matrix.filament }}" --no-interaction --no-update
           if [ -n "${{ matrix.laravel }}" ]; then
             composer require "illuminate/contracts:${{ matrix.laravel }}" --no-interaction --no-update
+            composer remove pestphp/pest-plugin-laravel --dev --no-interaction --no-update
           fi
           composer update --no-interaction --prefer-dist
 
