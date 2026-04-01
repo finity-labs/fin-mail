@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'תאריך',
             'by' => 'על ידי',
+            'preview' => 'תצוגה מקדימה',
             'restore' => 'שחזור',
             'restore_confirm' => 'האם אתה בטוח שברצונך לשחזר גרסה :version? התוכן הנוכחי יישמר תחילה כגרסה חדשה.',
             'restored' => 'גרסה :version שוחזרה.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'פעולה זו תשלח עותק חדש של הדוא"ל לנמענים המקוריים.',
         ],
 
+
+        'preview' => [
+            'from' => 'מאת:',
+            'to' => 'אל:',
+            'cc' => 'העתק:',
+            'template' => 'תבנית:',
+            'sent' => 'נשלח:',
+            'sent_not_yet' => 'עדיין לא',
+            'status' => 'סטטוס:',
+            'no_body' => 'תוכן האימייל לא נשמר. הפעל את <code>logging.store_rendered_body</code> בהגדרות כדי לשמור את תוכן האימייל.',
+            'error' => 'פרטי השגיאה'
+        ],
         'notifications' => [
             'resent' => 'הדוא"ל נשלח מחדש בהצלחה',
             'resend_failed' => 'שליחה מחדש של הדוא"ל נכשלה',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'שולח ברירת מחדל',
             'default_sender_description' => 'כתובת השולח המוגדרת כברירת מחדל לכל הדוא"ל שנשלח על ידי התוסף.',
             'additional_senders' => 'שולחים נוספים',
+            'add_additional_senders' => 'הוסף שולחים נוספים',
             'additional_senders_description' => 'כתובות שולח נוספות שמשתמשים יכולים לבחור בעת חיבור דוא"ל.',
             'localization' => 'לוקליזציה',
             'categories' => 'קטגוריות תבניות',
             'logo' => 'לוגו',
             'colors' => 'צבעים',
             'footer_links' => 'קישורי כותרת תחתונה',
+            'add_footer_links' => 'הוסף קישורי כותרת תחתונה',
             'customer_service' => 'שירות לקוחות',
             'logging' => 'רישום דוא"ל',
             'logging_description' => 'שלוט באופן שבו דוא"ל שנשלח מתועד במסד הנתונים.',

@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Sana',
             'by' => 'Muallif',
+            'preview' => 'Oldindan ko\'rish',
             'restore' => 'Qayta tiklash',
             'restore_confirm' => ':version versiyasini qayta tiklashni xohlaysizmi? Joriy kontent avval yangi versiya sifatida saqlanadi.',
             'restored' => ':version versiyasi qayta tiklandi.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Bu xatning yangi nusxasini asl qabul qiluvchilarga yuboradi.',
         ],
 
+
+        'preview' => [
+            'from' => 'Kimdan:',
+            'to' => 'Kimga:',
+            'cc' => 'Nusxa:',
+            'template' => 'Shablon:',
+            'sent' => 'Yuborilgan:',
+            'sent_not_yet' => 'Hali yo\'q',
+            'status' => 'Holat:',
+            'no_body' => 'Elektron pochta matni saqlanmagan. Elektron pochta mazmunini saqlash uchun sozlamalarda <code>logging.store_rendered_body</code> ni yoqing.',
+            'error' => 'Xato tafsilotlari'
+        ],
         'notifications' => [
             'resent' => 'Xat muvaffaqiyatli qayta yuborildi',
             'resend_failed' => 'Xatni qayta yuborib bo\'lmadi',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Standart yuboruvchi',
             'default_sender_description' => 'Plagin tomonidan yuboriladigan barcha xatlar uchun standart "Kimdan" manzili.',
             'additional_senders' => 'Qo\'shimcha yuboruvchilar',
+            'add_additional_senders' => 'Qo\'shimcha jo\'natuvchilar qo\'shish',
             'additional_senders_description' => 'Foydalanuvchilar xat yozayotganda tanlashi mumkin bo\'lgan qo\'shimcha "Kimdan" manzillari.',
             'localization' => 'Mahalliylashtirish',
             'categories' => 'Shablon kategoriyalari',
             'logo' => 'Logotip',
             'colors' => 'Ranglar',
             'footer_links' => 'Pastki qism havolalari',
+            'add_footer_links' => 'Pastki havolalarni qo\'shish',
             'customer_service' => 'Mijozlarga xizmat',
             'logging' => 'Elektron pochta jurnali',
             'logging_description' => 'Yuborilgan xatlar ma\'lumotlar bazasida qanday qayd etilishini boshqaring.',

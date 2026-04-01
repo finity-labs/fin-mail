@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Datum',
             'by' => 'Av',
+            'preview' => 'Förhandsgranska',
             'restore' => 'Återställ',
             'restore_confirm' => 'Är du säker på att du vill återställa version :version? Det aktuella innehållet sparas som en ny version först.',
             'restored' => 'Version :version återställd.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Detta skickar en ny kopia av e-postmeddelandet till de ursprungliga mottagarna.',
         ],
 
+
+        'preview' => [
+            'from' => 'Från:',
+            'to' => 'Till:',
+            'cc' => 'CC:',
+            'template' => 'Mall:',
+            'sent' => 'Skickat:',
+            'sent_not_yet' => 'Inte ännu',
+            'status' => 'Status:',
+            'no_body' => 'E-postens innehåll sparades inte. Aktivera <code>logging.store_rendered_body</code> i inställningarna för att spara e-postinnehåll.',
+            'error' => 'Feldetaljer'
+        ],
         'notifications' => [
             'resent' => 'E-postmeddelandet skickades igen',
             'resend_failed' => 'Kunde inte skicka e-postmeddelandet igen',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Standardavsandare',
             'default_sender_description' => 'Standard "Fran"-adressen for alla e-postmeddelanden som skickas av tillaget.',
             'additional_senders' => 'Ytterligare avsandare',
+            'add_additional_senders' => 'Lägg till ytterligare avsändare',
             'additional_senders_description' => 'Extra "Fran"-adresser som anvandare kan valja nar de skriver e-post.',
             'localization' => 'Sprakinstallningar',
             'categories' => 'Mallkategorier',
             'logo' => 'Logotyp',
             'colors' => 'Farger',
             'footer_links' => 'Sidfotlankar',
+            'add_footer_links' => 'Lägg till sidfotslänkar',
             'customer_service' => 'Kundtjanst',
             'logging' => 'E-postloggning',
             'logging_description' => 'Styr hur skickade e-postmeddelanden registreras i databasen.',

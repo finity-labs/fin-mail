@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Data',
             'by' => 'Autor',
+            'preview' => 'Podgląd',
             'restore' => 'Przywróć',
             'restore_confirm' => 'Czy na pewno chcesz przywrócić wersję :version? Bieżąca treść zostanie najpierw zapisana jako nowa wersja.',
             'restored' => 'Wersja :version przywrócona.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Spowoduje to wysłanie nowej kopii e-maila do oryginalnych odbiorców.',
         ],
 
+
+        'preview' => [
+            'from' => 'Od:',
+            'to' => 'Do:',
+            'cc' => 'DW:',
+            'template' => 'Szablon:',
+            'sent' => 'Wysłano:',
+            'sent_not_yet' => 'Jeszcze nie',
+            'status' => 'Status:',
+            'no_body' => 'Treść wiadomości e-mail nie została zapisana. Włącz <code>logging.store_rendered_body</code> w ustawieniach, aby zapisywać treść wiadomości.',
+            'error' => 'Szczegóły błędu'
+        ],
         'notifications' => [
             'resent' => 'E-mail wysłany ponownie pomyślnie',
             'resend_failed' => 'Nie udało się ponownie wysłać e-maila',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Domyślny nadawca',
             'default_sender_description' => 'Domyślny adres "Od" dla wszystkich e-maili wysyłanych przez wtyczkę.',
             'additional_senders' => 'Dodatkowi nadawcy',
+            'add_additional_senders' => 'Dodaj dodatkowych nadawców',
             'additional_senders_description' => 'Dodatkowe adresy "Od", które użytkownicy mogą wybrać podczas pisania e-maili.',
             'localization' => 'Lokalizacja',
             'categories' => 'Kategorie szablonów',
             'logo' => 'Logo',
             'colors' => 'Kolory',
             'footer_links' => 'Linki stopki',
+            'add_footer_links' => 'Dodaj linki w stopce',
             'customer_service' => 'Obsługa klienta',
             'logging' => 'Logowanie e-maili',
             'logging_description' => 'Kontroluj, jak wysłane e-maile są rejestrowane w bazie danych.',

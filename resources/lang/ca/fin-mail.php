@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Data',
             'by' => 'Per',
+            'preview' => 'Previsualització',
             'restore' => 'Restaurar',
             'restore_confirm' => 'Esteu segur que voleu restaurar la versió :version? El contingut actual es desarà com a nova versió primer.',
             'restored' => 'Versió :version restaurada.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Això enviarà una nova còpia del correu als destinataris originals.',
         ],
 
+
+        'preview' => [
+            'from' => 'De:',
+            'to' => 'A:',
+            'cc' => 'CC:',
+            'template' => 'Plantilla:',
+            'sent' => 'Enviat:',
+            'sent_not_yet' => 'Encara no',
+            'status' => 'Estat:',
+            'no_body' => 'El cos del correu electrònic no s\'ha emmagatzemat. Activeu <code>logging.store_rendered_body</code> a la configuració per desar el contingut del correu.',
+            'error' => 'Detalls de l\'error'
+        ],
         'notifications' => [
             'resent' => 'Correu reenviat correctament',
             'resend_failed' => 'No s\'ha pogut reenviar el correu',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Remitent per defecte',
             'default_sender_description' => 'L\'adreça "De" per defecte per a tots els correus enviats pel connector.',
             'additional_senders' => 'Remitents addicionals',
+            'add_additional_senders' => 'Afegir remitents addicionals',
             'additional_senders_description' => 'Adreces "De" addicionals que els usuaris poden escollir en redactar correus.',
             'localization' => 'Localització',
             'categories' => 'Categories de plantilles',
             'logo' => 'Logotip',
             'colors' => 'Colors',
             'footer_links' => 'Enllaços del peu de pàgina',
+            'add_footer_links' => 'Afegir enllaços al peu de pàgina',
             'customer_service' => 'Atenció al client',
             'logging' => 'Registre de correus',
             'logging_description' => 'Controleu com es registren els correus enviats a la base de dades.',

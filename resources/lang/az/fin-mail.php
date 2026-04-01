@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Tarix',
             'by' => 'Tərəfindən',
+            'preview' => 'Önizləmə',
             'restore' => 'Bərpa et',
             'restore_confirm' => ':version versiyasını bərpa etmək istədiyinizə əminsiniz? Cari məzmun əvvəlcə yeni versiya olaraq saxlanacaq.',
             'restored' => ':version versiyası bərpa edildi.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Bu, orijinal alıcılara e-poçtun yeni surətini göndərəcək.',
         ],
 
+
+        'preview' => [
+            'from' => 'Kimdən:',
+            'to' => 'Kimə:',
+            'cc' => 'Surət:',
+            'template' => 'Şablon:',
+            'sent' => 'Göndərildi:',
+            'sent_not_yet' => 'Hələ yox',
+            'status' => 'Status:',
+            'no_body' => 'E-poçt məzmunu saxlanmayıb. E-poçt məzmununu saxlamaq üçün parametrlərdə <code>logging.store_rendered_body</code> seçimini aktivləşdirin.',
+            'error' => 'Xəta Təfərrüatları'
+        ],
         'notifications' => [
             'resent' => 'E-poçt uğurla yenidən göndərildi',
             'resend_failed' => 'E-poçtun yenidən göndərilməsi uğursuz oldu',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Standart göndərən',
             'default_sender_description' => 'Plagin tərəfindən göndərilən bütün e-poçtlar üçün standart "Kimdən" ünvanı.',
             'additional_senders' => 'Əlavə göndərənlər',
+            'add_additional_senders' => 'Əlavə Göndərənlər Əlavə Et',
             'additional_senders_description' => 'E-poçt yazarkən istifadəçilərin seçə biləcəyi əlavə "Kimdən" ünvanları.',
             'localization' => 'Lokallaşdırma',
             'categories' => 'Şablon kateqoriyaları',
             'logo' => 'Logo',
             'colors' => 'Rənglər',
             'footer_links' => 'Alt hissə keçidləri',
+            'add_footer_links' => 'Altbilgi Keçidləri Əlavə Et',
             'customer_service' => 'Müştəri xidməti',
             'logging' => 'E-poçt qeydiyyatı',
             'logging_description' => 'Göndərilmiş e-poçtların verilənlər bazasında necə qeyd olunacağını idarə edin.',

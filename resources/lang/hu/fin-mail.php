@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Dátum',
             'by' => 'Szerző',
+            'preview' => 'Előnézet',
             'restore' => 'Visszaállítás',
             'restore_confirm' => 'Biztosan vissza szeretné állítani a(z) :version verziót? A jelenlegi tartalom előbb új verzióként lesz elmentve.',
             'restored' => 'A(z) :version verzió visszaállítva.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Az e-mail egy új példánya kerül elküldésre az eredeti címzetteknek.',
         ],
 
+
+        'preview' => [
+            'from' => 'Feladó:',
+            'to' => 'Címzett:',
+            'cc' => 'Másolat:',
+            'template' => 'Sablon:',
+            'sent' => 'Elküldve:',
+            'sent_not_yet' => 'Még nem',
+            'status' => 'Állapot:',
+            'no_body' => 'Az e-mail törzse nem lett eltárolva. Engedélyezze a <code>logging.store_rendered_body</code> opciót a beállításokban az e-mail tartalom mentéséhez.',
+            'error' => 'Hiba részletei'
+        ],
         'notifications' => [
             'resent' => 'E-mail újraküldve',
             'resend_failed' => 'Újraküldés sikertelen',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Alapértelmezett feladó',
             'default_sender_description' => 'Az alapértelmezett feladó cím a bővítmény által küldött összes e-mailhez.',
             'additional_senders' => 'További feladók',
+            'add_additional_senders' => 'További feladók hozzáadása',
             'additional_senders_description' => 'További feladó címek, amelyeket a felhasználók választhatnak e-mail írásakor.',
             'localization' => 'Nyelvesítés',
             'categories' => 'Sablon kategóriák',
             'logo' => 'Logó',
             'colors' => 'Színek',
             'footer_links' => 'Lábléc hivatkozások',
+            'add_footer_links' => 'Lábléc linkek hozzáadása',
             'customer_service' => 'Ügyfélszolgálat',
             'logging' => 'E-mail naplózás',
             'logging_description' => 'Az elküldött e-mailek adatbázisban történő rögzítésének vezérlése.',

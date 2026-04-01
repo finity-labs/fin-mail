@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Tanggal',
             'by' => 'Oleh',
+            'preview' => 'Pratinjau',
             'restore' => 'Pulihkan',
             'restore_confirm' => 'Apakah Anda yakin ingin memulihkan versi :version? Konten saat ini akan disimpan sebagai versi baru terlebih dahulu.',
             'restored' => 'Versi :version dipulihkan.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Ini akan mengirim salinan baru email ke penerima asal.',
         ],
 
+
+        'preview' => [
+            'from' => 'Dari:',
+            'to' => 'Kepada:',
+            'cc' => 'CC:',
+            'template' => 'Template:',
+            'sent' => 'Terkirim:',
+            'sent_not_yet' => 'Belum',
+            'status' => 'Status:',
+            'no_body' => 'Isi email tidak disimpan. Aktifkan <code>logging.store_rendered_body</code> di pengaturan untuk menyimpan konten email.',
+            'error' => 'Detail Kesalahan'
+        ],
         'notifications' => [
             'resent' => 'Email berhasil dikirim ulang',
             'resend_failed' => 'Gagal mengirim ulang email',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Pengirim Bawaan',
             'default_sender_description' => 'Alamat "Dari" bawaan untuk semua email yang dikirim oleh plugin.',
             'additional_senders' => 'Pengirim Tambahan',
+            'add_additional_senders' => 'Tambah Pengirim Tambahan',
             'additional_senders_description' => 'Alamat "Dari" tambahan yang dapat dipilih pengguna saat menulis email.',
             'localization' => 'Lokalisasi',
             'categories' => 'Kategori Templat',
             'logo' => 'Logo',
             'colors' => 'Warna',
             'footer_links' => 'Tautan Footer',
+            'add_footer_links' => 'Tambah Tautan Footer',
             'customer_service' => 'Layanan Pelanggan',
             'logging' => 'Pencatatan Email',
             'logging_description' => 'Kontrol bagaimana email terkirim dicatat dalam database.',

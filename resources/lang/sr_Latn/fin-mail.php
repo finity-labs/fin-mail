@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Datum',
             'by' => 'Od',
+            'preview' => 'Pregled',
             'restore' => 'Vrati',
             'restore_confirm' => 'Da li ste sigurni da želite da vratite verziju :version? Trenutni sadržaj će prvo biti sačuvan kao nova verzija.',
             'restored' => 'Verzija :version je vraćena.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Ovo ce poslati novu kopiju poruke originalnim primaocima.',
         ],
 
+
+        'preview' => [
+            'from' => 'Od:',
+            'to' => 'Za:',
+            'cc' => 'Kopija:',
+            'template' => 'Šablon:',
+            'sent' => 'Poslato:',
+            'sent_not_yet' => 'Još ne',
+            'status' => 'Status:',
+            'no_body' => 'Sadržaj e-pošte nije sačuvan. Omogućite <code>logging.store_rendered_body</code> u podešavanjima da biste sačuvali sadržaj e-pošte.',
+            'error' => 'Detalji greške'
+        ],
         'notifications' => [
             'resent' => 'Poruka uspesno ponovo poslata',
             'resend_failed' => 'Ponovno slanje poruke nije uspelo',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Podrazumevani posiljalac',
             'default_sender_description' => 'Podrazumevana adresa "Od" za sve poruke poslate dodatkom.',
             'additional_senders' => 'Dodatni posiljaoci',
+            'add_additional_senders' => 'Dodaj dodatne pošiljaoce',
             'additional_senders_description' => 'Dodatne adrese "Od" koje korisnici mogu izabrati prilikom pisanja poruka.',
             'localization' => 'Lokalizacija',
             'categories' => 'Kategorije sablona',
             'logo' => 'Logotip',
             'colors' => 'Boje',
             'footer_links' => 'Linkovi u podnozju',
+            'add_footer_links' => 'Dodaj linkove u podnožje',
             'customer_service' => 'Korisnicka podrska',
             'logging' => 'Evidencija poruka',
             'logging_description' => 'Kontrolisite kako se poslate poruke beleze u bazi podataka.',

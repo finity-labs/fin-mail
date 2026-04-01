@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Datum',
             'by' => 'Von',
+            'preview' => 'Vorschau',
             'restore' => 'Wiederherstellen',
             'restore_confirm' => 'Möchten Sie wirklich Version :version wiederherstellen? Der aktuelle Inhalt wird zuerst als neue Version gespeichert.',
             'restored' => 'Version :version wiederhergestellt.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Es wird eine neue Kopie der E-Mail an die ursprünglichen Empfänger gesendet.',
         ],
 
+
+        'preview' => [
+            'from' => 'Von:',
+            'to' => 'An:',
+            'cc' => 'CC:',
+            'template' => 'Vorlage:',
+            'sent' => 'Gesendet:',
+            'sent_not_yet' => 'Noch nicht',
+            'status' => 'Status:',
+            'no_body' => 'Der E-Mail-Inhalt wurde nicht gespeichert. Aktivieren Sie <code>logging.store_rendered_body</code> in den Einstellungen, um E-Mail-Inhalte zu speichern.',
+            'error' => 'Fehlerdetails'
+        ],
         'notifications' => [
             'resent' => 'E-Mail erneut gesendet',
             'resend_failed' => 'Erneutes Senden fehlgeschlagen',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Standardabsender',
             'default_sender_description' => 'Die Standard-Absenderadresse für alle vom Plugin gesendeten E-Mails.',
             'additional_senders' => 'Weitere Absender',
+            'add_additional_senders' => 'Weitere Absender hinzufügen',
             'additional_senders_description' => 'Zusätzliche Absenderadressen, die Benutzer beim Verfassen von E-Mails wählen können.',
             'localization' => 'Lokalisierung',
             'categories' => 'Vorlagenkategorien',
             'logo' => 'Logo',
             'colors' => 'Farben',
             'footer_links' => 'Fußzeilen-Links',
+            'add_footer_links' => 'Fußzeilen-Links hinzufügen',
             'customer_service' => 'Kundenservice',
             'logging' => 'E-Mail-Protokollierung',
             'logging_description' => 'Steuern Sie, wie gesendete E-Mails in der Datenbank aufgezeichnet werden.',

@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'ቀን',
             'by' => 'በ',
+            'preview' => 'ቅድመ-እይታ',
             'restore' => 'መልስ',
             'restore_confirm' => 'ስሪት :version መመለስ እንደሚፈልጉ እርግጠኛ ነዎት? የአሁኑ ይዘት መጀመሪያ እንደ አዲስ ስሪት ይቀመጣል።',
             'restored' => 'ስሪት :version ተመልሷል።',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'ይህ ለመጀመሪያዎቹ ተቀባዮች አዲስ የኢሜይል ቅጂ ይልካል።',
         ],
 
+
+        'preview' => [
+            'from' => 'ከ:',
+            'to' => 'ለ:',
+            'cc' => 'ቅጂ:',
+            'template' => 'ቅንብር:',
+            'sent' => 'ተልኳል:',
+            'sent_not_yet' => 'ገና አልተላከም',
+            'status' => 'ሁኔታ:',
+            'no_body' => 'የኢሜይል ይዘት አልተከማቸም። የኢሜይል ይዘትን ለማስቀመጥ በቅንብሮች ውስጥ <code>logging.store_rendered_body</code>ን ያንቁ።',
+            'error' => 'የስህተት ዝርዝሮች'
+        ],
         'notifications' => [
             'resent' => 'ኢሜይል እንደገና በተሳካ ሁኔታ ተልኳል',
             'resend_failed' => 'ኢሜይል እንደገና መላክ አልተሳካም',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'ነባሪ ላኪ',
             'default_sender_description' => 'በፕላጊኑ የሚላኩ ሁሉም ኢሜይሎች ነባሪ "ከ" አድራሻ።',
             'additional_senders' => 'ተጨማሪ ላኪዎች',
+            'add_additional_senders' => 'ተጨማሪ ላኪዎችን ያክሉ',
             'additional_senders_description' => 'ኢሜይል ሲጽፉ ተጠቃሚዎች የሚመርጧቸው ተጨማሪ "ከ" አድራሻዎች።',
             'localization' => 'ሀገራዊነት',
             'categories' => 'የቅጽ ምድቦች',
             'logo' => 'አርማ',
             'colors' => 'ቀለሞች',
             'footer_links' => 'የግርጌ አገናኞች',
+            'add_footer_links' => 'የግርጌ ማስፈንጠሪያዎችን ያክሉ',
             'customer_service' => 'የደንበኛ አገልግሎት',
             'logging' => 'የኢሜይል ምዝግብ',
             'logging_description' => 'የተላኩ ኢሜይሎች በመረጃ ቋት ውስጥ እንዴት እንደሚመዘገቡ ይቆጣጠሩ።',

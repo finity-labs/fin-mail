@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Tarih',
             'by' => 'Tarafından',
+            'preview' => 'Önizleme',
             'restore' => 'Geri yükle',
             'restore_confirm' => ':version sürümünü geri yüklemek istediğinizden emin misiniz? Mevcut içerik önce yeni bir sürüm olarak kaydedilecektir.',
             'restored' => ':version sürümü geri yüklendi.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Bu islem, e-postanin yeni bir kopyasini orijinal alicilara gonderecektir.',
         ],
 
+
+        'preview' => [
+            'from' => 'Kimden:',
+            'to' => 'Kime:',
+            'cc' => 'CC:',
+            'template' => 'Şablon:',
+            'sent' => 'Gönderildi:',
+            'sent_not_yet' => 'Henüz değil',
+            'status' => 'Durum:',
+            'no_body' => 'E-posta içeriği kaydedilmedi. E-posta içeriğini kaydetmek için ayarlarda <code>logging.store_rendered_body</code> seçeneğini etkinleştirin.',
+            'error' => 'Hata Detayları'
+        ],
         'notifications' => [
             'resent' => 'E-posta basariyla tekrar gonderildi',
             'resend_failed' => 'E-posta tekrar gonderilemedi',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Varsayilan gonderen',
             'default_sender_description' => 'Eklenti tarafindan gonderilen tum e-postalar icin varsayilan "Kimden" adresi.',
             'additional_senders' => 'Ek gonderenler',
+            'add_additional_senders' => 'Ek Gönderenler Ekle',
             'additional_senders_description' => 'Kullanicilarin e-posta yazarken secebilecegi ek "Kimden" adresleri.',
             'localization' => 'Yerellestime',
             'categories' => 'Sablon kategorileri',
             'logo' => 'Logo',
             'colors' => 'Renkler',
             'footer_links' => 'Alt bilgi baglantilari',
+            'add_footer_links' => 'Alt Bilgi Bağlantıları Ekle',
             'customer_service' => 'Musteri hizmetleri',
             'logging' => 'E-posta gunlugu',
             'logging_description' => 'Gonderilen e-postalarin veritabanina nasil kaydedilecegini kontrol edin.',

@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Data',
             'by' => 'Da',
+            'preview' => 'Anteprima',
             'restore' => 'Ripristina',
             'restore_confirm' => 'Sei sicuro di voler ripristinare la versione :version? Il contenuto attuale verrà prima salvato come nuova versione.',
             'restored' => 'Versione :version ripristinata.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Verrà inviata una nuova copia dell\'email ai destinatari originali.',
         ],
 
+
+        'preview' => [
+            'from' => 'Da:',
+            'to' => 'A:',
+            'cc' => 'CC:',
+            'template' => 'Modello:',
+            'sent' => 'Inviato:',
+            'sent_not_yet' => 'Non ancora',
+            'status' => 'Stato:',
+            'no_body' => 'Il corpo dell\'email non è stato salvato. Abilita <code>logging.store_rendered_body</code> nelle impostazioni per salvare il contenuto dell\'email.',
+            'error' => 'Dettagli errore'
+        ],
         'notifications' => [
             'resent' => 'Email reinviata con successo',
             'resend_failed' => 'Reinvio email fallito',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Mittente predefinito',
             'default_sender_description' => 'L\'indirizzo "Da" predefinito per tutte le email inviate dal plugin.',
             'additional_senders' => 'Mittenti aggiuntivi',
+            'add_additional_senders' => 'Aggiungi mittenti aggiuntivi',
             'additional_senders_description' => 'Indirizzi "Da" aggiuntivi che gli utenti possono scegliere quando compongono email.',
             'localization' => 'Localizzazione',
             'categories' => 'Categorie modelli',
             'logo' => 'Logo',
             'colors' => 'Colori',
             'footer_links' => 'Link piè di pagina',
+            'add_footer_links' => 'Aggiungi link al piè di pagina',
             'customer_service' => 'Servizio clienti',
             'logging' => 'Registrazione email',
             'logging_description' => 'Controlla come le email inviate vengono registrate nel database.',

@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Dato',
             'by' => 'Af',
+            'preview' => 'Forhåndsvisning',
             'restore' => 'Gendan',
             'restore_confirm' => 'Er du sikker på, at du vil gendanne version :version? Det nuværende indhold gemmes som en ny version først.',
             'restored' => 'Version :version gendannet.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Dette sender en ny kopi af e-mailen til de oprindelige modtagere.',
         ],
 
+
+        'preview' => [
+            'from' => 'Fra:',
+            'to' => 'Til:',
+            'cc' => 'CC:',
+            'template' => 'Skabelon:',
+            'sent' => 'Sendt:',
+            'sent_not_yet' => 'Endnu ikke',
+            'status' => 'Status:',
+            'no_body' => 'E-mailens indhold blev ikke gemt. Aktiver <code>logging.store_rendered_body</code> i indstillingerne for at gemme e-mailindhold.',
+            'error' => 'Fejldetaljer'
+        ],
         'notifications' => [
             'resent' => 'E-mail gensendt',
             'resend_failed' => 'Kunne ikke gensende e-mail',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Standardafsender',
             'default_sender_description' => 'Standardafsenderadressen for alle e-mails sendt af pluginet.',
             'additional_senders' => 'Yderligere afsendere',
+            'add_additional_senders' => 'Tilføj yderligere afsendere',
             'additional_senders_description' => 'Ekstra afsenderadresser, som brugere kan vælge ved e-mailskrivning.',
             'localization' => 'Lokalisering',
             'categories' => 'Skabelonkategorier',
             'logo' => 'Logo',
             'colors' => 'Farver',
             'footer_links' => 'Sidefod-links',
+            'add_footer_links' => 'Tilføj sidefodlinks',
             'customer_service' => 'Kundeservice',
             'logging' => 'E-maillogning',
             'logging_description' => 'Styr, hvordan sendte e-mails registreres i databasen.',

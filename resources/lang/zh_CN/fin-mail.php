@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => '日期',
             'by' => '作者',
+            'preview' => '预览',
             'restore' => '恢复',
             'restore_confirm' => '您确定要恢复版本 :version 吗？当前内容将先保存为新版本。',
             'restored' => '版本 :version 已恢复。',
@@ -313,6 +314,18 @@ return [
             'resend_description' => '这将向原始收件人发送一封新的邮件副本。',
         ],
 
+
+        'preview' => [
+            'from' => '发件人：',
+            'to' => '收件人：',
+            'cc' => '抄送：',
+            'template' => '模板：',
+            'sent' => '发送时间：',
+            'sent_not_yet' => '尚未发送',
+            'status' => '状态：',
+            'no_body' => '邮件正文未保存。请在设置中启用 <code>logging.store_rendered_body</code> 以保存邮件内容。',
+            'error' => '错误详情'
+        ],
         'notifications' => [
             'resent' => '邮件已成功重新发送',
             'resend_failed' => '邮件重新发送失败',
@@ -394,12 +407,14 @@ return [
             'default_sender' => '默认发件人',
             'default_sender_description' => '插件发送的所有邮件的默认"发件人"地址。',
             'additional_senders' => '其他发件人',
+            'add_additional_senders' => '添加其他发件人',
             'additional_senders_description' => '用户撰写邮件时可选择的其他"发件人"地址。',
             'localization' => '本地化',
             'categories' => '模板分类',
             'logo' => '标志',
             'colors' => '颜色',
             'footer_links' => '页脚链接',
+            'add_footer_links' => '添加页脚链接',
             'customer_service' => '客户服务',
             'logging' => '邮件日志',
             'logging_description' => '控制已发送邮件在数据库中的记录方式。',

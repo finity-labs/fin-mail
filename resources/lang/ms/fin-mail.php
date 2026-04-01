@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Tarikh',
             'by' => 'Oleh',
+            'preview' => 'Pratonton',
             'restore' => 'Pulihkan',
             'restore_confirm' => 'Adakah anda pasti mahu memulihkan versi :version? Kandungan semasa akan disimpan sebagai versi baharu terlebih dahulu.',
             'restored' => 'Versi :version dipulihkan.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Ini akan menghantar salinan baharu e-mel kepada penerima asal.',
         ],
 
+
+        'preview' => [
+            'from' => 'Daripada:',
+            'to' => 'Kepada:',
+            'cc' => 'CC:',
+            'template' => 'Templat:',
+            'sent' => 'Dihantar:',
+            'sent_not_yet' => 'Belum lagi',
+            'status' => 'Status:',
+            'no_body' => 'Kandungan emel tidak disimpan. Aktifkan <code>logging.store_rendered_body</code> dalam tetapan untuk menyimpan kandungan emel.',
+            'error' => 'Butiran Ralat'
+        ],
         'notifications' => [
             'resent' => 'E-mel berjaya dihantar semula',
             'resend_failed' => 'Gagal menghantar semula e-mel',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Pengirim Lalai',
             'default_sender_description' => 'Alamat "Dari" lalai untuk semua e-mel yang dihantar oleh pemalam.',
             'additional_senders' => 'Pengirim Tambahan',
+            'add_additional_senders' => 'Tambah Penghantar Tambahan',
             'additional_senders_description' => 'Alamat "Dari" tambahan yang boleh dipilih pengguna semasa mengarang e-mel.',
             'localization' => 'Penyetempatan',
             'categories' => 'Kategori Templat',
             'logo' => 'Logo',
             'colors' => 'Warna',
             'footer_links' => 'Pautan Pengaki',
+            'add_footer_links' => 'Tambah Pautan Pengaki',
             'customer_service' => 'Khidmat Pelanggan',
             'logging' => 'Pengelogan E-mel',
             'logging_description' => 'Kawal bagaimana e-mel yang dihantar direkodkan dalam pangkalan data.',

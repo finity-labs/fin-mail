@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Data',
             'by' => 'De',
+            'preview' => 'Previzualizare',
             'restore' => 'Restaurare',
             'restore_confirm' => 'Sunteți sigur că doriți să restaurați versiunea :version? Conținutul actual va fi salvat mai întâi ca versiune nouă.',
             'restored' => 'Versiunea :version a fost restaurată.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Aceasta va trimite o noua copie a emailului catre destinatarii originali.',
         ],
 
+
+        'preview' => [
+            'from' => 'De la:',
+            'to' => 'Către:',
+            'cc' => 'CC:',
+            'template' => 'Șablon:',
+            'sent' => 'Trimis:',
+            'sent_not_yet' => 'Încă nu',
+            'status' => 'Status:',
+            'no_body' => 'Conținutul e-mailului nu a fost stocat. Activați <code>logging.store_rendered_body</code> în setări pentru a salva conținutul e-mailului.',
+            'error' => 'Detalii eroare'
+        ],
         'notifications' => [
             'resent' => 'Email retrimis cu succes',
             'resend_failed' => 'Retrimiterea emailului a esuat',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Expeditor Implicit',
             'default_sender_description' => 'Adresa "De la" implicita pentru toate emailurile trimise de plugin.',
             'additional_senders' => 'Expeditori Suplimentari',
+            'add_additional_senders' => 'Adăugați expeditori suplimentari',
             'additional_senders_description' => 'Adrese "De la" suplimentare pe care utilizatorii le pot alege la compunerea emailurilor.',
             'localization' => 'Localizare',
             'categories' => 'Categorii Sabloane',
             'logo' => 'Logo',
             'colors' => 'Culori',
             'footer_links' => 'Linkuri Subsol',
+            'add_footer_links' => 'Adăugați linkuri în subsol',
             'customer_service' => 'Serviciu Clienti',
             'logging' => 'Jurnal Emailuri',
             'logging_description' => 'Controlati modul in care emailurile trimise sunt inregistrate in baza de date.',

@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Dátum',
             'by' => 'Od',
+            'preview' => 'Náhľad',
             'restore' => 'Obnoviť',
             'restore_confirm' => 'Naozaj chcete obnoviť verziu :version? Aktuálny obsah bude najskôr uložený ako nová verzia.',
             'restored' => 'Verzia :version bola obnovená.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Toto odosle novu kopiu e-mailu povodnym prijimatelom.',
         ],
 
+
+        'preview' => [
+            'from' => 'Od:',
+            'to' => 'Komu:',
+            'cc' => 'Kópia:',
+            'template' => 'Šablóna:',
+            'sent' => 'Odoslané:',
+            'sent_not_yet' => 'Zatiaľ nie',
+            'status' => 'Stav:',
+            'no_body' => 'Telo e-mailu nebolo uložené. Povoľte <code>logging.store_rendered_body</code> v nastaveniach pre uloženie obsahu e-mailu.',
+            'error' => 'Podrobnosti chyby'
+        ],
         'notifications' => [
             'resent' => 'E-mail uspesne znovu odoslany',
             'resend_failed' => 'Znovu odoslanie e-mailu zlyhalo',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Predvoleny odosielatel',
             'default_sender_description' => 'Predvolena adresa "Od" pre vsetky e-maily odosielane pluginom.',
             'additional_senders' => 'Dalsi odosielatelia',
+            'add_additional_senders' => 'Pridať ďalších odosielateľov',
             'additional_senders_description' => 'Dalsie adresy "Od", ktore mozu pouzivatelia vyberat pri pisani e-mailov.',
             'localization' => 'Lokalizacia',
             'categories' => 'Kategorie sablon',
             'logo' => 'Logo',
             'colors' => 'Farby',
             'footer_links' => 'Odkazy v pate',
+            'add_footer_links' => 'Pridať odkazy v päte',
             'customer_service' => 'Zakaznicka podpora',
             'logging' => 'Logovanie e-mailov',
             'logging_description' => 'Ovladajte, ako su odoslane e-maily zaznamenavane v databaze.',

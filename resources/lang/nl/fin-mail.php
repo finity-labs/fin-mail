@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Datum',
             'by' => 'Door',
+            'preview' => 'Voorbeeld',
             'restore' => 'Herstellen',
             'restore_confirm' => 'Weet u zeker dat u versie :version wilt herstellen? De huidige inhoud wordt eerst opgeslagen als nieuwe versie.',
             'restored' => 'Versie :version hersteld.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Dit stuurt een nieuwe kopie van de e-mail naar de oorspronkelijke ontvangers.',
         ],
 
+
+        'preview' => [
+            'from' => 'Van:',
+            'to' => 'Aan:',
+            'cc' => 'CC:',
+            'template' => 'Sjabloon:',
+            'sent' => 'Verzonden:',
+            'sent_not_yet' => 'Nog niet',
+            'status' => 'Status:',
+            'no_body' => 'De e-mailinhoud is niet opgeslagen. Schakel <code>logging.store_rendered_body</code> in bij de instellingen om e-mailinhoud op te slaan.',
+            'error' => 'Foutdetails'
+        ],
         'notifications' => [
             'resent' => 'E-mail succesvol opnieuw verzonden',
             'resend_failed' => 'E-mail kon niet opnieuw worden verzonden',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Standaard afzender',
             'default_sender_description' => 'Het standaard "Van"-adres voor alle e-mails die door de plug-in worden verzonden.',
             'additional_senders' => 'Extra afzenders',
+            'add_additional_senders' => 'Extra afzenders toevoegen',
             'additional_senders_description' => 'Extra "Van"-adressen die gebruikers kunnen kiezen bij het opstellen van e-mails.',
             'localization' => 'Lokalisatie',
             'categories' => 'Sjablooncategorieen',
             'logo' => 'Logo',
             'colors' => 'Kleuren',
             'footer_links' => 'Voettekstlinks',
+            'add_footer_links' => 'Voettekst-links toevoegen',
             'customer_service' => 'Klantenservice',
             'logging' => 'E-maillogging',
             'logging_description' => 'Beheer hoe verzonden e-mails worden vastgelegd in de database.',

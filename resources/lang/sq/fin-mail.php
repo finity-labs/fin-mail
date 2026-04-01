@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Data',
             'by' => 'Nga',
+            'preview' => 'Parapamje',
             'restore' => 'Rikthe',
             'restore_confirm' => 'A jeni i sigurt që dëshironi të riktheni versionin :version? Përmbajtja aktuale do të ruhet fillimisht si version i ri.',
             'restored' => 'Versioni :version u rikthye.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Kjo do te dergoje nje kopje te re te emailit tek marresit origjinale.',
         ],
 
+
+        'preview' => [
+            'from' => 'Nga:',
+            'to' => 'Për:',
+            'cc' => 'CC:',
+            'template' => 'Shablloni:',
+            'sent' => 'Dërguar:',
+            'sent_not_yet' => 'Ende jo',
+            'status' => 'Statusi:',
+            'no_body' => 'Trupi i emailit nuk u ruajt. Aktivizo <code>logging.store_rendered_body</code> te cilësimet për të ruajtur përmbajtjen e emailit.',
+            'error' => 'Detajet e gabimit'
+        ],
         'notifications' => [
             'resent' => 'Emaili u ridergua me sukses',
             'resend_failed' => 'Ridergimi i emailit deshtoi',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Derguesi i Parazgjedhur',
             'default_sender_description' => 'Adresa e parazgjedhur "Nga" per te gjithe emailet e derguara nga shtojca.',
             'additional_senders' => 'Derguesit Shtese',
+            'add_additional_senders' => 'Shto dërgues shtesë',
             'additional_senders_description' => 'Adresa shtese "Nga" qe perdoruesit mund te zgjedhin kur shkruajne emaile.',
             'localization' => 'Lokalizimi',
             'categories' => 'Kategorite e Shablloneve',
             'logo' => 'Logoja',
             'colors' => 'Ngjyrat',
             'footer_links' => 'Lidhjet e Fundit',
+            'add_footer_links' => 'Shto lidhje në fund të faqes',
             'customer_service' => 'Sherbimi ndaj Klientit',
             'logging' => 'Regjistrimi i Emaileve',
             'logging_description' => 'Kontrolloni se si regjistrohen emailet e derguara ne databazen.',

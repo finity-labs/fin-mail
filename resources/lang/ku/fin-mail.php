@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Dîrok',
             'by' => 'Ji aliyê',
+            'preview' => 'Pêşdîtin',
             'restore' => 'Vegerîne',
             'restore_confirm' => 'Tu bawer î ku dixwazî guhertoya :version vegerînî? Naveroka heyî pêşî wek guhertoyeke nû tê tomarkirin.',
             'restored' => 'Guhertoya :version hat vegerandin.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Kopîyeke nû ya e-nameyê dê ji wergirên eslî re were şandin.',
         ],
 
+
+        'preview' => [
+            'from' => 'Ji:',
+            'to' => 'Ji bo:',
+            'cc' => 'CC:',
+            'template' => 'Şablon:',
+            'sent' => 'Hat şandin:',
+            'sent_not_yet' => 'Hîn na',
+            'status' => 'Rewş:',
+            'no_body' => 'Naveroka e-nameyê nehat tomarkirin. Ji bo tomarkirina naveroka e-nameyê <code>logging.store_rendered_body</code> di mîhengan de çalak bike.',
+            'error' => 'Hûrguliyên çewtiyê'
+        ],
         'notifications' => [
             'resent' => 'E-name bi serkeftî ji nû hat şandin',
             'resend_failed' => 'Ji nû şandin bi ser neket',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Şandyarê standard',
             'default_sender_description' => 'Navnîşana standard a "Ji" ji bo hemû e-nameyên ku ji hêla pêvekê ve têne şandin.',
             'additional_senders' => 'Şandyarên zêde',
+            'add_additional_senders' => 'Şandkerên din lê zêde bike',
             'additional_senders_description' => 'Navnîşanên zêde yên "Ji" ku bikarhêner dikarin dema e-name dinivîsin hilbijêrin.',
             'localization' => 'Herêmîkirin',
             'categories' => 'Kategoriyên şablonê',
             'logo' => 'Logo',
             'colors' => 'Reng',
             'footer_links' => 'Girêdanên binê rûpelê',
+            'add_footer_links' => 'Girêdanên jêrîn lê zêde bike',
             'customer_service' => 'Xizmeta xerîdar',
             'logging' => 'Tomarka e-nameyê',
             'logging_description' => 'Kontrol bike ka e-nameyên şandî çawa di databasê de têne tomar kirin.',

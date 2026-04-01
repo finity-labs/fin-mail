@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Datum',
             'by' => 'Od',
+            'preview' => 'Pregled',
             'restore' => 'Vrati',
             'restore_confirm' => 'Jeste li sigurni da želite vratiti verziju :version? Trenutni sadržaj će se prvo spremiti kao nova verzija.',
             'restored' => 'Verzija :version vraćena.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Ovo će poslati novu kopiju e-poruke izvornim primateljima.',
         ],
 
+
+        'preview' => [
+            'from' => 'Od:',
+            'to' => 'Za:',
+            'cc' => 'CC:',
+            'template' => 'Predložak:',
+            'sent' => 'Poslano:',
+            'sent_not_yet' => 'Još ne',
+            'status' => 'Status:',
+            'no_body' => 'Tijelo e-pošte nije pohranjeno. Omogućite <code>logging.store_rendered_body</code> u postavkama za spremanje sadržaja e-pošte.',
+            'error' => 'Detalji pogreške'
+        ],
         'notifications' => [
             'resent' => 'E-poruka uspješno ponovno poslana',
             'resend_failed' => 'Ponovno slanje e-poruke nije uspjelo',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Zadani pošiljatelj',
             'default_sender_description' => 'Zadana adresa pošiljatelja za sve e-poruke koje šalje dodatak.',
             'additional_senders' => 'Dodatni pošiljatelji',
+            'add_additional_senders' => 'Dodaj dodatne pošiljatelje',
             'additional_senders_description' => 'Dodatne adrese pošiljatelja koje korisnici mogu odabrati prilikom pisanja e-poruka.',
             'localization' => 'Lokalizacija',
             'categories' => 'Kategorije predložaka',
             'logo' => 'Logo',
             'colors' => 'Boje',
             'footer_links' => 'Poveznice podnožja',
+            'add_footer_links' => 'Dodaj linkove u podnožje',
             'customer_service' => 'Korisnička podrška',
             'logging' => 'Zapisivanje e-pošte',
             'logging_description' => 'Upravljajte načinom na koji se poslane e-poruke bilježe u bazu podataka.',

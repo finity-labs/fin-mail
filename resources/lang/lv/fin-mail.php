@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Datums',
             'by' => 'Autors',
+            'preview' => 'Priekšskatījums',
             'restore' => 'Atjaunot',
             'restore_confirm' => 'Vai tiešām vēlaties atjaunot versiju :version? Pašreizējais saturs vispirms tiks saglabāts kā jauna versija.',
             'restored' => 'Versija :version atjaunota.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Tas nosutis jaunu e-pasta kopiju sakotnajiem sanemajiem.',
         ],
 
+
+        'preview' => [
+            'from' => 'No:',
+            'to' => 'Kam:',
+            'cc' => 'Kopija:',
+            'template' => 'Veidne:',
+            'sent' => 'Nosūtīts:',
+            'sent_not_yet' => 'Vēl nē',
+            'status' => 'Statuss:',
+            'no_body' => 'E-pasta saturs netika saglabāts. Iespējojiet <code>logging.store_rendered_body</code> iestatījumos, lai saglabātu e-pasta saturu.',
+            'error' => 'Kļūdas informācija'
+        ],
         'notifications' => [
             'resent' => 'E-pasts veiksmigi nosutits atkartoti',
             'resend_failed' => 'Neizdevas atkartoti nosutit e-pastu',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Noklusejuma sutitajs',
             'default_sender_description' => 'Noklusejuma "No" adrese visiem spraudna nosutitajiem e-pastiem.',
             'additional_senders' => 'Papildu sutitaji',
+            'add_additional_senders' => 'Pievienot papildu sūtītājus',
             'additional_senders_description' => 'Papildu "No" adreses, ko lietotaji var izvelieties, rakstot e-pastus.',
             'localization' => 'Lokalizacija',
             'categories' => 'Veidnu kategorijas',
             'logo' => 'Logo',
             'colors' => 'Krasas',
             'footer_links' => 'Kajenes saites',
+            'add_footer_links' => 'Pievienot kājenes saites',
             'customer_service' => 'Klientu apkalposana',
             'logging' => 'E-pastu zurnalosana',
             'logging_description' => 'Kontrolejiet, ka nosutitie e-pasti tiek ierakstiti datubaze.',

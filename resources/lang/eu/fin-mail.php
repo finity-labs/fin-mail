@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Data',
             'by' => 'Egilea',
+            'preview' => 'Aurrebista',
             'restore' => 'Berrezarri',
             'restore_confirm' => 'Ziur zaude :version bertsioa berrezarri nahi duzula? Uneko edukia bertsio berri gisa gordeko da lehenik.',
             'restored' => ':version bertsioa berrezarri da.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Emailaren kopia berri bat bidaliko zaie jatorrizko hartzaileei.',
         ],
 
+
+        'preview' => [
+            'from' => 'Nork:',
+            'to' => 'Nori:',
+            'cc' => 'CC:',
+            'template' => 'Txantiloia:',
+            'sent' => 'Bidalita:',
+            'sent_not_yet' => 'Oraindik ez',
+            'status' => 'Egoera:',
+            'no_body' => 'Emailaren gorputza ez da gorde. Gaitu <code>logging.store_rendered_body</code> ezarpenetan emailaren edukia gordetzeko.',
+            'error' => 'Errorearen xehetasunak'
+        ],
         'notifications' => [
             'resent' => 'Emaila ondo birbidali da',
             'resend_failed' => 'Ezin izan da emaila birbidali',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Bidaltzaile lehenetsia',
             'default_sender_description' => 'Pluginak bidalitako email guztien bidaltzaile-helbide lehenetsia.',
             'additional_senders' => 'Bidaltzaile gehigarriak',
+            'add_additional_senders' => 'Gehitu bidaltzaile gehigarriak',
             'additional_senders_description' => 'Erabiltzaileek emailak idazterakoan aukeratu ditzaketen bidaltzaile-helbide gehigarriak.',
             'localization' => 'Lokalizazioa',
             'categories' => 'Txantiloi kategoriak',
             'logo' => 'Logoa',
             'colors' => 'Koloreak',
             'footer_links' => 'Oin-estekak',
+            'add_footer_links' => 'Gehitu orri-oineko estekak',
             'customer_service' => 'Bezero-arreta',
             'logging' => 'Email erregistroa',
             'logging_description' => 'Kontrolatu bidalitako emailak datu-basean nola erregistratzen diren.',

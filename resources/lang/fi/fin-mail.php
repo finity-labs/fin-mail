@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Päivämäärä',
             'by' => 'Tekijä',
+            'preview' => 'Esikatselu',
             'restore' => 'Palauta',
             'restore_confirm' => 'Haluatko varmasti palauttaa version :version? Nykyinen sisältö tallennetaan ensin uutena versiona.',
             'restored' => 'Versio :version palautettu.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Tämä lähettää uuden kopion sähköpostista alkuperäisille vastaanottajille.',
         ],
 
+
+        'preview' => [
+            'from' => 'Lähettäjä:',
+            'to' => 'Vastaanottaja:',
+            'cc' => 'Kopio:',
+            'template' => 'Pohja:',
+            'sent' => 'Lähetetty:',
+            'sent_not_yet' => 'Ei vielä',
+            'status' => 'Tila:',
+            'no_body' => 'Sähköpostin sisältöä ei tallennettu. Ota käyttöön <code>logging.store_rendered_body</code> asetuksissa tallentaaksesi sähköpostin sisällön.',
+            'error' => 'Virheen tiedot'
+        ],
         'notifications' => [
             'resent' => 'Sähköposti lähetetty uudelleen onnistuneesti',
             'resend_failed' => 'Sähköpostin uudelleenlähetys epäonnistui',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Oletuslähettäjä',
             'default_sender_description' => 'Oletuslähettäjäosoite kaikille lisäosan lähettämille sähköposteille.',
             'additional_senders' => 'Lisälähettäjät',
+            'add_additional_senders' => 'Lisää ylimääräisiä lähettäjiä',
             'additional_senders_description' => 'Lisälähettäjäosoitteet, jotka käyttäjät voivat valita sähköpostia kirjoittaessaan.',
             'localization' => 'Lokalisointi',
             'categories' => 'Mallipohjien kategoriat',
             'logo' => 'Logo',
             'colors' => 'Värit',
             'footer_links' => 'Alatunnisteen linkit',
+            'add_footer_links' => 'Lisää alatunnisteen linkkejä',
             'customer_service' => 'Asiakaspalvelu',
             'logging' => 'Sähköpostilokitus',
             'logging_description' => 'Hallitse, miten lähetetyt sähköpostit tallennetaan tietokantaan.',

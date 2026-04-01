@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => '日付',
             'by' => '作成者',
+            'preview' => 'プレビュー',
             'restore' => '復元',
             'restore_confirm' => 'バージョン :version を復元してもよろしいですか？現在のコンテンツは先に新しいバージョンとして保存されます。',
             'restored' => 'バージョン :version を復元しました。',
@@ -313,6 +314,18 @@ return [
             'resend_description' => '元の宛先にメールの新しいコピーが送信されます。',
         ],
 
+
+        'preview' => [
+            'from' => '送信元:',
+            'to' => '宛先:',
+            'cc' => 'CC:',
+            'template' => 'テンプレート:',
+            'sent' => '送信日時:',
+            'sent_not_yet' => '未送信',
+            'status' => 'ステータス:',
+            'no_body' => 'メール本文が保存されていません。メール内容を保存するには、設定で <code>logging.store_rendered_body</code> を有効にしてください。',
+            'error' => 'エラー詳細'
+        ],
         'notifications' => [
             'resent' => 'メールを再送信しました',
             'resend_failed' => 'メールの再送信に失敗しました',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'デフォルト差出人',
             'default_sender_description' => 'プラグインから送信されるすべてのメールのデフォルトの「差出人」アドレス。',
             'additional_senders' => '追加の差出人',
+            'add_additional_senders' => '追加の送信者を追加',
             'additional_senders_description' => 'メール作成時にユーザーが選択できる追加の「差出人」アドレス。',
             'localization' => 'ローカライズ',
             'categories' => 'テンプレートカテゴリ',
             'logo' => 'ロゴ',
             'colors' => 'カラー',
             'footer_links' => 'フッターリンク',
+            'add_footer_links' => 'フッターリンクを追加',
             'customer_service' => 'カスタマーサービス',
             'logging' => 'メールログ',
             'logging_description' => '送信済みメールのデータベースへの記録方法を制御します。',

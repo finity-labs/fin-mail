@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Fecha',
             'by' => 'Por',
+            'preview' => 'Vista previa',
             'restore' => 'Restaurar',
             'restore_confirm' => '¿Está seguro de que desea restaurar la versión :version? El contenido actual se guardará primero como una nueva versión.',
             'restored' => 'Versión :version restaurada.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Esto enviará una nueva copia del correo a los destinatarios originales.',
         ],
 
+
+        'preview' => [
+            'from' => 'De:',
+            'to' => 'Para:',
+            'cc' => 'CC:',
+            'template' => 'Plantilla:',
+            'sent' => 'Enviado:',
+            'sent_not_yet' => 'Aún no',
+            'status' => 'Estado:',
+            'no_body' => 'El cuerpo del correo no fue almacenado. Habilite <code>logging.store_rendered_body</code> en la configuración para guardar el contenido del correo.',
+            'error' => 'Detalles del error'
+        ],
         'notifications' => [
             'resent' => 'Correo reenviado correctamente',
             'resend_failed' => 'Error al reenviar el correo',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Remitente predeterminado',
             'default_sender_description' => 'La dirección de remitente predeterminada para todos los correos enviados por el plugin.',
             'additional_senders' => 'Remitentes adicionales',
+            'add_additional_senders' => 'Agregar remitentes adicionales',
             'additional_senders_description' => 'Direcciones de remitente adicionales que los usuarios pueden elegir al redactar correos.',
             'localization' => 'Localización',
             'categories' => 'Categorías de plantillas',
             'logo' => 'Logo',
             'colors' => 'Colores',
             'footer_links' => 'Enlaces del pie de página',
+            'add_footer_links' => 'Agregar enlaces de pie de página',
             'customer_service' => 'Atención al cliente',
             'logging' => 'Registro de correos',
             'logging_description' => 'Controle cómo se registran los correos enviados en la base de datos.',

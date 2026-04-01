@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Tarehe',
             'by' => 'Na',
+            'preview' => 'Hakiki',
             'restore' => 'Rejesha',
             'restore_confirm' => 'Una uhakika unataka kurejesha toleo :version? Maudhui ya sasa yatahifadhiwa kwanza kama toleo jipya.',
             'restored' => 'Toleo :version limerejeswa.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Hii itatuma nakala mpya ya barua pepe kwa wapokeaji wa awali.',
         ],
 
+
+        'preview' => [
+            'from' => 'Kutoka:',
+            'to' => 'Kwa:',
+            'cc' => 'CC:',
+            'template' => 'Kiolezo:',
+            'sent' => 'Imetumwa:',
+            'sent_not_yet' => 'Bado',
+            'status' => 'Hali:',
+            'no_body' => 'Maudhui ya barua pepe hayakuhifadhiwa. Washa <code>logging.store_rendered_body</code> kwenye mipangilio ili kuhifadhi maudhui ya barua pepe.',
+            'error' => 'Maelezo ya Hitilafu'
+        ],
         'notifications' => [
             'resent' => 'Barua pepe imetumwa tena kikamilifu',
             'resend_failed' => 'Imeshindwa kutuma barua pepe tena',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Mtumaji chaguo-msingi',
             'default_sender_description' => 'Anwani chaguo-msingi ya "Kutoka" kwa barua pepe zote zinazotumwa na programu-jalizi.',
             'additional_senders' => 'Watumaji wa ziada',
+            'add_additional_senders' => 'Ongeza Watumaji Zaidi',
             'additional_senders_description' => 'Anwani za ziada za "Kutoka" ambazo watumiaji wanaweza kuchagua wakati wa kutunga barua pepe.',
             'localization' => 'Lugha',
             'categories' => 'Kategoria za violezo',
             'logo' => 'Nembo',
             'colors' => 'Rangi',
             'footer_links' => 'Viungo vya kijachini',
+            'add_footer_links' => 'Ongeza Viungo vya Chini ya Ukurasa',
             'customer_service' => 'Huduma kwa wateja',
             'logging' => 'Kumbukumbu za barua pepe',
             'logging_description' => 'Dhibiti jinsi barua pepe zilizotumwa zinavyorekodiwa kwenye hifadhidata.',

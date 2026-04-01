@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Datum',
             'by' => 'Od',
+            'preview' => 'Náhled',
             'restore' => 'Obnovit',
             'restore_confirm' => 'Opravdu chcete obnovit verzi :version? Aktuální obsah bude nejprve uložen jako nová verze.',
             'restored' => 'Verze :version byla obnovena.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Tímto odešlete novou kopii e-mailu původním příjemcům.',
         ],
 
+
+        'preview' => [
+            'from' => 'Od:',
+            'to' => 'Komu:',
+            'cc' => 'Kopie:',
+            'template' => 'Šablona:',
+            'sent' => 'Odesláno:',
+            'sent_not_yet' => 'Zatím ne',
+            'status' => 'Stav:',
+            'no_body' => 'Tělo e-mailu nebylo uloženo. Povolte <code>logging.store_rendered_body</code> v nastavení pro uložení obsahu e-mailu.',
+            'error' => 'Podrobnosti chyby'
+        ],
         'notifications' => [
             'resent' => 'E-mail byl úspěšně přeposlán',
             'resend_failed' => 'Přeposlání e-mailu se nezdařilo',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Výchozí odesílatel',
             'default_sender_description' => 'Výchozí adresa "Od" pro všechny e-maily odeslané pluginem.',
             'additional_senders' => 'Další odesílatelé',
+            'add_additional_senders' => 'Přidat další odesílatele',
             'additional_senders_description' => 'Další adresy "Od", ze kterých mohou uživatelé vybírat při psaní e-mailů.',
             'localization' => 'Lokalizace',
             'categories' => 'Kategorie šablon',
             'logo' => 'Logo',
             'colors' => 'Barvy',
             'footer_links' => 'Odkazy v zápatí',
+            'add_footer_links' => 'Přidat odkazy v zápatí',
             'customer_service' => 'Zákaznický servis',
             'logging' => 'Protokolování e-mailů',
             'logging_description' => 'Nastavte, jak se odeslané e-maily zaznamenávají v databázi.',

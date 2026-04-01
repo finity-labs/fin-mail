@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Dyddiad',
             'by' => 'Gan',
+            'preview' => 'Rhagolwg',
             'restore' => 'Adfer',
             'restore_confirm' => 'Ydych chi\'n siŵr eich bod am adfer fersiwn :version? Bydd y cynnwys presennol yn cael ei gadw fel fersiwn newydd yn gyntaf.',
             'restored' => 'Fersiwn :version wedi\'i adfer.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Bydd hyn yn anfon copi newydd o\'r e-bost at y derbynwyr gwreiddiol.',
         ],
 
+
+        'preview' => [
+            'from' => 'Oddi wrth:',
+            'to' => 'At:',
+            'cc' => 'CC:',
+            'template' => 'Templed:',
+            'sent' => 'Anfonwyd:',
+            'sent_not_yet' => 'Ddim eto',
+            'status' => 'Statws:',
+            'no_body' => 'Ni chafodd corff yr e-bost ei storio. Galluogwch <code>logging.store_rendered_body</code> yn y gosodiadau i gadw cynnwys e-bost.',
+            'error' => 'Manylion y Gwall'
+        ],
         'notifications' => [
             'resent' => 'E-bost wedi\'i ailanfon yn llwyddiannus',
             'resend_failed' => 'Methodd ailanfon yr e-bost',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Anfonwr rhagosodedig',
             'default_sender_description' => 'Y cyfeiriad "Oddi wrth" rhagosodedig ar gyfer pob e-bost a anfonir gan yr ategyn.',
             'additional_senders' => 'Anfonwyr ychwanegol',
+            'add_additional_senders' => 'Ychwanegu Anfonwyr Ychwanegol',
             'additional_senders_description' => 'Cyfeiriadau "Oddi wrth" ychwanegol y gall defnyddwyr eu dewis wrth gyfansoddi e-byst.',
             'localization' => 'Lleoleiddio',
             'categories' => 'Categorïau templedi',
             'logo' => 'Logo',
             'colors' => 'Lliwiau',
             'footer_links' => 'Dolenni troedyn',
+            'add_footer_links' => 'Ychwanegu Dolenni Troedyn',
             'customer_service' => 'Gwasanaeth cwsmeriaid',
             'logging' => 'Cofnodi e-bost',
             'logging_description' => 'Rheolwch sut mae e-byst a anfonir yn cael eu cofnodi yn y gronfa ddata.',

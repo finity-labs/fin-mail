@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Datum',
             'by' => 'Od',
+            'preview' => 'Pregled',
             'restore' => 'Vrati',
             'restore_confirm' => 'Jeste li sigurni da želite vratiti verziju :version? Trenutni sadržaj će prvo biti sačuvan kao nova verzija.',
             'restored' => 'Verzija :version je vraćena.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Ovo će poslati novu kopiju e-maila originalnim primaocima.',
         ],
 
+
+        'preview' => [
+            'from' => 'Od:',
+            'to' => 'Za:',
+            'cc' => 'CC:',
+            'template' => 'Šablon:',
+            'sent' => 'Poslano:',
+            'sent_not_yet' => 'Još ne',
+            'status' => 'Status:',
+            'no_body' => 'Tijelo e-maila nije pohranjeno. Omogućite <code>logging.store_rendered_body</code> u postavkama da sačuvate sadržaj e-maila.',
+            'error' => 'Detalji greške'
+        ],
         'notifications' => [
             'resent' => 'E-mail je uspješno ponovo poslan',
             'resend_failed' => 'Ponovno slanje e-maila nije uspjelo',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Podrazumijevani pošiljalac',
             'default_sender_description' => 'Podrazumijevana adresa "Od" za sve e-mailove poslane putem dodatka.',
             'additional_senders' => 'Dodatni pošiljaoci',
+            'add_additional_senders' => 'Dodaj dodatne pošiljaoce',
             'additional_senders_description' => 'Dodatne adrese "Od" koje korisnici mogu odabrati prilikom sastavljanja e-mailova.',
             'localization' => 'Lokalizacija',
             'categories' => 'Kategorije predložaka',
             'logo' => 'Logo',
             'colors' => 'Boje',
             'footer_links' => 'Linkovi u podnožju',
+            'add_footer_links' => 'Dodaj linkove u podnožje',
             'customer_service' => 'Korisnička podrška',
             'logging' => 'Evidencija e-pošte',
             'logging_description' => 'Kontrolirajte kako se poslani e-mailovi evidentiraju u bazi podataka.',

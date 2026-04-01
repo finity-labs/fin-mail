@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Datum',
             'by' => 'Avtor',
+            'preview' => 'Predogled',
             'restore' => 'Obnovi',
             'restore_confirm' => 'Ali ste prepričani, da želite obnoviti različico :version? Trenutna vsebina bo najprej shranjena kot nova različica.',
             'restored' => 'Različica :version obnovljena.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'To bo poslalo novo kopijo e-poste izvirnim prejemnikom.',
         ],
 
+
+        'preview' => [
+            'from' => 'Od:',
+            'to' => 'Za:',
+            'cc' => 'Kopija:',
+            'template' => 'Predloga:',
+            'sent' => 'Poslano:',
+            'sent_not_yet' => 'Še ne',
+            'status' => 'Status:',
+            'no_body' => 'Telo e-pošte ni bilo shranjeno. Omogočite <code>logging.store_rendered_body</code> v nastavitvah za shranjevanje vsebine e-pošte.',
+            'error' => 'Podrobnosti napake'
+        ],
         'notifications' => [
             'resent' => 'E-posta uspesno ponovno poslana',
             'resend_failed' => 'Ponovno posiljanje e-poste ni uspelo',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Privzeti posiljatelj',
             'default_sender_description' => 'Privzeti naslov "Od" za vse e-poste, poslane s vticnikom.',
             'additional_senders' => 'Dodatni posiljatelji',
+            'add_additional_senders' => 'Dodaj dodatne pošiljatelje',
             'additional_senders_description' => 'Dodatni naslovi "Od", ki jih lahko uporabniki izberejo pri sestavljanju e-poste.',
             'localization' => 'Lokalizacija',
             'categories' => 'Kategorije predlog',
             'logo' => 'Logotip',
             'colors' => 'Barve',
             'footer_links' => 'Povezave v nogi',
+            'add_footer_links' => 'Dodaj povezave v nogo',
             'customer_service' => 'Podpora strankam',
             'logging' => 'Beleženje e-poste',
             'logging_description' => 'Nadzirajte, kako se poslana e-posta belezi v podatkovni bazi.',

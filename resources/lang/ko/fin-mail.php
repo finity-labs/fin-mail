@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => '날짜',
             'by' => '작성자',
+            'preview' => '미리보기',
             'restore' => '복원',
             'restore_confirm' => ':version 버전을 복원하시겠습니까? 현재 콘텐츠가 먼저 새 버전으로 저장됩니다.',
             'restored' => ':version 버전이 복원되었습니다.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => '원래 수신자에게 이메일의 새 사본이 발송됩니다.',
         ],
 
+
+        'preview' => [
+            'from' => '보낸 사람:',
+            'to' => '받는 사람:',
+            'cc' => '참조:',
+            'template' => '템플릿:',
+            'sent' => '발송일:',
+            'sent_not_yet' => '아직 아님',
+            'status' => '상태:',
+            'no_body' => '이메일 본문이 저장되지 않았습니다. 이메일 콘텐츠를 저장하려면 설정에서 <code>logging.store_rendered_body</code>를 활성화하세요.',
+            'error' => '오류 상세'
+        ],
         'notifications' => [
             'resent' => '이메일이 성공적으로 재발송되었습니다',
             'resend_failed' => '이메일 재발송에 실패했습니다',
@@ -394,12 +407,14 @@ return [
             'default_sender' => '기본 발신자',
             'default_sender_description' => '플러그인에서 발송하는 모든 이메일의 기본 "보내는 사람" 주소입니다.',
             'additional_senders' => '추가 발신자',
+            'add_additional_senders' => '추가 발신자 추가',
             'additional_senders_description' => '이메일 작성 시 사용자가 선택할 수 있는 추가 "보내는 사람" 주소입니다.',
             'localization' => '현지화',
             'categories' => '템플릿 카테고리',
             'logo' => '로고',
             'colors' => '색상',
             'footer_links' => '푸터 링크',
+            'add_footer_links' => '푸터 링크 추가',
             'customer_service' => '고객 서비스',
             'logging' => '이메일 로깅',
             'logging_description' => '발송된 이메일이 데이터베이스에 기록되는 방식을 제어합니다.',

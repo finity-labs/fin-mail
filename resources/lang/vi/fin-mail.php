@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Ngày',
             'by' => 'Bởi',
+            'preview' => 'Xem trước',
             'restore' => 'Khôi phục',
             'restore_confirm' => 'Bạn có chắc chắn muốn khôi phục phiên bản :version? Nội dung hiện tại sẽ được lưu thành phiên bản mới trước.',
             'restored' => 'Phiên bản :version đã được khôi phục.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Thao tac nay se gui ban sao moi cua email den nguoi nhan ban dau.',
         ],
 
+
+        'preview' => [
+            'from' => 'Từ:',
+            'to' => 'Đến:',
+            'cc' => 'CC:',
+            'template' => 'Mẫu:',
+            'sent' => 'Đã gửi:',
+            'sent_not_yet' => 'Chưa gửi',
+            'status' => 'Trạng thái:',
+            'no_body' => 'Nội dung email chưa được lưu trữ. Bật <code>logging.store_rendered_body</code> trong cài đặt để lưu nội dung email.',
+            'error' => 'Chi tiết lỗi'
+        ],
         'notifications' => [
             'resent' => 'Email da duoc gui lai thanh cong',
             'resend_failed' => 'Khong the gui lai email',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Nguoi gui mac dinh',
             'default_sender_description' => 'Dia chi "Tu" mac dinh cho tat ca email duoc gui boi plugin.',
             'additional_senders' => 'Nguoi gui bo sung',
+            'add_additional_senders' => 'Thêm người gửi bổ sung',
             'additional_senders_description' => 'Cac dia chi "Tu" bo sung ma nguoi dung co the chon khi soan email.',
             'localization' => 'Ban dia hoa',
             'categories' => 'Danh muc mau',
             'logo' => 'Logo',
             'colors' => 'Mau sac',
             'footer_links' => 'Lien ket chan trang',
+            'add_footer_links' => 'Thêm liên kết chân trang',
             'customer_service' => 'Dich vu khach hang',
             'logging' => 'Ghi nhat ky email',
             'logging_description' => 'Kiem soat cach cac email da gui duoc ghi lai trong co so du lieu.',

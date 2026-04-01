@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Data',
             'by' => 'Por',
+            'preview' => 'Pré-visualizar',
             'restore' => 'Restaurar',
             'restore_confirm' => 'Tem a certeza de que pretende restaurar a versão :version? O conteúdo atual será guardado primeiro como uma nova versão.',
             'restored' => 'Versão :version restaurada.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Isto enviara uma nova copia do email para os destinatarios originais.',
         ],
 
+
+        'preview' => [
+            'from' => 'De:',
+            'to' => 'Para:',
+            'cc' => 'CC:',
+            'template' => 'Modelo:',
+            'sent' => 'Enviado:',
+            'sent_not_yet' => 'Ainda não',
+            'status' => 'Estado:',
+            'no_body' => 'O corpo do e-mail não foi armazenado. Ative <code>logging.store_rendered_body</code> nas definições para guardar o conteúdo do e-mail.',
+            'error' => 'Detalhes do erro'
+        ],
         'notifications' => [
             'resent' => 'Email reenviado com sucesso',
             'resend_failed' => 'Falha ao reenviar email',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Remetente Predefinido',
             'default_sender_description' => 'O endereco "De" predefinido para todos os emails enviados pelo plugin.',
             'additional_senders' => 'Remetentes Adicionais',
+            'add_additional_senders' => 'Adicionar remetentes adicionais',
             'additional_senders_description' => 'Enderecos "De" adicionais que os utilizadores podem escolher ao compor emails.',
             'localization' => 'Localizacao',
             'categories' => 'Categorias de Modelos',
             'logo' => 'Logotipo',
             'colors' => 'Cores',
             'footer_links' => 'Ligacoes do Rodape',
+            'add_footer_links' => 'Adicionar links de rodapé',
             'customer_service' => 'Apoio ao Cliente',
             'logging' => 'Registo de Emails',
             'logging_description' => 'Controlar como os emails enviados sao registados na base de dados.',

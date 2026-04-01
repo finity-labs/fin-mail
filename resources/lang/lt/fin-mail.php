@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Data',
             'by' => 'Autorius',
+            'preview' => 'Peržiūra',
             'restore' => 'Atkurti',
             'restore_confirm' => 'Ar tikrai norite atkurti versiją :version? Dabartinis turinys pirmiausia bus išsaugotas kaip nauja versija.',
             'restored' => 'Versija :version atkurta.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Bus išsiųsta nauja laiško kopija pradiniams gavėjams.',
         ],
 
+
+        'preview' => [
+            'from' => 'Nuo:',
+            'to' => 'Kam:',
+            'cc' => 'Kopija:',
+            'template' => 'Šablonas:',
+            'sent' => 'Išsiųsta:',
+            'sent_not_yet' => 'Dar ne',
+            'status' => 'Būsena:',
+            'no_body' => 'El. laiško turinys nebuvo išsaugotas. Įjunkite <code>logging.store_rendered_body</code> nustatymuose, kad būtų išsaugotas el. laiško turinys.',
+            'error' => 'Klaidos informacija'
+        ],
         'notifications' => [
             'resent' => 'Laiškas sėkmingai išsiųstas iš naujo',
             'resend_failed' => 'Nepavyko išsiųsti laiško iš naujo',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Numatytasis siuntėjas',
             'default_sender_description' => 'Numatytasis "Nuo" adresas visiems plugino siunčiamiems laiškams.',
             'additional_senders' => 'Papildomi siuntėjai',
+            'add_additional_senders' => 'Pridėti papildomų siuntėjų',
             'additional_senders_description' => 'Papildomi "Nuo" adresai, kuriuos vartotojai gali pasirinkti rašydami laišką.',
             'localization' => 'Lokalizacija',
             'categories' => 'Šablonų kategorijos',
             'logo' => 'Logotipas',
             'colors' => 'Spalvos',
             'footer_links' => 'Poraštės nuorodos',
+            'add_footer_links' => 'Pridėti poraštės nuorodų',
             'customer_service' => 'Klientų aptarnavimas',
             'logging' => 'El. laiškų registravimas',
             'logging_description' => 'Valdykite, kaip išsiųsti laiškai registruojami duomenų bazėje.',

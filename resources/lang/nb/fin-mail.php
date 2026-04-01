@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => 'Dato',
             'by' => 'Av',
+            'preview' => 'Forhåndsvisning',
             'restore' => 'Gjenopprett',
             'restore_confirm' => 'Er du sikker på at du vil gjenopprette versjon :version? Gjeldende innhold lagres som en ny versjon først.',
             'restored' => 'Versjon :version gjenopprettet.',
@@ -313,6 +314,18 @@ return [
             'resend_description' => 'Dette vil sende en ny kopi av e-posten til de opprinnelige mottakerne.',
         ],
 
+
+        'preview' => [
+            'from' => 'Fra:',
+            'to' => 'Til:',
+            'cc' => 'Kopi:',
+            'template' => 'Mal:',
+            'sent' => 'Sendt:',
+            'sent_not_yet' => 'Ikke ennå',
+            'status' => 'Status:',
+            'no_body' => 'E-postinnholdet ble ikke lagret. Aktiver <code>logging.store_rendered_body</code> i innstillingene for å lagre e-postinnhold.',
+            'error' => 'Feildetaljer'
+        ],
         'notifications' => [
             'resent' => 'E-post sendt på nytt',
             'resend_failed' => 'Kunne ikke sende e-post på nytt',
@@ -394,12 +407,14 @@ return [
             'default_sender' => 'Standard avsender',
             'default_sender_description' => 'Standard "Fra"-adresse for alle e-poster sendt av tillegget.',
             'additional_senders' => 'Ytterligere avsendere',
+            'add_additional_senders' => 'Legg til flere avsendere',
             'additional_senders_description' => 'Ekstra "Fra"-adresser brukere kan velge når de skriver e-poster.',
             'localization' => 'Lokalisering',
             'categories' => 'Malkategorier',
             'logo' => 'Logo',
             'colors' => 'Farger',
             'footer_links' => 'Bunntekstlenker',
+            'add_footer_links' => 'Legg til bunntekstlenker',
             'customer_service' => 'Kundeservice',
             'logging' => 'E-postlogging',
             'logging_description' => 'Kontroller hvordan sendte e-poster registreres i databasen.',

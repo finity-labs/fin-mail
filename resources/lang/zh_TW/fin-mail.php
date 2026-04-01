@@ -125,6 +125,7 @@ return [
         'versioning' => [
             'date' => '日期',
             'by' => '作者',
+            'preview' => '預覽',
             'restore' => '還原',
             'restore_confirm' => '您確定要還原版本 :version 嗎？目前的內容將會先儲存為新版本。',
             'restored' => '版本 :version 已還原。',
@@ -313,6 +314,18 @@ return [
             'resend_description' => '這將向原始收件人寄送一封新的郵件副本。',
         ],
 
+
+        'preview' => [
+            'from' => '寄件人：',
+            'to' => '收件人：',
+            'cc' => '副本：',
+            'template' => '範本：',
+            'sent' => '寄送時間：',
+            'sent_not_yet' => '尚未寄送',
+            'status' => '狀態：',
+            'no_body' => '郵件內文未儲存。請在設定中啟用 <code>logging.store_rendered_body</code> 以儲存郵件內容。',
+            'error' => '錯誤詳情'
+        ],
         'notifications' => [
             'resent' => '郵件已成功重新寄送',
             'resend_failed' => '郵件重新寄送失敗',
@@ -394,12 +407,14 @@ return [
             'default_sender' => '預設寄件人',
             'default_sender_description' => '外掛寄送的所有郵件的預設「寄件人」地址。',
             'additional_senders' => '其他寄件人',
+            'add_additional_senders' => '新增其他寄件人',
             'additional_senders_description' => '使用者撰寫郵件時可選擇的其他「寄件人」地址。',
             'localization' => '在地化',
             'categories' => '範本分類',
             'logo' => '標誌',
             'colors' => '色彩',
             'footer_links' => '頁尾連結',
+            'add_footer_links' => '新增頁尾連結',
             'customer_service' => '客戶服務',
             'logging' => '郵件日誌',
             'logging_description' => '控制已寄送郵件在資料庫中的記錄方式。',
