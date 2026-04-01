@@ -23,11 +23,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
-use FinityLabs\FinMail\Mail\TemplateMail;
+use FinityLabs\FinMail\Actions\EmailSender;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
 use FinityLabs\FinMail\Settings\GeneralSettings;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Mail;
 
 class EmailTemplatesTable
 {
@@ -169,18 +168,23 @@ class EmailTemplatesTable
                         ])
                         ->action(function ($record, array $data): void {
                             try {
-                                $mail = TemplateMail::make($record->key, $data['locale'])
-                                    ->models([
-                                        'user' => auth()->user(),
-                                    ]);
+                                $rendered = $record->render(['user' => auth()->user()], $data['locale']);
 
-                                Mail::to($data['test_email'])->send($mail);
+                                $sender = new EmailSender(
+                                    data: [
+                                        'template_key' => $record->key,
+                                        'to' => [$data['test_email']],
+                                        'cc' => [],
+                                        'bcc' => [],
+                                        'locale' => $data['locale'],
+                                        'subject' => $rendered['subject'],
+                                        'body' => $rendered['body'],
+                                    ],
+                                    templateKey: $record->key,
+                                    modelsResolver: ['user' => auth()->user()],
+                                );
 
-                                Notification::make()
-                                    ->title(__('fin-mail::fin-mail.template.notifications.test_sent'))
-                                    ->body(__('fin-mail::fin-mail.template.notifications.test_sent_body', ['email' => $data['test_email']]))
-                                    ->success()
-                                    ->send();
+                                $sender->send();
                             } catch (\Throwable $e) {
                                 Notification::make()
                                     ->title(__('fin-mail::fin-mail.template.notifications.test_failed'))
