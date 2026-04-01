@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Spowoduje to wysłanie nowej kopii e-maila do oryginalnych odbiorców.',
         ],
 
-
         'preview' => [
             'from' => 'Od:',
             'to' => 'Do:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Jeszcze nie',
             'status' => 'Status:',
             'no_body' => 'Treść wiadomości e-mail nie została zapisana. Włącz <code>logging.store_rendered_body</code> w ustawieniach, aby zapisywać treść wiadomości.',
-            'error' => 'Szczegóły błędu'
+            'error' => 'Szczegóły błędu',
         ],
         'notifications' => [
             'resent' => 'E-mail wysłany ponownie pomyślnie',

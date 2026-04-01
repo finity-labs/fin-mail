@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Bus išsiųsta nauja laiško kopija pradiniams gavėjams.',
         ],
 
-
         'preview' => [
             'from' => 'Nuo:',
             'to' => 'Kam:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Dar ne',
             'status' => 'Būsena:',
             'no_body' => 'El. laiško turinys nebuvo išsaugotas. Įjunkite <code>logging.store_rendered_body</code> nustatymuose, kad būtų išsaugotas el. laiško turinys.',
-            'error' => 'Klaidos informacija'
+            'error' => 'Klaidos informacija',
         ],
         'notifications' => [
             'resent' => 'Laiškas sėkmingai išsiųstas iš naujo',

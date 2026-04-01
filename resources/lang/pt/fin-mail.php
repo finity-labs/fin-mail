@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Isto enviara uma nova copia do email para os destinatarios originais.',
         ],
 
-
         'preview' => [
             'from' => 'De:',
             'to' => 'Para:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Ainda não',
             'status' => 'Estado:',
             'no_body' => 'O corpo do e-mail não foi armazenado. Ative <code>logging.store_rendered_body</code> nas definições para guardar o conteúdo do e-mail.',
-            'error' => 'Detalhes do erro'
+            'error' => 'Detalhes do erro',
         ],
         'notifications' => [
             'resent' => 'Email reenviado com sucesso',

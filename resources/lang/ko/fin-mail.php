@@ -314,7 +314,6 @@ return [
             'resend_description' => '원래 수신자에게 이메일의 새 사본이 발송됩니다.',
         ],
 
-
         'preview' => [
             'from' => '보낸 사람:',
             'to' => '받는 사람:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => '아직 아님',
             'status' => '상태:',
             'no_body' => '이메일 본문이 저장되지 않았습니다. 이메일 콘텐츠를 저장하려면 설정에서 <code>logging.store_rendered_body</code>를 활성화하세요.',
-            'error' => '오류 상세'
+            'error' => '오류 상세',
         ],
         'notifications' => [
             'resent' => '이메일이 성공적으로 재발송되었습니다',

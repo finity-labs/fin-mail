@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Hii itatuma nakala mpya ya barua pepe kwa wapokeaji wa awali.',
         ],
 
-
         'preview' => [
             'from' => 'Kutoka:',
             'to' => 'Kwa:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Bado',
             'status' => 'Hali:',
             'no_body' => 'Maudhui ya barua pepe hayakuhifadhiwa. Washa <code>logging.store_rendered_body</code> kwenye mipangilio ili kuhifadhi maudhui ya barua pepe.',
-            'error' => 'Maelezo ya Hitilafu'
+            'error' => 'Maelezo ya Hitilafu',
         ],
         'notifications' => [
             'resent' => 'Barua pepe imetumwa tena kikamilifu',

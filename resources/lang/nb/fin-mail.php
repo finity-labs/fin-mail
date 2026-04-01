@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Dette vil sende en ny kopi av e-posten til de opprinnelige mottakerne.',
         ],
 
-
         'preview' => [
             'from' => 'Fra:',
             'to' => 'Til:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Ikke ennå',
             'status' => 'Status:',
             'no_body' => 'E-postinnholdet ble ikke lagret. Aktiver <code>logging.store_rendered_body</code> i innstillingene for å lagre e-postinnhold.',
-            'error' => 'Feildetaljer'
+            'error' => 'Feildetaljer',
         ],
         'notifications' => [
             'resent' => 'E-post sendt på nytt',

@@ -314,7 +314,6 @@ return [
             'resend_description' => 'פעולה זו תשלח עותק חדש של הדוא"ל לנמענים המקוריים.',
         ],
 
-
         'preview' => [
             'from' => 'מאת:',
             'to' => 'אל:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'עדיין לא',
             'status' => 'סטטוס:',
             'no_body' => 'תוכן האימייל לא נשמר. הפעל את <code>logging.store_rendered_body</code> בהגדרות כדי לשמור את תוכן האימייל.',
-            'error' => 'פרטי השגיאה'
+            'error' => 'פרטי השגיאה',
         ],
         'notifications' => [
             'resent' => 'הדוא"ל נשלח מחדש בהצלחה',

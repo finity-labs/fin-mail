@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Tas nosutis jaunu e-pasta kopiju sakotnajiem sanemajiem.',
         ],
 
-
         'preview' => [
             'from' => 'No:',
             'to' => 'Kam:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Vēl nē',
             'status' => 'Statuss:',
             'no_body' => 'E-pasta saturs netika saglabāts. Iespējojiet <code>logging.store_rendered_body</code> iestatījumos, lai saglabātu e-pasta saturu.',
-            'error' => 'Kļūdas informācija'
+            'error' => 'Kļūdas informācija',
         ],
         'notifications' => [
             'resent' => 'E-pasts veiksmigi nosutits atkartoti',

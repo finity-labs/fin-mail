@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Kjo do te dergoje nje kopje te re te emailit tek marresit origjinale.',
         ],
 
-
         'preview' => [
             'from' => 'Nga:',
             'to' => 'Për:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Ende jo',
             'status' => 'Statusi:',
             'no_body' => 'Trupi i emailit nuk u ruajt. Aktivizo <code>logging.store_rendered_body</code> te cilësimet për të ruajtur përmbajtjen e emailit.',
-            'error' => 'Detajet e gabimit'
+            'error' => 'Detajet e gabimit',
         ],
         'notifications' => [
             'resent' => 'Emaili u ridergua me sukses',

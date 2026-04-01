@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Això enviarà una nova còpia del correu als destinataris originals.',
         ],
 
-
         'preview' => [
             'from' => 'De:',
             'to' => 'A:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Encara no',
             'status' => 'Estat:',
             'no_body' => 'El cos del correu electrònic no s\'ha emmagatzemat. Activeu <code>logging.store_rendered_body</code> a la configuració per desar el contingut del correu.',
-            'error' => 'Detalls de l\'error'
+            'error' => 'Detalls de l\'error',
         ],
         'notifications' => [
             'resent' => 'Correu reenviat correctament',

@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Bu xatning yangi nusxasini asl qabul qiluvchilarga yuboradi.',
         ],
 
-
         'preview' => [
             'from' => 'Kimdan:',
             'to' => 'Kimga:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Hali yo\'q',
             'status' => 'Holat:',
             'no_body' => 'Elektron pochta matni saqlanmagan. Elektron pochta mazmunini saqlash uchun sozlamalarda <code>logging.store_rendered_body</code> ni yoqing.',
-            'error' => 'Xato tafsilotlari'
+            'error' => 'Xato tafsilotlari',
         ],
         'notifications' => [
             'resent' => 'Xat muvaffaqiyatli qayta yuborildi',

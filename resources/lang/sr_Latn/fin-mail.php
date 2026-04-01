@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Ovo ce poslati novu kopiju poruke originalnim primaocima.',
         ],
 
-
         'preview' => [
             'from' => 'Od:',
             'to' => 'Za:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Još ne',
             'status' => 'Status:',
             'no_body' => 'Sadržaj e-pošte nije sačuvan. Omogućite <code>logging.store_rendered_body</code> u podešavanjima da biste sačuvali sadržaj e-pošte.',
-            'error' => 'Detalji greške'
+            'error' => 'Detalji greške',
         ],
         'notifications' => [
             'resent' => 'Poruka uspesno ponovo poslata',

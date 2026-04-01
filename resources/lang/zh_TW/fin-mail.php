@@ -314,7 +314,6 @@ return [
             'resend_description' => '這將向原始收件人寄送一封新的郵件副本。',
         ],
 
-
         'preview' => [
             'from' => '寄件人：',
             'to' => '收件人：',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => '尚未寄送',
             'status' => '狀態：',
             'no_body' => '郵件內文未儲存。請在設定中啟用 <code>logging.store_rendered_body</code> 以儲存郵件內容。',
-            'error' => '錯誤詳情'
+            'error' => '錯誤詳情',
         ],
         'notifications' => [
             'resent' => '郵件已成功重新寄送',

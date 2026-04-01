@@ -314,7 +314,6 @@ return [
             'resend_description' => 'ይህ ለመጀመሪያዎቹ ተቀባዮች አዲስ የኢሜይል ቅጂ ይልካል።',
         ],
 
-
         'preview' => [
             'from' => 'ከ:',
             'to' => 'ለ:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'ገና አልተላከም',
             'status' => 'ሁኔታ:',
             'no_body' => 'የኢሜይል ይዘት አልተከማቸም። የኢሜይል ይዘትን ለማስቀመጥ በቅንብሮች ውስጥ <code>logging.store_rendered_body</code>ን ያንቁ።',
-            'error' => 'የስህተት ዝርዝሮች'
+            'error' => 'የስህተት ዝርዝሮች',
         ],
         'notifications' => [
             'resent' => 'ኢሜይል እንደገና በተሳካ ሁኔታ ተልኳል',

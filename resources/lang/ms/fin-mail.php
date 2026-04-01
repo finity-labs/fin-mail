@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Ini akan menghantar salinan baharu e-mel kepada penerima asal.',
         ],
 
-
         'preview' => [
             'from' => 'Daripada:',
             'to' => 'Kepada:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Belum lagi',
             'status' => 'Status:',
             'no_body' => 'Kandungan emel tidak disimpan. Aktifkan <code>logging.store_rendered_body</code> dalam tetapan untuk menyimpan kandungan emel.',
-            'error' => 'Butiran Ralat'
+            'error' => 'Butiran Ralat',
         ],
         'notifications' => [
             'resent' => 'E-mel berjaya dihantar semula',

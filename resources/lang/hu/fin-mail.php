@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Az e-mail egy új példánya kerül elküldésre az eredeti címzetteknek.',
         ],
 
-
         'preview' => [
             'from' => 'Feladó:',
             'to' => 'Címzett:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Még nem',
             'status' => 'Állapot:',
             'no_body' => 'Az e-mail törzse nem lett eltárolva. Engedélyezze a <code>logging.store_rendered_body</code> opciót a beállításokban az e-mail tartalom mentéséhez.',
-            'error' => 'Hiba részletei'
+            'error' => 'Hiba részletei',
         ],
         'notifications' => [
             'resent' => 'E-mail újraküldve',

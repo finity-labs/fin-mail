@@ -314,7 +314,6 @@ return [
             'resend_description' => '这将向原始收件人发送一封新的邮件副本。',
         ],
 
-
         'preview' => [
             'from' => '发件人：',
             'to' => '收件人：',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => '尚未发送',
             'status' => '状态：',
             'no_body' => '邮件正文未保存。请在设置中启用 <code>logging.store_rendered_body</code> 以保存邮件内容。',
-            'error' => '错误详情'
+            'error' => '错误详情',
         ],
         'notifications' => [
             'resent' => '邮件已成功重新发送',

@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Dit stuurt een nieuwe kopie van de e-mail naar de oorspronkelijke ontvangers.',
         ],
 
-
         'preview' => [
             'from' => 'Van:',
             'to' => 'Aan:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Nog niet',
             'status' => 'Status:',
             'no_body' => 'De e-mailinhoud is niet opgeslagen. Schakel <code>logging.store_rendered_body</code> in bij de instellingen om e-mailinhoud op te slaan.',
-            'error' => 'Foutdetails'
+            'error' => 'Foutdetails',
         ],
         'notifications' => [
             'resent' => 'E-mail succesvol opnieuw verzonden',

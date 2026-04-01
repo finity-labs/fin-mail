@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Bu, orijinal alıcılara e-poçtun yeni surətini göndərəcək.',
         ],
 
-
         'preview' => [
             'from' => 'Kimdən:',
             'to' => 'Kimə:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Hələ yox',
             'status' => 'Status:',
             'no_body' => 'E-poçt məzmunu saxlanmayıb. E-poçt məzmununu saxlamaq üçün parametrlərdə <code>logging.store_rendered_body</code> seçimini aktivləşdirin.',
-            'error' => 'Xəta Təfərrüatları'
+            'error' => 'Xəta Təfərrüatları',
         ],
         'notifications' => [
             'resent' => 'E-poçt uğurla yenidən göndərildi',

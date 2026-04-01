@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Bydd hyn yn anfon copi newydd o\'r e-bost at y derbynwyr gwreiddiol.',
         ],
 
-
         'preview' => [
             'from' => 'Oddi wrth:',
             'to' => 'At:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Ddim eto',
             'status' => 'Statws:',
             'no_body' => 'Ni chafodd corff yr e-bost ei storio. Galluogwch <code>logging.store_rendered_body</code> yn y gosodiadau i gadw cynnwys e-bost.',
-            'error' => 'Manylion y Gwall'
+            'error' => 'Manylion y Gwall',
         ],
         'notifications' => [
             'resent' => 'E-bost wedi\'i ailanfon yn llwyddiannus',

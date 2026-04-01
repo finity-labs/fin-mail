@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Detta skickar en ny kopia av e-postmeddelandet till de ursprungliga mottagarna.',
         ],
 
-
         'preview' => [
             'from' => 'Från:',
             'to' => 'Till:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Inte ännu',
             'status' => 'Status:',
             'no_body' => 'E-postens innehåll sparades inte. Aktivera <code>logging.store_rendered_body</code> i inställningarna för att spara e-postinnehåll.',
-            'error' => 'Feldetaljer'
+            'error' => 'Feldetaljer',
         ],
         'notifications' => [
             'resent' => 'E-postmeddelandet skickades igen',

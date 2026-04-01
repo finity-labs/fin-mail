@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Bu islem, e-postanin yeni bir kopyasini orijinal alicilara gonderecektir.',
         ],
 
-
         'preview' => [
             'from' => 'Kimden:',
             'to' => 'Kime:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Henüz değil',
             'status' => 'Durum:',
             'no_body' => 'E-posta içeriği kaydedilmedi. E-posta içeriğini kaydetmek için ayarlarda <code>logging.store_rendered_body</code> seçeneğini etkinleştirin.',
-            'error' => 'Hata Detayları'
+            'error' => 'Hata Detayları',
         ],
         'notifications' => [
             'resent' => 'E-posta basariyla tekrar gonderildi',

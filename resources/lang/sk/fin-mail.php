@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Toto odosle novu kopiu e-mailu povodnym prijimatelom.',
         ],
 
-
         'preview' => [
             'from' => 'Od:',
             'to' => 'Komu:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Zatiaľ nie',
             'status' => 'Stav:',
             'no_body' => 'Telo e-mailu nebolo uložené. Povoľte <code>logging.store_rendered_body</code> v nastaveniach pre uloženie obsahu e-mailu.',
-            'error' => 'Podrobnosti chyby'
+            'error' => 'Podrobnosti chyby',
         ],
         'notifications' => [
             'resent' => 'E-mail uspesne znovu odoslany',

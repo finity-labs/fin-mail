@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Ini akan mengirim salinan baru email ke penerima asal.',
         ],
 
-
         'preview' => [
             'from' => 'Dari:',
             'to' => 'Kepada:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Belum',
             'status' => 'Status:',
             'no_body' => 'Isi email tidak disimpan. Aktifkan <code>logging.store_rendered_body</code> di pengaturan untuk menyimpan konten email.',
-            'error' => 'Detail Kesalahan'
+            'error' => 'Detail Kesalahan',
         ],
         'notifications' => [
             'resent' => 'Email berhasil dikirim ulang',

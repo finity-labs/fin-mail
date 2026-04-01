@@ -314,7 +314,6 @@ return [
             'resend_description' => '元の宛先にメールの新しいコピーが送信されます。',
         ],
 
-
         'preview' => [
             'from' => '送信元:',
             'to' => '宛先:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => '未送信',
             'status' => 'ステータス:',
             'no_body' => 'メール本文が保存されていません。メール内容を保存するには、設定で <code>logging.store_rendered_body</code> を有効にしてください。',
-            'error' => 'エラー詳細'
+            'error' => 'エラー詳細',
         ],
         'notifications' => [
             'resent' => 'メールを再送信しました',

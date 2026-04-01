@@ -323,7 +323,7 @@ return [
             'sent_not_yet' => 'Pas encore',
             'status' => 'Statut :',
             'no_body' => 'Le corps de l\'e-mail n\'a pas été enregistré. Activez l\'option <code>logging.store_rendered_body</code> dans les paramètres pour enregistrer le contenu de l\'e-mail.',
-            'error' => 'Détails de l\'erreur'
+            'error' => 'Détails de l\'erreur',
         ],
 
         'notifications' => [

@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Tämä lähettää uuden kopion sähköpostista alkuperäisille vastaanottajille.',
         ],
 
-
         'preview' => [
             'from' => 'Lähettäjä:',
             'to' => 'Vastaanottaja:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Ei vielä',
             'status' => 'Tila:',
             'no_body' => 'Sähköpostin sisältöä ei tallennettu. Ota käyttöön <code>logging.store_rendered_body</code> asetuksissa tallentaaksesi sähköpostin sisällön.',
-            'error' => 'Virheen tiedot'
+            'error' => 'Virheen tiedot',
         ],
         'notifications' => [
             'resent' => 'Sähköposti lähetetty uudelleen onnistuneesti',

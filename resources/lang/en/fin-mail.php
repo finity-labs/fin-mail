@@ -323,7 +323,7 @@ return [
             'sent_not_yet' => 'Not yet',
             'status' => 'Status:',
             'no_body' => 'Email body was not stored. Enable <code>logging.store_rendered_body</code> in settings to save email content.',
-            'error' => 'Error Details'
+            'error' => 'Error Details',
         ],
 
         'notifications' => [

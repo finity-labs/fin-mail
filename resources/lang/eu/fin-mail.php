@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Emailaren kopia berri bat bidaliko zaie jatorrizko hartzaileei.',
         ],
 
-
         'preview' => [
             'from' => 'Nork:',
             'to' => 'Nori:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Oraindik ez',
             'status' => 'Egoera:',
             'no_body' => 'Emailaren gorputza ez da gorde. Gaitu <code>logging.store_rendered_body</code> ezarpenetan emailaren edukia gordetzeko.',
-            'error' => 'Errorearen xehetasunak'
+            'error' => 'Errorearen xehetasunak',
         ],
         'notifications' => [
             'resent' => 'Emaila ondo birbidali da',

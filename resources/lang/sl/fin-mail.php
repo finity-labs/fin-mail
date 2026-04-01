@@ -314,7 +314,6 @@ return [
             'resend_description' => 'To bo poslalo novo kopijo e-poste izvirnim prejemnikom.',
         ],
 
-
         'preview' => [
             'from' => 'Od:',
             'to' => 'Za:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Še ne',
             'status' => 'Status:',
             'no_body' => 'Telo e-pošte ni bilo shranjeno. Omogočite <code>logging.store_rendered_body</code> v nastavitvah za shranjevanje vsebine e-pošte.',
-            'error' => 'Podrobnosti napake'
+            'error' => 'Podrobnosti napake',
         ],
         'notifications' => [
             'resent' => 'E-posta uspesno ponovno poslana',

@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Thao tac nay se gui ban sao moi cua email den nguoi nhan ban dau.',
         ],
 
-
         'preview' => [
             'from' => 'Từ:',
             'to' => 'Đến:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Chưa gửi',
             'status' => 'Trạng thái:',
             'no_body' => 'Nội dung email chưa được lưu trữ. Bật <code>logging.store_rendered_body</code> trong cài đặt để lưu nội dung email.',
-            'error' => 'Chi tiết lỗi'
+            'error' => 'Chi tiết lỗi',
         ],
         'notifications' => [
             'resent' => 'Email da duoc gui lai thanh cong',

@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Kopîyeke nû ya e-nameyê dê ji wergirên eslî re were şandin.',
         ],
 
-
         'preview' => [
             'from' => 'Ji:',
             'to' => 'Ji bo:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Hîn na',
             'status' => 'Rewş:',
             'no_body' => 'Naveroka e-nameyê nehat tomarkirin. Ji bo tomarkirina naveroka e-nameyê <code>logging.store_rendered_body</code> di mîhengan de çalak bike.',
-            'error' => 'Hûrguliyên çewtiyê'
+            'error' => 'Hûrguliyên çewtiyê',
         ],
         'notifications' => [
             'resent' => 'E-name bi serkeftî ji nû hat şandin',

@@ -314,7 +314,6 @@ return [
             'resend_description' => 'Aceasta va trimite o noua copie a emailului catre destinatarii originali.',
         ],
 
-
         'preview' => [
             'from' => 'De la:',
             'to' => 'Către:',
@@ -324,7 +323,7 @@ return [
             'sent_not_yet' => 'Încă nu',
             'status' => 'Status:',
             'no_body' => 'Conținutul e-mailului nu a fost stocat. Activați <code>logging.store_rendered_body</code> în setări pentru a salva conținutul e-mailului.',
-            'error' => 'Detalii eroare'
+            'error' => 'Detalii eroare',
         ],
         'notifications' => [
             'resent' => 'Email retrimis cu succes',
