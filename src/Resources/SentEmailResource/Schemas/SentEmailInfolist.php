@@ -24,7 +24,7 @@ class SentEmailInfolist
                     TextEntry::make('template.name')
                         ->label(__('fin-mail::fin-mail.sent.preview.template'))
                         ->visible(fn (SentEmail $record): bool => $record->template !== null)
-                            ->columnSpanFull(),
+                        ->columnSpanFull(),
 
                     TextEntry::make('sender')
                         ->label(__('fin-mail::fin-mail.sent.preview.from')),
@@ -48,9 +48,9 @@ class SentEmailInfolist
                         ->badge(),
 
                     TextEntry::make('subject')
-                            ->label(__('fin-mail::fin-mail.sent.columns.subject'))
-                            ->columnSpanFull(),
-                    ]),
+                        ->label(__('fin-mail::fin-mail.sent.columns.subject'))
+                        ->columnSpanFull(),
+                ]),
 
             ViewEntry::make('rendered_body')
                 ->hiddenLabel()
