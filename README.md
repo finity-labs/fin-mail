@@ -429,29 +429,55 @@ MIT
 
 ## Screenshots
 
-### Template Management
-Easily manage, search, and create new email templates with multi-language support.
+<details>
+<summary><b>📝 Template Management</b></summary>
+<br>
+
+**Template List**
+Manage, search, and create email templates with multi-language support.
 ![Email Templates List View](https://github.com/user-attachments/assets/6e0a0b97-0572-4f6f-bdd2-a765ab26d399)
 
-The powerful template editor includes a live preview and a dynamic token selector.
+**Template Editor**
+The editor includes a live preview and a dynamic token selector.
 ![Template Editor](https://github.com/user-attachments/assets/68e42727-ca4b-42dc-9a9a-ed3db36a2f01)
 ![Editor Tokens View](https://github.com/user-attachments/assets/a9d2360e-8470-49d3-8055-ca4aa6dae79c)
 
-### Theming
-Create a consistent brand look with the visual theme editor—no CSS knowledge required.
+</details>
+
+<details>
+<summary><b>🎨 Theming</b></summary>
+<br>
+
+**Theme Editor**
+Create a consistent brand look with the visual theme editor — no CSS knowledge required.
 ![Theme Editor](https://github.com/user-attachments/assets/b7a5e904-b879-4576-b08e-681d1023f249)
 
-### Plugin Configuration
-Comprehensive settings allow you to control senders, localization, branding, logging, attachments, and system overrides.
+</details>
 
+<details>
+<summary><b>⚙️ Plugin Configuration</b></summary>
+<br>
+
+**General Settings**
+Configure senders, localization, and template categories.
 ![General Settings](https://github.com/user-attachments/assets/3a5362ea-826a-4c1d-8537-e8569d93e3c7)
-<br>
+
+**Branding Settings**
+Customize logo, colors, and footer links for your email layout.
 ![Branding Settings](https://github.com/user-attachments/assets/c6fb26fe-b789-42f7-9bf7-7250bc8f7c81)
-<br>
+
+**Logging Settings**
+Control how sent emails are recorded and cleaned up.
 ![Logging Settings](https://github.com/user-attachments/assets/402e3704-3bd3-44de-beb1-249a17705913)
-<br>
+
+**Attachment Settings**
+Set file size limits and allowed extensions.
 ![Attachment Settings](https://github.com/user-attachments/assets/8408f05b-7545-49df-a26b-52dd6247caee)
-<br>
+
+**Auth Email Overrides**
+Replace default Laravel auth emails with your custom templates.
 ![Auth Override Settings](https://github.com/user-attachments/assets/974704f6-e66a-4a59-8f07-a22d4b333924)
+
+</details>
 
 
