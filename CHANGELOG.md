@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-04-11
+
+### Added
+
+- **Custom block registration** — Register your own editor blocks via `FinMailPlugin::make()->customBlocks([...])`. Custom blocks now render correctly in the editor, preview mode, and sent emails. ButtonBlock is always included by default. Closes #6
+
+### Changed
+
+- Block rendering in `EmailTemplate`, `TipTapConverter`, and `DefaultEditor` now reads from a dynamic plugin-level registry instead of a hardcoded list
+
 ## [1.3.0] - 2026-04-01
 
 ### Added
