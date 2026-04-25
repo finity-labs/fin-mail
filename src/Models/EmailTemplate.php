@@ -26,6 +26,7 @@ use Spatie\Translatable\HasTranslations;
  * @property string $body
  * @property string|null $view_path
  * @property array{address?: string, name?: string}|null $from
+ * @property array{address?: string, name?: string}|null $reply_to
  * @property int|null $email_theme_id
  * @property array<string, mixed>|null $token_schema
  * @property bool $is_active
