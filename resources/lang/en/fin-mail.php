@@ -58,12 +58,16 @@ return [
             'tags_placeholder' => 'Add tags for organization',
             'from_address' => 'From Email',
             'from_name' => 'From Name',
+            'reply_to_address' => 'Recipient Email',
+            'reply_to_name' => 'Recipient Name',
             'locale' => 'Language',
         ],
 
         'sections' => [
             'custom_sender' => 'Custom Sender',
             'custom_sender_description' => 'Override the default from address for this template',
+            'custom_reply_to' => 'Custom Reply To',
+            'custom_reply_to_description' => 'Set reply to address for this template',
         ],
 
         'tokens' => [

@@ -58,6 +58,9 @@ class TemplateMail extends Mailable implements ShouldQueue
     /** @var array{address: string, name: ?string}|null */
     protected ?array $overrideFrom = null;
 
+    /** @var array{address: string, name: ?string}|null */
+    protected ?array $overrideReplyTo = null;
+
     public function __construct(
         protected readonly string $templateKey,
         ?string $locale = null,
@@ -125,6 +128,13 @@ class TemplateMail extends Mailable implements ShouldQueue
         return $this;
     }
 
+    public function overrideReplyTo(string $address, ?string $name = null): static
+    {
+        $this->overrideReplyTo = ['address' => $address, 'name' => $name];
+
+        return $this;
+    }
+
     public function withLogging(?SentEmail $log = null): static
     {
         $this->sentEmailLog = $log;
@@ -146,6 +156,8 @@ class TemplateMail extends Mailable implements ShouldQueue
 
         $templateFrom = $this->emailTemplate->from;
 
+        $templateReplyTo = $this->emailTemplate->reply_to;
+
         $from = $this->overrideFrom
             ?? (! empty($templateFrom['address']) ? $templateFrom : null)
             ?? [
@@ -153,8 +165,12 @@ class TemplateMail extends Mailable implements ShouldQueue
                 'name' => $mailSettings->default_from_name,
             ];
 
+        $replyTo = $this->overrideReplyTo
+            ?? (! empty($templateReplyTo['address']) ? $templateReplyTo : null);
+
         return new Envelope(
             from: new Address($from['address'], $from['name'] ?? ''),
+            replyTo: filled($replyTo) ? [new Address($replyTo['address'], $replyTo['name'] ?? '')] : [],
             subject: $this->overrideSubject ?? $rendered['subject'],
         );
     }

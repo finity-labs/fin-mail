@@ -58,12 +58,16 @@ return [
             'tags_placeholder' => 'Ajouter des tags pour l\'organisation',
             'from_address' => 'Email de l\'expéditeur',
             'from_name' => 'Nom de l\'expéditeur',
+            'reply_to_address' => 'Email du destinataire',
+            'reply_to_name' => 'Nom du destinataire',
             'locale' => 'Langue',
         ],
 
         'sections' => [
             'custom_sender' => 'Expéditeur personnalisé',
             'custom_sender_description' => 'Remplacer l\'adresse d\'expéditeur par défaut pour ce modèle',
+            'custom_reply_to' => 'Répondre à personnalisé',
+            'custom_reply_to_description' => 'Définir une adresse de "Réponse A" pour ce modèle',
         ],
 
         'tokens' => [

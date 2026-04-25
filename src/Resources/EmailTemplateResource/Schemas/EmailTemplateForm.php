@@ -154,6 +154,22 @@ class EmailTemplateForm
                                     ]),
                                 ])
                                 ->collapsed(),
+
+                            Section::make(__('fin-mail::fin-mail.template.sections.custom_reply_to'))
+                                ->description(__('fin-mail::fin-mail.template.sections.custom_reply_to_description'))
+                                ->schema([
+                                    Grid::make(2)->schema([
+                                        TextInput::make('reply_to.address')
+                                            ->label(__('fin-mail::fin-mail.template.fields.reply_to_address'))
+                                            ->email()
+                                            ->placeholder(fn (): string => app(GeneralSettings::class)->default_from_address),
+
+                                        TextInput::make('reply_to.name')
+                                            ->label(__('fin-mail::fin-mail.template.fields.reply_to_name'))
+                                            ->placeholder(fn (): string => app(GeneralSettings::class)->default_from_name),
+                                    ]),
+                                ])
+                                ->collapsed(),
                         ]),
 
                     Tab::make(__('fin-mail::fin-mail.template.tabs.tokens'))
