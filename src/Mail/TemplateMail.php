@@ -110,12 +110,6 @@ class TemplateMail extends Mailable implements ShouldQueue
         return $this;
     }
 
-    /*public function extraData(array $data): static
-    {
-        $this->extraData = array_merge($this->extraData, $data);
-
-        return $this;
-    }*/
     public function extraData(array $data): static
     {
         foreach ($data as $key => $value) {
@@ -124,7 +118,6 @@ class TemplateMail extends Mailable implements ShouldQueue
 
         return $this;
     }
-
 
     public function overrideSubject(string $subject): static
     {
@@ -215,7 +208,6 @@ class TemplateMail extends Mailable implements ShouldQueue
                     'branding' => $this->resolveBranding(),
                 ],
                 $this->viewData
-                //$this->extraData
             )
         );
     }
