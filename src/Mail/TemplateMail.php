@@ -51,6 +51,9 @@ class TemplateMail extends Mailable implements ShouldQueue
 
     protected ?SentEmail $sentEmailLog = null;
 
+    /** @var array<string, mixed> */
+    protected array $extraData = [];
+
     protected ?string $overrideSubject = null;
 
     protected ?string $overrideBody = null;
@@ -103,6 +106,15 @@ class TemplateMail extends Mailable implements ShouldQueue
     public function attachFile(string $path, ?string $name = null, ?string $mime = null): static
     {
         $this->fileAttachments[] = compact('path', 'name', 'mime');
+
+        return $this;
+    }
+
+    public function extraData(array $data): static
+    {
+        foreach ($data as $key => $value) {
+            $this->with($key, $value);
+        }
 
         return $this;
     }
@@ -183,17 +195,20 @@ class TemplateMail extends Mailable implements ShouldQueue
 
         return new Content(
             view: 'fin-mail::email.default',
-            with: [
-                'body' => $this->overrideBody
-                    ? app(TokenReplacer::class)->replace(
-                        $this->stripMergeTagSpans($this->overrideBody),
-                        $this->models,
-                    )
-                    : $rendered['body'],
-                'preheader' => $rendered['preheader'],
-                'theme' => $theme?->resolvedColors() ?? EmailTheme::defaultColors(),
-                'branding' => $this->resolveBranding(),
-            ],
+            with: array_merge(
+                [
+                    'body' => $this->overrideBody
+                        ? app(TokenReplacer::class)->replace(
+                            $this->stripMergeTagSpans($this->overrideBody),
+                            $this->models,
+                        )
+                        : $rendered['body'],
+                    'preheader' => $rendered['preheader'],
+                    'theme' => $theme?->resolvedColors() ?? EmailTheme::defaultColors(),
+                    'branding' => $this->resolveBranding(),
+                ],
+                $this->viewData
+            )
         );
     }
 
