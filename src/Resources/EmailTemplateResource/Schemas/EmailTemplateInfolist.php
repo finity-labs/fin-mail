@@ -94,6 +94,19 @@ class EmailTemplateInfolist
                                 ])
                                 ->columns(2)
                                 ->collapsed(),
+
+                            Section::make(__('fin-mail::fin-mail.template.sections.custom_reply_to'))
+                                ->schema([
+                                    TextEntry::make('reply_to.address')
+                                        ->label(__('fin-mail::fin-mail.template.fields.reply_to_address'))
+                                        ->placeholder('-'),
+
+                                    TextEntry::make('reply_to.name')
+                                        ->label(__('fin-mail::fin-mail.template.fields.reply_to_name'))
+                                        ->placeholder('-'),
+                                ])
+                                ->columns(2)
+                                ->collapsed(),
                         ])
                         ->columns(2),
 
