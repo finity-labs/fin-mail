@@ -152,13 +152,14 @@ class SentEmailsTable
                                 ->send();
                         }
                     })
-                    ->visible(function(): bool{
+                    ->visible(function (): bool {
                         /** @var FinMailPlugin $plugin */
                         $plugin = filament('fin-mail');
 
-                        if (!$plugin->isShieldAvailable()) {
+                        if (! $plugin->isShieldAvailable()) {
                             return true;
                         }
+
                         return auth()->user()->can('Resend:SentEmail');
                     }),
             ])

@@ -150,13 +150,14 @@ class EmailTemplatesTable
                         ]))
                         ->modalWidth(Width::FourExtraLarge)
                         ->modalSubmitAction(false)
-                        ->visible(function(): bool{
+                        ->visible(function (): bool {
                             /** @var FinMailPlugin $plugin */
                             $plugin = filament('fin-mail');
 
-                            if (!$plugin->isShieldAvailable()) {
+                            if (! $plugin->isShieldAvailable()) {
                                 return true;
                             }
+
                             return auth()->user()->can('Preview:EmailTemplate');
                         }),
 
@@ -239,13 +240,14 @@ class EmailTemplatesTable
                                     ->send();
                             }
                         })
-                        ->visible(function(): bool{
+                        ->visible(function (): bool {
                             /** @var FinMailPlugin $plugin */
                             $plugin = filament('fin-mail');
 
-                            if (!$plugin->isShieldAvailable()) {
+                            if (! $plugin->isShieldAvailable()) {
                                 return true;
                             }
+
                             return auth()->user()->can('SendTest:EmailTemplate');
                         }),
 
@@ -253,13 +255,14 @@ class EmailTemplatesTable
                         ->label(__('fin-mail::fin-mail.template.actions.compose'))
                         ->icon(Heroicon::OutlinedPencilSquare)
                         ->url(fn ($record): string => EmailTemplateResource::getUrl('compose', ['record' => $record]))
-                        ->visible(function(): bool{
+                        ->visible(function (): bool {
                             /** @var FinMailPlugin $plugin */
                             $plugin = filament('fin-mail');
 
-                            if (!$plugin->isShieldAvailable()) {
+                            if (! $plugin->isShieldAvailable()) {
                                 return true;
                             }
+
                             return auth()->user()->can('Compose:EmailTemplate');
                         }),
                 ]),
@@ -267,7 +270,7 @@ class EmailTemplatesTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->authorizeIndividualRecords(function(){
+                        ->authorizeIndividualRecords(function () {
                             /** @var FinMailPlugin $plugin */
                             $plugin = filament('fin-mail');
 

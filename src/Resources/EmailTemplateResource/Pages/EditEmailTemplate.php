@@ -104,13 +104,14 @@ class EditEmailTemplate extends EditRecord
                 })
                 ->modalWidth(Width::FourExtraLarge)
                 ->modalSubmitAction(false)
-                ->visible(function(): bool{
+                ->visible(function (): bool {
                     /** @var FinMailPlugin $plugin */
                     $plugin = filament('fin-mail');
 
-                    if (!$plugin->isShieldAvailable()) {
+                    if (! $plugin->isShieldAvailable()) {
                         return true;
                     }
+
                     return auth()->user()->can('Preview:EmailTemplate');
                 }),
 
@@ -118,13 +119,14 @@ class EditEmailTemplate extends EditRecord
                 ->label(__('fin-mail::fin-mail.template.actions.compose'))
                 ->icon(Heroicon::OutlinedPaperAirplane)
                 ->url(fn (): string => static::getResource()::getUrl('compose', ['record' => $this->record]))
-                ->visible(function(): bool{
+                ->visible(function (): bool {
                     /** @var FinMailPlugin $plugin */
                     $plugin = filament('fin-mail');
 
-                    if (!$plugin->isShieldAvailable()) {
+                    if (! $plugin->isShieldAvailable()) {
                         return true;
                     }
+
                     return auth()->user()->can('Compose:EmailTemplate');
                 }),
 

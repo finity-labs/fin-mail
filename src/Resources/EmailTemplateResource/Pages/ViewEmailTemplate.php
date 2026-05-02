@@ -92,13 +92,14 @@ class ViewEmailTemplate extends ViewRecord
                 ]))
                 ->modalWidth(Width::FourExtraLarge)
                 ->modalSubmitAction(false)
-                ->visible(function(): bool{
+                ->visible(function (): bool {
                     /** @var FinMailPlugin $plugin */
                     $plugin = filament('fin-mail');
 
-                    if (!$plugin->isShieldAvailable()) {
+                    if (! $plugin->isShieldAvailable()) {
                         return true;
                     }
+
                     return auth()->user()->can('Preview:EmailTemplate');
                 }),
 
