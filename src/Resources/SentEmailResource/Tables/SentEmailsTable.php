@@ -14,6 +14,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use FinityLabs\FinMail\Enums\EmailStatus;
+use FinityLabs\FinMail\FinMailPlugin;
 use FinityLabs\FinMail\Mail\TemplateMail;
 use FinityLabs\FinMail\Models\SentEmail;
 use FinityLabs\FinMail\Resources\SentEmailResource\Schemas\SentEmailInfolist;
@@ -150,6 +151,15 @@ class SentEmailsTable
                                 ->danger()
                                 ->send();
                         }
+                    })
+                    ->visible(function(): bool{
+                        /** @var FinMailPlugin $plugin */
+                        $plugin = filament('fin-mail');
+
+                        if (!$plugin->isShieldAvailable()) {
+                            return true;
+                        }
+                        return auth()->user()->can('Resend:SentEmail');
                     }),
             ])
             ->poll('30s');

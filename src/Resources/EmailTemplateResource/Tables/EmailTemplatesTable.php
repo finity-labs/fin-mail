@@ -25,6 +25,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use FinityLabs\FinMail\Actions\EmailSender;
+use FinityLabs\FinMail\FinMailPlugin;
 use FinityLabs\FinMail\Helpers\TokenValue;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
 use FinityLabs\FinMail\Settings\GeneralSettings;
@@ -140,7 +141,7 @@ class EmailTemplatesTable
                         ->label(__('fin-mail::fin-mail.template.actions.preview'))
                         ->icon(Heroicon::OutlinedEye)
                         ->modal()
-                        ->modalHeading(fn ($record): string => "Preview: {$record->name}")
+                        ->modalHeading(fn ($record): string => __('fin-mail::fin-mail.template.actions.preview_heading', ['record' => $record->name]))
                         ->modalContent(fn ($record) => view('fin-mail::components.email-preview', [
                             'subject' => $record->subject,
                             'preheader' => $record->preheader,
@@ -148,7 +149,16 @@ class EmailTemplatesTable
                             'theme' => $record->theme?->resolvedColors(),
                         ]))
                         ->modalWidth(Width::FourExtraLarge)
-                        ->modalSubmitAction(false),
+                        ->modalSubmitAction(false)
+                        ->visible(function(): bool{
+                            /** @var FinMailPlugin $plugin */
+                            $plugin = filament('fin-mail');
+
+                            if (!$plugin->isShieldAvailable()) {
+                                return true;
+                            }
+                            return auth()->user()->can('Preview:EmailTemplate');
+                        }),
 
                     Action::make('send_test')
                         ->label(__('fin-mail::fin-mail.template.actions.send_test'))
@@ -228,17 +238,41 @@ class EmailTemplatesTable
                                     ->danger()
                                     ->send();
                             }
+                        })
+                        ->visible(function(): bool{
+                            /** @var FinMailPlugin $plugin */
+                            $plugin = filament('fin-mail');
+
+                            if (!$plugin->isShieldAvailable()) {
+                                return true;
+                            }
+                            return auth()->user()->can('SendTest:EmailTemplate');
                         }),
 
                     Action::make('compose')
                         ->label(__('fin-mail::fin-mail.template.actions.compose'))
                         ->icon(Heroicon::OutlinedPencilSquare)
-                        ->url(fn ($record): string => EmailTemplateResource::getUrl('compose', ['record' => $record])),
+                        ->url(fn ($record): string => EmailTemplateResource::getUrl('compose', ['record' => $record]))
+                        ->visible(function(): bool{
+                            /** @var FinMailPlugin $plugin */
+                            $plugin = filament('fin-mail');
+
+                            if (!$plugin->isShieldAvailable()) {
+                                return true;
+                            }
+                            return auth()->user()->can('Compose:EmailTemplate');
+                        }),
                 ]),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
+                        ->authorizeIndividualRecords(function(){
+                            /** @var FinMailPlugin $plugin */
+                            $plugin = filament('fin-mail');
+
+                            return $plugin->isShieldAvailable() ? 'delete' : true;
+                        })
                         ->before(function (DeleteBulkAction $action, Collection $records): void {
                             $lockedCount = $records->where('is_locked', true)->count();
                             if ($lockedCount > 0) {

@@ -103,12 +103,30 @@ class EditEmailTemplate extends EditRecord
                     ]);
                 })
                 ->modalWidth(Width::FourExtraLarge)
-                ->modalSubmitAction(false),
+                ->modalSubmitAction(false)
+                ->visible(function(): bool{
+                    /** @var FinMailPlugin $plugin */
+                    $plugin = filament('fin-mail');
+
+                    if (!$plugin->isShieldAvailable()) {
+                        return true;
+                    }
+                    return auth()->user()->can('Preview:EmailTemplate');
+                }),
 
             Action::make('compose')
                 ->label(__('fin-mail::fin-mail.template.actions.compose'))
                 ->icon(Heroicon::OutlinedPaperAirplane)
-                ->url(fn (): string => static::getResource()::getUrl('compose', ['record' => $this->record])),
+                ->url(fn (): string => static::getResource()::getUrl('compose', ['record' => $this->record]))
+                ->visible(function(): bool{
+                    /** @var FinMailPlugin $plugin */
+                    $plugin = filament('fin-mail');
+
+                    if (!$plugin->isShieldAvailable()) {
+                        return true;
+                    }
+                    return auth()->user()->can('Compose:EmailTemplate');
+                }),
 
             Action::make('version_history')
                 ->label(__('fin-mail::fin-mail.template.actions.version_history'))

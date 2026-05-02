@@ -10,6 +10,7 @@ use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
+use FinityLabs\FinMail\FinMailPlugin;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
 use FinityLabs\FinMail\Settings\GeneralSettings;
@@ -90,7 +91,16 @@ class ViewEmailTemplate extends ViewRecord
                     'theme' => $this->record->theme?->resolvedColors(),
                 ]))
                 ->modalWidth(Width::FourExtraLarge)
-                ->modalSubmitAction(false),
+                ->modalSubmitAction(false)
+                ->visible(function(): bool{
+                    /** @var FinMailPlugin $plugin */
+                    $plugin = filament('fin-mail');
+
+                    if (!$plugin->isShieldAvailable()) {
+                        return true;
+                    }
+                    return auth()->user()->can('Preview:EmailTemplate');
+                }),
 
             EditAction::make(),
         ];

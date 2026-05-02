@@ -347,11 +347,11 @@ php artisan shield:generate --panel=admin --option=policies_and_permissions
 
 **Resources:**
 
-| Resource | Permissions |
-|----------|------------|
-| Email Templates | `ViewAny`, `View`, `Create`, `Update`, `Delete` |
-| Email Themes | `ViewAny`, `View`, `Create`, `Update`, `Delete` |
-| Sent Emails | `ViewAny`, `View` |
+| Resource | Permissions                                                                       |
+|----------|-----------------------------------------------------------------------------------|
+| Email Templates | `ViewAny`, `View`, `Create`, `Update`, `Delete`, `Preview`, `SendTest`, `Compose` |
+| Email Themes | `ViewAny`, `View`, `Create`, `Update`, `Delete`                                   |
+| Sent Emails | `ViewAny`, `View`, `Resend`                                                       |
 
 **Settings pages:**
 

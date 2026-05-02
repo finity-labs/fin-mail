@@ -408,6 +408,9 @@ class InstallCommand extends Command
             ."                'create',\n"
             ."                'update',\n"
             ."                'delete',\n"
+            ."                'preview',\n"
+            ."                'sendTest',\n"
+            ."                'compose',\n"
             ."            ],\n"
             ."            \\FinityLabs\\FinMail\\Resources\\EmailThemeResource\\EmailThemeResource::class => [\n"
             ."                'viewAny',\n"
@@ -419,6 +422,7 @@ class InstallCommand extends Command
             ."            \\FinityLabs\\FinMail\\Resources\\SentEmailResource\\SentEmailResource::class => [\n"
             ."                'viewAny',\n"
             ."                'view',\n"
+            ."                'resend',\n"
             ."            ],\n";
 
         $managePos = strpos($content, "'manage' => [");

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FinityLabs\FinMail;
 
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
@@ -289,5 +290,10 @@ class FinMailPlugin implements Plugin
     public static function getCustomBlockClasses(): array
     {
         return array_values(static::getCustomBlocks());
+    }
+
+    public static function isShieldAvailable(): bool
+    {
+        return class_exists(FilamentShieldPlugin::class);
     }
 }
