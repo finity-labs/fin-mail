@@ -55,6 +55,8 @@ class TemplateMail extends Mailable implements ShouldQueue
 
     protected ?string $overrideBody = null;
 
+    protected ?string $overrideView = null;
+
     /** @var array{address: string, name: ?string}|null */
     protected ?array $overrideFrom = null;
 
@@ -144,6 +146,13 @@ class TemplateMail extends Mailable implements ShouldQueue
         return $this;
     }
 
+    public function overrideView(string $view): static
+    {
+        $this->overrideView = $view;
+
+        return $this;
+    }
+
     public function withLogging(?SentEmail $log = null): static
     {
         $this->sentEmailLog = $log;
@@ -191,7 +200,7 @@ class TemplateMail extends Mailable implements ShouldQueue
         $theme = $this->emailTemplate->theme ?? EmailTheme::getDefault();
 
         return new Content(
-            view: 'fin-mail::email.default',
+            view: $this->overrideView ?? 'fin-mail::email.default',
             with: array_merge(
                 [
                     'body' => $this->overrideBody
