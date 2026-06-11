@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-06-11
+
+### Added
+
+- **Per-email view override** — New `overrideView()` method on `TemplateMail` renders an email with your own Blade layout instead of the package's `fin-mail::email.default`, while keeping database-driven templates, token replacement, theming, logging, and attachments. The custom view receives the same variables as the default one (`$body`, `$preheader`, `$theme`, `$branding`) plus anything passed via `with()` or `extraData()`. Existing emails are unaffected if you don't call it (#14, thanks @agencetwogether)
+
 ## [1.7.1] - 2026-05-09
 
 ### Fixed
