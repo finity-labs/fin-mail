@@ -183,6 +183,20 @@ After publishing the package views (`php artisan vendor:publish --tag=fin-mail-v
 
 The default keys (`body`, `preheader`, `theme`, `branding`) remain available — extra data is merged on top.
 
+#### Using a custom email view
+
+By default, FinMail renders emails using the built-in `fin-mail::email.default` view.
+
+You can override the view on a per-email basis:
+
+```php
+TemplateMail::make('welcome-email')
+    ->models(['user' => $user])
+    ->overrideView('emails.custom-layout');
+```
+
+The custom view receives the same variables as the default view (`$body`, `$preheader`, `$theme`, `$branding`) as well as any data provided via `with()` or `extraData()`.
+
 ### Adding "Send Email" to any resource
 
 ```php
