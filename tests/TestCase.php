@@ -7,6 +7,7 @@ namespace FinityLabs\FinMail\Tests;
 use FinityLabs\FinMail\FinMailServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Spatie\LaravelSettings\LaravelSettingsServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -23,6 +24,7 @@ class TestCase extends Orchestra
     {
         return [
             FinMailServiceProvider::class,
+            LaravelSettingsServiceProvider::class,
         ];
     }
 
