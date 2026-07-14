@@ -6,7 +6,6 @@ namespace FinityLabs\FinMail\Mail;
 
 use FinityLabs\FinMail\Helpers\TokenReplacer;
 use FinityLabs\FinMail\Models\EmailTemplate;
-use FinityLabs\FinMail\Models\EmailTheme;
 use FinityLabs\FinMail\Models\SentEmail;
 use FinityLabs\FinMail\Settings\BrandingSettings;
 use FinityLabs\FinMail\Settings\GeneralSettings;
@@ -196,8 +195,6 @@ class TemplateMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         $rendered = $this->getRendered();
-        /** @var EmailTheme|null $theme */
-        $theme = $this->emailTemplate->theme ?? EmailTheme::getDefault();
 
         return new Content(
             view: $this->overrideView ?? 'fin-mail::email.default',
@@ -210,7 +207,7 @@ class TemplateMail extends Mailable implements ShouldQueue
                         )
                         : $rendered['body'],
                     'preheader' => $rendered['preheader'],
-                    'theme' => $theme?->resolvedColors() ?? EmailTheme::defaultColors(),
+                    'theme' => $this->emailTemplate->resolvedThemeColors(),
                     'branding' => $this->resolveBranding(),
                 ],
                 $this->viewData

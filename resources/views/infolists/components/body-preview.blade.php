@@ -6,7 +6,7 @@
         $record = $getRecord();
         $locale = app()->getLocale();
         $body = $record->getTranslation('body', $locale);
-        $theme = $record->theme?->resolvedColors() ?? \FinityLabs\FinMail\Models\EmailTheme::defaultColors();
+        $theme = $record->resolvedThemeColors();
         $body = \FinityLabs\FinMail\Models\EmailTemplate::renderCustomBlocks($body, $theme);
     @endphp
 

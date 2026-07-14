@@ -1,8 +1,8 @@
 @php
     $content = $html ?? '';
 
-    // Use passed theme or fall back to defaults
-    $resolvedTheme = $theme ?? \FinityLabs\FinMail\Models\EmailTheme::defaultColors();
+    // Use passed theme or fall back to the configured default theme (then hardcoded defaults)
+    $resolvedTheme = $theme ?? \FinityLabs\FinMail\Models\EmailTheme::resolvedDefaultColors();
 
     if (is_array($content)) {
         // Tiptap JSON document (has 'type' key) — convert to HTML via Filament's renderer

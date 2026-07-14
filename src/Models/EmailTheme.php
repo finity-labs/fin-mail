@@ -79,6 +79,17 @@ class EmailTheme extends Model
     }
 
     /**
+     * Resolve the colors of the configured default theme, falling back to the
+     * hardcoded defaults when no default theme has been set.
+     *
+     * @return array<string, string>
+     */
+    public static function resolvedDefaultColors(): array
+    {
+        return static::getDefault()?->resolvedColors() ?? static::defaultColors();
+    }
+
+    /**
      * Get a merged color set (theme colors + defaults for any missing keys).
      *
      * @return array<string, string>
