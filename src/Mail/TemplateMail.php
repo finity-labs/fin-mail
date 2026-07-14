@@ -296,7 +296,7 @@ class TemplateMail extends Mailable implements ShouldQueue
         $branding = app(BrandingSettings::class);
 
         return [
-            'logo' => $branding->logo,
+            'logo' => $branding->resolvedLogo(),
             'logo_width' => $branding->logo_width,
             'logo_height' => $branding->logo_height,
             'content_width' => $branding->content_width,

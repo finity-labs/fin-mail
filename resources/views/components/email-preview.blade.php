@@ -17,7 +17,7 @@
     // Resolve branding from settings
     $brandingSettings = app(\FinityLabs\FinMail\Settings\BrandingSettings::class);
     $resolvedBranding = [
-        'logo' => $brandingSettings->logo,
+        'logo' => $brandingSettings->resolvedLogo(),
         'logo_width' => $brandingSettings->logo_width,
         'logo_height' => $brandingSettings->logo_height,
         'content_width' => $brandingSettings->content_width,

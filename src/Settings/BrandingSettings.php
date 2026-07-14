@@ -30,6 +30,27 @@ class BrandingSettings extends Settings
     }
 
     /**
+     * Resolve the configured logo into an absolute URL suitable for email.
+     *
+     * Absolute URLs (http, https, protocol-relative) and data URIs are
+     * returned unchanged. App-relative paths (e.g. "/images/logo.png") are
+     * resolved against config('app.url') so the logo displays in email
+     * clients, which have no base URL of their own.
+     */
+    public function resolvedLogo(): ?string
+    {
+        if ($this->logo === null || $this->logo === '') {
+            return null;
+        }
+
+        if (preg_match('#^(https?:)?//#i', $this->logo) === 1 || str_starts_with($this->logo, 'data:')) {
+            return $this->logo;
+        }
+
+        return url($this->logo);
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public static function defaults(): array
