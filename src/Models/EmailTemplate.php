@@ -174,10 +174,13 @@ class EmailTemplate extends Model
      * Render the template body with token replacement.
      *
      * @param  array<string, mixed>  $models  Keyed by token prefix: ['user' => $user, 'invoice' => $invoice]
+     * @param  bool  $renderBlocks  When false, custom blocks (e.g. buttons) are left as their
+     *                              editor markup instead of being expanded to final HTML. Use this
+     *                              when seeding an editable RichEditor so the blocks round-trip.
      *
      * @return array{subject: string, preheader: string, body: string}
      */
-    public function render(array $models = [], ?string $locale = null): array
+    public function render(array $models = [], ?string $locale = null, bool $renderBlocks = true): array
     {
         if ($locale) {
             $this->setLocale($locale);
@@ -187,7 +190,10 @@ class EmailTemplate extends Model
 
         $theme = $this->theme?->resolvedColors() ?? EmailTheme::defaultColors();
         $body = self::stripMergeTagSpans($this->body);
-        $body = self::renderCustomBlocks($body, $theme);
+
+        if ($renderBlocks) {
+            $body = self::renderCustomBlocks($body, $theme);
+        }
 
         return [
             'subject' => $replacer->replace($this->subject, $models),

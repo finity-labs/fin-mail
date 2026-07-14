@@ -198,6 +198,7 @@ class TemplateMail extends Mailable implements ShouldQueue
         $rendered = $this->getRendered();
         /** @var EmailTheme|null $theme */
         $theme = $this->emailTemplate->theme ?? EmailTheme::getDefault();
+        $themeColors = $theme?->resolvedColors() ?? EmailTheme::defaultColors();
 
         return new Content(
             view: $this->overrideView ?? 'fin-mail::email.default',
@@ -205,12 +206,15 @@ class TemplateMail extends Mailable implements ShouldQueue
                 [
                     'body' => $this->overrideBody
                         ? app(TokenReplacer::class)->replace(
-                            $this->stripMergeTagSpans($this->overrideBody),
+                            EmailTemplate::renderCustomBlocks(
+                                $this->stripMergeTagSpans($this->overrideBody),
+                                $themeColors,
+                            ),
                             $this->models,
                         )
                         : $rendered['body'],
                     'preheader' => $rendered['preheader'],
-                    'theme' => $theme?->resolvedColors() ?? EmailTheme::defaultColors(),
+                    'theme' => $themeColors,
                     'branding' => $this->resolveBranding(),
                 ],
                 $this->viewData

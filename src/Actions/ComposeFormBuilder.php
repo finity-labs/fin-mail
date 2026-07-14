@@ -62,7 +62,7 @@ class ComposeFormBuilder
     {
         $template = $this->resolveTemplate();
         $models = $this->resolveModels();
-        $rendered = $template?->render($models) ?? ['subject' => '', 'body' => '', 'preheader' => ''];
+        $rendered = $template?->render($models, renderBlocks: false) ?? ['subject' => '', 'body' => '', 'preheader' => ''];
         $recipient = $this->resolveRecipient();
 
         $mailSettings = app(GeneralSettings::class);
@@ -130,7 +130,7 @@ class ComposeFormBuilder
                             }
 
                             $models = $this->resolveModels();
-                            $rendered = $tpl->render($models);
+                            $rendered = $tpl->render($models, renderBlocks: false);
                             $set('subject', $rendered['subject']);
                             $set('body', $rendered['body']);
                         }),

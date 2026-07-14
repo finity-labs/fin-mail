@@ -98,6 +98,54 @@ it('renders tokens in subject and body', function () {
         ->and($rendered['body'])->toBe('<p>Hello Acme Corp</p>');
 });
 
+it('expands button custom blocks to final html when rendering blocks', function () {
+    $config = htmlspecialchars((string) json_encode([
+        'label' => 'Click Me',
+        'url' => 'https://example.com',
+        'align' => 'center',
+    ]), ENT_QUOTES);
+
+    $template = EmailTemplate::create([
+        'key' => 'with-button',
+        'name' => ['en' => 'With Button'],
+        'category' => 'transactional',
+        'subject' => ['en' => 'Test'],
+        'body' => ['en' => '<p>Hi</p><div data-type="customBlock" data-id="emailButton" data-config="'.$config.'">preview</div>'],
+        'is_active' => true,
+    ]);
+
+    $rendered = $template->render();
+
+    expect($rendered['body'])
+        ->toContain('<a href="https://example.com"')
+        ->toContain('Click Me')
+        ->not->toContain('data-type="customBlock"');
+});
+
+it('keeps button custom blocks as editor markup when rendering without blocks', function () {
+    $config = htmlspecialchars((string) json_encode([
+        'label' => 'Click Me',
+        'url' => 'https://example.com',
+        'align' => 'center',
+    ]), ENT_QUOTES);
+
+    $template = EmailTemplate::create([
+        'key' => 'with-button-editable',
+        'name' => ['en' => 'With Button Editable'],
+        'category' => 'transactional',
+        'subject' => ['en' => 'Test'],
+        'body' => ['en' => '<p>Hi</p><div data-type="customBlock" data-id="emailButton" data-config="'.$config.'">preview</div>'],
+        'is_active' => true,
+    ]);
+
+    $rendered = $template->render([], null, renderBlocks: false);
+
+    expect($rendered['body'])
+        ->toContain('data-type="customBlock"')
+        ->toContain('data-id="emailButton"')
+        ->not->toContain('<a href="https://example.com"');
+});
+
 it('renders with specific locale', function () {
     $template = EmailTemplate::create([
         'key' => 'greeting',
