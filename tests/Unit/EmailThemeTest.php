@@ -32,3 +32,18 @@ it('merges default theme colors over the hardcoded defaults', function () {
             'button_text' => EmailTheme::defaultColors()['button_text'],
         ]);
 });
+
+it('ignores null and empty stored colors when resolving', function () {
+    $theme = EmailTheme::create([
+        'name' => 'Sparse',
+        'colors' => ['primary' => '#FF0000', 'button_bg' => null, 'border' => ''],
+        'is_default' => false,
+    ]);
+
+    expect($theme->resolvedColors())
+        ->toMatchArray([
+            'primary' => '#FF0000',
+            'button_bg' => EmailTheme::defaultColors()['button_bg'],
+            'border' => EmailTheme::defaultColors()['border'],
+        ]);
+});

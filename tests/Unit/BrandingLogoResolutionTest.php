@@ -52,6 +52,12 @@ it('leaves a data uri unchanged', function () {
     expect(fakeBrandingWithLogo($logo)->resolvedLogo())->toBe($logo);
 });
 
+it('leaves an uppercase data uri unchanged', function () {
+    $logo = 'DATA:image/png;base64,iVBORw0KGgo=';
+
+    expect(fakeBrandingWithLogo($logo)->resolvedLogo())->toBe($logo);
+});
+
 it('resolves an app-relative path against the app url', function () {
     expect(fakeBrandingWithLogo('/images/logo.png')->resolvedLogo())
         ->toBe('https://mail.example.com/images/logo.png');

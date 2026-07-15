@@ -186,6 +186,7 @@ class EmailTemplate extends Model
      * Render the template body with token replacement.
      *
      * @param  array<string, mixed>  $models  Keyed by token prefix: ['user' => $user, 'invoice' => $invoice]
+     * @param  string|null  $locale  When set, the template's translations are resolved in this locale
      * @param  bool  $renderBlocks  When false, custom blocks (e.g. buttons) are left as their
      *                              editor markup instead of being expanded to final HTML. Use this
      *                              when seeding an editable RichEditor so the blocks round-trip.

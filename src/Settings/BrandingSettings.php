@@ -43,7 +43,7 @@ class BrandingSettings extends Settings
             return null;
         }
 
-        if (preg_match('#^(https?:)?//#i', $this->logo) === 1 || str_starts_with($this->logo, 'data:')) {
+        if (preg_match('#^(?:(?:https?:)?//|data:)#i', $this->logo) === 1) {
             return $this->logo;
         }
 

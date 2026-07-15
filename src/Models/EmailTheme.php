@@ -96,7 +96,12 @@ class EmailTheme extends Model
      */
     public function resolvedColors(): array
     {
-        return array_merge(static::defaultColors(), $this->colors ?? []);
+        $colors = array_filter(
+            $this->colors ?? [],
+            fn ($color): bool => is_string($color) && $color !== '',
+        );
+
+        return array_merge(static::defaultColors(), $colors);
     }
 
     /*
