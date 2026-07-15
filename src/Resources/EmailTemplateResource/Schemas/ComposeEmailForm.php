@@ -83,7 +83,7 @@ class ComposeEmailForm
                                             return;
                                         }
 
-                                        $rendered = $record->render([], $state);
+                                        $rendered = $record->render([], $state, renderBlocks: false);
                                         $set('subject', $rendered['subject']);
                                         $set('preheader', $rendered['preheader']);
                                         $set('body', $rendered['body']);
