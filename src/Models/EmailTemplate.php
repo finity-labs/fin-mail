@@ -156,6 +156,18 @@ class EmailTemplate extends Model
     }
 
     /**
+     * Resolve the theme colors for this template, falling back to the
+     * configured default theme (and then the hardcoded defaults) when the
+     * template has no theme of its own.
+     *
+     * @return array<string, string>
+     */
+    public function resolvedThemeColors(): array
+    {
+        return $this->theme?->resolvedColors() ?? EmailTheme::resolvedDefaultColors();
+    }
+
+    /**
      * Find a template by its key, optionally setting the locale for translation resolution.
      */
     public static function findByKey(string $key, ?string $locale = null): ?static
@@ -188,7 +200,7 @@ class EmailTemplate extends Model
 
         $replacer = app(TokenReplacer::class);
 
-        $theme = $this->theme?->resolvedColors() ?? EmailTheme::defaultColors();
+        $theme = $this->resolvedThemeColors();
         $body = self::stripMergeTagSpans($this->body);
 
         if ($renderBlocks) {
