@@ -48,7 +48,7 @@ class ComposeEmail extends Page
         $this->record = $record;
 
         $locale = app()->getLocale();
-        $rendered = $record->render([], $locale);
+        $rendered = $record->render([], $locale, renderBlocks: false);
 
         ButtonBlock::setPreviewTheme($record->theme?->resolvedColors());
 
