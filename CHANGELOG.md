@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-07-15
+
+### Added
+
+- **App-relative logo resolution** — branding logos configured as relative paths (e.g. `/images/logo.png`) are now resolved to absolute URLs at render time via `BrandingSettings::resolvedLogo()`, so they display in email clients. Absolute URLs, protocol-relative URLs, and data URIs pass through unchanged (#19, thanks @mrsafalpiya)
+
+### Fixed
+
+- Button and other custom blocks were replaced with plain text when a template was loaded into the Compose Email editor, and were missing from the sent email. `EmailTemplate::render()` gained a `renderBlocks` flag so blocks round-trip in the editor, and `TemplateMail` now expands blocks in overridden bodies (#17, thanks @mrsafalpiya)
+- Templates without an assigned theme now fall back to the user-configured default theme instead of the package's hardcoded colors — in the preview, the body infolist, and the sent email. New helpers: `EmailTheme::resolvedDefaultColors()` and `EmailTemplate::resolvedThemeColors()` (#18, thanks @mrsafalpiya)
+- Theme colors stored as `null` or an empty string (cleared ColorPickers) no longer override the hardcoded defaults when resolving colors
+
 ## [1.8.1] - 2026-06-30
 
 ### Fixed
