@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Cadarnhau anfon',
             'description' => 'Ydych chi\'n siŵr eich bod am anfon yr e-bost hwn?',
+            'description_multiple' => 'Mae gennych fwy nag un derbynnydd. Dewiswch sut yr hoffech anfon yr e-bost hwn.',
+            'send_mode_label' => 'Sut ddylid anfon hwn?',
+            'send_mode_individual' => 'Anfon pob e-bost yn unigol',
+            'send_mode_individual_help' => 'Anfonir e-bost ar wahân at bob derbynnydd yn y maes "At", felly nid ydynt yn gweld cyfeiriadau ei gilydd. Bydd unrhyw gysylltiadau CC/BCC yn derbyn copi o bob e-bost.',
+            'send_mode_combined' => 'Anfon fel un e-bost gyda sawl derbynnydd',
+            'send_mode_combined_help' => 'Anfonir un e-bost at bawb. Mae holl gyfeiriadau "At" a CC yn weladwy i bob derbynnydd.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-byst wedi\'u hanfon',
+            'individual_sent_body' => 'Anfonwyd :count e-bost unigol.',
         ],
     ],
 

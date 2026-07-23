@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Küldés megerősítése',
             'description' => 'Biztosan el szeretné küldeni ezt az e-mailt?',
+            'description_multiple' => 'Több címzettet adott meg. Válassza ki, hogyan szeretné elküldeni ezt az e-mailt.',
+            'send_mode_label' => 'Hogyan történjen a küldés?',
+            'send_mode_individual' => 'Minden e-mail külön küldése',
+            'send_mode_individual_help' => 'A „Címzett” mezőben szereplő minden címzett külön e-mailt kap, így nem látják egymás címét. A Másolat/Titkos másolat címzettjei minden e-mailből kapnak egy példányt.',
+            'send_mode_combined' => 'Küldés egyetlen e-mailként több címzettel',
+            'send_mode_combined_help' => 'Mindenki ugyanazt az egy e-mailt kapja. Az összes „Címzett” és Másolat cím minden címzett számára látható.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-mailek elküldve',
+            'individual_sent_body' => ':count külön e-mail elküldve.',
         ],
     ],
 

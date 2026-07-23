@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Xac nhan gui',
             'description' => 'Ban co chac chan muon gui email nay khong?',
+            'description_multiple' => 'Bạn có nhiều người nhận. Hãy chọn cách bạn muốn gửi email này.',
+            'send_mode_label' => 'Gửi bằng cách nào?',
+            'send_mode_individual' => 'Gửi riêng từng email',
+            'send_mode_individual_help' => 'Mỗi người nhận trong mục "Đến" sẽ nhận một email riêng, nên họ không thấy địa chỉ của nhau. Các liên hệ CC/BCC sẽ nhận bản sao của mọi email.',
+            'send_mode_combined' => 'Gửi thành một email duy nhất cho nhiều người nhận',
+            'send_mode_combined_help' => 'Một email duy nhất được gửi đến tất cả mọi người. Tất cả địa chỉ "Đến" và CC đều hiển thị với mọi người nhận.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Đã gửi email',
+            'individual_sent_body' => 'Đã gửi :count email riêng lẻ.',
         ],
     ],
 

@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Επιβεβαίωση αποστολής',
             'description' => 'Είστε βέβαιοι ότι θέλετε να στείλετε αυτό το email;',
+            'description_multiple' => 'Έχετε πολλούς παραλήπτες. Επιλέξτε πώς θέλετε να σταλεί αυτό το email.',
+            'send_mode_label' => 'Πώς να γίνει η αποστολή;',
+            'send_mode_individual' => 'Αποστολή κάθε email ξεχωριστά',
+            'send_mode_individual_help' => 'Σε κάθε παραλήπτη του πεδίου "Προς" αποστέλλεται ξεχωριστό email, ώστε να μην βλέπουν ο ένας τη διεύθυνση του άλλου. Οι επαφές CC/BCC λαμβάνουν αντίγραφο κάθε email.',
+            'send_mode_combined' => 'Αποστολή ως ένα email με πολλούς παραλήπτες',
+            'send_mode_combined_help' => 'Αποστέλλεται ένα email σε όλους. Όλες οι διευθύνσεις "Προς" και CC είναι ορατές σε κάθε παραλήπτη.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Τα email στάλθηκαν',
+            'individual_sent_body' => 'Στάλθηκαν :count ξεχωριστά email.',
         ],
     ],
 

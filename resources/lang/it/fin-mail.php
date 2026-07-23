@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Conferma invio',
             'description' => 'Sei sicuro di voler inviare questa email?',
+            'description_multiple' => 'Hai più destinatari. Scegli come inviare questa email.',
+            'send_mode_label' => 'Come deve essere inviata?',
+            'send_mode_individual' => 'Invia ogni email singolarmente',
+            'send_mode_individual_help' => 'Viene inviata un\'email separata a ogni destinatario del campo "A", così i destinatari non vedono gli indirizzi degli altri. I contatti in CC/BCC ricevono una copia di ogni email.',
+            'send_mode_combined' => 'Invia come unica email con più destinatari',
+            'send_mode_combined_help' => 'Viene inviata una sola email a tutti. Tutti gli indirizzi "A" e CC sono visibili a ogni destinatario.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Email inviate',
+            'individual_sent_body' => ':count email singole inviate.',
         ],
     ],
 

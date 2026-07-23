@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Confirmar enviament',
             'description' => 'Esteu segur que voleu enviar aquest correu?',
+            'description_multiple' => 'Teniu diversos destinataris. Trieu com voleu enviar aquest correu.',
+            'send_mode_label' => 'Com s\'ha d\'enviar?',
+            'send_mode_individual' => 'Enviar cada correu individualment',
+            'send_mode_individual_help' => 'S\'envia un correu separat a cada destinatari del camp "A", de manera que no veuen les adreces dels altres. Els contactes CC/BCC reben una còpia de cada correu.',
+            'send_mode_combined' => 'Enviar com un sol correu amb diversos destinataris',
+            'send_mode_combined_help' => 'S\'envia un únic correu a tothom. Totes les adreces "A" i CC són visibles per a tots els destinataris.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Correus enviats',
+            'individual_sent_body' => 'S\'han enviat :count correus individuals.',
         ],
     ],
 

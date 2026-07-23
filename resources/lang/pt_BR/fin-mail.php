@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Confirmar Envio',
             'description' => 'Tem certeza de que deseja enviar este e-mail?',
+            'description_multiple' => 'Você tem vários destinatários. Escolha como deseja enviar este e-mail.',
+            'send_mode_label' => 'Como deve ser enviado?',
+            'send_mode_individual' => 'Enviar cada e-mail individualmente',
+            'send_mode_individual_help' => 'Um e-mail separado é enviado para cada destinatário do campo "Para", assim eles não veem os endereços uns dos outros. Os contatos em CC/BCC recebem uma cópia de cada e-mail.',
+            'send_mode_combined' => 'Enviar como um único e-mail com vários destinatários',
+            'send_mode_combined_help' => 'Um único e-mail é enviado para todos. Todos os endereços "Para" e CC ficam visíveis para todos os destinatários.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-mails enviados',
+            'individual_sent_body' => ':count e-mails individuais foram enviados.',
         ],
     ],
 

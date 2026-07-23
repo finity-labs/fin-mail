@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Senden bestätigen',
             'description' => 'Möchten Sie diese E-Mail wirklich senden?',
+            'description_multiple' => 'Sie haben mehrere Empfänger. Wählen Sie, wie diese E-Mail versendet werden soll.',
+            'send_mode_label' => 'Wie soll die E-Mail versendet werden?',
+            'send_mode_individual' => 'Jede E-Mail einzeln senden',
+            'send_mode_individual_help' => 'An jeden "An"-Empfänger wird eine separate E-Mail gesendet, sodass die Empfänger die Adressen der anderen nicht sehen. CC-/BCC-Kontakte erhalten eine Kopie jeder E-Mail.',
+            'send_mode_combined' => 'Als eine E-Mail mit mehreren Empfängern senden',
+            'send_mode_combined_help' => 'Es wird eine einzige E-Mail an alle gesendet. Alle "An"- und CC-Adressen sind für jeden Empfänger sichtbar.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-Mails gesendet',
+            'individual_sent_body' => ':count einzelne E-Mails wurden gesendet.',
         ],
     ],
 

@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Göndərməni təsdiqləyin',
             'description' => 'Bu e-poçtu göndərmək istədiyinizə əminsiniz?',
+            'description_multiple' => 'Birdən çox alıcınız var. Bu e-poçtu necə göndərmək istədiyinizi seçin.',
+            'send_mode_label' => 'Bu necə göndərilsin?',
+            'send_mode_individual' => 'Hər e-poçtu ayrıca göndər',
+            'send_mode_individual_help' => 'Hər "Kimə" alıcısına ayrıca e-poçt göndərilir, beləliklə onlar bir-birinin ünvanlarını görmürlər. CC/BCC ünvanları isə hər e-poçtun bir nüsxəsini alır.',
+            'send_mode_combined' => 'Birdən çox alıcı ilə tək e-poçt kimi göndər',
+            'send_mode_combined_help' => 'Hamıya bir e-poçt göndərilir. Bütün "Kimə" və CC ünvanları hər alıcıya görünür.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-poçtlar göndərildi',
+            'individual_sent_body' => ':count ayrıca e-poçt göndərildi.',
         ],
     ],
 

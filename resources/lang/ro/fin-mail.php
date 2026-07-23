@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Confirma Trimiterea',
             'description' => 'Sunteti sigur ca doriti sa trimiteti acest email?',
+            'description_multiple' => 'Aveți mai mulți destinatari. Alegeți cum doriți să trimiteți acest email.',
+            'send_mode_label' => 'Cum ar trebui trimis?',
+            'send_mode_individual' => 'Trimite fiecare email individual',
+            'send_mode_individual_help' => 'Fiecărui destinatar din câmpul "Către" i se trimite un email separat, astfel încât destinatarii nu își văd reciproc adresele. Contactele CC/BCC primesc o copie a fiecărui email.',
+            'send_mode_combined' => 'Trimite ca un singur email cu mai mulți destinatari',
+            'send_mode_combined_help' => 'Un singur email este trimis tuturor. Toate adresele "Către" și CC sunt vizibile pentru fiecare destinatar.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Emailuri trimise',
+            'individual_sent_body' => 'Au fost trimise :count emailuri individuale.',
         ],
     ],
 

@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Potvrdit odeslání',
             'description' => 'Jste si jisti, že chcete odeslat tento e-mail?',
+            'description_multiple' => 'Máte více příjemců. Zvolte, jak chcete tento e-mail odeslat.',
+            'send_mode_label' => 'Jak se má e-mail odeslat?',
+            'send_mode_individual' => 'Odeslat každý e-mail zvlášť',
+            'send_mode_individual_help' => 'Každému příjemci v poli "Komu" se odešle samostatný e-mail, takže příjemci navzájem nevidí své adresy. Kontakty v CC/BCC obdrží kopii každého e-mailu.',
+            'send_mode_combined' => 'Odeslat jako jeden e-mail s více příjemci',
+            'send_mode_combined_help' => 'Všem se odešle jeden společný e-mail. Všechny adresy v polích "Komu" a CC uvidí každý příjemce.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-maily odeslány',
+            'individual_sent_body' => 'Odesláno :count samostatných e-mailů.',
         ],
     ],
 

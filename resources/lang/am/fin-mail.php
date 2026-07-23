@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'መላክን አረጋግጥ',
             'description' => 'ይህን ኢሜይል መላክ እንደሚፈልጉ እርግጠኛ ነዎት?',
+            'description_multiple' => 'ብዙ ተቀባዮች አሉዎት። ይህን ኢሜይል እንዴት መላክ እንደሚፈልጉ ይምረጡ።',
+            'send_mode_label' => 'እንዴት ይላክ?',
+            'send_mode_individual' => 'እያንዳንዱን ኢሜይል ለብቻ ላክ',
+            'send_mode_individual_help' => 'ለእያንዳንዱ "ወደ" ተቀባይ የተለየ ኢሜይል ይላካል፣ ስለዚህ አንዳቸው የሌላውን አድራሻ አያዩም። ማንኛውም የ CC/BCC አድራሻ የእያንዳንዱ ኢሜይል ቅጂ ይደርሰዋል።',
+            'send_mode_combined' => 'ለብዙ ተቀባዮች እንደ አንድ ኢሜይል ላክ',
+            'send_mode_combined_help' => 'አንድ ኢሜይል ለሁሉም ይላካል። ሁሉም የ "ወደ" እና CC አድራሻዎች ለእያንዳንዱ ተቀባይ ይታያሉ።',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'ኢሜይሎች ተልከዋል',
+            'individual_sent_body' => ':count የተለያዩ ኢሜይሎች ተልከዋል።',
         ],
     ],
 

@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Gonderimi onayla',
             'description' => 'Bu e-postayi gondermek istediginizden emin misiniz?',
+            'description_multiple' => 'Birden fazla alıcınız var. Bu e-postayı nasıl göndermek istediğinizi seçin.',
+            'send_mode_label' => 'Nasıl gönderilsin?',
+            'send_mode_individual' => 'Her e-postayı ayrı ayrı gönder',
+            'send_mode_individual_help' => '"Kime" alanındaki her alıcıya ayrı bir e-posta gönderilir, böylece alıcılar birbirlerinin adreslerini görmez. Tüm CC/BCC kişileri her e-postanın bir kopyasını alır.',
+            'send_mode_combined' => 'Birden fazla alıcılı tek bir e-posta olarak gönder',
+            'send_mode_combined_help' => 'Herkese tek bir e-posta gönderilir. Tüm "Kime" ve CC adresleri her alıcı tarafından görülebilir.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-postalar gönderildi',
+            'individual_sent_body' => ':count ayrı e-posta gönderildi.',
         ],
     ],
 

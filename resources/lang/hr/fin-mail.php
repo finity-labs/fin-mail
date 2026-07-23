@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Potvrdi slanje',
             'description' => 'Jeste li sigurni da želite poslati ovu e-poruku?',
+            'description_multiple' => 'Imate više primatelja. Odaberite kako želite poslati ovu e-poruku.',
+            'send_mode_label' => 'Kako poslati ovu e-poruku?',
+            'send_mode_individual' => 'Pošalji svaku e-poruku zasebno',
+            'send_mode_individual_help' => 'Svakom primatelju iz polja "Za" šalje se zasebna e-poruka, tako da primatelji ne vide adrese drugih. Kontakti u CC/BCC primaju kopiju svake e-poruke.',
+            'send_mode_combined' => 'Pošalji kao jednu e-poruku s više primatelja',
+            'send_mode_combined_help' => 'Svima se šalje jedna e-poruka. Sve adrese iz polja "Za" i CC vidljive su svim primateljima.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-poruke poslane',
+            'individual_sent_body' => 'Poslano je :count zasebnih e-poruka.',
         ],
     ],
 

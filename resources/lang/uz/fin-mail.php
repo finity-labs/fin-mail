@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Yuborishni tasdiqlash',
             'description' => 'Ushbu xatni yubormoqchimisiz?',
+            'description_multiple' => 'Sizda bir nechta qabul qiluvchi bor. Ushbu xatni qanday yubormoqchi ekaningizni tanlang.',
+            'send_mode_label' => 'Qanday yuborilsin?',
+            'send_mode_individual' => 'Har bir xatni alohida yuborish',
+            'send_mode_individual_help' => '"Kimga" maydonidagi har bir qabul qiluvchiga alohida xat yuboriladi, shuning uchun ular bir-birining manzillarini ko\'rmaydi. Barcha CC/BCC kontaktlari har bir xatning nusxasini oladi.',
+            'send_mode_combined' => 'Bir nechta qabul qiluvchiga bitta xat sifatida yuborish',
+            'send_mode_combined_help' => 'Hammaga bitta xat yuboriladi. Barcha "Kimga" va CC manzillari har bir qabul qiluvchiga ko\'rinadi.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Xatlar yuborildi',
+            'individual_sent_body' => ':count ta alohida xat yuborildi.',
         ],
     ],
 

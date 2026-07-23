@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Konfirmasi Pengiriman',
             'description' => 'Apakah Anda yakin ingin mengirim email ini?',
+            'description_multiple' => 'Anda memiliki beberapa penerima. Pilih cara pengiriman email ini.',
+            'send_mode_label' => 'Bagaimana email ini akan dikirim?',
+            'send_mode_individual' => 'Kirim setiap email secara terpisah',
+            'send_mode_individual_help' => 'Email terpisah dikirim ke setiap penerima "Kepada", sehingga mereka tidak melihat alamat satu sama lain. Kontak CC/BCC menerima salinan dari setiap email.',
+            'send_mode_combined' => 'Kirim sebagai satu email dengan beberapa penerima',
+            'send_mode_combined_help' => 'Satu email dikirim ke semua orang. Semua alamat "Kepada" dan CC terlihat oleh setiap penerima.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Email terkirim',
+            'individual_sent_body' => ':count email terpisah telah dikirim.',
         ],
     ],
 

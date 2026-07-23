@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => '确认发送',
             'description' => '您确定要发送此邮件吗？',
+            'description_multiple' => '您有多个收件人。请选择此邮件的发送方式。',
+            'send_mode_label' => '如何发送？',
+            'send_mode_individual' => '分别发送每封邮件',
+            'send_mode_individual_help' => '系统会向“收件人”中的每位收件人单独发送一封邮件，收件人之间看不到彼此的地址。所有 CC/BCC 联系人都会收到每封邮件的副本。',
+            'send_mode_combined' => '以一封邮件发送给多个收件人',
+            'send_mode_combined_help' => '仅发送一封邮件给所有人。所有“收件人”和 CC 地址对每位收件人均可见。',
+        ],
+
+        'notifications' => [
+            'individual_sent' => '邮件已发送',
+            'individual_sent_body' => '已单独发送 :count 封邮件。',
         ],
     ],
 

@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => '確認寄送',
             'description' => '您確定要寄送此郵件嗎？',
+            'description_multiple' => '您有多位收件人。請選擇這封郵件的寄送方式。',
+            'send_mode_label' => '要如何寄送？',
+            'send_mode_individual' => '逐一分別寄送每封郵件',
+            'send_mode_individual_help' => '系統會分別寄送一封郵件給「收件人」欄位中的每位收件人，收件人之間不會看到彼此的地址。所有 CC/BCC 聯絡人都會收到每封郵件的副本。',
+            'send_mode_combined' => '以單一郵件寄送給多位收件人',
+            'send_mode_combined_help' => '僅寄送一封郵件給所有人。所有「收件人」與 CC 地址對每位收件人皆可見。',
+        ],
+
+        'notifications' => [
+            'individual_sent' => '郵件已寄送',
+            'individual_sent_body' => '已分別寄送 :count 封郵件。',
         ],
     ],
 

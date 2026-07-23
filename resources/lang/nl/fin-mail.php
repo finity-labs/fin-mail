@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Verzending bevestigen',
             'description' => 'Weet u zeker dat u deze e-mail wilt verzenden?',
+            'description_multiple' => 'U heeft meerdere ontvangers. Kies hoe u deze e-mail wilt verzenden.',
+            'send_mode_label' => 'Hoe moet dit worden verzonden?',
+            'send_mode_individual' => 'Elke e-mail afzonderlijk verzenden',
+            'send_mode_individual_help' => 'Naar elke "Aan"-ontvanger wordt een aparte e-mail verzonden, zodat ze elkaars adressen niet zien. Eventuele CC/BCC-contacten ontvangen een kopie van elke e-mail.',
+            'send_mode_combined' => 'Verzenden als één e-mail met meerdere ontvangers',
+            'send_mode_combined_help' => 'Er wordt één e-mail naar iedereen verzonden. Alle "Aan"- en CC-adressen zijn zichtbaar voor elke ontvanger.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-mails verzonden',
+            'individual_sent_body' => ':count afzonderlijke e-mails verzonden.',
         ],
     ],
 

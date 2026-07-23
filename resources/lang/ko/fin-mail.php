@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => '발송 확인',
             'description' => '이 이메일을 발송하시겠습니까?',
+            'description_multiple' => '수신자가 여러 명입니다. 이 이메일을 어떻게 발송할지 선택하세요.',
+            'send_mode_label' => '어떻게 발송할까요?',
+            'send_mode_individual' => '각 이메일을 개별적으로 발송',
+            'send_mode_individual_help' => '"받는 사람"의 각 수신자에게 별도의 이메일이 발송되므로 서로의 주소를 볼 수 없습니다. CC/BCC 연락처는 모든 이메일의 사본을 받습니다.',
+            'send_mode_combined' => '여러 수신자가 포함된 하나의 이메일로 발송',
+            'send_mode_combined_help' => '모든 사람에게 하나의 이메일이 발송됩니다. 모든 "받는 사람" 및 CC 주소가 모든 수신자에게 표시됩니다.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => '이메일 발송 완료',
+            'individual_sent_body' => ':count개의 개별 이메일을 발송했습니다.',
         ],
     ],
 

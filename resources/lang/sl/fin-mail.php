@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Potrdi posiljanje',
             'description' => 'Ali ste prepricani, da zelite poslati to e-posto?',
+            'description_multiple' => 'Imate več prejemnikov. Izberite, kako želite poslati to e-pošto.',
+            'send_mode_label' => 'Kako naj bo poslano?',
+            'send_mode_individual' => 'Pošlji vsako e-pošto posebej',
+            'send_mode_individual_help' => 'Vsakemu prejemniku v polju "Za" je poslana ločena e-pošta, tako da prejemniki ne vidijo naslovov drug drugega. Vsi kontakti CC/BCC prejmejo kopijo vsake e-pošte.',
+            'send_mode_combined' => 'Pošlji kot eno e-pošto z več prejemniki',
+            'send_mode_combined_help' => 'Vsem je poslana ena sama e-pošta. Vsi naslovi v poljih "Za" in CC so vidni vsem prejemnikom.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-pošte poslane',
+            'individual_sent_body' => 'Poslanih :count posameznih e-pošt.',
         ],
     ],
 

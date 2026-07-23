@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Potvrdite slanje',
             'description' => 'Jeste li sigurni da želite poslati ovaj e-mail?',
+            'description_multiple' => 'Imate više primalaca. Odaberite kako želite poslati ovaj e-mail.',
+            'send_mode_label' => 'Kako ovo treba poslati?',
+            'send_mode_individual' => 'Pošalji svaki e-mail zasebno',
+            'send_mode_individual_help' => 'Svakom primaocu iz polja "Za" šalje se zaseban e-mail, tako da ne vide adrese jedni drugih. Svi CC/BCC kontakti primaju kopiju svakog e-maila.',
+            'send_mode_combined' => 'Pošalji kao jedan e-mail sa više primalaca',
+            'send_mode_combined_help' => 'Jedan e-mail se šalje svima. Sve adrese iz polja "Za" i CC vidljive su svakom primaocu.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-mailovi poslani',
+            'individual_sent_body' => 'Poslano :count zasebnih e-mailova.',
         ],
     ],
 

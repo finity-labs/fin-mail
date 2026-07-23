@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2026-07-23
+
+### Added
+
+- **Delivery-mode chooser for multi-recipient composes** — when the Compose Email "To" field holds more than one address, the send confirmation now asks whether to deliver a separate email to each recipient (recipients don't see each other) or one combined email addressed to everyone, with a note that the full recipient list is visible in that case (#20, thanks @mrsafalpiya)
+- `EmailSender` gained a `notify` constructor flag so callers batching multiple sends can suppress the per-send notification and show an aggregate one instead
+
+### Changed
+
+- The send-mode help texts spell out how CC/BCC behave in each mode: in individual mode CC/BCC contacts receive a copy of every email, and in combined mode the "To" and CC lists are visible to every recipient (BCC stays hidden)
+- All 59 non-English locales received translations for the new send-mode strings
+
 ## [1.9.0] - 2026-07-15
 
 ### Added

@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => '送信の確認',
             'description' => 'このメールを送信してよろしいですか？',
+            'description_multiple' => '宛先が複数あります。このメールの送信方法を選択してください。',
+            'send_mode_label' => 'どのように送信しますか？',
+            'send_mode_individual' => 'メールを個別に送信',
+            'send_mode_individual_help' => '「宛先」の各受信者に個別のメールを送信するため、受信者同士のアドレスは表示されません。CC/BCC の連絡先には、すべてのメールのコピーが送信されます。',
+            'send_mode_combined' => '複数の宛先を含む1通のメールとして送信',
+            'send_mode_combined_help' => '全員に1通のメールを送信します。「宛先」と CC のすべてのアドレスは、すべての受信者に表示されます。',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'メールを送信しました',
+            'individual_sent_body' => ':count 件のメールを個別に送信しました。',
         ],
     ],
 

@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Apstiprinat sutisanu',
             'description' => 'Vai tiesat velaties nosutit so e-pastu?',
+            'description_multiple' => 'Jums ir vairāki saņēmēji. Izvēlieties, kā vēlaties nosūtīt šo e-pastu.',
+            'send_mode_label' => 'Kā nosūtīt šo e-pastu?',
+            'send_mode_individual' => 'Sūtīt katram saņēmējam atsevišķu e-pastu',
+            'send_mode_individual_help' => 'Katram "Kam" saņēmējam tiek nosūtīts atsevišķs e-pasts, tāpēc saņēmēji neredz cits cita adreses. Visi CC/BCC kontakti saņem katra e-pasta kopiju.',
+            'send_mode_combined' => 'Sūtīt kā vienu e-pastu vairākiem saņēmējiem',
+            'send_mode_combined_help' => 'Viens e-pasts tiek nosūtīts visiem. Visas "Kam" un CC adreses ir redzamas katram saņēmējam.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-pasti nosūtīti',
+            'individual_sent_body' => 'Nosūtīti :count atsevišķi e-pasti.',
         ],
     ],
 

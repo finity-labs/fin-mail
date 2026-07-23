@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Sahkan Penghantaran',
             'description' => 'Adakah anda pasti mahu menghantar e-mel ini?',
+            'description_multiple' => 'Anda mempunyai berbilang penerima. Pilih cara anda mahu menghantar e-mel ini.',
+            'send_mode_label' => 'Bagaimanakah e-mel ini harus dihantar?',
+            'send_mode_individual' => 'Hantar setiap e-mel secara berasingan',
+            'send_mode_individual_help' => 'E-mel berasingan dihantar kepada setiap penerima "Kepada", jadi mereka tidak dapat melihat alamat satu sama lain. Semua kenalan CC/BCC menerima salinan setiap e-mel.',
+            'send_mode_combined' => 'Hantar sebagai satu e-mel dengan berbilang penerima',
+            'send_mode_combined_help' => 'Satu e-mel dihantar kepada semua orang. Semua alamat "Kepada" dan CC dapat dilihat oleh setiap penerima.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-mel dihantar',
+            'individual_sent_body' => ':count e-mel berasingan telah dihantar.',
         ],
     ],
 

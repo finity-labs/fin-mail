@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Bidalketa berretsi',
             'description' => 'Ziur zaude email hau bidali nahi duzula?',
+            'description_multiple' => 'Hartzaile bat baino gehiago dituzu. Aukeratu email hau nola bidali nahi duzun.',
+            'send_mode_label' => 'Nola bidali behar da?',
+            'send_mode_individual' => 'Bidali email bakoitza banaka',
+            'send_mode_individual_help' => '"Nori" eremuko hartzaile bakoitzari email bereizi bat bidaltzen zaio, elkarren helbideak ikus ez ditzaten. CC/BCC kontaktuek email bakoitzaren kopia bat jasotzen dute.',
+            'send_mode_combined' => 'Bidali email bakar gisa hartzaile anitzekin',
+            'send_mode_combined_help' => 'Email bakarra bidaltzen zaie guztiei. "Nori" eta CC helbide guztiak hartzaile guztientzat ikusgai daude.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Emailak bidalita',
+            'individual_sent_body' => ':count email banaka bidali dira.',
         ],
     ],
 

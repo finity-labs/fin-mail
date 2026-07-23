@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Patvirtinti siuntimą',
             'description' => 'Ar tikrai norite išsiųsti šį laišką?',
+            'description_multiple' => 'Turite kelis gavėjus. Pasirinkite, kaip norite išsiųsti šį laišką.',
+            'send_mode_label' => 'Kaip siųsti šį laišką?',
+            'send_mode_individual' => 'Siųsti kiekvienam gavėjui atskirą laišką',
+            'send_mode_individual_help' => 'Kiekvienam "Kam" gavėjui siunčiamas atskiras laiškas, todėl gavėjai nemato vieni kitų adresų. Visi CC/BCC kontaktai gauna kiekvieno laiško kopiją.',
+            'send_mode_combined' => 'Siųsti kaip vieną laišką keliems gavėjams',
+            'send_mode_combined_help' => 'Visiems siunčiamas vienas laiškas. Visi "Kam" ir CC adresai matomi kiekvienam gavėjui.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Laiškai išsiųsti',
+            'individual_sent_body' => 'Išsiųsta :count atskirų laiškų.',
         ],
     ],
 

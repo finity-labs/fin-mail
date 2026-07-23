@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Potwierdź wysłanie',
             'description' => 'Czy na pewno chcesz wysłać tego e-maila?',
+            'description_multiple' => 'Masz wielu odbiorców. Wybierz, jak chcesz wysłać tego e-maila.',
+            'send_mode_label' => 'Jak wysłać wiadomość?',
+            'send_mode_individual' => 'Wyślij każdy e-mail osobno',
+            'send_mode_individual_help' => 'Do każdego odbiorcy z pola "Do" wysyłany jest osobny e-mail, dzięki czemu odbiorcy nie widzą nawzajem swoich adresów. Wszystkie kontakty CC/BCC otrzymują kopię każdego e-maila.',
+            'send_mode_combined' => 'Wyślij jako jeden e-mail do wielu odbiorców',
+            'send_mode_combined_help' => 'Do wszystkich wysyłany jest jeden e-mail. Wszystkie adresy z pól "Do" i CC są widoczne dla każdego odbiorcy.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-maile wysłane',
+            'individual_sent_body' => 'Wysłano :count osobnych e-maili.',
         ],
     ],
 

@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Thibitisha kutuma',
             'description' => 'Una uhakika unataka kutuma barua pepe hii?',
+            'description_multiple' => 'Una wapokeaji kadhaa. Chagua jinsi ungependa kutuma barua pepe hii.',
+            'send_mode_label' => 'Itumwe kwa njia gani?',
+            'send_mode_individual' => 'Tuma kila barua pepe kivyake',
+            'send_mode_individual_help' => 'Kila mpokeaji katika sehemu ya "Kwa" hutumiwa barua pepe yake tofauti, hivyo hawaoni anwani za wenzao. Anwani zote za CC/BCC hupokea nakala ya kila barua pepe.',
+            'send_mode_combined' => 'Tuma kama barua pepe moja yenye wapokeaji kadhaa',
+            'send_mode_combined_help' => 'Barua pepe moja hutumwa kwa wote. Anwani zote za "Kwa" na CC zinaonekana kwa kila mpokeaji.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Barua pepe zimetumwa',
+            'individual_sent_body' => 'Barua pepe :count zimetumwa moja moja.',
         ],
     ],
 

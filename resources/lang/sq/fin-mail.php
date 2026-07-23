@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Konfirmo Dergimin',
             'description' => 'A jeni te sigurt qe doni ta dergoni kete email?',
+            'description_multiple' => 'Keni disa marrës. Zgjidhni si dëshironi ta dërgoni këtë email.',
+            'send_mode_label' => 'Si duhet të dërgohet?',
+            'send_mode_individual' => 'Dërgo çdo email veçmas',
+            'send_mode_individual_help' => 'Çdo marrësi në fushën "Për" i dërgohet një email i veçantë, kështu që ata nuk i shohin adresat e njëri-tjetrit. Kontaktet CC/BCC marrin një kopje të çdo emaili.',
+            'send_mode_combined' => 'Dërgo si një email të vetëm me disa marrës',
+            'send_mode_combined_help' => 'Të gjithëve u dërgohet një email i vetëm. Të gjitha adresat "Për" dhe CC janë të dukshme për çdo marrës.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Emailet u dërguan',
+            'individual_sent_body' => 'U dërguan :count emaile të veçanta.',
         ],
     ],
 

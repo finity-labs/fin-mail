@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Potvrdi slanje',
             'description' => 'Da li ste sigurni da zelite da posaljete ovu poruku?',
+            'description_multiple' => 'Imate više primalaca. Izaberite kako želite da pošaljete ovu poruku.',
+            'send_mode_label' => 'Kako treba da se pošalje?',
+            'send_mode_individual' => 'Pošalji svaku poruku pojedinačno',
+            'send_mode_individual_help' => 'Svakom primaocu u polju "Za" šalje se zasebna poruka, tako da primaoci ne vide adrese jedni drugih. Svi CC/BCC kontakti dobijaju kopiju svake poruke.',
+            'send_mode_combined' => 'Pošalji kao jednu poruku sa više primalaca',
+            'send_mode_combined_help' => 'Svima se šalje jedna poruka. Sve adrese u poljima "Za" i CC vidljive su svakom primaocu.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Poruke su poslate',
+            'individual_sent_body' => 'Poslato je :count pojedinačnih poruka.',
         ],
     ],
 

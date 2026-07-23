@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Bekrafta utskick',
             'description' => 'Ar du saker pa att du vill skicka detta e-postmeddelande?',
+            'description_multiple' => 'Du har flera mottagare. Välj hur du vill skicka detta e-postmeddelande.',
+            'send_mode_label' => 'Hur ska det skickas?',
+            'send_mode_individual' => 'Skicka varje e-postmeddelande separat',
+            'send_mode_individual_help' => 'Ett separat e-postmeddelande skickas till varje mottagare i "Till"-fältet, så att de inte ser varandras adresser. Alla CC/BCC-kontakter får en kopia av varje meddelande.',
+            'send_mode_combined' => 'Skicka som ett enda e-postmeddelande med flera mottagare',
+            'send_mode_combined_help' => 'Ett enda e-postmeddelande skickas till alla. Alla "Till"- och CC-adresser är synliga för varje mottagare.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-postmeddelanden skickade',
+            'individual_sent_body' => ':count separata e-postmeddelanden har skickats.',
         ],
     ],
 

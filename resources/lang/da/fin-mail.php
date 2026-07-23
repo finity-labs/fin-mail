@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Bekræft afsendelse',
             'description' => 'Er du sikker på, at du vil sende denne e-mail?',
+            'description_multiple' => 'Du har flere modtagere. Vælg, hvordan du vil sende denne e-mail.',
+            'send_mode_label' => 'Hvordan skal den sendes?',
+            'send_mode_individual' => 'Send hver e-mail enkeltvis',
+            'send_mode_individual_help' => 'Der sendes en separat e-mail til hver modtager i "Til"-feltet, så de ikke kan se hinandens adresser. Eventuelle CC/BCC-kontakter modtager en kopi af hver e-mail.',
+            'send_mode_combined' => 'Send som én samlet e-mail til flere modtagere',
+            'send_mode_combined_help' => 'Der sendes én e-mail til alle. Alle "Til"- og CC-adresser er synlige for alle modtagere.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-mails sendt',
+            'individual_sent_body' => 'Der blev sendt :count individuelle e-mails.',
         ],
     ],
 

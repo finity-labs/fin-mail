@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Şandinê piştrast bike',
             'description' => 'Tu bawer î ku dixwazî vê e-nameyê bişînî?',
+            'description_multiple' => 'Çend wergirên te hene. Hilbijêre ka tu dixwazî vê e-nameyê çawa bişînî.',
+            'send_mode_label' => 'Ev çawa bê şandin?',
+            'send_mode_individual' => 'Her e-nameyê cuda bişîne',
+            'send_mode_individual_help' => 'Ji her wergirê qada "Bo" re e-nameyeke cuda tê şandin, ji ber vê yekê ew navnîşanên hev nabînin. Kesên di CC/BCC de ji her e-nameyê nusxeyekê distînin.',
+            'send_mode_combined' => 'Wek e-nameyeke tekane bi çend wergiran bişîne',
+            'send_mode_combined_help' => 'Ji her kesî re yek e-name tê şandin. Hemû navnîşanên "Bo" û CC ji hemû wergiran re xuya ne.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'E-name hatin şandin',
+            'individual_sent_body' => ':count e-nameyên cuda hatin şandin.',
         ],
     ],
 

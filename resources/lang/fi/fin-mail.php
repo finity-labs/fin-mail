@@ -188,6 +188,17 @@ return [
         'confirm' => [
             'heading' => 'Vahvista lähetys',
             'description' => 'Haluatko varmasti lähettää tämän sähköpostin?',
+            'description_multiple' => 'Vastaanottajia on useita. Valitse, miten haluat lähettää tämän sähköpostin.',
+            'send_mode_label' => 'Miten lähetys tehdään?',
+            'send_mode_individual' => 'Lähetä jokainen sähköposti erikseen',
+            'send_mode_individual_help' => 'Jokaiselle "Vastaanottaja"-kentän osoitteelle lähetetään oma sähköposti, joten vastaanottajat eivät näe toistensa osoitteita. CC/BCC-yhteystiedot saavat kopion jokaisesta sähköpostista.',
+            'send_mode_combined' => 'Lähetä yhtenä sähköpostina kaikille vastaanottajille',
+            'send_mode_combined_help' => 'Kaikille lähetetään yksi yhteinen sähköposti. Kaikki "Vastaanottaja"- ja CC-osoitteet näkyvät jokaiselle vastaanottajalle.',
+        ],
+
+        'notifications' => [
+            'individual_sent' => 'Sähköpostit lähetetty',
+            'individual_sent_body' => 'Lähetettiin :count erillistä sähköpostia.',
         ],
     ],
 
