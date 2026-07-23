@@ -34,6 +34,7 @@ class EmailSender
         protected readonly Closure|array|null $modelsResolver = null,
         protected readonly Closure|array|null $attachmentsResolver = null,
         protected readonly ?Closure $onSentCallback = null,
+        protected readonly bool $notify = true,
     ) {}
 
     public function send(): bool
@@ -92,11 +93,13 @@ class EmailSender
                 ($this->onSentCallback)($this->record);
             }
 
-            Notification::make()
-                ->title(__('fin-mail::fin-mail.send_action.notifications.sent'))
-                ->body(__('fin-mail::fin-mail.send_action.notifications.sent_body', ['recipients' => implode(', ', $this->data['to'])]))
-                ->success()
-                ->send();
+            if ($this->notify) {
+                Notification::make()
+                    ->title(__('fin-mail::fin-mail.send_action.notifications.sent'))
+                    ->body(__('fin-mail::fin-mail.send_action.notifications.sent_body', ['recipients' => implode(', ', $this->data['to'])]))
+                    ->success()
+                    ->send();
+            }
 
             return true;
         } catch (\Throwable $e) {
