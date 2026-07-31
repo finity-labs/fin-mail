@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] - 2026-07-31
+
+### Added
+
+- **Automatic logging for programmatic sends** — `TemplateMail` now creates a Sent Emails log entry on its own whenever logging is enabled in the settings, so emails sent from code show up in the log just like ones sent from the admin panel. Queued mail is logged at dispatch time with a `Queued` status and updated to `Sent` or `Failed` once the worker processes it. Log creation failures are reported but never block the email from going out (#23, thanks @gazohu)
+- Log entries now record who sent the email: the authenticated user at the time the mailable is built is carried across queueing, so queued mail is attributed to the person who triggered it instead of nobody. System-triggered mail (jobs, listeners, guest-initiated resets) is logged without a user
+- `TemplateMail::withoutLogging()` opts a single email out of logging
+- `TemplateMail::withLogging()` called without an argument now forces a log entry even when logging is disabled in the settings. Passing a `SentEmail` still hands over an externally created record, as before — previously a bare `withLogging()` call silently did nothing
+- `TemplateMail::withoutStoringRenderedBody()` logs the email but keeps the rendered HTML out of the database
+
+### Changed
+
+- The built-in welcome, password reset, and email verification notifications now appear in the Sent Emails log when logging is enabled. Reset and verification emails never store their rendered body, since it contains signed URLs
+
 ## [1.10.0] - 2026-07-23
 
 ### Added

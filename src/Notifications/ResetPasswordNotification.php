@@ -20,6 +20,7 @@ class ResetPasswordNotification extends ResetPassword
             ->models([
                 'user' => $notifiable,
                 'url' => TokenValue::make($url),
-            ]);
+            ])
+            ->withoutStoringRenderedBody();
     }
 }

@@ -55,8 +55,13 @@ class EmailSender
             $mail = TemplateMail::make($templateKey, $this->data['locale'] ?? null)
                 ->models($this->resolveModels())
                 ->overrideSubject($this->data['subject'])
-                ->overrideBody($this->data['body'])
-                ->withLogging($this->sentEmailLog);
+                ->overrideBody($this->data['body']);
+
+            if ($this->sentEmailLog) {
+                $mail->withLogging($this->sentEmailLog);
+            } else {
+                $mail->withoutLogging();
+            }
 
             $this->applyFromOverride($mail);
 

@@ -156,6 +156,28 @@ Mail::to($customer->email)->send(
 
 `TemplateMail` is automatically queued. Configure the queue connection and name in `config/fin-mail.php`.
 
+#### Logging
+
+When logging is enabled in the FinMail settings, every `TemplateMail` creates a Sent Emails log entry on its own — no extra setup needed. Queued mail is logged at dispatch time with a `Queued` status and updated to `Sent` or `Failed` once the worker processes it. Each entry records who sent the email: the authenticated user at the time the mailable was built, or nobody for system-triggered mail like scheduled jobs.
+
+```php
+// Logged automatically when logging is enabled in the settings
+Mail::to($user->email)->send(
+    TemplateMail::make('welcome-email')->models(['user' => $user])
+);
+
+// Opt out for a single email
+TemplateMail::make('internal-report')->withoutLogging();
+
+// Force a log entry even when logging is disabled in the settings
+TemplateMail::make('invoice-sent')->withLogging();
+
+// Log the email but keep the rendered body out of the database —
+// the built-in password reset and verification emails do this,
+// since their bodies contain signed URLs
+TemplateMail::make('user-password-reset')->withoutStoringRenderedBody();
+```
+
 #### Passing extra view data
 
 `models()` is for token replacement (`{{ user.name }}`). For variables you want available directly in the Blade template — without going through the token system — use `with()` or its `extraData()` alias:

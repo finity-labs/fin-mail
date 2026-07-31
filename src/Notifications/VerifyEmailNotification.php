@@ -20,6 +20,7 @@ class VerifyEmailNotification extends VerifyEmail
             ->models([
                 'user' => $notifiable,
                 'url' => TokenValue::make($verificationUrl),
-            ]);
+            ])
+            ->withoutStoringRenderedBody();
     }
 }

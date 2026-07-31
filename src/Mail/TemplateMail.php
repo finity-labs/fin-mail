@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FinityLabs\FinMail\Mail;
 
+use FinityLabs\FinMail\Enums\EmailStatus;
 use FinityLabs\FinMail\Helpers\TokenReplacer;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Models\SentEmail;
@@ -13,6 +14,7 @@ use FinityLabs\FinMail\Settings\LoggingSettings;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Mail\Factory;
 use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Contracts\Queue\Factory as QueueFactory;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
@@ -50,6 +52,20 @@ class TemplateMail extends Mailable implements ShouldQueue
 
     protected ?SentEmail $sentEmailLog = null;
 
+    /**
+     * Tri-state logging switch: null follows LoggingSettings,
+     * true forces a log entry, false disables logging entirely.
+     */
+    protected ?bool $shouldLog = null;
+
+    protected bool $storeRenderedBodyInLog = true;
+
+    /**
+     * The authenticated user at the time the mailable was built.
+     * Serialized with the mailable so queued sends keep the dispatcher.
+     */
+    protected int|string|null $sentById = null;
+
     protected ?string $overrideSubject = null;
 
     protected ?string $overrideBody = null;
@@ -75,6 +91,8 @@ class TemplateMail extends Mailable implements ShouldQueue
         }
 
         $this->emailTemplate = $template;
+
+        $this->sentById = auth()->id();
 
         if (config('fin-mail.queue.enabled')) {
             $this->onQueue(config('fin-mail.queue.queue', 'emails'));
@@ -152,9 +170,44 @@ class TemplateMail extends Mailable implements ShouldQueue
         return $this;
     }
 
+    /**
+     * Force logging on, even when disabled in the settings.
+     *
+     * A log entry is created automatically when logging is enabled in the
+     * settings, so calling this is only needed to override a disabled
+     * setting or to hand over an externally created log record.
+     */
     public function withLogging(?SentEmail $log = null): static
     {
-        $this->sentEmailLog = $log;
+        if ($log) {
+            $this->sentEmailLog = $log;
+        }
+
+        $this->shouldLog = true;
+
+        return $this;
+    }
+
+    /**
+     * Opt out of logging for this email.
+     */
+    public function withoutLogging(): static
+    {
+        $this->sentEmailLog = null;
+        $this->shouldLog = false;
+
+        return $this;
+    }
+
+    /**
+     * Log the email but never store its rendered body.
+     *
+     * Useful for emails containing sensitive links (password reset,
+     * verification) that should not end up in the database.
+     */
+    public function withoutStoringRenderedBody(): static
+    {
+        $this->storeRenderedBodyInLog = false;
 
         return $this;
     }
@@ -169,18 +222,9 @@ class TemplateMail extends Mailable implements ShouldQueue
     {
         $rendered = $this->getRendered();
 
-        $mailSettings = app(GeneralSettings::class);
-
-        $templateFrom = $this->emailTemplate->from;
-
         $templateReplyTo = $this->emailTemplate->reply_to;
 
-        $from = $this->overrideFrom
-            ?? (! empty($templateFrom['address']) ? $templateFrom : null)
-            ?? [
-                'address' => $mailSettings->default_from_address,
-                'name' => $mailSettings->default_from_name,
-            ];
+        $from = $this->resolveFrom();
 
         $replyTo = $this->overrideReplyTo
             ?? (! empty($templateReplyTo['address']) ? $templateReplyTo : null);
@@ -241,6 +285,31 @@ class TemplateMail extends Mailable implements ShouldQueue
     }
 
     /**
+     * Override queue to create the log entry at dispatch time, while the
+     * request context (recipients, authenticated user) is still available.
+     *
+     * @return mixed
+     */
+    public function queue(QueueFactory $queue)
+    {
+        $this->ensureLogEntry();
+
+        return parent::queue($queue);
+    }
+
+    /**
+     * @param  \DateTimeInterface|\DateInterval|int  $delay
+     *
+     * @return mixed
+     */
+    public function later($delay, QueueFactory $queue)
+    {
+        $this->ensureLogEntry();
+
+        return parent::later($delay, $queue);
+    }
+
+    /**
      * Override send to update status after the email is actually delivered.
      *
      * This is called by the queue worker (or sync driver), so it runs
@@ -252,6 +321,8 @@ class TemplateMail extends Mailable implements ShouldQueue
      */
     public function send($mailer)
     {
+        $this->ensureLogEntry();
+
         try {
             if ($this->sentEmailLog) {
                 $this->storeRenderedBody();
@@ -269,8 +340,52 @@ class TemplateMail extends Mailable implements ShouldQueue
         }
     }
 
+    /**
+     * Create the SentEmail log entry unless one was injected, logging is
+     * opted out, or logging is disabled in the settings.
+     *
+     * Failures are reported but never block the email from being sent.
+     */
+    protected function ensureLogEntry(): void
+    {
+        if ($this->sentEmailLog || $this->shouldLog === false) {
+            return;
+        }
+
+        if ($this->shouldLog !== true && ! app(LoggingSettings::class)->enabled) {
+            return;
+        }
+
+        try {
+            $this->sentEmailLog = SentEmail::create([
+                'email_template_id' => $this->emailTemplate->id,
+                'sender' => $this->resolveFrom()['address'],
+                'to' => collect($this->to)->pluck('address')->all(),
+                'cc' => collect($this->cc)->pluck('address')->all(),
+                'bcc' => collect($this->bcc)->pluck('address')->all(),
+                'subject' => $this->overrideSubject ?? $this->getRendered()['subject'],
+                'rendered_body' => null,
+                'attachments' => collect($this->fileAttachments)
+                    ->map(fn (array $file): array => [
+                        'name' => $file['name'] ?? basename($file['path']),
+                        'path' => $file['path'],
+                        'source' => 'programmatic',
+                    ])
+                    ->all(),
+                'status' => EmailStatus::Queued,
+                'sent_by' => $this->sentById,
+            ]);
+        } catch (\Throwable $e) {
+            report($e);
+        }
+    }
+
     protected function storeRenderedBody(): void
     {
+        if (! $this->storeRenderedBodyInLog) {
+            return;
+        }
+
         if (! app(LoggingSettings::class)->store_rendered_body) {
             return;
         }
@@ -288,6 +403,23 @@ class TemplateMail extends Mailable implements ShouldQueue
     | Internal
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @return array{address: string, name: ?string}
+     */
+    protected function resolveFrom(): array
+    {
+        $templateFrom = $this->emailTemplate->from;
+
+        $mailSettings = app(GeneralSettings::class);
+
+        return $this->overrideFrom
+            ?? (! empty($templateFrom['address']) ? $templateFrom : null)
+            ?? [
+                'address' => $mailSettings->default_from_address,
+                'name' => $mailSettings->default_from_name,
+            ];
+    }
 
     /**
      * @return array<string, mixed>
