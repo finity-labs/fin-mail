@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Barua pepe zimetumwa',
-            'individual_sent_body' => 'Barua pepe :count zimetumwa moja moja.',
+            'individual_sent_body' => 'Barua pepe :count imetumwa peke yake.|Barua pepe :count zimetumwa moja moja.',
         ],
     ],
 

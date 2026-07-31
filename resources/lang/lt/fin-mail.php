@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Laiškai išsiųsti',
-            'individual_sent_body' => 'Išsiųsta :count atskirų laiškų.',
+            'individual_sent_body' => 'Išsiųstas :count atskiras laiškas.|Išsiųsti :count atskiri laiškai.|Išsiųsta :count atskirų laiškų.',
         ],
     ],
 

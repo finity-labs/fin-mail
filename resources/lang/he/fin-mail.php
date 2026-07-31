@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'הודעות הדוא"ל נשלחו',
-            'individual_sent_body' => 'נשלחו :count הודעות דוא"ל נפרדות.',
+            'individual_sent_body' => 'נשלחה :count הודעת דוא"ל נפרדת.|נשלחו :count הודעות דוא"ל נפרדות.',
         ],
     ],
 

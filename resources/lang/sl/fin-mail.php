@@ -11,20 +11,20 @@ return [
     */
 
     'navigation' => [
-        'group' => 'E-posta',
+        'group' => 'E-pošta',
         'templates' => 'Predloge',
         'themes' => 'Teme',
-        'sent-emails' => 'Poslana sporocila',
+        'sent-emails' => 'Poslana sporočila',
         'settings' => 'Nastavitve',
     ],
 
     'models' => [
-        'email_template' => 'E-postna predloga',
-        'email_templates' => 'E-postne predloge',
-        'email_theme' => 'E-postna tema',
-        'email_themes' => 'E-postne teme',
-        'sent_email' => 'Poslano sporocilo',
-        'sent_emails' => 'Poslana sporocila',
+        'email_template' => 'E-poštna predloga',
+        'email_templates' => 'E-poštne predloge',
+        'email_theme' => 'E-poštna tema',
+        'email_themes' => 'E-poštne teme',
+        'sent_email' => 'Poslano sporočilo',
+        'sent_emails' => 'Poslana sporočila',
     ],
 
     /*
@@ -37,49 +37,49 @@ return [
         'tabs' => [
             'content' => 'Vsebina',
             'settings' => 'Nastavitve',
-            'tokens' => 'Zetoni',
+            'tokens' => 'Žetoni',
         ],
 
         'fields' => [
             'name' => 'Ime',
-            'key' => 'Kljuc',
-            'key_helper' => 'Edinstveni kljuc, uporabljen v kodi: npr. "invoice-sent"',
+            'key' => 'Ključ',
+            'key_helper' => 'Edinstveni ključ, uporabljen v kodi: npr. "invoice-sent"',
             'category' => 'Kategorija',
             'subject' => 'Zadeva',
-            'subject_helper' => 'Podpira zetone: {{ user.name }}, {{ config.app.name }}',
+            'subject_helper' => 'Podpira žetone: {{ user.name }}, {{ config.app.name }}',
             'preheader' => 'Prednaslov',
-            'preheader_helper' => 'Predogled besedila, prikazanega v e-postnih odjemalcih',
+            'preheader_helper' => 'Predogled besedila, prikazanega v e-poštnih odjemalcih',
             'body' => 'Telo',
             'theme' => 'Tema',
             'theme_placeholder' => 'Privzeta tema',
             'is_active' => 'Aktivno',
-            'is_active_helper' => 'Neaktivnih predlog ni mogoce uporabiti za posiljanje',
+            'is_active_helper' => 'Neaktivnih predlog ni mogoče uporabiti za pošiljanje',
             'tags' => 'Oznake',
             'tags_placeholder' => 'Dodajte oznake za organizacijo',
-            'from_address' => 'E-naslov posiljatelja',
-            'from_name' => 'Ime posiljatelja',
+            'from_address' => 'E-naslov pošiljatelja',
+            'from_name' => 'Ime pošiljatelja',
             'reply_to_address' => 'E-pošta prejemnika',
             'reply_to_name' => 'Ime prejemnika',
             'locale' => 'Jezik',
         ],
 
         'sections' => [
-            'custom_sender' => 'Prilagojeni posiljatelj',
-            'custom_sender_description' => 'Preglasi privzeti naslov posiljatelja za to predlogo',
+            'custom_sender' => 'Prilagojeni pošiljatelj',
+            'custom_sender_description' => 'Preglasi privzeti naslov pošiljatelja za to predlogo',
             'custom_reply_to' => 'Prilagojen naslov za odgovor',
             'custom_reply_to_description' => 'Nastavite naslov za odgovor za to predlogo',
         ],
 
         'tokens' => [
-            'label' => 'Razpolozljivi zetoni',
-            'helper' => 'Dokumentirajte zetone, ki so na voljo za to predlogo. To pomaga urednikom vedeti, katere spremenljivke lahko uporabijo.',
-            'token' => 'Zeton',
+            'label' => 'Razpoložljivi žetoni',
+            'helper' => 'Dokumentirajte žetone, ki so na voljo za to predlogo. To pomaga urednikom vedeti, katere spremenljivke lahko uporabijo.',
+            'token' => 'Žeton',
             'description' => 'Opis',
             'example' => 'Primer',
             'token_placeholder' => 'user.name',
             'description_placeholder' => 'Polno ime prejemnika',
             'example_placeholder' => 'Janez Novak',
-            'new_item' => 'Nov zeton',
+            'new_item' => 'Nov žeton',
         ],
 
         'blocks' => [
@@ -105,26 +105,26 @@ return [
         'actions' => [
             'preview' => 'Predogled',
             'preview_heading' => 'Predogled: :record',
-            'send_test' => 'Poslji test',
-            'send_test_field' => 'Poslji na',
+            'send_test' => 'Pošlji test',
+            'send_test_field' => 'Pošlji na',
             'send_test_locale' => 'Jezik',
-            'compose' => 'Sestavi e-poscto',
-            'version_history' => 'Zgodovina razlicic',
+            'compose' => 'Sestavi e-pošto',
+            'version_history' => 'Zgodovina različic',
             'back_to_templates' => 'Nazaj na predloge',
         ],
 
         'notifications' => [
-            'test_sent' => 'Testno sporocilo poslano!',
+            'test_sent' => 'Testno sporočilo poslano!',
             'test_sent_body' => 'Poslano na :email',
-            'test_failed' => 'Posiljanje testnega sporocila ni uspelo',
+            'test_failed' => 'Pošiljanje testnega sporočila ni uspelo',
             'saved' => 'Predloga shranjena',
-            'saved_body' => 'Posnetek razlicice je bil samodejno shranjen.',
-            'locked_skipped' => 'Zaklenjene predloge preskocene',
-            'locked_skipped_body' => ':count zaklenjena(-ih) predlog(a) je bilo preskocenih in ni bilo izbrisanih.',
+            'saved_body' => 'Posnetek različice je bil samodejno shranjen.',
+            'locked_skipped' => 'Zaklenjene predloge preskočene',
+            'locked_skipped_body' => ':count zaklenjena(-ih) predlog(a) je bilo preskočenih in ni bilo izbrisanih.',
         ],
 
         'tooltips' => [
-            'locked' => 'Ta predloga je zaklenjena — kljuc in kategorija sta samo za branje, brisanje je prepreceno.',
+            'locked' => 'Ta predloga je zaklenjena — ključ in kategorija sta samo za branje, brisanje je preprečeno.',
         ],
 
         'versioning' => [
@@ -138,7 +138,7 @@ return [
         ],
 
         'notices' => [
-            'locked' => 'Ta predloga je zaklenjena. Polj kljuc in kategorija ni mogoce spreminjati.',
+            'locked' => 'Ta predloga je zaklenjena. Polj ključ in kategorija ni mogoče spreminjati.',
         ],
 
         'language_label' => 'Jezik: :locale',
@@ -153,14 +153,14 @@ return [
     */
 
     'compose' => [
-        'title' => 'Sestavi e-posto',
+        'title' => 'Sestavi e-pošto',
         'title_with_name' => 'Sestavi: :name',
 
         'sections' => [
             'recipients' => 'Prejemniki',
-            'content' => 'Vsebina e-poste',
+            'content' => 'Vsebina e-pošte',
             'attachments' => 'Priloge',
-            'tokens' => 'Razpolozljivi zetoni',
+            'tokens' => 'Razpoložljivi žetoni',
         ],
 
         'fields' => [
@@ -168,26 +168,26 @@ return [
             'to' => 'Za',
             'cc' => 'CC',
             'bcc' => 'BCC',
-            'to_placeholder' => 'Vnesite e-postne naslove',
+            'to_placeholder' => 'Vnesite e-poštne naslove',
             'cc_placeholder' => 'Naslovi CC',
             'bcc_placeholder' => 'Naslovi BCC',
             'locale' => 'Jezik',
             'subject' => 'Zadeva',
             'preheader' => 'Prednaslov',
             'body' => 'Telo',
-            'attach_files' => 'Prilozi datoteke',
-            'preheader_helper' => 'Predogled besedila, prikazanega v e-postnih odjemalcih pred odprtjem',
-            'no_tokens' => 'Za to predlogo ni dokumentiranih zetonov. Zetoni, kot je {{ user.name }}, bodo zamenjani ob posiljanju prek API/kode.',
+            'attach_files' => 'Priloži datoteke',
+            'preheader_helper' => 'Predogled besedila, prikazanega v e-poštnih odjemalcih pred odprtjem',
+            'no_tokens' => 'Za to predlogo ni dokumentiranih žetonov. Žetoni, kot je {{ user.name }}, bodo zamenjani ob pošiljanju prek API/kode.',
         ],
 
         'actions' => [
-            'send' => 'Poslji e-posto',
+            'send' => 'Pošlji e-pošto',
             'preview' => 'Predogled',
         ],
 
         'confirm' => [
-            'heading' => 'Potrdi posiljanje',
-            'description' => 'Ali ste prepricani, da zelite poslati to e-posto?',
+            'heading' => 'Potrdi pošiljanje',
+            'description' => 'Ali ste prepričani, da želite poslati to e-pošto?',
             'description_multiple' => 'Imate več prejemnikov. Izberite, kako želite poslati to e-pošto.',
             'send_mode_label' => 'Kako naj bo poslano?',
             'send_mode_individual' => 'Pošlji vsako e-pošto posebej',
@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'E-pošte poslane',
-            'individual_sent_body' => 'Poslanih :count posameznih e-pošt.',
+            'individual_sent_body' => 'Poslana :count posamezna e-pošta.|Poslani :count posamezni e-pošti.|Poslane :count posamezne e-pošte.|Poslanih :count posameznih e-pošt.',
         ],
     ],
 
@@ -222,10 +222,10 @@ return [
             'bcc' => 'BCC',
             'template' => 'Predloga',
             'subject' => 'Zadeva',
-            'to_placeholder' => 'Vnesite e-postne naslove',
+            'to_placeholder' => 'Vnesite e-poštne naslove',
             'cc_placeholder' => 'Vnesite naslove CC',
             'bcc_placeholder' => 'Vnesite naslove BCC',
-            'auto_attached' => 'Samodejno prilozene datoteke',
+            'auto_attached' => 'Samodejno priložene datoteke',
             'auto_attached_none' => 'Brez',
             'additional_attachments' => 'Dodatne priloge',
         ],
@@ -238,14 +238,14 @@ return [
     */
 
     'send_action' => [
-        'label' => 'Poslji e-posto',
-        'modal_heading' => 'Sestavi e-posto',
-        'submit' => 'Poslji',
+        'label' => 'Pošlji e-pošto',
+        'modal_heading' => 'Sestavi e-pošto',
+        'submit' => 'Pošlji',
 
         'notifications' => [
-            'sent' => 'E-posta uspesno poslana',
+            'sent' => 'E-pošta uspešno poslana',
             'sent_body' => 'Poslano na: :recipients',
-            'failed' => 'Posiljanje e-poste ni uspelo',
+            'failed' => 'Pošiljanje e-pošte ni uspelo',
         ],
     ],
 
@@ -259,20 +259,20 @@ return [
         'sections' => [
             'details' => 'Podrobnosti teme',
             'background' => 'Ozadje in postavitev',
-            'background_description' => 'Glavne strukturne barve postavitve e-poste.',
+            'background_description' => 'Glavne strukturne barve postavitve e-pošte.',
             'typography' => 'Tipografija',
             'typography_description' => 'Barve za besedilo in naslove.',
             'buttons' => 'Gumbi',
             'buttons_description' => 'Slog gumbov za poziv k dejanju.',
             'footer' => 'Noga',
-            'footer_description' => 'Slog podrocja noge.',
+            'footer_description' => 'Slog področja noge.',
             'preview' => 'Predogled',
         ],
 
         'fields' => [
             'name' => 'Ime',
             'is_default' => 'Privzeta tema',
-            'is_default_helper' => 'Privzeta tema se uporabi za predloge, ki je ne dolocijo.',
+            'is_default_helper' => 'Privzeta tema se uporabi za predloge, ki je ne določijo.',
             'page_background' => 'Ozadje strani',
             'content_background' => 'Ozadje vsebine',
             'border' => 'Obroba',
@@ -326,8 +326,8 @@ return [
 
         'actions' => [
             'view' => 'Ogled',
-            'resend' => 'Ponovno poslji',
-            'resend_description' => 'To bo poslalo novo kopijo e-poste izvirnim prejemnikom.',
+            'resend' => 'Ponovno pošlji',
+            'resend_description' => 'To bo poslalo novo kopijo e-pošte izvirnim prejemnikom.',
         ],
 
         'preview' => [
@@ -342,13 +342,13 @@ return [
             'error' => 'Podrobnosti napake',
         ],
         'notifications' => [
-            'resent' => 'E-posta uspesno ponovno poslana',
-            'resend_failed' => 'Ponovno posiljanje e-poste ni uspelo',
+            'resent' => 'E-pošta uspešno ponovno poslana',
+            'resend_failed' => 'Ponovno pošiljanje e-pošte ni uspelo',
         ],
 
         'errors' => [
-            'no_rendered_body' => 'Ni mogoce ponovno poslati: upodobljeno telo ni shranjeno. Omogocite logging.store_rendered_body v nastavitvah.',
-            'no_template' => 'Izvirna predloga ne obstaja vec.',
+            'no_rendered_body' => 'Ni mogoče ponovno poslati: upodobljeno telo ni shranjeno. Omogočite logging.store_rendered_body v nastavitvah.',
+            'no_template' => 'Izvirna predloga ne obstaja več.',
         ],
     ],
 
@@ -359,7 +359,7 @@ return [
     */
 
     'relation' => [
-        'title' => 'Poslana sporocila',
+        'title' => 'Poslana sporočila',
 
         'columns' => [
             'to' => 'Za',
@@ -373,23 +373,23 @@ return [
 
         'actions' => [
             'view' => 'Ogled',
-            'resend' => 'Ponovno poslji',
-            'resend_confirm' => 'Ali ste prepricani, da zelite ponovno poslati to e-posto?',
+            'resend' => 'Ponovno pošlji',
+            'resend_confirm' => 'Ali ste prepričani, da želite ponovno poslati to e-pošto?',
         ],
 
         'notifications' => [
-            'resent' => 'E-posta uspesno ponovno poslana',
-            'resend_failed' => 'Ponovno posiljanje ni uspelo',
+            'resent' => 'E-pošta uspešno ponovno poslana',
+            'resend_failed' => 'Ponovno pošiljanje ni uspelo',
         ],
 
         'empty' => [
-            'heading' => 'Ni poslanih sporocil',
-            'description' => 'E-poste, poslane za ta zapis, se bodo prikazale tukaj.',
+            'heading' => 'Ni poslanih sporočil',
+            'description' => 'E-pošte, poslane za ta zapis, se bodo prikazale tukaj.',
         ],
 
         'errors' => [
-            'no_body' => 'Ni mogoce ponovno poslati: upodobljeno telo ali predloga nista shranjeni.',
-            'no_template' => 'Izvirna predloga ne obstaja vec.',
+            'no_body' => 'Ni mogoče ponovno poslati: upodobljeno telo ali predloga nista shranjeni.',
+            'no_template' => 'Izvirna predloga ne obstaja več.',
         ],
     ],
 
@@ -400,30 +400,30 @@ return [
     */
 
     'settings' => [
-        'title' => 'Nastavitve e-poste',
+        'title' => 'Nastavitve e-pošte',
 
         'tabs' => [
-            'general' => 'Splosno',
+            'general' => 'Splošno',
             'branding' => 'Blagovna znamka',
             'logging' => 'Beleženje',
             'attachments' => 'Priloge',
-            'auth_emails' => 'E-poste za preverjanje',
+            'auth_emails' => 'E-pošte za preverjanje',
         ],
 
         'titles' => [
-            'general' => 'Nastavitve e-postnih predlog - Splosno',
-            'branding' => 'Nastavitve e-postnih predlog - Blagovna znamka',
-            'logging' => 'Nastavitve e-postnih predlog - Beleženje',
-            'attachments' => 'Nastavitve e-postnih predlog - Priloge',
-            'auth_emails' => 'Nastavitve e-postnih predlog - E-poste za preverjanje',
+            'general' => 'Nastavitve e-poštnih predlog - Splošno',
+            'branding' => 'Nastavitve e-poštnih predlog - Blagovna znamka',
+            'logging' => 'Nastavitve e-poštnih predlog - Beleženje',
+            'attachments' => 'Nastavitve e-poštnih predlog - Priloge',
+            'auth_emails' => 'Nastavitve e-poštnih predlog - E-pošte za preverjanje',
         ],
 
         'sections' => [
-            'default_sender' => 'Privzeti posiljatelj',
-            'default_sender_description' => 'Privzeti naslov "Od" za vse e-poste, poslane s vticnikom.',
-            'additional_senders' => 'Dodatni posiljatelji',
+            'default_sender' => 'Privzeti pošiljatelj',
+            'default_sender_description' => 'Privzeti naslov "Od" za vse e-pošte, poslane s vtičnikom.',
+            'additional_senders' => 'Dodatni pošiljatelji',
             'add_additional_senders' => 'Dodaj dodatne pošiljatelje',
-            'additional_senders_description' => 'Dodatni naslovi "Od", ki jih lahko uporabniki izberejo pri sestavljanju e-poste.',
+            'additional_senders_description' => 'Dodatni naslovi "Od", ki jih lahko uporabniki izberejo pri sestavljanju e-pošte.',
             'localization' => 'Lokalizacija',
             'categories' => 'Kategorije predlog',
             'logo' => 'Logotip',
@@ -431,63 +431,63 @@ return [
             'footer_links' => 'Povezave v nogi',
             'add_footer_links' => 'Dodaj povezave v nogo',
             'customer_service' => 'Podpora strankam',
-            'logging' => 'Beleženje e-poste',
-            'logging_description' => 'Nadzirajte, kako se poslana e-posta belezi v podatkovni bazi.',
-            'cleanup' => 'Nacrtovano ciscenje',
-            'cleanup_description' => 'Samodejno izbrisi stare zapise o poslani e-posti po urniku.',
+            'logging' => 'Beleženje e-pošte',
+            'logging_description' => 'Nadzirajte, kako se poslana e-pošta beleži v podatkovni bazi.',
+            'cleanup' => 'Načrtovano čiščenje',
+            'cleanup_description' => 'Samodejno izbriši stare zapise o poslani e-pošti po urniku.',
             'attachment_rules' => 'Pravila prilog',
-            'attachment_rules_description' => 'Nastavite omejitve za datotecne priloge v sestavljenih e-postah.',
-            'auth_emails' => 'Preglasitve e-poste za preverjanje',
-            'auth_emails_description' => 'Zamenjajte privzete e-poste za preverjanje aplikacije s svojimi prilagojenimi predlogami.',
+            'attachment_rules_description' => 'Nastavite omejitve za datotečne priloge v sestavljenih e-poštah.',
+            'auth_emails' => 'Preglasitve e-pošte za preverjanje',
+            'auth_emails_description' => 'Zamenjajte privzete e-pošte za preverjanje aplikacije s svojimi prilagojenimi predlogami.',
         ],
 
         'fields' => [
-            'from_email' => 'E-naslov posiljatelja',
-            'from_name' => 'Ime posiljatelja',
+            'from_email' => 'E-naslov pošiljatelja',
+            'from_name' => 'Ime pošiljatelja',
             'sender_email' => 'E-naslov',
             'sender_name' => 'Prikazno ime',
-            'sender_new' => 'Nov posiljatelj',
+            'sender_new' => 'Nov pošiljatelj',
             'default_locale' => 'Privzeti jezik',
             'default_locale_helper' => 'Privzeti jezik za nove predloge (npr., en, hu, de).',
-            'languages' => 'Razpolozljivi jeziki',
+            'languages' => 'Razpoložljivi jeziki',
             'language_code' => 'Koda',
             'language_display' => 'Prikazno ime',
             'language_flag' => 'Ikona zastave',
             'language_new' => 'Nov jezik',
-            'category_key' => 'Kljuc',
+            'category_key' => 'Ključ',
             'category_label' => 'Oznaka',
             'category_new' => 'Nova kategorija',
             'logo_url' => 'URL ali pot logotipa',
             'logo_url_placeholder' => 'https://example.com/logo.png',
-            'logo_url_helper' => 'Absolutni URL ali pot do logotipa e-poste.',
-            'logo_width' => 'Sirina (px)',
-            'logo_height' => 'Visina (px)',
-            'content_width' => 'Sirina vsebine (px)',
+            'logo_url_helper' => 'Absolutni URL ali pot do logotipa e-pošte.',
+            'logo_width' => 'Širina (px)',
+            'logo_height' => 'Višina (px)',
+            'content_width' => 'Širina vsebine (px)',
             'primary_color' => 'Primarna barva',
             'footer_link_label' => 'Oznaka',
             'footer_link_url' => 'URL',
             'footer_link_new' => 'Nova povezava',
             'support_email' => 'E-naslov podpore',
             'support_phone' => 'Telefon podpore',
-            'enable_logging' => 'Omogoci belezenje',
-            'enable_logging_helper' => 'Ko je onemogoceno, se ne ustvarijo nobeni zapisi o poslani e-posti.',
+            'enable_logging' => 'Omogoči beleženje',
+            'enable_logging_helper' => 'Ko je onemogočeno, se ne ustvarijo nobeni zapisi o poslani e-pošti.',
             'store_rendered_body' => 'Shrani upodobljeno telo',
-            'store_rendered_body_helper' => 'Shrani koncni HTML vsakega poslanega sporocila. Potrebno za funkcije ponovnega posiljanja in predogleda.',
+            'store_rendered_body_helper' => 'Shrani končni HTML vsakega poslanega sporočila. Potrebno za funkcije ponovnega pošiljanja in predogleda.',
             'retention_days' => 'Hramba (dni)',
-            'retention_days_helper' => 'Samodejno izbrisi zapise o poslani e-posti po toliko dneh. Pustite prazno za trajno hrambo.',
-            'cleanup_enabled' => 'Omogoci nacrtovano ciscenje',
-            'cleanup_enabled_helper' => 'Samodejno zazeni ukaz za ciscenje po urniku.',
-            'cleanup_frequency' => 'Pogostost ciscenja',
-            'max_file_size' => 'Najvecja velikost datoteke (MB)',
-            'allowed_extensions' => 'Dovoljene koncnice datotek',
-            'allowed_extensions_placeholder' => 'Dodajte koncnico (npr., pdf)',
-            'allowed_extensions_helper' => 'Koncnice datotek, dovoljene za nalaganje.',
-            'override_verification' => 'Preglasi potrditveno e-posto',
-            'override_verification_helper' => 'Uporabite predlogo "user-verify-email" namesto privzete potrditvene e-poste aplikacije.',
+            'retention_days_helper' => 'Samodejno izbriši zapise o poslani e-pošti po toliko dneh. Pustite prazno za trajno hrambo.',
+            'cleanup_enabled' => 'Omogoči načrtovano čiščenje',
+            'cleanup_enabled_helper' => 'Samodejno zaženi ukaz za čiščenje po urniku.',
+            'cleanup_frequency' => 'Pogostost čiščenja',
+            'max_file_size' => 'Največja velikost datoteke (MB)',
+            'allowed_extensions' => 'Dovoljene končnice datotek',
+            'allowed_extensions_placeholder' => 'Dodajte končnico (npr., pdf)',
+            'allowed_extensions_helper' => 'Končnice datotek, dovoljene za nalaganje.',
+            'override_verification' => 'Preglasi potrditveno e-pošto',
+            'override_verification_helper' => 'Uporabite predlogo "user-verify-email" namesto privzete potrditvene e-pošte aplikacije.',
             'override_password_reset' => 'Preglasi ponastavitev gesla',
-            'override_password_reset_helper' => 'Uporabite predlogo "user-password-reset" namesto privzete e-poste za ponastavitev gesla aplikacije.',
-            'override_welcome' => 'Preglasi pozdravno e-posto',
-            'override_welcome_helper' => 'Posljite pozdravno e-posto s predlogo "user-welcome", ko se registrira nov uporabnik.',
+            'override_password_reset_helper' => 'Uporabite predlogo "user-password-reset" namesto privzete e-pošte za ponastavitev gesla aplikacije.',
+            'override_welcome' => 'Preglasi pozdravno e-pošto',
+            'override_welcome_helper' => 'Pošljite pozdravno e-pošto s predlogo "user-welcome", ko se registrira nov uporabnik.',
         ],
     ],
 
@@ -498,7 +498,7 @@ return [
     */
 
     'email' => [
-        'copyright' => '&copy; :year :app. Vse pravice pridrzane.',
+        'copyright' => '&copy; :year :app. Vse pravice pridržane.',
     ],
 
     /*
@@ -512,13 +512,13 @@ return [
             1 => 'Osnutek',
             2 => 'V vrsti',
             3 => 'Poslano',
-            4 => 'Neuspesno',
+            4 => 'Neuspešno',
         ],
 
         'cleanup_frequency' => [
             1 => 'Dnevno',
             2 => 'Tedensko',
-            3 => 'Mesecno',
+            3 => 'Mesečno',
         ],
     ],
 

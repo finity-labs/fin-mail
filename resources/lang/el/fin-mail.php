@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Τα email στάλθηκαν',
-            'individual_sent_body' => 'Στάλθηκαν :count ξεχωριστά email.',
+            'individual_sent_body' => 'Στάλθηκε :count ξεχωριστό email.|Στάλθηκαν :count ξεχωριστά email.',
         ],
     ],
 

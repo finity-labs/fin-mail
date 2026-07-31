@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'E-poster sendt',
-            'individual_sent_body' => 'Sendte :count separate e-poster.',
+            'individual_sent_body' => 'Sendte :count separat e-post.|Sendte :count separate e-poster.',
         ],
     ],
 

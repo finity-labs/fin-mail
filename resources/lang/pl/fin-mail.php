@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'E-maile wysłane',
-            'individual_sent_body' => 'Wysłano :count osobnych e-maili.',
+            'individual_sent_body' => 'Wysłano :count osobny e-mail.|Wysłano :count osobne e-maile.|Wysłano :count osobnych e-maili.',
         ],
     ],
 

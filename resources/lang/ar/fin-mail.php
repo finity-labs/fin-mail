@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'تم إرسال الرسائل',
-            'individual_sent_body' => 'تم إرسال :count رسالة منفصلة.',
+            'individual_sent_body' => 'تم إرسال :count من الرسائل المنفصلة.|تم إرسال :count رسالة منفصلة.|تم إرسال :count من الرسائل المنفصلة.|تم إرسال :count رسائل منفصلة.|تم إرسال :count رسالة منفصلة.|تم إرسال :count رسالة منفصلة.',
         ],
     ],
 

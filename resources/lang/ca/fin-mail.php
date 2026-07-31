@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Correus enviats',
-            'individual_sent_body' => 'S\'han enviat :count correus individuals.',
+            'individual_sent_body' => 'S\'ha enviat :count correu individual.|S\'han enviat :count correus individuals.',
         ],
     ],
 

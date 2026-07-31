@@ -15,7 +15,7 @@ return [
         'templates' => 'Modelos',
         'themes' => 'Temas',
         'sent-emails' => 'Emails Enviados',
-        'settings' => 'Definicoes',
+        'settings' => 'Definições',
     ],
 
     'models' => [
@@ -35,27 +35,27 @@ return [
 
     'template' => [
         'tabs' => [
-            'content' => 'Conteudo',
-            'settings' => 'Definicoes',
+            'content' => 'Conteúdo',
+            'settings' => 'Definições',
             'tokens' => 'Tokens',
         ],
 
         'fields' => [
             'name' => 'Nome',
             'key' => 'Chave',
-            'key_helper' => 'Chave unica utilizada no codigo: ex., "invoice-sent"',
+            'key_helper' => 'Chave única utilizada no código: ex., "invoice-sent"',
             'category' => 'Categoria',
             'subject' => 'Assunto',
             'subject_helper' => 'Suporta tokens: {{ user.name }}, {{ config.app.name }}',
-            'preheader' => 'Pre-cabecalho',
-            'preheader_helper' => 'Texto de pre-visualizacao apresentado nos clientes de email',
+            'preheader' => 'Pré-cabeçalho',
+            'preheader_helper' => 'Texto de pré-visualização apresentado nos clientes de email',
             'body' => 'Corpo',
             'theme' => 'Tema',
             'theme_placeholder' => 'Tema predefinido',
             'is_active' => 'Ativo',
-            'is_active_helper' => 'Modelos inativos nao podem ser utilizados para envio',
+            'is_active_helper' => 'Modelos inativos não podem ser utilizados para envio',
             'tags' => 'Etiquetas',
-            'tags_placeholder' => 'Adicionar etiquetas para organizacao',
+            'tags_placeholder' => 'Adicionar etiquetas para organização',
             'from_address' => 'Email do Remetente',
             'from_name' => 'Nome do Remetente',
             'reply_to_address' => 'E-mail do destinatário',
@@ -65,20 +65,20 @@ return [
 
         'sections' => [
             'custom_sender' => 'Remetente Personalizado',
-            'custom_sender_description' => 'Substituir o endereco de remetente predefinido para este modelo',
+            'custom_sender_description' => 'Substituir o endereço de remetente predefinido para este modelo',
             'custom_reply_to' => 'Responder para personalizado',
             'custom_reply_to_description' => 'Definir endereço de resposta para este modelo',
         ],
 
         'tokens' => [
-            'label' => 'Tokens Disponiveis',
-            'helper' => 'Documente os tokens disponiveis para este modelo. Isto ajuda os editores a saber que variaveis podem utilizar.',
+            'label' => 'Tokens Disponíveis',
+            'helper' => 'Documente os tokens disponíveis para este modelo. Isto ajuda os editores a saber que variáveis podem utilizar.',
             'token' => 'Token',
-            'description' => 'Descricao',
+            'description' => 'Descrição',
             'example' => 'Exemplo',
             'token_placeholder' => 'user.name',
-            'description_placeholder' => 'O nome completo do destinatario',
-            'example_placeholder' => 'Joao Silva',
+            'description_placeholder' => 'O nome completo do destinatário',
+            'example_placeholder' => 'João Silva',
             'new_item' => 'Novo Token',
         ],
 
@@ -103,13 +103,13 @@ return [
         ],
 
         'actions' => [
-            'preview' => 'Pre-visualizar',
-            'preview_heading' => 'Pre-visualizar: :record',
+            'preview' => 'Pré-visualizar',
+            'preview_heading' => 'Pré-visualizar: :record',
             'send_test' => 'Enviar Teste',
             'send_test_field' => 'Enviar para',
             'send_test_locale' => 'Idioma',
             'compose' => 'Compor Email',
-            'version_history' => 'Historico de Versoes',
+            'version_history' => 'Histórico de Versões',
             'back_to_templates' => 'Voltar aos Modelos',
         ],
 
@@ -118,13 +118,13 @@ return [
             'test_sent_body' => 'Enviado para :email',
             'test_failed' => 'Falha ao enviar email de teste',
             'saved' => 'Modelo guardado',
-            'saved_body' => 'Uma versao foi guardada automaticamente.',
+            'saved_body' => 'Uma versão foi guardada automaticamente.',
             'locked_skipped' => 'Modelos bloqueados ignorados',
-            'locked_skipped_body' => ':count modelo(s) bloqueado(s) foram ignorados e nao eliminados.',
+            'locked_skipped_body' => ':count modelo(s) bloqueado(s) foram ignorados e não eliminados.',
         ],
 
         'tooltips' => [
-            'locked' => 'Este modelo esta bloqueado — a chave e a categoria sao apenas de leitura, a eliminacao esta impedida.',
+            'locked' => 'Este modelo está bloqueado — a chave e a categoria são apenas de leitura, a eliminação está impedida.',
         ],
 
         'versioning' => [
@@ -138,12 +138,12 @@ return [
         ],
 
         'notices' => [
-            'locked' => 'Este modelo esta bloqueado. Os campos chave e categoria nao podem ser alterados.',
+            'locked' => 'Este modelo está bloqueado. Os campos chave e categoria não podem ser alterados.',
         ],
 
         'language_label' => 'Idioma: :locale',
 
-        'replicate_suffix' => '(Copia)',
+        'replicate_suffix' => '(Cópia)',
     ],
 
     /*
@@ -157,10 +157,10 @@ return [
         'title_with_name' => 'Compor: :name',
 
         'sections' => [
-            'recipients' => 'Destinatarios',
-            'content' => 'Conteudo do Email',
+            'recipients' => 'Destinatários',
+            'content' => 'Conteúdo do Email',
             'attachments' => 'Anexos',
-            'tokens' => 'Tokens Disponiveis',
+            'tokens' => 'Tokens Disponíveis',
         ],
 
         'fields' => [
@@ -168,21 +168,21 @@ return [
             'to' => 'Para',
             'cc' => 'CC',
             'bcc' => 'BCC',
-            'to_placeholder' => 'Introduzir enderecos de email',
-            'cc_placeholder' => 'Enderecos CC',
-            'bcc_placeholder' => 'Enderecos BCC',
+            'to_placeholder' => 'Introduzir endereços de email',
+            'cc_placeholder' => 'Endereços CC',
+            'bcc_placeholder' => 'Endereços BCC',
             'locale' => 'Idioma',
             'subject' => 'Assunto',
-            'preheader' => 'Pre-cabecalho',
+            'preheader' => 'Pré-cabeçalho',
             'body' => 'Corpo',
             'attach_files' => 'Anexar Ficheiros',
-            'preheader_helper' => 'Texto de pre-visualizacao apresentado nos clientes de email antes de abrir',
-            'no_tokens' => 'Nao existem tokens documentados para este modelo. Tokens como {{ user.name }} serao substituidos quando enviados via API/codigo.',
+            'preheader_helper' => 'Texto de pré-visualização apresentado nos clientes de email antes de abrir',
+            'no_tokens' => 'Não existem tokens documentados para este modelo. Tokens como {{ user.name }} serão substituídos quando enviados via API/código.',
         ],
 
         'actions' => [
             'send' => 'Enviar Email',
-            'preview' => 'Pre-visualizar',
+            'preview' => 'Pré-visualizar',
         ],
 
         'confirm' => [
@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Emails enviados',
-            'individual_sent_body' => 'Foram enviados :count emails individuais.',
+            'individual_sent_body' => 'Foi enviado :count email individual.|Foram enviados :count emails individuais.',
         ],
     ],
 
@@ -210,8 +210,8 @@ return [
 
     'compose_form' => [
         'sections' => [
-            'recipients' => 'Destinatarios',
-            'content' => 'Conteudo',
+            'recipients' => 'Destinatários',
+            'content' => 'Conteúdo',
             'attachments' => 'Anexos',
         ],
 
@@ -222,9 +222,9 @@ return [
             'bcc' => 'BCC',
             'template' => 'Modelo',
             'subject' => 'Assunto',
-            'to_placeholder' => 'Introduzir enderecos de email',
-            'cc_placeholder' => 'Introduzir enderecos CC',
-            'bcc_placeholder' => 'Introduzir enderecos BCC',
+            'to_placeholder' => 'Introduzir endereços de email',
+            'cc_placeholder' => 'Introduzir endereços CC',
+            'bcc_placeholder' => 'Introduzir endereços BCC',
             'auto_attached' => 'Ficheiros anexados automaticamente',
             'auto_attached_none' => 'Nenhum',
             'additional_attachments' => 'Anexos Adicionais',
@@ -258,46 +258,46 @@ return [
     'theme' => [
         'sections' => [
             'details' => 'Detalhes do Tema',
-            'background' => 'Fundo e Disposicao',
-            'background_description' => 'Cores estruturais principais da disposicao do email.',
+            'background' => 'Fundo e Disposição',
+            'background_description' => 'Cores estruturais principais da disposição do email.',
             'typography' => 'Tipografia',
-            'typography_description' => 'Cores para texto e titulos.',
-            'buttons' => 'Botoes',
-            'buttons_description' => 'Estilo dos botoes de acao.',
-            'footer' => 'Rodape',
-            'footer_description' => 'Estilo da area do rodape.',
-            'preview' => 'Pre-visualizacao',
+            'typography_description' => 'Cores para texto e títulos.',
+            'buttons' => 'Botões',
+            'buttons_description' => 'Estilo dos botões de ação.',
+            'footer' => 'Rodapé',
+            'footer_description' => 'Estilo da área do rodapé.',
+            'preview' => 'Pré-visualização',
         ],
 
         'fields' => [
             'name' => 'Nome',
             'is_default' => 'Tema Predefinido',
-            'is_default_helper' => 'O tema predefinido e aplicado a modelos que nao especificam um.',
-            'page_background' => 'Fundo da Pagina',
-            'content_background' => 'Fundo do Conteudo',
+            'is_default_helper' => 'O tema predefinido é aplicado a modelos que não especificam um.',
+            'page_background' => 'Fundo da Página',
+            'content_background' => 'Fundo do Conteúdo',
             'border' => 'Contorno',
-            'headings' => 'Titulos',
+            'headings' => 'Títulos',
             'body_text' => 'Texto do Corpo',
-            'secondary_text' => 'Texto Secundario',
-            'links' => 'Ligacoes',
-            'button_background' => 'Fundo do Botao',
-            'button_text' => 'Texto do Botao',
+            'secondary_text' => 'Texto Secundário',
+            'links' => 'Ligações',
+            'button_background' => 'Fundo do Botão',
+            'button_text' => 'Texto do Botão',
             'primary_accent' => 'Principal/Destaque',
-            'footer_background' => 'Fundo do Rodape',
-            'footer_text' => 'Texto do Rodape',
+            'footer_background' => 'Fundo do Rodapé',
+            'footer_text' => 'Texto do Rodapé',
         ],
 
         'columns' => [
             'primary' => 'Principal',
             'background' => 'Fundo',
             'text' => 'Texto',
-            'button' => 'Botao',
+            'button' => 'Botão',
             'default' => 'Predefinido',
             'templates' => 'Modelos',
             'updated_at' => 'Atualizado',
         ],
 
-        'replicate_suffix' => '(Copia)',
+        'replicate_suffix' => '(Cópia)',
     ],
 
     /*
@@ -321,13 +321,13 @@ return [
 
         'filters' => [
             'from' => 'De',
-            'until' => 'Ate',
+            'until' => 'Até',
         ],
 
         'actions' => [
             'view' => 'Ver',
             'resend' => 'Reenviar',
-            'resend_description' => 'Isto enviara uma nova copia do email para os destinatarios originais.',
+            'resend_description' => 'Isto enviará uma nova cópia do email para os destinatários originais.',
         ],
 
         'preview' => [
@@ -347,8 +347,8 @@ return [
         ],
 
         'errors' => [
-            'no_rendered_body' => 'Impossivel reenviar: corpo renderizado nao armazenado. Ative logging.store_rendered_body nas definicoes.',
-            'no_template' => 'O modelo original ja nao existe.',
+            'no_rendered_body' => 'Impossível reenviar: corpo renderizado não armazenado. Ative logging.store_rendered_body nas definições.',
+            'no_template' => 'O modelo original já não existe.',
         ],
     ],
 
@@ -384,12 +384,12 @@ return [
 
         'empty' => [
             'heading' => 'Nenhum email enviado',
-            'description' => 'Os emails enviados para este registo aparecerao aqui.',
+            'description' => 'Os emails enviados para este registo aparecerão aqui.',
         ],
 
         'errors' => [
-            'no_body' => 'Impossivel reenviar: corpo renderizado ou modelo nao armazenado.',
-            'no_template' => 'O modelo original ja nao existe.',
+            'no_body' => 'Impossível reenviar: corpo renderizado ou modelo não armazenado.',
+            'no_template' => 'O modelo original já não existe.',
         ],
     ],
 
@@ -400,92 +400,92 @@ return [
     */
 
     'settings' => [
-        'title' => 'Definicoes de Email',
+        'title' => 'Definições de Email',
 
         'tabs' => [
             'general' => 'Geral',
             'branding' => 'Marca',
             'logging' => 'Registo',
             'attachments' => 'Anexos',
-            'auth_emails' => 'Emails de Autenticacao',
+            'auth_emails' => 'Emails de Autenticação',
         ],
 
         'titles' => [
-            'general' => 'Definicoes de Modelos de Email - Geral',
-            'branding' => 'Definicoes de Modelos de Email - Marca',
-            'logging' => 'Definicoes de Modelos de Email - Registo',
-            'attachments' => 'Definicoes de Modelos de Email - Anexos',
-            'auth_emails' => 'Definicoes de Modelos de Email - Emails de Autenticacao',
+            'general' => 'Definições de Modelos de Email - Geral',
+            'branding' => 'Definições de Modelos de Email - Marca',
+            'logging' => 'Definições de Modelos de Email - Registo',
+            'attachments' => 'Definições de Modelos de Email - Anexos',
+            'auth_emails' => 'Definições de Modelos de Email - Emails de Autenticação',
         ],
 
         'sections' => [
             'default_sender' => 'Remetente Predefinido',
-            'default_sender_description' => 'O endereco "De" predefinido para todos os emails enviados pelo plugin.',
+            'default_sender_description' => 'O endereço "De" predefinido para todos os emails enviados pelo plugin.',
             'additional_senders' => 'Remetentes Adicionais',
             'add_additional_senders' => 'Adicionar remetentes adicionais',
-            'additional_senders_description' => 'Enderecos "De" adicionais que os utilizadores podem escolher ao compor emails.',
-            'localization' => 'Localizacao',
+            'additional_senders_description' => 'Endereços "De" adicionais que os utilizadores podem escolher ao compor emails.',
+            'localization' => 'Localização',
             'categories' => 'Categorias de Modelos',
             'logo' => 'Logotipo',
             'colors' => 'Cores',
-            'footer_links' => 'Ligacoes do Rodape',
+            'footer_links' => 'Ligações do Rodapé',
             'add_footer_links' => 'Adicionar links de rodapé',
             'customer_service' => 'Apoio ao Cliente',
             'logging' => 'Registo de Emails',
-            'logging_description' => 'Controlar como os emails enviados sao registados na base de dados.',
+            'logging_description' => 'Controlar como os emails enviados são registados na base de dados.',
             'cleanup' => 'Limpeza Programada',
-            'cleanup_description' => 'Eliminar automaticamente registos antigos de emails enviados num horario definido.',
+            'cleanup_description' => 'Eliminar automaticamente registos antigos de emails enviados num horário definido.',
             'attachment_rules' => 'Regras de Anexos',
             'attachment_rules_description' => 'Configurar limites para anexos de ficheiros nos emails compostos.',
-            'auth_emails' => 'Substituicoes de Emails de Autenticacao',
-            'auth_emails_description' => 'Substituir os emails de autenticacao predefinidos da aplicacao pelos seus modelos personalizados.',
+            'auth_emails' => 'Substituições de Emails de Autenticação',
+            'auth_emails_description' => 'Substituir os emails de autenticação predefinidos da aplicação pelos seus modelos personalizados.',
         ],
 
         'fields' => [
             'from_email' => 'Email do Remetente',
             'from_name' => 'Nome do Remetente',
             'sender_email' => 'Email',
-            'sender_name' => 'Nome de Apresentacao',
+            'sender_name' => 'Nome de Apresentação',
             'sender_new' => 'Novo Remetente',
             'default_locale' => 'Idioma Predefinido',
             'default_locale_helper' => 'O idioma predefinido para novos modelos (ex., en, hu, de).',
-            'languages' => 'Idiomas Disponiveis',
-            'language_code' => 'Codigo',
-            'language_display' => 'Nome de Apresentacao',
-            'language_flag' => 'Icone de Bandeira',
+            'languages' => 'Idiomas Disponíveis',
+            'language_code' => 'Código',
+            'language_display' => 'Nome de Apresentação',
+            'language_flag' => 'Ícone de Bandeira',
             'language_new' => 'Novo Idioma',
             'category_key' => 'Chave',
-            'category_label' => 'Rotulo',
+            'category_label' => 'Rótulo',
             'category_new' => 'Nova Categoria',
             'logo_url' => 'URL ou Caminho do Logotipo',
             'logo_url_placeholder' => 'https://example.com/logo.png',
             'logo_url_helper' => 'URL absoluto ou caminho para o logotipo do email.',
             'logo_width' => 'Largura (px)',
             'logo_height' => 'Altura (px)',
-            'content_width' => 'Largura do Conteudo (px)',
+            'content_width' => 'Largura do Conteúdo (px)',
             'primary_color' => 'Cor Principal',
-            'footer_link_label' => 'Rotulo',
+            'footer_link_label' => 'Rótulo',
             'footer_link_url' => 'URL',
-            'footer_link_new' => 'Nova Ligacao',
+            'footer_link_new' => 'Nova Ligação',
             'support_email' => 'Email de Suporte',
             'support_phone' => 'Telefone de Suporte',
             'enable_logging' => 'Ativar Registo',
-            'enable_logging_helper' => 'Quando desativado, nenhum registo de emails enviados sera criado.',
+            'enable_logging_helper' => 'Quando desativado, nenhum registo de emails enviados será criado.',
             'store_rendered_body' => 'Armazenar Corpo Renderizado',
-            'store_rendered_body_helper' => 'Guardar o HTML final de cada email enviado. Necessario para funcoes de reenvio e pre-visualizacao.',
-            'retention_days' => 'Retencao (dias)',
-            'retention_days_helper' => 'Eliminar automaticamente registos de emails enviados apos este numero de dias. Deixar vazio para manter indefinidamente.',
+            'store_rendered_body_helper' => 'Guardar o HTML final de cada email enviado. Necessário para funções de reenvio e pré-visualização.',
+            'retention_days' => 'Retenção (dias)',
+            'retention_days_helper' => 'Eliminar automaticamente registos de emails enviados após este número de dias. Deixar vazio para manter indefinidamente.',
             'cleanup_enabled' => 'Ativar Limpeza Programada',
-            'cleanup_enabled_helper' => 'Executar automaticamente o comando de limpeza num horario definido.',
-            'cleanup_frequency' => 'Frequencia de Limpeza',
-            'max_file_size' => 'Tamanho Maximo do Ficheiro (MB)',
-            'allowed_extensions' => 'Extensoes de Ficheiro Permitidas',
-            'allowed_extensions_placeholder' => 'Adicionar extensao (ex., pdf)',
-            'allowed_extensions_helper' => 'Extensoes de ficheiro permitidas para carregamento.',
-            'override_verification' => 'Substituir Email de Verificacao',
-            'override_verification_helper' => 'Utilizar o modelo "user-verify-email" em vez do email de verificacao predefinido da aplicacao.',
-            'override_password_reset' => 'Substituir Reposicao de Palavra-passe',
-            'override_password_reset_helper' => 'Utilizar o modelo "user-password-reset" em vez do email de reposicao de palavra-passe predefinido da aplicacao.',
+            'cleanup_enabled_helper' => 'Executar automaticamente o comando de limpeza num horário definido.',
+            'cleanup_frequency' => 'Frequência de Limpeza',
+            'max_file_size' => 'Tamanho Máximo do Ficheiro (MB)',
+            'allowed_extensions' => 'Extensões de Ficheiro Permitidas',
+            'allowed_extensions_placeholder' => 'Adicionar extensão (ex., pdf)',
+            'allowed_extensions_helper' => 'Extensões de ficheiro permitidas para carregamento.',
+            'override_verification' => 'Substituir Email de Verificação',
+            'override_verification_helper' => 'Utilizar o modelo "user-verify-email" em vez do email de verificação predefinido da aplicação.',
+            'override_password_reset' => 'Substituir Reposição de Palavra-passe',
+            'override_password_reset_helper' => 'Utilizar o modelo "user-password-reset" em vez do email de reposição de palavra-passe predefinido da aplicação.',
             'override_welcome' => 'Substituir Email de Boas-vindas',
             'override_welcome_helper' => 'Enviar um email de boas-vindas utilizando o modelo "user-welcome" quando um novo utilizador se regista.',
         ],

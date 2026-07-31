@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'ईमेल भेजे गए',
-            'individual_sent_body' => ':count अलग-अलग ईमेल भेजे गए।',
+            'individual_sent_body' => ':count अलग ईमेल भेजा गया।|:count अलग-अलग ईमेल भेजे गए।',
         ],
     ],
 

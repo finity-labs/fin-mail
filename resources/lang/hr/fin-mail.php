@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'E-poruke poslane',
-            'individual_sent_body' => 'Poslano je :count zasebnih e-poruka.',
+            'individual_sent_body' => 'Poslana je :count zasebna e-poruka.|Poslane su :count zasebne e-poruke.|Poslano je :count zasebnih e-poruka.',
         ],
     ],
 

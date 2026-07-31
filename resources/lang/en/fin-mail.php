@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Emails sent',
-            'individual_sent_body' => 'Sent :count individual emails.',
+            'individual_sent_body' => 'Sent :count individual email.|Sent :count individual emails.',
         ],
     ],
 

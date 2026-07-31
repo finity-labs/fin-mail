@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Имейлите са изпратени',
-            'individual_sent_body' => 'Изпратени са :count отделни имейла.',
+            'individual_sent_body' => 'Изпратен е :count отделен имейл.|Изпратени са :count отделни имейла.',
         ],
     ],
 

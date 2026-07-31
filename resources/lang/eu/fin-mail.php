@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Emailak bidalita',
-            'individual_sent_body' => ':count email banaka bidali dira.',
+            'individual_sent_body' => ':count email banaka bidali da.|:count email banaka bidali dira.',
         ],
     ],
 

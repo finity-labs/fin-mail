@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'ئیمەیلەکان نێردران',
-            'individual_sent_body' => ':count ئیمەیلی جیا نێردران.',
+            'individual_sent_body' => ':count ئیمەیلی جیا نێردرا.',
         ],
     ],
 

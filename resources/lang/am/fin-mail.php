@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'ኢሜይሎች ተልከዋል',
-            'individual_sent_body' => ':count የተለያዩ ኢሜይሎች ተልከዋል።',
+            'individual_sent_body' => ':count የተለየ ኢሜይል ተልኳል።|:count የተለያዩ ኢሜይሎች ተልከዋል።',
         ],
     ],
 

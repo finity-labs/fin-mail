@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Email inviate',
-            'individual_sent_body' => ':count email singole inviate.',
+            'individual_sent_body' => ':count email singola inviata.|:count email singole inviate.',
         ],
     ],
 

@@ -100,7 +100,7 @@ class ComposeEmail extends Page
         if (count($groups) > 1 && $sentCount > 0) {
             Notification::make()
                 ->title(__('fin-mail::fin-mail.compose.notifications.individual_sent'))
-                ->body(__('fin-mail::fin-mail.compose.notifications.individual_sent_body', ['count' => $sentCount]))
+                ->body(trans_choice('fin-mail::fin-mail.compose.notifications.individual_sent_body', $sentCount, ['count' => $sentCount]))
                 ->success()
                 ->send();
         }

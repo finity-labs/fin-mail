@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'ای میلز بھیج دی گئیں',
-            'individual_sent_body' => ':count الگ ای میلز بھیجی گئیں۔',
+            'individual_sent_body' => ':count الگ ای میل بھیجی گئی۔|:count الگ ای میلز بھیجی گئیں۔',
         ],
     ],
 

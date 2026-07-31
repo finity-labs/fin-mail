@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'E-name hatin şandin',
-            'individual_sent_body' => ':count e-nameyên cuda hatin şandin.',
+            'individual_sent_body' => ':count e-nameya cuda hat şandin.|:count e-nameyên cuda hatin şandin.',
         ],
     ],
 

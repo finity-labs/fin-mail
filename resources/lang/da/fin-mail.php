@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'E-mails sendt',
-            'individual_sent_body' => 'Der blev sendt :count individuelle e-mails.',
+            'individual_sent_body' => 'Der blev sendt :count individuel e-mail.|Der blev sendt :count individuelle e-mails.',
         ],
     ],
 

@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Письма отправлены',
-            'individual_sent_body' => 'Отправлено отдельных писем: :count.',
+            'individual_sent_body' => 'Отправлено :count отдельное письмо.|Отправлено :count отдельных письма.|Отправлено :count отдельных писем.',
         ],
     ],
 

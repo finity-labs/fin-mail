@@ -102,3 +102,12 @@ describe('actual delivery', function () {
         Mail::assertQueued(TemplateMail::class, fn (TemplateMail $mail): bool => $mail->hasTo('b@example.com') && ! $mail->hasTo('a@example.com'));
     });
 });
+
+it('pluralizes the individual-send notification body', function () {
+    app()->setLocale('en');
+
+    expect(trans_choice('fin-mail::fin-mail.compose.notifications.individual_sent_body', 1, ['count' => 1]))
+        ->toBe('Sent 1 individual email.')
+        ->and(trans_choice('fin-mail::fin-mail.compose.notifications.individual_sent_body', 3, ['count' => 3]))
+        ->toBe('Sent 3 individual emails.');
+});

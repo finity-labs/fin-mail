@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'E-mails verzonden',
-            'individual_sent_body' => ':count afzonderlijke e-mails verzonden.',
+            'individual_sent_body' => ':count afzonderlijke e-mail verzonden.|:count afzonderlijke e-mails verzonden.',
         ],
     ],
 

@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'E-mailovi poslani',
-            'individual_sent_body' => 'Poslano :count zasebnih e-mailova.',
+            'individual_sent_body' => 'Poslan :count zaseban e-mail.|Poslana :count zasebna e-maila.|Poslano :count zasebnih e-mailova.',
         ],
     ],
 

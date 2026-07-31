@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Поруке су послате',
-            'individual_sent_body' => 'Послато је :count појединачних порука.',
+            'individual_sent_body' => 'Број послатих појединачних порука: :count.',
         ],
     ],
 

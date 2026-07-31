@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Е-поштите се испратени',
-            'individual_sent_body' => 'Испратени се :count поединечни е-пошти.',
+            'individual_sent_body' => 'Испратена е :count поединечна е-пошта.|Испратени се :count поединечни е-пошти.',
         ],
     ],
 

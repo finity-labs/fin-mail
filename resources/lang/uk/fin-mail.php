@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Листи надіслано',
-            'individual_sent_body' => 'Надіслано :count окремих листів.',
+            'individual_sent_body' => 'Надіслано :count окремий лист.|Надіслано :count окремі листи.|Надіслано :count окремих листів.',
         ],
     ],
 

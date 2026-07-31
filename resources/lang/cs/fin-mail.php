@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'E-maily odeslány',
-            'individual_sent_body' => 'Odesláno :count samostatných e-mailů.',
+            'individual_sent_body' => 'Odeslán :count samostatný e-mail.|Odeslány :count samostatné e-maily.|Odesláno :count samostatných e-mailů.',
         ],
     ],
 

@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'इमेलहरू पठाइयो',
-            'individual_sent_body' => ':count वटा छुट्टाछुट्टै इमेल पठाइयो।',
+            'individual_sent_body' => ':count वटा छुट्टाछुट्टै इमेल पठाइयो।|:count वटा छुट्टाछुट्टै इमेल पठाइए।',
         ],
     ],
 

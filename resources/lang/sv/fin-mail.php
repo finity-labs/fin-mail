@@ -15,7 +15,7 @@ return [
         'templates' => 'Mallar',
         'themes' => 'Teman',
         'sent-emails' => 'Skickade e-postmeddelanden',
-        'settings' => 'Installningar',
+        'settings' => 'Inställningar',
     ],
 
     'models' => [
@@ -35,49 +35,49 @@ return [
 
     'template' => [
         'tabs' => [
-            'content' => 'Innehall',
-            'settings' => 'Installningar',
+            'content' => 'Innehåll',
+            'settings' => 'Inställningar',
             'tokens' => 'Variabler',
         ],
 
         'fields' => [
             'name' => 'Namn',
             'key' => 'Nyckel',
-            'key_helper' => 'Unik nyckel som anvands i koden, t.ex. "invoice-sent"',
+            'key_helper' => 'Unik nyckel som används i koden, t.ex. "invoice-sent"',
             'category' => 'Kategori',
-            'subject' => 'Amne',
-            'subject_helper' => 'Stoder variabler: {{ user.name }}, {{ config.app.name }}',
-            'preheader' => 'Forhandstext',
-            'preheader_helper' => 'Forhandsvisningstext som visas i e-postklienter',
-            'body' => 'Brodtext',
+            'subject' => 'Ämne',
+            'subject_helper' => 'Stöder variabler: {{ user.name }}, {{ config.app.name }}',
+            'preheader' => 'Förhandstext',
+            'preheader_helper' => 'Förhandsvisningstext som visas i e-postklienter',
+            'body' => 'Brödtext',
             'theme' => 'Tema',
             'theme_placeholder' => 'Standardtema',
             'is_active' => 'Aktiv',
-            'is_active_helper' => 'Inaktiva mallar kan inte anvandas for att skicka',
+            'is_active_helper' => 'Inaktiva mallar kan inte användas för att skicka',
             'tags' => 'Taggar',
-            'tags_placeholder' => 'Lagg till taggar for organisering',
-            'from_address' => 'Avsandarens e-post',
-            'from_name' => 'Avsandarens namn',
+            'tags_placeholder' => 'Lägg till taggar för organisering',
+            'from_address' => 'Avsändarens e-post',
+            'from_name' => 'Avsändarens namn',
             'reply_to_address' => 'Mottagar-e-post',
             'reply_to_name' => 'Mottagarnamn',
-            'locale' => 'Sprak',
+            'locale' => 'Språk',
         ],
 
         'sections' => [
-            'custom_sender' => 'Anpassad avsandare',
-            'custom_sender_description' => 'Overskrid standardavsandaradressen for denna mall',
+            'custom_sender' => 'Anpassad avsändare',
+            'custom_sender_description' => 'Överskrid standardavsändaradressen för denna mall',
             'custom_reply_to' => 'Anpassad svarsadress',
             'custom_reply_to_description' => 'Ange svarsadress för denna mall',
         ],
 
         'tokens' => [
-            'label' => 'Tillgangliga variabler',
-            'helper' => 'Dokumentera variablerna som ar tillgangliga for denna mall. Detta hjalper redaktorer att veta vilka variabler de kan anvanda.',
+            'label' => 'Tillgängliga variabler',
+            'helper' => 'Dokumentera variablerna som är tillgängliga för denna mall. Detta hjälper redaktörer att veta vilka variabler de kan använda.',
             'token' => 'Variabel',
             'description' => 'Beskrivning',
             'example' => 'Exempel',
             'token_placeholder' => 'user.name',
-            'description_placeholder' => 'Mottagarens fullstandiga namn',
+            'description_placeholder' => 'Mottagarens fullständiga namn',
             'example_placeholder' => 'John Doe',
             'new_item' => 'Ny variabel',
         ],
@@ -95,19 +95,19 @@ return [
         ],
 
         'columns' => [
-            'locales' => 'Sprak',
+            'locales' => 'Språk',
             'active' => 'Aktiv',
-            'locked' => 'Last',
+            'locked' => 'Låst',
             'sent' => 'Skickade',
             'updated_at' => 'Uppdaterad',
         ],
 
         'actions' => [
-            'preview' => 'Forhandsgranska',
-            'preview_heading' => 'Forhandsgranska: :record',
+            'preview' => 'Förhandsgranska',
+            'preview_heading' => 'Förhandsgranska: :record',
             'send_test' => 'Skicka test',
             'send_test_field' => 'Skicka till',
-            'send_test_locale' => 'Sprak',
+            'send_test_locale' => 'Språk',
             'compose' => 'Skriv e-post',
             'version_history' => 'Versionshistorik',
             'back_to_templates' => 'Tillbaka till mallar',
@@ -119,12 +119,12 @@ return [
             'test_failed' => 'Kunde inte skicka test-e-post',
             'saved' => 'Mallen sparad',
             'saved_body' => 'En version sparades automatiskt.',
-            'locked_skipped' => 'Lasta mallar hoppades over',
-            'locked_skipped_body' => ':count last(a) mall(ar) hoppades over och raderades inte.',
+            'locked_skipped' => 'Låsta mallar hoppades över',
+            'locked_skipped_body' => ':count låst(a) mall(ar) hoppades över och raderades inte.',
         ],
 
         'tooltips' => [
-            'locked' => 'Denna mall ar last -- nyckel och kategori ar skrivskyddade, och radering ar forhindrad.',
+            'locked' => 'Denna mall är låst — nyckel och kategori är skrivskyddade, och radering är förhindrad.',
         ],
 
         'versioning' => [
@@ -138,10 +138,10 @@ return [
         ],
 
         'notices' => [
-            'locked' => 'Denna mall ar last. Nyckel- och kategorifalten kan inte andras.',
+            'locked' => 'Denna mall är låst. Nyckel- och kategorifälten kan inte ändras.',
         ],
 
-        'language_label' => 'Sprak: :locale',
+        'language_label' => 'Språk: :locale',
 
         'replicate_suffix' => '(Kopia)',
     ],
@@ -158,36 +158,36 @@ return [
 
         'sections' => [
             'recipients' => 'Mottagare',
-            'content' => 'E-postinnehall',
+            'content' => 'E-postinnehåll',
             'attachments' => 'Bilagor',
-            'tokens' => 'Tillgangliga variabler',
+            'tokens' => 'Tillgängliga variabler',
         ],
 
         'fields' => [
-            'from' => 'Fran',
+            'from' => 'Från',
             'to' => 'Till',
             'cc' => 'CC',
             'bcc' => 'BCC',
             'to_placeholder' => 'Ange e-postadresser',
             'cc_placeholder' => 'CC-adresser',
             'bcc_placeholder' => 'BCC-adresser',
-            'locale' => 'Sprak',
-            'subject' => 'Amne',
-            'preheader' => 'Forhandstext',
-            'body' => 'Brodtext',
+            'locale' => 'Språk',
+            'subject' => 'Ämne',
+            'preheader' => 'Förhandstext',
+            'body' => 'Brödtext',
             'attach_files' => 'Bifoga filer',
-            'preheader_helper' => 'Forhandsvisningstext som visas i e-postklienter innan oppning',
-            'no_tokens' => 'Inga variabler dokumenterade for denna mall. Variabler som {{ user.name }} ersatts nar de skickas via API/kod.',
+            'preheader_helper' => 'Förhandsvisningstext som visas i e-postklienter innan öppning',
+            'no_tokens' => 'Inga variabler dokumenterade för denna mall. Variabler som {{ user.name }} ersätts när de skickas via API/kod.',
         ],
 
         'actions' => [
             'send' => 'Skicka e-post',
-            'preview' => 'Forhandsgranska',
+            'preview' => 'Förhandsgranska',
         ],
 
         'confirm' => [
-            'heading' => 'Bekrafta utskick',
-            'description' => 'Ar du saker pa att du vill skicka detta e-postmeddelande?',
+            'heading' => 'Bekräfta utskick',
+            'description' => 'Är du säker på att du vill skicka detta e-postmeddelande?',
             'description_multiple' => 'Du har flera mottagare. Välj hur du vill skicka detta e-postmeddelande.',
             'send_mode_label' => 'Hur ska det skickas?',
             'send_mode_individual' => 'Skicka varje e-postmeddelande separat',
@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'E-postmeddelanden skickade',
-            'individual_sent_body' => ':count separata e-postmeddelanden har skickats.',
+            'individual_sent_body' => ':count separat e-postmeddelande har skickats.|:count separata e-postmeddelanden har skickats.',
         ],
     ],
 
@@ -211,17 +211,17 @@ return [
     'compose_form' => [
         'sections' => [
             'recipients' => 'Mottagare',
-            'content' => 'Innehall',
+            'content' => 'Innehåll',
             'attachments' => 'Bilagor',
         ],
 
         'fields' => [
-            'from' => 'Fran',
+            'from' => 'Från',
             'to' => 'Till',
             'cc' => 'CC',
             'bcc' => 'BCC',
             'template' => 'Mall',
-            'subject' => 'Amne',
+            'subject' => 'Ämne',
             'to_placeholder' => 'Ange e-postadresser',
             'cc_placeholder' => 'Ange CC-adresser',
             'bcc_placeholder' => 'Ange BCC-adresser',
@@ -259,36 +259,36 @@ return [
         'sections' => [
             'details' => 'Temadetaljer',
             'background' => 'Bakgrund och layout',
-            'background_description' => 'Huvudsakliga strukturfarger for e-postlayouten.',
+            'background_description' => 'Huvudsakliga strukturfärger för e-postlayouten.',
             'typography' => 'Typografi',
-            'typography_description' => 'Farger for text och rubriker.',
+            'typography_description' => 'Färger för text och rubriker.',
             'buttons' => 'Knappar',
             'buttons_description' => 'Utformning av handlingsuppmaningsknappar.',
             'footer' => 'Sidfot',
             'footer_description' => 'Utformning av sidfotssektionen.',
-            'preview' => 'Forhandsgranska',
+            'preview' => 'Förhandsgranska',
         ],
 
         'fields' => [
             'name' => 'Namn',
             'is_default' => 'Standardtema',
-            'is_default_helper' => 'Standardtemat tillampas pa mallar som inte anger ett.',
+            'is_default_helper' => 'Standardtemat tillämpas på mallar som inte anger ett.',
             'page_background' => 'Sidbakgrund',
-            'content_background' => 'Innehallsbakgrund',
+            'content_background' => 'Innehållsbakgrund',
             'border' => 'Ram',
             'headings' => 'Rubriker',
-            'body_text' => 'Brodtext',
-            'secondary_text' => 'Sekundar text',
-            'links' => 'Lankar',
+            'body_text' => 'Brödtext',
+            'secondary_text' => 'Sekundär text',
+            'links' => 'Länkar',
             'button_background' => 'Knappbakgrund',
             'button_text' => 'Knapptext',
-            'primary_accent' => 'Primar/Accent',
+            'primary_accent' => 'Primär/Accent',
             'footer_background' => 'Sidfotsbakgrund',
             'footer_text' => 'Sidfotstext',
         ],
 
         'columns' => [
-            'primary' => 'Primar',
+            'primary' => 'Primär',
             'background' => 'Bakgrund',
             'text' => 'Text',
             'button' => 'Knapp',
@@ -312,7 +312,7 @@ return [
             'template' => 'Mall',
             'template_placeholder' => 'Anpassad',
             'sent_by' => 'Skickad av',
-            'subject' => 'Amne',
+            'subject' => 'Ämne',
             'status' => 'Status',
             'sent_by_placeholder' => 'System',
             'related_to' => 'Relaterad till',
@@ -320,7 +320,7 @@ return [
         ],
 
         'filters' => [
-            'from' => 'Fran',
+            'from' => 'Från',
             'until' => 'Till',
         ],
 
@@ -347,8 +347,8 @@ return [
         ],
 
         'errors' => [
-            'no_rendered_body' => 'Kan inte skicka igen: ingen renderad text sparad. Aktivera logging.store_rendered_body i installningarna.',
-            'no_template' => 'Originalmallen finns inte langre.',
+            'no_rendered_body' => 'Kan inte skicka igen: ingen renderad text sparad. Aktivera logging.store_rendered_body i inställningarna.',
+            'no_template' => 'Originalmallen finns inte längre.',
         ],
     ],
 
@@ -364,7 +364,7 @@ return [
         'columns' => [
             'to' => 'Till',
             'template' => 'Mall',
-            'subject' => 'Amne',
+            'subject' => 'Ämne',
             'status' => 'Status',
             'sent_by' => 'Skickad av',
             'sent_by_placeholder' => 'System',
@@ -374,7 +374,7 @@ return [
         'actions' => [
             'view' => 'Visa',
             'resend' => 'Skicka igen',
-            'resend_confirm' => 'Ar du saker pa att du vill skicka detta e-postmeddelande igen?',
+            'resend_confirm' => 'Är du säker på att du vill skicka detta e-postmeddelande igen?',
         ],
 
         'notifications' => [
@@ -384,12 +384,12 @@ return [
 
         'empty' => [
             'heading' => 'Inga e-postmeddelanden skickade',
-            'description' => 'E-postmeddelanden som skickats for denna post visas har.',
+            'description' => 'E-postmeddelanden som skickats för denna post visas här.',
         ],
 
         'errors' => [
             'no_body' => 'Kan inte skicka igen: ingen renderad text eller mall sparad.',
-            'no_template' => 'Originalmallen finns inte langre.',
+            'no_template' => 'Originalmallen finns inte längre.',
         ],
     ],
 
@@ -400,94 +400,94 @@ return [
     */
 
     'settings' => [
-        'title' => 'E-postinstallningar',
+        'title' => 'E-postinställningar',
 
         'tabs' => [
-            'general' => 'Allmant',
-            'branding' => 'Varumarke',
+            'general' => 'Allmänt',
+            'branding' => 'Varumärke',
             'logging' => 'Loggning',
             'attachments' => 'Bilagor',
             'auth_emails' => 'Autentiserings-e-post',
         ],
 
         'titles' => [
-            'general' => 'E-postmallinstallningar - Allmant',
-            'branding' => 'E-postmallinstallningar - Varumarke',
-            'logging' => 'E-postmallinstallningar - Loggning',
-            'attachments' => 'E-postmallinstallningar - Bilagor',
-            'auth_emails' => 'E-postmallinstallningar - Autentiserings-e-post',
+            'general' => 'E-postmallinställningar - Allmänt',
+            'branding' => 'E-postmallinställningar - Varumärke',
+            'logging' => 'E-postmallinställningar - Loggning',
+            'attachments' => 'E-postmallinställningar - Bilagor',
+            'auth_emails' => 'E-postmallinställningar - Autentiserings-e-post',
         ],
 
         'sections' => [
-            'default_sender' => 'Standardavsandare',
-            'default_sender_description' => 'Standard "Fran"-adressen for alla e-postmeddelanden som skickas av tillaget.',
-            'additional_senders' => 'Ytterligare avsandare',
+            'default_sender' => 'Standardavsändare',
+            'default_sender_description' => 'Standard "Från"-adressen för alla e-postmeddelanden som skickas av tillägget.',
+            'additional_senders' => 'Ytterligare avsändare',
             'add_additional_senders' => 'Lägg till ytterligare avsändare',
-            'additional_senders_description' => 'Extra "Fran"-adresser som anvandare kan valja nar de skriver e-post.',
-            'localization' => 'Sprakinstallningar',
+            'additional_senders_description' => 'Extra "Från"-adresser som användare kan välja när de skriver e-post.',
+            'localization' => 'Språkinställningar',
             'categories' => 'Mallkategorier',
             'logo' => 'Logotyp',
-            'colors' => 'Farger',
-            'footer_links' => 'Sidfotlankar',
+            'colors' => 'Färger',
+            'footer_links' => 'Sidfotlänkar',
             'add_footer_links' => 'Lägg till sidfotslänkar',
-            'customer_service' => 'Kundtjanst',
+            'customer_service' => 'Kundtjänst',
             'logging' => 'E-postloggning',
             'logging_description' => 'Styr hur skickade e-postmeddelanden registreras i databasen.',
             'cleanup' => 'Schemalagd rensning',
             'cleanup_description' => 'Radera automatiskt gamla skickade e-postposter enligt ett schema.',
             'attachment_rules' => 'Bilageregler',
-            'attachment_rules_description' => 'Konfigurera granser for filbilagor i komponerade e-postmeddelanden.',
-            'auth_emails' => 'Overskridning av autentiserings-e-post',
-            'auth_emails_description' => 'Overskrid applikationens standardautentiserings-e-postmeddelanden med dina anpassade mallar.',
+            'attachment_rules_description' => 'Konfigurera gränser för filbilagor i komponerade e-postmeddelanden.',
+            'auth_emails' => 'Överskridning av autentiserings-e-post',
+            'auth_emails_description' => 'Överskrid applikationens standardautentiserings-e-postmeddelanden med dina anpassade mallar.',
         ],
 
         'fields' => [
-            'from_email' => 'Avsandarens e-post',
-            'from_name' => 'Avsandarens namn',
+            'from_email' => 'Avsändarens e-post',
+            'from_name' => 'Avsändarens namn',
             'sender_email' => 'E-post',
             'sender_name' => 'Visningsnamn',
-            'sender_new' => 'Ny avsandare',
-            'default_locale' => 'Standardsprak',
-            'default_locale_helper' => 'Standardspraket for nya mallar (t.ex. en, hu, de).',
-            'languages' => 'Tillgangliga sprak',
+            'sender_new' => 'Ny avsändare',
+            'default_locale' => 'Standardspråk',
+            'default_locale_helper' => 'Standardspråket för nya mallar (t.ex. en, hu, de).',
+            'languages' => 'Tillgängliga språk',
             'language_code' => 'Kod',
             'language_display' => 'Visningsnamn',
             'language_flag' => 'Flaggikon',
-            'language_new' => 'Nytt sprak',
+            'language_new' => 'Nytt språk',
             'category_key' => 'Nyckel',
             'category_label' => 'Etikett',
             'category_new' => 'Ny kategori',
-            'logo_url' => 'Logotyp-URL eller sokvaag',
+            'logo_url' => 'Logotyp-URL eller sökväg',
             'logo_url_placeholder' => 'https://example.com/logo.png',
-            'logo_url_helper' => 'Absolut URL eller sokvaag till din e-postlogotyp.',
+            'logo_url_helper' => 'Absolut URL eller sökväg till din e-postlogotyp.',
             'logo_width' => 'Bredd (px)',
-            'logo_height' => 'Hojd (px)',
-            'content_width' => 'Innehallsbredd (px)',
-            'primary_color' => 'Primarfarg',
+            'logo_height' => 'Höjd (px)',
+            'content_width' => 'Innehållsbredd (px)',
+            'primary_color' => 'Primärfärg',
             'footer_link_label' => 'Etikett',
             'footer_link_url' => 'URL',
-            'footer_link_new' => 'Ny lank',
+            'footer_link_new' => 'Ny länk',
             'support_email' => 'Support-e-post',
             'support_phone' => 'Supporttelefon',
             'enable_logging' => 'Aktivera loggning',
-            'enable_logging_helper' => 'Nar det ar inaktiverat skapas inga poster for skickade e-postmeddelanden.',
+            'enable_logging_helper' => 'När det är inaktiverat skapas inga poster för skickade e-postmeddelanden.',
             'store_rendered_body' => 'Spara renderad text',
-            'store_rendered_body_helper' => 'Spara den slutgiltiga HTML-koden for varje skickat e-postmeddelande. Kravs for funktionerna "skicka igen" och "forhandsgranska".',
+            'store_rendered_body_helper' => 'Spara den slutgiltiga HTML-koden för varje skickat e-postmeddelande. Krävs för funktionerna "skicka igen" och "förhandsgranska".',
             'retention_days' => 'Bevaringstid (dagar)',
-            'retention_days_helper' => 'Radera automatiskt poster for skickade e-postmeddelanden efter detta antal dagar. Lamna tomt for att behalla for alltid.',
+            'retention_days_helper' => 'Radera automatiskt poster för skickade e-postmeddelanden efter detta antal dagar. Lämna tomt för att behålla för alltid.',
             'cleanup_enabled' => 'Aktivera schemalagd rensning',
-            'cleanup_enabled_helper' => 'Kor automatiskt rensningskommandot enligt ett schema.',
+            'cleanup_enabled_helper' => 'Kör automatiskt rensningskommandot enligt ett schema.',
             'cleanup_frequency' => 'Rensningsfrekvens',
             'max_file_size' => 'Max filstorlek (MB)',
-            'allowed_extensions' => 'Tillatna filtillagg',
-            'allowed_extensions_placeholder' => 'Lagg till tillagg (t.ex. pdf)',
-            'allowed_extensions_helper' => 'Filtillagg som ar tillatna for uppladdning.',
-            'override_verification' => 'Overskrid e-postverifiering',
-            'override_verification_helper' => 'Anvand mallen "user-verify-email" istallet for applikationens standardverifieringsmeddelande.',
-            'override_password_reset' => 'Overskrid losenordsaterstaallning',
-            'override_password_reset_helper' => 'Anvand mallen "user-password-reset" istallet for applikationens standardmeddelande for losenordsaterstaallning.',
-            'override_welcome' => 'Overskrid valkomstmeddelande',
-            'override_welcome_helper' => 'Skicka ett valkomstmeddelande med mallen "user-welcome" nar en ny anvandare registrerar sig.',
+            'allowed_extensions' => 'Tillåtna filtillägg',
+            'allowed_extensions_placeholder' => 'Lägg till tillägg (t.ex. pdf)',
+            'allowed_extensions_helper' => 'Filtillägg som är tillåtna för uppladdning.',
+            'override_verification' => 'Överskrid e-postverifiering',
+            'override_verification_helper' => 'Använd mallen "user-verify-email" istället för applikationens standardverifieringsmeddelande.',
+            'override_password_reset' => 'Överskrid lösenordsåterställning',
+            'override_password_reset_helper' => 'Använd mallen "user-password-reset" istället för applikationens standardmeddelande för lösenordsåterställning.',
+            'override_welcome' => 'Överskrid välkomstmeddelande',
+            'override_welcome_helper' => 'Skicka ett välkomstmeddelande med mallen "user-welcome" när en ny användare registrerar sig.',
         ],
     ],
 
@@ -498,7 +498,7 @@ return [
     */
 
     'email' => [
-        'copyright' => '&copy; :year :app. Alla rattigheter forbehallna.',
+        'copyright' => '&copy; :year :app. Alla rättigheter förbehållna.',
     ],
 
     /*
@@ -510,7 +510,7 @@ return [
     'enums' => [
         'email_status' => [
             1 => 'Utkast',
-            2 => 'I ko',
+            2 => 'I kö',
             3 => 'Skickat',
             4 => 'Misslyckat',
         ],
@@ -518,7 +518,7 @@ return [
         'cleanup_frequency' => [
             1 => 'Dagligen',
             2 => 'Veckovis',
-            3 => 'Manadsvis',
+            3 => 'Månadsvis',
         ],
     ],
 

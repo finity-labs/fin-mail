@@ -198,7 +198,7 @@ return [
 
         'notifications' => [
             'individual_sent' => 'Sähköpostit lähetetty',
-            'individual_sent_body' => 'Lähetettiin :count erillistä sähköpostia.',
+            'individual_sent_body' => 'Lähetettiin :count erillinen sähköposti.|Lähetettiin :count erillistä sähköpostia.',
         ],
     ],
 
