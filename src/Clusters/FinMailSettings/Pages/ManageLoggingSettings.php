@@ -62,10 +62,9 @@ class ManageLoggingSettings extends SettingsPage
      */
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        if (isset($data['cleanup_frequency'])) {
+        if (isset($data['cleanup_frequency']) && ! $data['cleanup_frequency'] instanceof CleanupFrequency) {
             $data['cleanup_frequency'] = CleanupFrequency::from((int) $data['cleanup_frequency']);
         }
-
         return $data;
     }
 
