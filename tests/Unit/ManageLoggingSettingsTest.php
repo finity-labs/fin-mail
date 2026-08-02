@@ -42,3 +42,15 @@ it('does not error when cleanup_frequency is absent (scheduled cleanup disabled)
     expect($data)->not->toHaveKey('cleanup_frequency')
         ->and($data['cleanup_enabled'])->toBeFalse();
 });
+
+it('leaves cleanup_frequency untouched when it is already an enum instance', function () {
+    // Filament's enum-aware Select can hand the state back as the enum itself;
+    // casting that to int crashes — or, where warnings are silenced, resolves
+    // to 1 and silently resets the schedule to Daily. (#24)
+    $data = mutateLoggingSaveData([
+        'cleanup_enabled' => true,
+        'cleanup_frequency' => CleanupFrequency::Monthly,
+    ]);
+
+    expect($data['cleanup_frequency'])->toBe(CleanupFrequency::Monthly);
+});
