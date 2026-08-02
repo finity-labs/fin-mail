@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.2] - 2026-08-02
+
+### Fixed
+
+- Saving the logging settings no longer throws (or, where warnings are silenced, silently resets the cleanup schedule to Daily) when Filament hands the cleanup frequency back as an enum instance instead of a scalar (#24, thanks @agencetwogether)
+
 ## [1.11.1] - 2026-07-31
 
 ### Fixed
