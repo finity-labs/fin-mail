@@ -124,7 +124,11 @@ class FinMailServiceProvider extends PackageServiceProvider
 
     protected function registerScheduledCommands(): void
     {
-        $this->app->afterResolving(
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
+        $this->callAfterResolving(
             Schedule::class,
             function (Schedule $schedule): void {
                 try {
@@ -138,7 +142,9 @@ class FinMailServiceProvider extends PackageServiceProvider
                         ->description('Clean up old sent email records')
                         ->{$logging->cleanup_frequency->cronMethod()}();
                 } catch (\Throwable) {
-                    // Settings table or rows may not exist yet (pre-migration).
+                    // Deliberately swallowed: the settings table or rows may not
+                    // exist yet (pre-migration), and reporting here would spam
+                    // the log on every boot of a fresh install.
                 }
             }
         );
