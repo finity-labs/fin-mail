@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.3] - 2026-08-05
+
+### Fixed
+
+- The scheduled `fin-mail:cleanup` command now registers reliably: registration uses `callAfterResolving()`, so it also works when the schedule was already resolved before the package booted — previously the command could silently never appear in `schedule:list` (#26, thanks @agencetwogether)
+- Resending an email from the Sent Emails log now sends the stored HTML verbatim through a new raw passthrough mode on `TemplateMail`, instead of re-wrapping the full stored document in the email layout — which produced a nested document with two doctypes and broken logo/footer sections (#25, thanks @agencetwogether)
+- Resent emails re-attach the original files when they still exist on disk; previously the new log entry listed the attachments but the resent email carried none
+
 ## [1.11.2] - 2026-08-02
 
 ### Fixed

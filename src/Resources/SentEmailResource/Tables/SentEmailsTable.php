@@ -19,6 +19,7 @@ use FinityLabs\FinMail\Mail\TemplateMail;
 use FinityLabs\FinMail\Models\SentEmail;
 use FinityLabs\FinMail\Resources\SentEmailResource\Schemas\SentEmailInfolist;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class SentEmailsTable
 {
@@ -110,7 +111,15 @@ class SentEmailsTable
 
                             $mail = TemplateMail::make($template->key)
                                 ->overrideSubject($record->subject)
-                                ->overrideBody($record->rendered_body);
+                                ->rawBody($record->rendered_body);
+
+                            foreach ($record->attachments ?? [] as $attachment) {
+                                $path = self::resolveAttachmentPath($attachment['path'] ?? null);
+
+                                if ($path) {
+                                    $mail->attachFile($path, $attachment['name'] ?? null);
+                                }
+                            }
 
                             $newLog = SentEmail::create([
                                 'email_template_id' => $record->email_template_id,
@@ -164,5 +173,25 @@ class SentEmailsTable
                     }),
             ])
             ->poll('30s');
+    }
+
+    /**
+     * Resolve a logged attachment path back to a readable file, or null if
+     * the file no longer exists. Preset attachments are logged with absolute
+     * paths; uploaded ones with paths relative to the attachments disk.
+     */
+    protected static function resolveAttachmentPath(?string $path): ?string
+    {
+        if (! $path) {
+            return null;
+        }
+
+        if (is_file($path)) {
+            return $path;
+        }
+
+        $diskPath = Storage::disk(config('fin-mail.attachments_disk', 'local'))->path($path);
+
+        return is_file($diskPath) ? $diskPath : null;
     }
 }

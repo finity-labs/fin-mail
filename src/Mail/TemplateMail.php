@@ -70,6 +70,8 @@ class TemplateMail extends Mailable implements ShouldQueue
 
     protected ?string $overrideBody = null;
 
+    protected ?string $rawBody = null;
+
     protected ?string $overrideView = null;
 
     /** @var array{address: string, name: ?string}|null */
@@ -145,6 +147,18 @@ class TemplateMail extends Mailable implements ShouldQueue
     public function overrideBody(string $body): static
     {
         $this->overrideBody = $body;
+
+        return $this;
+    }
+
+    /**
+     * Send a pre-rendered HTML document verbatim, bypassing the template
+     * layout, token replacement, and custom-block rendering. Used to resend
+     * stored emails exactly as they originally went out.
+     */
+    public function rawBody(string $html): static
+    {
+        $this->rawBody = $html;
 
         return $this;
     }
@@ -238,6 +252,13 @@ class TemplateMail extends Mailable implements ShouldQueue
 
     public function content(): Content
     {
+        if ($this->rawBody !== null) {
+            return new Content(
+                view: 'fin-mail::email.raw',
+                with: array_merge(['body' => $this->rawBody], $this->viewData),
+            );
+        }
+
         $rendered = $this->getRendered();
         $themeColors = $this->emailTemplate->resolvedThemeColors();
 
