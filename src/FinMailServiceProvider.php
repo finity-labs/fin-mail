@@ -124,23 +124,30 @@ class FinMailServiceProvider extends PackageServiceProvider
 
     protected function registerScheduledCommands(): void
     {
-        $this->app->booted(function (): void {
-            $schedule = $this->app->make(Schedule::class);
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
 
-            try {
-                $logging = app(Settings\LoggingSettings::class);
+        $this->callAfterResolving(
+            Schedule::class,
+            function (Schedule $schedule): void {
+                try {
+                    $logging = app(Settings\LoggingSettings::class);
 
-                if (! $logging->cleanup_enabled) {
-                    return;
+                    if (! $logging->cleanup_enabled) {
+                        return;
+                    }
+
+                    $schedule->command('fin-mail:cleanup')
+                        ->description('Clean up old sent email records')
+                        ->{$logging->cleanup_frequency->cronMethod()}();
+                } catch (\Throwable) {
+                    // Deliberately swallowed: the settings table or rows may not
+                    // exist yet (pre-migration), and reporting here would spam
+                    // the log on every boot of a fresh install.
                 }
-
-                $schedule->command('fin-mail:cleanup')
-                    ->description('Clean up old sent email records')
-                    ->{$logging->cleanup_frequency->cronMethod()}();
-            } catch (\Throwable $e) {
-                report($e);
             }
-        });
+        );
     }
 
     protected function registerVerificationOverride(): void
