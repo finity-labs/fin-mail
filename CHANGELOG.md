@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.4] - 2026-08-13
+
+### Fixed
+
+- The language switcher dropdown on the email template view page now highlights the newly selected language immediately. The active-state color was evaluated while the header actions were being cached — before the locale switch ran — so the highlight lagged one click behind the button label and the page content (#27, thanks @Brett-Mulder)
+
 ## [1.11.3] - 2026-08-05
 
 ### Fixed

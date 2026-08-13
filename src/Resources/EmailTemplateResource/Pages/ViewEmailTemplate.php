@@ -71,7 +71,7 @@ class ViewEmailTemplate extends ViewRecord
                     ->map(
                         fn (array $lang) => Action::make("locale_{$lang['code']}")
                             ->label($lang['display'])
-                            ->color($this->activeLocale === $lang['code'] ? 'primary' : 'gray')
+                            ->color(fn (): string => $this->activeLocale === $lang['code'] ? 'primary' : 'gray')
                             ->action(fn () => $this->switchLocale($lang['code']))
                     )->values()->all()
             )
