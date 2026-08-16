@@ -13,13 +13,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use FinityLabs\FinMail\Actions\SentEmailResender;
 use FinityLabs\FinMail\Enums\EmailStatus;
 use FinityLabs\FinMail\FinMailPlugin;
-use FinityLabs\FinMail\Mail\TemplateMail;
-use FinityLabs\FinMail\Models\SentEmail;
 use FinityLabs\FinMail\Resources\SentEmailResource\Schemas\SentEmailInfolist;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 
 class SentEmailsTable
 {
@@ -99,55 +96,7 @@ class SentEmailsTable
                     ->modalDescription(__('fin-mail::fin-mail.sent.actions.resend_description'))
                     ->action(function ($record): void {
                         try {
-                            if (! $record->rendered_body || ! $record->email_template_id) {
-                                throw new \RuntimeException(__('fin-mail::fin-mail.sent.errors.no_rendered_body'));
-                            }
-
-                            $template = $record->template;
-
-                            if (! $template) {
-                                throw new \RuntimeException(__('fin-mail::fin-mail.sent.errors.no_template'));
-                            }
-
-                            $mail = TemplateMail::make($template->key)
-                                ->overrideSubject($record->subject)
-                                ->rawBody($record->rendered_body);
-
-                            foreach ($record->attachments ?? [] as $attachment) {
-                                $path = self::resolveAttachmentPath($attachment['path'] ?? null);
-
-                                if ($path) {
-                                    $mail->attachFile($path, $attachment['name'] ?? null);
-                                }
-                            }
-
-                            $newLog = SentEmail::create([
-                                'email_template_id' => $record->email_template_id,
-                                'sender' => $record->sender,
-                                'to' => $record->to,
-                                'cc' => $record->cc,
-                                'bcc' => $record->bcc,
-                                'subject' => $record->subject,
-                                'rendered_body' => $record->rendered_body,
-                                'attachments' => $record->attachments,
-                                'status' => EmailStatus::Queued,
-                                'sent_by' => auth()->id(),
-                                'sendable_type' => $record->sendable_type,
-                                'sendable_id' => $record->sendable_id,
-                                'metadata' => ['resent_from' => $record->id],
-                            ]);
-
-                            $mail->withLogging($newLog);
-
-                            $message = Mail::to($record->to);
-                            if (! empty($record->cc)) {
-                                $message->cc($record->cc);
-                            }
-                            if (! empty($record->bcc)) {
-                                $message->bcc($record->bcc);
-                            }
-
-                            $message->send($mail);
+                            app(SentEmailResender::class)->resend($record);
 
                             Notification::make()
                                 ->title(__('fin-mail::fin-mail.sent.notifications.resent'))
@@ -173,25 +122,5 @@ class SentEmailsTable
                     }),
             ])
             ->poll('30s');
-    }
-
-    /**
-     * Resolve a logged attachment path back to a readable file, or null if
-     * the file no longer exists. Preset attachments are logged with absolute
-     * paths; uploaded ones with paths relative to the attachments disk.
-     */
-    protected static function resolveAttachmentPath(?string $path): ?string
-    {
-        if (! $path) {
-            return null;
-        }
-
-        if (is_file($path)) {
-            return $path;
-        }
-
-        $diskPath = Storage::disk(config('fin-mail.attachments_disk', 'local'))->path($path);
-
-        return is_file($diskPath) ? $diskPath : null;
     }
 }

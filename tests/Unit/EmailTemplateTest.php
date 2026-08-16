@@ -360,3 +360,27 @@ it('renders custom blocks in the body using the default theme when no theme is a
     expect($rendered['body'])->toContain('#FF0000')
         ->and($rendered['body'])->not->toContain('#4F46E5');
 });
+
+it('generates collision-free copy keys for replication', function () {
+    $original = EmailTemplate::create([
+        'key' => 'copy-key-test',
+        'name' => ['en' => 'Copy Key Test'],
+        'category' => 'transactional',
+        'subject' => ['en' => 'Hello'],
+        'body' => ['en' => '<p>Body</p>'],
+        'is_active' => true,
+    ]);
+
+    expect($original->nextCopyKey())->toBe('copy-key-test-copy');
+
+    EmailTemplate::create([
+        'key' => 'copy-key-test-copy',
+        'name' => ['en' => 'First Copy'],
+        'category' => 'transactional',
+        'subject' => ['en' => 'Hello'],
+        'body' => ['en' => '<p>Body</p>'],
+        'is_active' => false,
+    ]);
+
+    expect($original->nextCopyKey())->toBe('copy-key-test-copy-2');
+});

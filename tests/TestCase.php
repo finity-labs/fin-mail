@@ -6,6 +6,7 @@ namespace FinityLabs\FinMail\Tests;
 
 use FinityLabs\FinMail\FinMailServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\LaravelSettings\LaravelSettingsServiceProvider;
 
@@ -14,6 +15,12 @@ class TestCase extends Orchestra
     protected function setUp(): void
     {
         parent::setUp();
+
+        // The migrations in getEnvironmentSetUp() boot package models (via
+        // foreignIdFor()) before the event dispatcher is set, which silently
+        // drops listeners registered in the models' booted() hooks. Re-boot
+        // them now that the dispatcher exists.
+        Model::clearBootedModels();
 
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'FinityLabs\\FinMail\\Database\\Factories\\'.class_basename($modelName).'Factory'

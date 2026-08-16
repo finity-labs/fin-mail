@@ -7,6 +7,12 @@ namespace FinityLabs\FinMail\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property array<string, string|null> $colors
+ * @property bool $is_default
+ */
 class EmailTheme extends Model
 {
     protected $fillable = [
@@ -30,6 +36,26 @@ class EmailTheme extends Model
             'colors' => 'array',
             'is_default' => 'boolean',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        // Only one default theme may exist. Enforced on the model so every
+        // write path (create, edit, bulk, programmatic) keeps the invariant.
+        static::saved(function (self $theme): void {
+            if ($theme->is_default) {
+                static::whereKeyNot($theme->getKey())
+                    ->where('is_default', true)
+                    ->update(['is_default' => false]);
+            }
+        });
+
+        // Detach templates on every delete path (single, bulk, programmatic).
+        // The email_theme_id FK is nullOnDelete, but not every database
+        // enforces foreign keys (e.g. SQLite without the pragma).
+        static::deleting(function (self $theme): void {
+            $theme->templates()->update(['email_theme_id' => null]);
+        });
     }
 
     /*

@@ -173,8 +173,8 @@ TemplateMail::make('internal-report')->withoutLogging();
 TemplateMail::make('invoice-sent')->withLogging();
 
 // Log the email but keep the rendered body out of the database —
-// the built-in password reset and verification emails do this,
-// since their bodies contain signed URLs
+// the built-in password reset and verification emails do this by
+// default, since their bodies contain signed URLs
 TemplateMail::make('user-password-reset')->withoutStoringRenderedBody();
 ```
 
@@ -420,6 +420,21 @@ Create templates with these keys (the seeder includes them by default):
 ### Locale support
 
 Auth email overrides automatically use the active application locale (`app()->getLocale()`). If you use a language switcher plugin, the emails will be sent in the user's selected language — provided the template has a translation for that locale.
+
+### Logging auth email bodies
+
+Auth emails are logged like any other email, but their rendered body is kept out of the database by default because it contains signed URLs — anyone able to read the log could replay a still-valid reset link. If you need a full audit trail of exactly what was sent, opt in via the config:
+
+```php
+// config/fin-mail.php
+'auth_emails' => [
+    'store_rendered_body' => true,
+],
+```
+
+### Fallback behavior
+
+If a required template is missing or deactivated, the override falls back to Laravel's default notification email instead of failing — password reset and verification keep working no matter what happens to the templates.
 
 ## Configuration
 

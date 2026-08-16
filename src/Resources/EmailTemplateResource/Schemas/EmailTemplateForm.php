@@ -54,7 +54,7 @@ class EmailTemplateForm
                                     ->helperText(__('fin-mail::fin-mail.template.fields.key_helper'))
                                     ->maxLength(255)
                                     ->disabled(fn (?EmailTemplate $record): bool => (bool) $record?->is_locked)
-                                    ->dehydrated(true),
+                                    ->dehydrated(fn (?EmailTemplate $record): bool => ! $record?->is_locked),
 
                                 Select::make('category')
                                     ->label(__('fin-mail::fin-mail.template.fields.category'))
@@ -63,7 +63,7 @@ class EmailTemplateForm
                                     ->native(false)
                                     ->required()
                                     ->disabled(fn (?EmailTemplate $record): bool => (bool) $record?->is_locked)
-                                    ->dehydrated(true),
+                                    ->dehydrated(fn (?EmailTemplate $record): bool => ! $record?->is_locked),
                             ]),
 
                             Select::make('active_locale')

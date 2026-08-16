@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.12.0] - 2026-08-16
+
+### Added
+
+- New `auth_emails.store_rendered_body` config option (default `false`). When enabled, the password reset and verification overrides store their rendered body in the Sent Emails log like any other email, for teams that want a full audit trail of exactly what was sent. Left off, the signed reset/verification URLs stay out of the database
+
+### Fixed
+
+- Files uploaded in the Compose Email page's Attachments section are now actually attached to the sent email and recorded in the log. The upload field dehydrated under a key the sender never read, so uploads were silently discarded while the UI reported success
+- Editing the preheader on the Compose Email page now affects the delivered email. The form collected the value and the preview showed it, but the sender had no way to pass it through — `TemplateMail` gained `overridePreheader()` and the compose path uses it. Tokens in the overridden preheader are replaced like in the body
+- Sending from the composer no longer throws a `TypeError` when the configured editor stores the body as a TipTap document array (e.g. the Tiptap editor). The preview already converted the document to HTML; the send path now does the same, using the template's theme colors for custom blocks
+- The requested template locale now survives every queue path: log creation and stored-body rendering are wrapped in the mailable's locale, so a `TemplateMail` whose log entry is first created after queue serialization (e.g. dispatch-time log insert failed, or the mailable was re-dispatched from a stored job) no longer renders in the worker's app locale
+- Auth email overrides no longer break authentication when their template is unavailable: if `user-verify-email` or `user-password-reset` is missing, deactivated, or errors during lookup, the notification falls back to Laravel's default mail instead of throwing — deactivating a template can no longer take down password reset app-wide
+- Verification and password reset emails sent through the auth overrides no longer store their rendered body in the Sent Emails log. The bodies contain signed URLs; the log entry itself is still created, as the documentation always described
+- Locked templates now enforce their `key` and `category` protection server-side. The fields were only `disabled()` in the form but still dehydrated, so a crafted request could rewrite a locked system template's key — which the auth email overrides depend on
+- Switching languages while editing a template no longer discards unsaved work. The edit page now stashes in-progress translations per locale (like the create page always did), restores them when switching back, keeps unsaved non-translatable edits (theme, tags, sender) intact across the switch, and persists every stashed locale on save
+- Only one theme can be the default now, enforced on the model for every write path. Previously the uniqueness lived in a form callback that only ran when editing an existing theme — creating a new theme with "default" toggled on produced two defaults, and which one actually applied was undefined. The premature form callback (which rewrote other themes before the form was even saved) is gone
+- Deleting themes in bulk now detaches their templates like single deletes always did. The detach logic moved from two duplicated action callbacks into a model `deleting` hook, so every delete path behaves the same — including on SQLite databases without foreign key enforcement (enforcing databases were already covered by the FK's `nullOnDelete`)
+- The stored-email viewers now render the email HTML in a sandboxed iframe (`sandbox="allow-same-origin"`), matching the template preview. Stored bodies can contain recipient-influenced content, and the unsandboxed frames allowed scripts to run inside the admin panel
+- Replicating a template now suggests a readable, collision-free key (`invoice-copy`, `invoice-copy-2`, …) instead of a `-copy-<timestamp>` suffix that could collide when two replications happened in the same second
+- Resending from the Sent Emails relation manager now behaves exactly like resending from the Sent Emails page: stored HTML sent verbatim (no re-wrapping in the layout, no re-running token replacement) and original attachments re-attached when they still exist. The two actions had drifted apart — the relation manager was still re-wrapping the full stored document (the bug fixed for the resource in 1.11.3) and silently dropped attachments. Both now share one `SentEmailResender` service
+
 ## [1.11.4] - 2026-08-13
 
 ### Fixed

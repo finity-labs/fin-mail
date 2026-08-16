@@ -13,11 +13,9 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use FinityLabs\FinMail\Actions\SentEmailResender;
 use FinityLabs\FinMail\Enums\EmailStatus;
-use FinityLabs\FinMail\Mail\TemplateMail;
-use FinityLabs\FinMail\Models\SentEmail;
 use FinityLabs\FinMail\Resources\SentEmailResource\Schemas\SentEmailInfolist;
-use Illuminate\Support\Facades\Mail;
 
 /**
  * Drop this into any Filament resource to show emails sent for that record.
@@ -98,45 +96,7 @@ class SentEmailsRelationManager extends RelationManager
                     ->modalDescription(__('fin-mail::fin-mail.relation.actions.resend_confirm'))
                     ->action(function ($record): void {
                         try {
-                            if (! $record->rendered_body || ! $record->email_template_id) {
-                                throw new \RuntimeException(__('fin-mail::fin-mail.relation.errors.no_body'));
-                            }
-
-                            $template = $record->template;
-                            if (! $template) {
-                                throw new \RuntimeException(__('fin-mail::fin-mail.relation.errors.no_template'));
-                            }
-
-                            $mail = TemplateMail::make($template->key)
-                                ->overrideSubject($record->subject)
-                                ->overrideBody($record->rendered_body);
-
-                            $newLog = SentEmail::create([
-                                'email_template_id' => $record->email_template_id,
-                                'sender' => $record->sender,
-                                'to' => $record->to,
-                                'cc' => $record->cc,
-                                'bcc' => $record->bcc,
-                                'subject' => $record->subject,
-                                'rendered_body' => $record->rendered_body,
-                                'attachments' => $record->attachments,
-                                'status' => EmailStatus::Queued,
-                                'sent_by' => auth()->id(),
-                                'sendable_type' => $record->sendable_type,
-                                'sendable_id' => $record->sendable_id,
-                                'metadata' => ['resent_from' => $record->id],
-                            ]);
-
-                            $mail->withLogging($newLog);
-
-                            $message = Mail::to($record->to);
-                            if (! empty($record->cc)) {
-                                $message->cc($record->cc);
-                            }
-                            if (! empty($record->bcc)) {
-                                $message->bcc($record->bcc);
-                            }
-                            $message->send($mail);
+                            app(SentEmailResender::class)->resend($record);
 
                             Notification::make()
                                 ->title(__('fin-mail::fin-mail.relation.notifications.resent'))

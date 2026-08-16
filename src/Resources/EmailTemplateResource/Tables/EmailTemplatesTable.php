@@ -108,7 +108,7 @@ class EmailTemplatesTable
                         $locale = app()->getLocale();
 
                         $data['name'] = $record->getTranslation('name', $locale).$suffix;
-                        $data['key'] = $record->key.'-copy-'.time();
+                        $data['key'] = $record->nextCopyKey();
 
                         return $data;
                     })

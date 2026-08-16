@@ -116,7 +116,7 @@ class ComposeEmailForm
                         Section::make(__('fin-mail::fin-mail.compose.sections.attachments'))
                             ->icon(Heroicon::OutlinedPaperClip)
                             ->schema([
-                                FileUpload::make('attachments')
+                                FileUpload::make('additional_attachments')
                                     ->label(__('fin-mail::fin-mail.compose.fields.attach_files'))
                                     ->multiple()
                                     ->disk(config('fin-mail.attachments_disk', 'local'))

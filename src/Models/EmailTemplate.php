@@ -183,6 +183,24 @@ class EmailTemplate extends Model
     }
 
     /**
+     * First available "-copy" key for replicating this template.
+     * Guarded against collisions by checking existing keys instead of
+     * relying on a timestamp suffix.
+     */
+    public function nextCopyKey(): string
+    {
+        $base = "{$this->key}-copy";
+        $key = $base;
+        $counter = 2;
+
+        while (static::query()->where('key', $key)->exists()) {
+            $key = $base.'-'.$counter++;
+        }
+
+        return $key;
+    }
+
+    /**
      * Render the template body with token replacement.
      *
      * @param  array<string, mixed>  $models  Keyed by token prefix: ['user' => $user, 'invoice' => $invoice]

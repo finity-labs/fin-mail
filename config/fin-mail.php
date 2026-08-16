@@ -65,6 +65,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Auth Email Overrides
+    |--------------------------------------------------------------------------
+    |
+    | When true, the password reset and email verification overrides store
+    | their rendered body in the Sent Emails log like any other email, so you
+    | can audit exactly what was sent. Off by default: these bodies contain
+    | signed URLs, and anyone who can read the log could replay a still-valid
+    | reset link. The log entry itself is always created.
+    |
+    */
+
+    'auth_emails' => [
+        'store_rendered_body' => false,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Date & DateTime Formatting
     |--------------------------------------------------------------------------
     |

@@ -12,6 +12,7 @@ use FinityLabs\FinMail\Editors\DefaultEditor;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Spatie\LaravelPackageTools\Package;
@@ -152,28 +153,72 @@ class FinMailServiceProvider extends PackageServiceProvider
 
     protected function registerVerificationOverride(): void
     {
-        VerifyEmail::toMailUsing(function (mixed $notifiable, string $url): Mail\TemplateMail {
-            return Mail\TemplateMail::make('user-verify-email', app()->getLocale())
-                ->to($notifiable->getEmailForVerification())
-                ->models([
-                    'user' => $notifiable,
-                    'url' => new Helpers\TokenValue($url),
-                ]);
+        VerifyEmail::toMailUsing(function (mixed $notifiable, string $url): Mail\TemplateMail|MailMessage {
+            try {
+                if (Models\EmailTemplate::findByKey('user-verify-email')) {
+                    $mail = Mail\TemplateMail::make('user-verify-email', app()->getLocale())
+                        ->to($notifiable->getEmailForVerification())
+                        ->models([
+                            'user' => $notifiable,
+                            'url' => new Helpers\TokenValue($url),
+                        ]);
+
+                    return $this->applyAuthBodyStoragePolicy($mail);
+                }
+            } catch (\Throwable $e) {
+                report($e);
+            }
+
+            // Template missing, inactive, or errored: never break account
+            // verification - fall back to Laravel's default notification mail.
+            return $this->defaultAuthMailMessage(new VerifyEmail, $url);
         });
     }
 
     protected function registerPasswordResetOverride(): void
     {
-        ResetPassword::toMailUsing(function (mixed $notifiable, string $token): Mail\TemplateMail {
+        ResetPassword::toMailUsing(function (mixed $notifiable, string $token): Mail\TemplateMail|MailMessage {
             $url = $this->buildPasswordResetUrl($notifiable, $token);
 
-            return Mail\TemplateMail::make('user-password-reset', app()->getLocale())
-                ->to($notifiable->getEmailForPasswordReset())
-                ->models([
-                    'user' => $notifiable,
-                    'url' => new Helpers\TokenValue($url),
-                ]);
+            try {
+                if (Models\EmailTemplate::findByKey('user-password-reset')) {
+                    $mail = Mail\TemplateMail::make('user-password-reset', app()->getLocale())
+                        ->to($notifiable->getEmailForPasswordReset())
+                        ->models([
+                            'user' => $notifiable,
+                            'url' => new Helpers\TokenValue($url),
+                        ]);
+
+                    return $this->applyAuthBodyStoragePolicy($mail);
+                }
+            } catch (\Throwable $e) {
+                report($e);
+            }
+
+            // Template missing, inactive, or errored: never break password
+            // reset - fall back to Laravel's default notification mail.
+            return $this->defaultAuthMailMessage(new ResetPassword($token), $url);
         });
+    }
+
+    /**
+     * Auth email bodies contain signed URLs, so they are kept out of the
+     * Sent Emails log unless the developer opts in via config.
+     */
+    protected function applyAuthBodyStoragePolicy(Mail\TemplateMail $mail): Mail\TemplateMail
+    {
+        if (! config('fin-mail.auth_emails.store_rendered_body', false)) {
+            $mail->withoutStoringRenderedBody();
+        }
+
+        return $mail;
+    }
+
+    protected function defaultAuthMailMessage(VerifyEmail|ResetPassword $notification, string $url): MailMessage
+    {
+        $buildMailMessage = new \ReflectionMethod($notification, 'buildMailMessage');
+
+        return $buildMailMessage->invoke($notification, $url);
     }
 
     protected function buildPasswordResetUrl(mixed $notifiable, string $token): string

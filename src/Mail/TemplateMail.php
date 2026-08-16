@@ -70,6 +70,8 @@ class TemplateMail extends Mailable implements ShouldQueue
 
     protected ?string $overrideBody = null;
 
+    protected ?string $overridePreheader = null;
+
     protected ?string $rawBody = null;
 
     protected ?string $overrideView = null;
@@ -147,6 +149,13 @@ class TemplateMail extends Mailable implements ShouldQueue
     public function overrideBody(string $body): static
     {
         $this->overrideBody = $body;
+
+        return $this;
+    }
+
+    public function overridePreheader(string $preheader): static
+    {
+        $this->overridePreheader = $preheader;
 
         return $this;
     }
@@ -275,7 +284,9 @@ class TemplateMail extends Mailable implements ShouldQueue
                             $this->models,
                         )
                         : $rendered['body'],
-                    'preheader' => $rendered['preheader'],
+                    'preheader' => $this->overridePreheader !== null
+                        ? app(TokenReplacer::class)->replace($this->overridePreheader, $this->models)
+                        : $rendered['preheader'],
                     'theme' => $themeColors,
                     'branding' => $this->resolveBranding(),
                 ],
@@ -313,7 +324,7 @@ class TemplateMail extends Mailable implements ShouldQueue
      */
     public function queue(QueueFactory $queue)
     {
-        $this->ensureLogEntry();
+        $this->withLocale($this->locale, fn () => $this->ensureLogEntry());
 
         return parent::queue($queue);
     }
@@ -325,7 +336,7 @@ class TemplateMail extends Mailable implements ShouldQueue
      */
     public function later($delay, QueueFactory $queue)
     {
-        $this->ensureLogEntry();
+        $this->withLocale($this->locale, fn () => $this->ensureLogEntry());
 
         return parent::later($delay, $queue);
     }
@@ -342,23 +353,29 @@ class TemplateMail extends Mailable implements ShouldQueue
      */
     public function send($mailer)
     {
-        $this->ensureLogEntry();
+        // The log entry and stored body are rendered before parent::send()
+        // gets to apply the mailable's locale, so wrap them ourselves. After
+        // queue serialization the template model has lost its per-model
+        // locale and would otherwise render in the worker's app locale.
+        return $this->withLocale($this->locale, function () use ($mailer) {
+            $this->ensureLogEntry();
 
-        try {
-            if ($this->sentEmailLog) {
-                $this->storeRenderedBody();
+            try {
+                if ($this->sentEmailLog) {
+                    $this->storeRenderedBody();
+                }
+
+                $result = parent::send($mailer);
+
+                $this->sentEmailLog?->markAsSent();
+
+                return $result;
+            } catch (\Throwable $e) {
+                $this->sentEmailLog?->markAsFailed($e->getMessage());
+
+                throw $e;
             }
-
-            $result = parent::send($mailer);
-
-            $this->sentEmailLog?->markAsSent();
-
-            return $result;
-        } catch (\Throwable $e) {
-            $this->sentEmailLog?->markAsFailed($e->getMessage());
-
-            throw $e;
-        }
+        });
     }
 
     /**

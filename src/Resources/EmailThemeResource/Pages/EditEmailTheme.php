@@ -26,9 +26,6 @@ class EditEmailTheme extends EditRecord
                     $plugin = filament('fin-mail');
 
                     return $plugin->hasDeleteActionOnEditPage();
-                })
-                ->before(function (): void {
-                    $this->record->templates()->update(['email_theme_id' => null]);
                 }),
         ];
     }

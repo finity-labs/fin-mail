@@ -59,6 +59,7 @@
                     src="data:text/html;base64,{{ base64_encode($email->rendered_body) }}"
                     class="w-full bg-white rounded-lg shadow-lg mx-auto"
                     style="max-width: 700px; min-height: 500px; border: none;"
+                    sandbox="allow-same-origin"
                 ></iframe>
             </div>
         </div>

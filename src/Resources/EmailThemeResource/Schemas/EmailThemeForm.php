@@ -30,15 +30,7 @@ class EmailThemeForm
                         Toggle::make('is_default')
                             ->label(__('fin-mail::fin-mail.theme.fields.is_default'))
                             ->helperText(__('fin-mail::fin-mail.theme.fields.is_default_helper'))
-                            ->afterStateUpdated(function (bool $state, $record): void {
-                                if ($state && $record) {
-                                    EmailTheme::where('id', '!=', $record->id)
-                                        ->where('is_default', true)
-                                        ->update(['is_default' => false]);
-                                }
-                            })
-                            ->columnSpan(2)
-                            ->live(),
+                            ->columnSpan(2),
                     ])
                     ->columns(3),
 

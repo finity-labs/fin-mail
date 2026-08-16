@@ -80,10 +80,7 @@ class EmailThemesTable
                     ->after(function ($replica) {
                         return redirect(EmailThemeResource::getUrl('edit', ['record' => $replica]));
                     }),
-                DeleteAction::make()
-                    ->before(function ($record): void {
-                        $record->templates()->update(['email_theme_id' => null]);
-                    }),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

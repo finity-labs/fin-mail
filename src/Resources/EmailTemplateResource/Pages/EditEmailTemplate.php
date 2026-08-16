@@ -32,6 +32,14 @@ class EditEmailTemplate extends EditRecord
 
     public ?int $previewVersionNumber = null;
 
+    /**
+     * Unsaved translatable edits, stashed per locale when the user switches
+     * languages so nothing typed is lost before saving.
+     *
+     * @var array<string, array<string, string>>
+     */
+    public array $localeData = [];
+
     public function mount(int|string $record): void
     {
         $this->activeLocale = app(GeneralSettings::class)->default_locale;
@@ -71,16 +79,59 @@ class EditEmailTemplate extends EditRecord
 
     public function switchLocale(string $locale): void
     {
+        // Stash unsaved translatable edits for the locale we're leaving,
+        // mirroring CreateEmailTemplate - previously these were discarded.
+        $formData = $this->form->getState();
+
+        foreach ($this->record->translatable as $field) {
+            $this->localeData[$this->activeLocale][$field] = $formData[$field] ?? '';
+        }
+
         $this->activeLocale = $locale;
         $this->record->setLocale($locale);
-        $this->fillForm();
+
+        $fill = $this->localeData[$locale] ?? collect($this->record->translatable)
+            ->mapWithKeys(fn (string $field): array => [
+                $field => $this->record->getTranslation($field, $locale, useFallbackLocale: false) ?: '',
+            ])
+            ->all();
+
+        $fill['active_locale'] = $locale;
+
+        // Merge over the current form state so unsaved non-translatable
+        // edits (theme, tags, sender...) survive the switch too.
+        $this->form->fill(array_merge($formData, $fill));
     }
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
         $this->record->setLocale($this->activeLocale);
 
+        // Server-side lock enforcement: disabled inputs are only a client-side
+        // guard, so a crafted request could still submit these fields.
+        if ($this->record->is_locked) {
+            unset($data['key'], $data['category']);
+        }
+
+        // Persist translations edited in other locales during this session.
+        foreach ($this->localeData as $locale => $fields) {
+            if ($locale === $this->activeLocale) {
+                continue;
+            }
+
+            foreach ($fields as $field => $value) {
+                if ($value !== '') {
+                    $this->record->setTranslation($field, $locale, $value);
+                }
+            }
+        }
+
         return $data;
+    }
+
+    protected function afterSave(): void
+    {
+        $this->localeData = [];
     }
 
     protected function getHeaderActions(): array

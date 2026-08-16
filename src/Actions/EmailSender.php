@@ -10,6 +10,7 @@ use FinityLabs\FinMail\Enums\EmailStatus;
 use FinityLabs\FinMail\Events\EmailFailed;
 use FinityLabs\FinMail\Events\EmailSending;
 use FinityLabs\FinMail\Events\EmailSent;
+use FinityLabs\FinMail\Helpers\TipTapConverter;
 use FinityLabs\FinMail\Mail\TemplateMail;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Models\SentEmail;
@@ -52,10 +53,20 @@ class EmailSender
                 throw new \RuntimeException('No template key provided.');
             }
 
+            $body = $this->data['body'];
+
+            if (is_array($body)) {
+                $body = TipTapConverter::toHtml($body, $this->resolveTemplateModel()?->resolvedThemeColors());
+            }
+
             $mail = TemplateMail::make($templateKey, $this->data['locale'] ?? null)
                 ->models($this->resolveModels())
                 ->overrideSubject($this->data['subject'])
-                ->overrideBody($this->data['body']);
+                ->overrideBody($body);
+
+            if (($this->data['preheader'] ?? null) !== null) {
+                $mail->overridePreheader($this->data['preheader']);
+            }
 
             if ($this->sentEmailLog) {
                 $mail->withLogging($this->sentEmailLog);
