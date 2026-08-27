@@ -7,6 +7,8 @@ namespace FinityLabs\FinMail\Traits;
 use BezhanSalleh\FilamentShield\Facades\FilamentShield;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Facades\Filament;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Gate;
 
 trait HasPageShieldSupport
 {
@@ -20,6 +22,16 @@ trait HasPageShieldSupport
     public static function canAccess(): bool
     {
         if (! static::isShieldAvailable()) {
+            // Without Shield, apps can gate each settings page by defining a
+            // Gate ability named after it (Shield's own naming convention),
+            // e.g. Gate::define('page_ManageGeneralSettings', ...). Pages
+            // stay open when no ability is defined, as before.
+            $ability = 'page_'.class_basename(static::class);
+
+            if (Gate::has($ability)) {
+                return (bool) static::getAuthUser()?->can($ability);
+            }
+
             return parent::canAccess();
         }
 
@@ -29,6 +41,15 @@ trait HasPageShieldSupport
         return $permission && $user
             ? $user->can($permission)
             : parent::canAccess();
+    }
+
+    protected static function getAuthUser(): ?Authenticatable
+    {
+        try {
+            return Filament::auth()->user();
+        } catch (\Throwable) {
+            return auth()->user();
+        }
     }
 
     protected static function isShieldAvailable(): bool

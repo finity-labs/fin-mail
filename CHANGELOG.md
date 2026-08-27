@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.13.0] - 2026-08-27
+
+### Added
+
+- **Extendable resources** — register your own subclass of any built-in resource on the plugin: `->emailTemplateResource(MyResource::class)`, `->emailThemeResource(...)`, `->sentEmailResource(...)` (#22)
+- **Authorization without Shield** — the `policyNamespace()` policy mapping now registers policies whenever the classes exist, with or without Shield installed. Settings pages can be gated by defining Gate abilities named after the page class (`page_ManageGeneralSettings`, …); pages without a defined ability stay open as before (#21)
+- **Per-email branding overrides** — `TemplateMail::withoutLogo()` sends without the branding logo, and `overrideBranding([...])` overrides any branding key (logo, colors, footer links, …) for a single email while the rest falls through to the saved settings (#8)
+
 ## [1.12.0] - 2026-08-16
 
 ### Added

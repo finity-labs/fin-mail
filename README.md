@@ -105,8 +105,28 @@ FinMailPlugin::make()
     ->enableSentEmails()    // Show the Sent Emails resource (default: true)
     ->enableThemes()        // Show the Themes resource (default: true)
     ->deleteActionOnEditPage() // Show delete button on edit pages (default: false)
-    ->policyNamespace('App\\Policies') // Where Shield policies live (default: App\Policies)
+    ->policyNamespace('App\\Policies') // Where model policies live (default: App\Policies)
 ```
+
+### Extending the resources
+
+To adjust one of the built-in resources, extend it and register your class on the plugin — it replaces the built-in one:
+
+```php
+use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
+
+class MyEmailTemplateResource extends EmailTemplateResource
+{
+    // override what you need
+}
+
+FinMailPlugin::make()
+    ->emailTemplateResource(MyEmailTemplateResource::class)
+    ->emailThemeResource(...)   // same pattern
+    ->sentEmailResource(...)    // same pattern
+```
+
+Keep the built-in slug (or override `getPages()` too) so the plugin's internal links keep resolving.
 
 ### Navigation customization
 
@@ -204,6 +224,25 @@ After publishing the package views (`php artisan vendor:publish --tag=fin-mail-v
 ```
 
 The default keys (`body`, `preheader`, `theme`, `branding`) remain available — extra data is merged on top.
+
+#### Overriding branding per email
+
+Branding settings (logo, colors, footer) normally apply to every email. For one-off deviations — a partner co-branded email, a plain internal notice — override them per email:
+
+```php
+// No logo on this one
+TemplateMail::make('internal-report')
+    ->withoutLogo();
+
+// Different logo and color for a partner mailing
+TemplateMail::make('partner-newsletter')
+    ->overrideBranding([
+        'logo' => 'https://example.com/partner-logo.png',
+        'primary_color' => '#0EA5E9',
+    ]);
+```
+
+Any key from the branding settings works (`logo`, `logo_width`, `logo_height`, `content_width`, `primary_color`, `footer_links`, `customer_service_email`, `customer_service_phone`); keys you don't pass fall through to the saved settings.
 
 #### Using a custom email view
 
@@ -356,9 +395,27 @@ Event::listen(EmailFailed::class, function (EmailFailed $event) {
 
 All event properties are `readonly`. Events use `SerializesModels` so they are safe to dispatch from queued jobs.
 
+## Authorization
+
+### Without Shield
+
+FinMail works with plain Laravel policies — no extra package needed. Create policy classes named `EmailTemplatePolicy`, `EmailThemePolicy`, and `SentEmailPolicy` in `App\Policies` (or wherever `policyNamespace()` points) and FinMail registers them automatically; Filament then applies them to the resources. Policies that don't exist are simply skipped, so you can gate only what you need.
+
+Settings pages are gated through Gate abilities named after the page class:
+
+```php
+use Illuminate\Support\Facades\Gate;
+
+Gate::define('page_ManageGeneralSettings', fn ($user) => $user->isAdmin());
+Gate::define('page_ManageBrandingSettings', fn ($user) => $user->isAdmin());
+// also: page_ManageLoggingSettings, page_ManageAttachmentSettings, page_ManageAuthEmailSettings
+```
+
+Pages without a defined ability stay accessible to any authenticated user, so nothing changes until you opt in.
+
 ## Filament Shield Integration
 
-FinMail ships with built-in support for [Filament Shield](https://github.com/bezhanSalleh/filament-shield). Shield is entirely optional — without it, all resources are accessible to any authenticated user.
+FinMail ships with built-in support for [Filament Shield](https://github.com/bezhanSalleh/filament-shield). Shield is entirely optional — without it, authorization works as described above.
 
 ### Automatic setup
 

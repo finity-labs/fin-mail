@@ -52,6 +52,15 @@ class FinMailPlugin implements Plugin
 
     protected string $policyNamespace = 'App\\Policies';
 
+    /** @var class-string */
+    protected string $emailTemplateResource = EmailTemplateResource::class;
+
+    /** @var class-string */
+    protected string $emailThemeResource = EmailThemeResource::class;
+
+    /** @var class-string */
+    protected string $sentEmailResource = SentEmailResource::class;
+
     public static function make(): static
     {
         return app(static::class);
@@ -71,15 +80,15 @@ class FinMailPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $resources = [
-            EmailTemplateResource::class,
+            $this->emailTemplateResource,
         ];
 
         if ($this->evaluate($this->themesEnabled)) {
-            $resources[] = EmailThemeResource::class;
+            $resources[] = $this->emailThemeResource;
         }
 
         if ($this->evaluate($this->sentEmailsEnabled)) {
-            $resources[] = SentEmailResource::class;
+            $resources[] = $this->sentEmailResource;
         }
 
         $panel
@@ -116,6 +125,54 @@ class FinMailPlugin implements Plugin
         $this->themesEnabled = $enabled;
 
         return $this;
+    }
+
+    /**
+     * Swap in your own resource class (extend the built-in one). Keep the
+     * built-in slug, or override getPages() as well, so internal links keep
+     * resolving.
+     *
+     * @param  class-string  $resource
+     */
+    public function emailTemplateResource(string $resource): static
+    {
+        $this->emailTemplateResource = $resource;
+
+        return $this;
+    }
+
+    /** @param class-string $resource */
+    public function emailThemeResource(string $resource): static
+    {
+        $this->emailThemeResource = $resource;
+
+        return $this;
+    }
+
+    /** @param class-string $resource */
+    public function sentEmailResource(string $resource): static
+    {
+        $this->sentEmailResource = $resource;
+
+        return $this;
+    }
+
+    /** @return class-string */
+    public function getEmailTemplateResource(): string
+    {
+        return $this->emailTemplateResource;
+    }
+
+    /** @return class-string */
+    public function getEmailThemeResource(): string
+    {
+        return $this->emailThemeResource;
+    }
+
+    /** @return class-string */
+    public function getSentEmailResource(): string
+    {
+        return $this->sentEmailResource;
     }
 
     public function policyNamespace(string $namespace): static

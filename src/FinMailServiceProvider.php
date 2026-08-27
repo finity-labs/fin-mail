@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FinityLabs\FinMail;
 
-use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Auth\Events\Registered;
 use Filament\Facades\Filament;
 use FinityLabs\FinMail\Contracts\EditorContract;
@@ -67,16 +66,18 @@ class FinMailServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        $this->registerShieldPolicies();
+        $this->registerPolicies();
         $this->registerAuthEmailOverrides();
         $this->registerScheduledCommands();
     }
 
-    protected function registerShieldPolicies(): void
+    /**
+     * Map policies from the configured namespace to the package models.
+     * Works with Shield-generated policies and hand-written ones alike;
+     * a policy is only registered when its class actually exists.
+     */
+    protected function registerPolicies(): void
     {
-        if (! class_exists(FilamentShieldPlugin::class)) {
-            return;
-        }
 
         try {
             $namespace = FinMailPlugin::get()->getPolicyNamespace();

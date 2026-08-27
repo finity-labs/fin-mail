@@ -82,6 +82,13 @@ class TemplateMail extends Mailable implements ShouldQueue
     /** @var array{address: string, name: ?string}|null */
     protected ?array $overrideReplyTo = null;
 
+    /**
+     * Per-email branding overrides, merged over BrandingSettings.
+     *
+     * @var array<string, mixed>
+     */
+    protected array $brandingOverrides = [];
+
     public function __construct(
         protected readonly string $templateKey,
         ?string $locale = null,
@@ -189,6 +196,31 @@ class TemplateMail extends Mailable implements ShouldQueue
     public function overrideView(string $view): static
     {
         $this->overrideView = $view;
+
+        return $this;
+    }
+
+    /**
+     * Override branding settings for this one email. Any key from the
+     * branding settings works (logo, logo_width, logo_height, content_width,
+     * primary_color, footer_links, customer_service_email/phone); unset keys
+     * fall through to the saved settings.
+     *
+     * @param  array<string, mixed>  $overrides
+     */
+    public function overrideBranding(array $overrides): static
+    {
+        $this->brandingOverrides = array_merge($this->brandingOverrides, $overrides);
+
+        return $this;
+    }
+
+    /**
+     * Send this email without the branding logo.
+     */
+    public function withoutLogo(): static
+    {
+        $this->brandingOverrides['logo'] = null;
 
         return $this;
     }
@@ -466,7 +498,7 @@ class TemplateMail extends Mailable implements ShouldQueue
     {
         $branding = app(BrandingSettings::class);
 
-        return [
+        return array_merge([
             'logo' => $branding->resolvedLogo(),
             'logo_width' => $branding->logo_width,
             'logo_height' => $branding->logo_height,
@@ -475,7 +507,7 @@ class TemplateMail extends Mailable implements ShouldQueue
             'footer_links' => $branding->footer_links,
             'customer_service_email' => $branding->customer_service_email,
             'customer_service_phone' => $branding->customer_service_phone,
-        ];
+        ], $this->brandingOverrides);
     }
 
     /**
