@@ -159,22 +159,95 @@ class TokenReplacer
     }
 
     /**
-     * Replace {% if model.attribute %} ... {% endif %} conditionals.
+     * Replace {% if model.attribute %} ... {% else %} ... {% endif %}
+     * conditionals, including arbitrarily nested blocks.
+     *
+     * Single pass over the tag stream with a frame stack: text accumulates
+     * into the innermost open block's active branch, and each {% endif %}
+     * pops its frame and appends the winning branch to the parent. Malformed
+     * markup (a stray {% else %}/{% endif %}, or an unclosed {% if %}) is
+     * left in the output verbatim so template authors can see the mistake
+     * instead of silently losing content.
      */
     protected function replaceConditionals(string $content, array $models): string
     {
-        $pattern = '/\{%\s*if\s+(.+?)\s*%\}(.*?)(?:\{%\s*else\s*%\}(.*?))?\{%\s*endif\s*%\}/s';
+        if (! str_contains($content, '{%')) {
+            return $content;
+        }
 
-        return (string) preg_replace_callback($pattern, function (array $matches) use ($models): string {
-            $token = trim($matches[1]);
-            $truthyContent = $matches[2];
-            $falsyContent = $matches[3] ?? '';
+        $tokens = preg_split(
+            '/(\{%\s*if\s+.+?\s*%\}|\{%\s*else\s*%\}|\{%\s*endif\s*%\})/s',
+            $content,
+            -1,
+            PREG_SPLIT_DELIM_CAPTURE
+        );
 
-            $value = $this->resolveToken($token, $models);
-            $isTruthy = ! empty($value) && $value !== 'false';
+        if ($tokens === false) {
+            return $content;
+        }
 
-            return $isTruthy ? $truthyContent : $falsyContent;
-        }, $content);
+        $root = '';
+
+        /** @var array<int, array{ifTag: string, condition: string, truthy: string, falsy: string, elseTag: ?string}> $stack */
+        $stack = [];
+
+        $append = function (string $text) use (&$root, &$stack): void {
+            if ($stack === []) {
+                $root .= $text;
+            } else {
+                $top = count($stack) - 1;
+                $branch = $stack[$top]['elseTag'] === null ? 'truthy' : 'falsy';
+                $stack[$top][$branch] .= $text;
+            }
+        };
+
+        foreach ($tokens as $token) {
+            if (preg_match('/^\{%\s*if\s+(.+?)\s*%\}$/s', $token, $matches)) {
+                $stack[] = [
+                    'ifTag' => $token,
+                    'condition' => trim($matches[1]),
+                    'truthy' => '',
+                    'falsy' => '',
+                    'elseTag' => null,
+                ];
+            } elseif (preg_match('/^\{%\s*else\s*%\}$/', $token)) {
+                $top = count($stack) - 1;
+
+                if ($top < 0 || $stack[$top]['elseTag'] !== null) {
+                    // Stray or duplicate else: keep it visible.
+                    $append($token);
+                } else {
+                    $stack[$top]['elseTag'] = $token;
+                }
+            } elseif (preg_match('/^\{%\s*endif\s*%\}$/', $token)) {
+                if ($stack === []) {
+                    // Stray endif: keep it visible.
+                    $append($token);
+
+                    continue;
+                }
+
+                $frame = array_pop($stack);
+                $value = $this->resolveToken($frame['condition'], $models);
+                $isTruthy = ! empty($value) && $value !== 'false';
+
+                $append($isTruthy ? $frame['truthy'] : $frame['falsy']);
+            } else {
+                $append($token);
+            }
+        }
+
+        // Unclosed {% if %} blocks: restore their raw markup, innermost first
+        // so each reconstruction lands in its parent's branch.
+        while (($frame = array_pop($stack)) !== null) {
+            $append(
+                $frame['ifTag']
+                .$frame['truthy']
+                .($frame['elseTag'] !== null ? $frame['elseTag'].$frame['falsy'] : '')
+            );
+        }
+
+        return $root;
     }
 
     /**

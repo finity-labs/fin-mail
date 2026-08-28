@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.13.1] - 2026-08-28
+
+### Fixed
+
+- Nested `{% if %}` conditionals now work at any depth, with `{% else %}` supported on every level. Previously the first `{% endif %}` closed the outermost `{% if %}`, so any nested conditional produced broken output. Conditionals are now parsed in a single pass with a frame stack, and malformed markup (a stray `{% else %}`/`{% endif %}` or an unclosed `{% if %}`) stays visible in the output instead of silently losing content (thanks @Pycckoe, whose fork flagged the limitation)
+
 ## [1.13.0] - 2026-08-27
 
 ### Added

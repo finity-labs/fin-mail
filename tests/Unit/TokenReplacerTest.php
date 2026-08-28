@@ -181,3 +181,120 @@ it('handles date casting', function () {
 
     expect($result)->toBe('Created: Feb 25, 2026');
 });
+
+it('handles nested conditionals in the truthy branch', function () {
+    $replacer = new TokenReplacer;
+
+    $user = new class extends Model
+    {
+        protected $attributes = ['is_premium' => true, 'has_invoice' => true];
+    };
+
+    $result = $replacer->replace(
+        '{% if user.is_premium %}Premium{% if user.has_invoice %} with invoice{% endif %}{% endif %}',
+        ['user' => $user],
+    );
+
+    expect($result)->toBe('Premium with invoice');
+});
+
+it('drops nested conditional content when the outer condition is falsy', function () {
+    $replacer = new TokenReplacer;
+
+    $user = new class extends Model
+    {
+        protected $attributes = ['is_premium' => false, 'has_invoice' => true];
+    };
+
+    $result = $replacer->replace(
+        'Start{% if user.is_premium %}Premium{% if user.has_invoice %} with invoice{% endif %}{% endif %}End',
+        ['user' => $user],
+    );
+
+    expect($result)->toBe('StartEnd');
+});
+
+it('handles else branches on both outer and nested levels', function () {
+    $replacer = new TokenReplacer;
+
+    $user = new class extends Model
+    {
+        protected $attributes = ['is_premium' => true, 'has_invoice' => false];
+    };
+
+    $result = $replacer->replace(
+        '{% if user.is_premium %}{% if user.has_invoice %}Invoice{% else %}No invoice{% endif %}{% else %}Free{% endif %}',
+        ['user' => $user],
+    );
+
+    expect($result)->toBe('No invoice');
+});
+
+it('handles a nested conditional inside an else branch', function () {
+    $replacer = new TokenReplacer;
+
+    $user = new class extends Model
+    {
+        protected $attributes = ['is_premium' => false, 'is_trial' => true];
+    };
+
+    $result = $replacer->replace(
+        '{% if user.is_premium %}Premium{% else %}{% if user.is_trial %}Trial{% else %}Free{% endif %}{% endif %}',
+        ['user' => $user],
+    );
+
+    expect($result)->toBe('Trial');
+});
+
+it('handles sibling conditionals independently', function () {
+    $replacer = new TokenReplacer;
+
+    $user = new class extends Model
+    {
+        protected $attributes = ['is_premium' => true, 'has_invoice' => false];
+    };
+
+    $result = $replacer->replace(
+        '{% if user.is_premium %}A{% endif %}-{% if user.has_invoice %}B{% endif %}-C',
+        ['user' => $user],
+    );
+
+    expect($result)->toBe('A--C');
+});
+
+it('handles deeply nested conditionals without a depth limit', function () {
+    $replacer = new TokenReplacer;
+
+    $user = new class extends Model
+    {
+        protected $attributes = ['is_premium' => true];
+    };
+
+    $depth = 25;
+    $content = str_repeat('{% if user.is_premium %}', $depth).'Core'.str_repeat('{% endif %}', $depth);
+
+    expect($replacer->replace($content, ['user' => $user]))->toBe('Core');
+});
+
+it('leaves an unclosed conditional visible instead of dropping content', function () {
+    $replacer = new TokenReplacer;
+
+    $user = new class extends Model
+    {
+        protected $attributes = ['is_premium' => true];
+    };
+
+    $result = $replacer->replace(
+        'Before {% if user.is_premium %}Premium after',
+        ['user' => $user],
+    );
+
+    expect($result)->toBe('Before {% if user.is_premium %}Premium after');
+});
+
+it('leaves stray else and endif tags visible', function () {
+    $replacer = new TokenReplacer;
+
+    expect($replacer->replace('A {% endif %} B {% else %} C'))
+        ->toBe('A {% endif %} B {% else %} C');
+});
