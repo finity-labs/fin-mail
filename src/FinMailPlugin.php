@@ -11,6 +11,7 @@ use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use FinityLabs\FinMail\Editors\Blocks\ButtonBlock;
 use FinityLabs\FinMail\Enums\NavigationGroup;
+use FinityLabs\FinMail\Helpers\PolicyRegistration;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
 use FinityLabs\FinMail\Resources\EmailThemeResource\EmailThemeResource;
 use FinityLabs\FinMail\Resources\SentEmailResource\SentEmailResource;
@@ -96,9 +97,15 @@ class FinMailPlugin implements Plugin
             ->resources($resources);
     }
 
+    /**
+     * This panel's policies. The provider registered the default panel's at
+     * boot; a panel that names its own namespace re-registers here, once per
+     * request, before any page of it renders. The Gate map is a plain array
+     * keyed by model, so repeating the registration costs nothing.
+     */
     public function boot(Panel $panel): void
     {
-        //
+        PolicyRegistration::register($this->getPolicyNamespace());
     }
 
     public function deleteActionOnEditPage(bool|Closure $enabled = true): static

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Filament\Panel;
 use FinityLabs\FinMail\FinMailPlugin;
 use FinityLabs\FinMail\FinMailServiceProvider;
 use FinityLabs\FinMail\Models\EmailTemplate;
@@ -17,6 +18,14 @@ class CustomEmailTemplatePolicy
     public function viewAny($user): bool
     {
         return false;
+    }
+}
+
+class PanelEmailTemplatePolicy
+{
+    public function viewAny($user): bool
+    {
+        return true;
     }
 }
 
@@ -44,4 +53,22 @@ it('registers policies from the configured namespace without Shield installed', 
 
     expect(Gate::getPolicyFor(EmailTemplate::class))
         ->toBeInstanceOf(CustomEmailTemplatePolicy::class);
+});
+
+it('registers the namespace of the panel that boots, not only the default panel\'s', function () {
+    // A namespace no other test names: the alias outlives this test, the
+    // plugin instance does not. The harness boots no Filament manager, so
+    // the plugin's boot() is called the way Panel::boot() would call it.
+    if (! class_exists('FinMailHostTest\\Policies\\EmailTemplatePolicy', false)) {
+        class_alias(PanelEmailTemplatePolicy::class, 'FinMailHostTest\\Policies\\EmailTemplatePolicy');
+    }
+
+    // Provider boot ran with the default namespace and cannot have used this one.
+    expect(Gate::getPolicyFor(EmailTemplate::class))->not->toBeInstanceOf(PanelEmailTemplatePolicy::class);
+
+    FinMailPlugin::make()
+        ->policyNamespace('FinMailHostTest\\Policies')
+        ->boot(Panel::make()->id('host'));
+
+    expect(Gate::getPolicyFor(EmailTemplate::class))->toBeInstanceOf(PanelEmailTemplatePolicy::class);
 });

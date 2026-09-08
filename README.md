@@ -401,6 +401,8 @@ All event properties are `readonly`. Events use `SerializesModels` so they are s
 
 FinMail works with plain Laravel policies — no extra package needed. Create policy classes named `EmailTemplatePolicy`, `EmailThemePolicy`, and `SentEmailPolicy` in `App\Policies` (or wherever `policyNamespace()` points) and FinMail registers them automatically; Filament then applies them to the resources. Policies that don't exist are simply skipped, so you can gate only what you need.
 
+The namespace is a per-panel option, registered when that panel boots for a request, so two panels can point at two sets of policies. Outside any panel — console commands, queue workers, routes of your own — the default panel's namespace applies, or `App\Policies` when the plugin is not on the default panel.
+
 Settings pages are gated through Gate abilities named after the page class:
 
 ```php

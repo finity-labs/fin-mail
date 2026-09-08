@@ -8,12 +8,12 @@ use Filament\Auth\Events\Registered;
 use Filament\Facades\Filament;
 use FinityLabs\FinMail\Contracts\EditorContract;
 use FinityLabs\FinMail\Editors\DefaultEditor;
+use FinityLabs\FinMail\Helpers\PolicyRegistration;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Gate;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -72,32 +72,15 @@ class FinMailServiceProvider extends PackageServiceProvider
     }
 
     /**
-     * Map policies from the configured namespace to the package models.
-     * Works with Shield-generated policies and hand-written ones alike;
-     * a policy is only registered when its class actually exists.
+     * Map the policies of the default panel's namespace (App\Policies when
+     * the plugin is not on the default panel) onto the package models while
+     * no panel is current. FinMailPlugin::boot() maps again with the booting
+     * panel's own namespace; Helpers\PolicyRegistration explains why both
+     * calls exist.
      */
     protected function registerPolicies(): void
     {
-
-        try {
-            $namespace = FinMailPlugin::get()->getPolicyNamespace();
-        } catch (\Throwable) {
-            $namespace = 'App\\Policies';
-        }
-
-        $policyMap = [
-            Models\EmailTemplate::class => $namespace.'\\EmailTemplatePolicy',
-            Models\EmailTheme::class => $namespace.'\\EmailThemePolicy',
-            Models\SentEmail::class => $namespace.'\\SentEmailPolicy',
-        ];
-
-        $gate = Gate::getFacadeRoot();
-
-        foreach ($policyMap as $model => $policy) {
-            if (class_exists($policy)) {
-                $gate->policy($model, $policy);
-            }
-        }
+        PolicyRegistration::register(PolicyRegistration::defaultNamespace());
     }
 
     protected function registerAuthEmailOverrides(): void

@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.13.2] - 2026-09-08
+
+### Fixed
+
+- `policyNamespace()` only took effect on the default panel: the policies were mapped once at provider boot, from whichever panel was the default, so a plugin on a non-default panel (or two panels naming different namespaces) silently fell back to `App\Policies`. Each panel now maps its own namespace when it boots for a request; provider boot keeps the default panel's (or `App\Policies`) for console commands, queues and routes outside any panel. `Helpers\PolicyRegistration` is the one place that does the mapping.
+
 ## [1.13.1] - 2026-08-28
 
 ### Fixed
