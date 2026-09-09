@@ -73,9 +73,11 @@ class FinMailPlugin implements Plugin
         return filament(app(static::class)->getId());
     }
 
+    public const ID = 'fin-mail';
+
     public function getId(): string
     {
-        return 'fin-mail';
+        return self::ID;
     }
 
     public function register(Panel $panel): void

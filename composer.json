@@ -26,6 +26,7 @@
         "illuminate/contracts": "^11.0|^12.0|^13.0",
         "spatie/laravel-package-tools": "^1.16",
         "spatie/laravel-settings": "^3.0|^4.0",
+        "finity-labs/fin-support": "^0.1",
         "spatie/laravel-translatable": "^6.0"
     },
     "require-dev": {
@@ -39,6 +40,22 @@
         "awcodes/filament-tiptap-editor": "For a richer email body editor experience",
         "mohamedsabil83/filament-forms-tinyeditor": "Alternative rich text editor"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../fin-support*",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../lin-support*",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "autoload": {
         "psr-4": {
             "FinityLabs\\FinMail\\": "src/",

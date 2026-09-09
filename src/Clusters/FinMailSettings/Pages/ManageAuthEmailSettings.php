@@ -12,7 +12,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use FinityLabs\FinMail\Clusters\FinMailSettings\FinMailSettings;
 use FinityLabs\FinMail\Settings\AuthEmailSettings;
-use FinityLabs\FinMail\Traits\HasPageShieldSupport;
+use FinityLabs\FinSupport\Pages\Concerns\HasPageShieldSupport;
 
 class ManageAuthEmailSettings extends SettingsPage
 {

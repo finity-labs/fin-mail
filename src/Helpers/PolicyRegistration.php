@@ -8,8 +8,7 @@ use FinityLabs\FinMail\FinMailPlugin;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Models\EmailTheme;
 use FinityLabs\FinMail\Models\SentEmail;
-use Illuminate\Support\Facades\Gate;
-use Throwable;
+use FinityLabs\FinSupport\Auth\PolicyRegistrar;
 
 /**
  * Maps the policies of one namespace onto the package models. Works with
@@ -28,44 +27,30 @@ use Throwable;
  */
 final class PolicyRegistration
 {
-    public const DEFAULT_NAMESPACE = 'App\\Policies';
+    public const DEFAULT_NAMESPACE = PolicyRegistrar::DEFAULT_NAMESPACE;
 
     /**
-     * @return array<class-string, class-string> model => the policy registered for it
+     * FinMail's models and the policy class basename each looks for under
+     * the configured namespace.
+     *
+     * @var array<class-string, string>
+     */
+    public const POLICIES = [
+        EmailTemplate::class => 'EmailTemplatePolicy',
+        EmailTheme::class => 'EmailThemePolicy',
+        SentEmail::class => 'SentEmailPolicy',
+    ];
+
+    /**
+     * @return array<class-string, class-string> model => the policy now registered for it
      */
     public static function register(string $namespace): array
     {
-        $namespace = rtrim($namespace, '\\');
-
-        $policyMap = [
-            EmailTemplate::class => $namespace.'\\EmailTemplatePolicy',
-            EmailTheme::class => $namespace.'\\EmailThemePolicy',
-            SentEmail::class => $namespace.'\\SentEmailPolicy',
-        ];
-
-        $gate = Gate::getFacadeRoot();
-        $registered = [];
-
-        foreach ($policyMap as $model => $policy) {
-            if (class_exists($policy)) {
-                $gate->policy($model, $policy);
-                $registered[$model] = $policy;
-            }
-        }
-
-        return $registered;
+        return PolicyRegistrar::register($namespace, self::POLICIES);
     }
 
-    /**
-     * The namespace to use while no panel is current: the default panel's
-     * option when the plugin is on it, App\Policies otherwise.
-     */
     public static function defaultNamespace(): string
     {
-        try {
-            return FinMailPlugin::get()->getPolicyNamespace();
-        } catch (Throwable) {
-            return self::DEFAULT_NAMESPACE;
-        }
+        return PolicyRegistrar::namespaceOf(FinMailPlugin::ID);
     }
 }

@@ -4,94 +4,47 @@ declare(strict_types=1);
 
 namespace FinityLabs\FinMail\Commands;
 
-use FinityLabs\FinMail\Commands\Concerns\CanRegisterPlugin;
-use FinityLabs\FinMail\Commands\Concerns\DiscoversPanelProviders;
 use FinityLabs\FinMail\Commands\Concerns\ManagesThemeStyles;
 use FinityLabs\FinMail\Database\Seeders\EmailTemplateSeeder;
 use FinityLabs\FinMail\Enums\CleanupFrequency;
+use FinityLabs\FinMail\FinMailPlugin;
+use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
+use FinityLabs\FinMail\Resources\EmailThemeResource\EmailThemeResource;
+use FinityLabs\FinMail\Resources\SentEmailResource\SentEmailResource;
 use FinityLabs\FinMail\Settings\GeneralSettings;
 use FinityLabs\FinMail\Settings\LoggingSettings;
+use FinityLabs\FinSupport\Console\Concerns\DiscoversPanelProviders;
+use FinityLabs\FinSupport\Console\Concerns\EditsPanelProviders;
+use FinityLabs\FinSupport\Console\Concerns\EditsShieldConfig;
+use FinityLabs\LinSupport\Console\Concerns\PromptsForLocales;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 
-use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\select;
-use function Laravel\Prompts\text;
 
 use Symfony\Component\Process\Process;
 
 class InstallCommand extends Command
 {
-    use CanRegisterPlugin;
     use DiscoversPanelProviders;
+    use EditsPanelProviders;
+    use EditsShieldConfig;
     use ManagesThemeStyles;
+    use PromptsForLocales;
 
     protected ?string $panelId = null;
 
     protected bool $shieldConfigured = false;
 
-    /** @var array<string, array{display: string, flag-icon: string}> */
-    private const LOCALE_MAP = [
-        'am' => ['display' => 'Amharic', 'flag-icon' => 'et'],
-        'ar' => ['display' => 'العربية', 'flag-icon' => 'sa'],
-        'az' => ['display' => 'Azərbaycanca', 'flag-icon' => 'az'],
-        'bg' => ['display' => 'Български', 'flag-icon' => 'bg'],
-        'bn' => ['display' => 'বাংলা', 'flag-icon' => 'bd'],
-        'bs' => ['display' => 'Bosanski', 'flag-icon' => 'ba'],
-        'ca' => ['display' => 'Català', 'flag-icon' => 'es'],
-        'ckb' => ['display' => 'کوردی', 'flag-icon' => 'iq'],
-        'cs' => ['display' => 'Čeština', 'flag-icon' => 'cz'],
-        'cy' => ['display' => 'Cymraeg', 'flag-icon' => 'gb'],
-        'da' => ['display' => 'Dansk', 'flag-icon' => 'dk'],
-        'de' => ['display' => 'Deutsch', 'flag-icon' => 'de'],
-        'el' => ['display' => 'Ελληνικά', 'flag-icon' => 'gr'],
-        'en' => ['display' => 'English', 'flag-icon' => 'gb'],
-        'es' => ['display' => 'Español', 'flag-icon' => 'es'],
-        'eu' => ['display' => 'Euskara', 'flag-icon' => 'es'],
-        'fa' => ['display' => 'فارسی', 'flag-icon' => 'ir'],
-        'fi' => ['display' => 'Suomi', 'flag-icon' => 'fi'],
-        'fr' => ['display' => 'Français', 'flag-icon' => 'fr'],
-        'he' => ['display' => 'עברית', 'flag-icon' => 'il'],
-        'hi' => ['display' => 'हिन्दी', 'flag-icon' => 'in'],
-        'hr' => ['display' => 'Hrvatski', 'flag-icon' => 'hr'],
-        'hu' => ['display' => 'Magyar', 'flag-icon' => 'hu'],
-        'hy' => ['display' => 'Հայերեն', 'flag-icon' => 'am'],
-        'id' => ['display' => 'Bahasa Indonesia', 'flag-icon' => 'id'],
-        'it' => ['display' => 'Italiano', 'flag-icon' => 'it'],
-        'ja' => ['display' => '日本語', 'flag-icon' => 'jp'],
-        'ka' => ['display' => 'ქართული', 'flag-icon' => 'ge'],
-        'km' => ['display' => 'ខ្មែរ', 'flag-icon' => 'kh'],
-        'ko' => ['display' => '한국어', 'flag-icon' => 'kr'],
-        'ku' => ['display' => 'Kurdî', 'flag-icon' => 'iq'],
-        'lt' => ['display' => 'Lietuvių', 'flag-icon' => 'lt'],
-        'lv' => ['display' => 'Latviešu', 'flag-icon' => 'lv'],
-        'mk' => ['display' => 'Македонски', 'flag-icon' => 'mk'],
-        'mn' => ['display' => 'Монгол', 'flag-icon' => 'mn'],
-        'ms' => ['display' => 'Bahasa Melayu', 'flag-icon' => 'my'],
-        'my' => ['display' => 'မြန်မာ', 'flag-icon' => 'mm'],
-        'nb' => ['display' => 'Norsk bokmål', 'flag-icon' => 'no'],
-        'ne' => ['display' => 'नेपाली', 'flag-icon' => 'np'],
-        'nl' => ['display' => 'Nederlands', 'flag-icon' => 'nl'],
-        'pl' => ['display' => 'Polski', 'flag-icon' => 'pl'],
-        'pt' => ['display' => 'Português', 'flag-icon' => 'pt'],
-        'pt_BR' => ['display' => 'Português (Brasil)', 'flag-icon' => 'br'],
-        'ro' => ['display' => 'Română', 'flag-icon' => 'ro'],
-        'ru' => ['display' => 'Русский', 'flag-icon' => 'ru'],
-        'sk' => ['display' => 'Slovenčina', 'flag-icon' => 'sk'],
-        'sl' => ['display' => 'Slovenščina', 'flag-icon' => 'si'],
-        'sq' => ['display' => 'Shqip', 'flag-icon' => 'al'],
-        'sr_Cyrl' => ['display' => 'Српски', 'flag-icon' => 'rs'],
-        'sr_Latn' => ['display' => 'Srpski', 'flag-icon' => 'rs'],
-        'sv' => ['display' => 'Svenska', 'flag-icon' => 'se'],
-        'sw' => ['display' => 'Kiswahili', 'flag-icon' => 'tz'],
-        'th' => ['display' => 'ไทย', 'flag-icon' => 'th'],
-        'tr' => ['display' => 'Türkçe', 'flag-icon' => 'tr'],
-        'uk' => ['display' => 'Українська', 'flag-icon' => 'ua'],
-        'ur' => ['display' => 'اردو', 'flag-icon' => 'pk'],
-        'uz' => ['display' => 'Oʻzbek', 'flag-icon' => 'uz'],
-        'vi' => ['display' => 'Tiếng Việt', 'flag-icon' => 'vn'],
-        'zh_CN' => ['display' => '简体中文', 'flag-icon' => 'cn'],
-        'zh_TW' => ['display' => '繁體中文', 'flag-icon' => 'tw'],
+    /**
+     * What Shield's config gets: the three resources and their abilities.
+     *
+     * @var array<class-string, list<string>>
+     */
+    private const SHIELD_RESOURCES = [
+        EmailTemplateResource::class => ['viewAny', 'view', 'create', 'update', 'delete', 'preview', 'sendTest', 'compose'],
+        EmailThemeResource::class => ['viewAny', 'view', 'create', 'update', 'delete'],
+        SentEmailResource::class => ['viewAny', 'view', 'resend'],
     ];
 
     protected $signature = 'fin-mail:install
@@ -197,19 +150,8 @@ class InstallCommand extends Command
 
     protected function configureLocales(): void
     {
-        $localesOption = $this->option('locales');
-
-        if (is_string($localesOption) && $localesOption !== '') {
-            $selected = $this->parseLocalesOption($localesOption);
-        } else {
-            $selected = $this->promptLocales();
-        }
-
-        $languages = [];
-        foreach ($selected as $code) {
-            $meta = self::LOCALE_MAP[$code] ?? ['display' => strtoupper($code), 'flag-icon' => $code];
-            $languages[] = ['code' => $code, ...$meta];
-        }
+        $selected = $this->resolveLocales('Which locales should FinMail support for email templates?');
+        $languages = $this->localeEntries($selected);
 
         try {
             $mailSettings = app(GeneralSettings::class);
@@ -222,109 +164,6 @@ class InstallCommand extends Command
         } catch (\Throwable) {
             $this->components->warn('Could not save locale settings. Configure them manually in the admin panel.');
         }
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    protected function parseLocalesOption(string $value): array
-    {
-        $codes = array_map('trim', explode(',', $value));
-        $codes = array_filter($codes, fn (string $code): bool => $code !== '');
-
-        $invalid = array_diff($codes, array_keys(self::LOCALE_MAP));
-
-        if (! empty($invalid)) {
-            $this->components->warn('Unknown locale codes ignored: '.implode(', ', $invalid));
-            $codes = array_intersect($codes, array_keys(self::LOCALE_MAP));
-        }
-
-        if (empty($codes)) {
-            $this->components->warn('No valid locales provided. Falling back to interactive selection.');
-
-            return $this->promptLocales();
-        }
-
-        $this->comment('Locales from --locales option: '.implode(', ', $codes));
-
-        return $codes;
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    protected function promptLocales(): array
-    {
-        $detected = $this->detectLocales();
-
-        $options = [];
-        foreach ($detected as $code) {
-            $meta = self::LOCALE_MAP[$code] ?? ['display' => strtoupper($code), 'flag-icon' => $code];
-            $options[$code] = "{$meta['display']} ({$code})";
-        }
-
-        $options['other'] = 'Other (enter locale codes manually)';
-
-        $this->comment('Detected locales: '.implode(', ', $detected));
-
-        $selected = multiselect(
-            label: 'Which locales should FinMail support for email templates?',
-            options: $options,
-            default: $detected,
-            required: true,
-        );
-
-        /** @var array<int, string> $selected */
-        $selected = array_values($selected);
-
-        if (! in_array('other', $selected, true)) {
-            return $selected;
-        }
-
-        $selected = array_filter($selected, fn (string $code): bool => $code !== 'other');
-
-        $availableCodes = implode(', ', array_keys(self::LOCALE_MAP));
-        $extra = text(
-            label: 'Enter additional locale codes (comma-separated)',
-            placeholder: 'e.g. ja,ko,zh_CN',
-            hint: "Available: {$availableCodes}",
-            required: true,
-        );
-
-        $extraCodes = $this->parseLocalesOption($extra);
-
-        return array_values(array_unique([...$selected, ...$extraCodes]));
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    protected function detectLocales(): array
-    {
-        $langPath = lang_path();
-
-        if (! is_dir($langPath)) {
-            return [config('app.locale', 'en')];
-        }
-
-        $directories = glob($langPath.'/*', GLOB_ONLYDIR);
-
-        if ($directories === false || empty($directories)) {
-            return [config('app.locale', 'en')];
-        }
-
-        $locales = [];
-
-        foreach ($directories as $dir) {
-            $locale = basename($dir);
-            if ($locale !== 'vendor') {
-                $locales[] = $locale;
-            }
-        }
-
-        sort($locales);
-
-        return empty($locales) ? [config('app.locale', 'en')] : $locales;
     }
 
     protected function registerInPanel(): void
@@ -354,7 +193,7 @@ class InstallCommand extends Command
         }
 
         $this->comment("Registering FinMailPlugin in {$this->panelId} panel...");
-        $this->registerPlugin($panelProviders[$this->panelId]);
+        $this->registerPlugin($panelProviders[$this->panelId], FinMailPlugin::class);
     }
 
     protected function registerThemeStylesForPanel(): void
@@ -377,9 +216,7 @@ class InstallCommand extends Command
 
     protected function configureShield(): void
     {
-        $configPath = config_path('filament-shield.php');
-
-        if (! file_exists($configPath)) {
+        if (! $this->hasShieldConfig()) {
             return;
         }
 
@@ -387,91 +224,10 @@ class InstallCommand extends Command
             return;
         }
 
-        $content = file_get_contents($configPath);
-
-        if ($content === false) {
-            $this->components->warn('Could not read Shield config file.');
-
+        if (! $this->registerShieldResources(self::SHIELD_RESOURCES, 'FinityLabs\\FinMail')) {
             return;
         }
 
-        if (str_contains($content, 'FinityLabs\\FinMail')) {
-            $this->components->warn('FinMail resources are already registered in Shield config.');
-
-            return;
-        }
-
-        $entries = ''
-            ."            \\FinityLabs\\FinMail\\Resources\\EmailTemplateResource\\EmailTemplateResource::class => [\n"
-            ."                'viewAny',\n"
-            ."                'view',\n"
-            ."                'create',\n"
-            ."                'update',\n"
-            ."                'delete',\n"
-            ."                'preview',\n"
-            ."                'sendTest',\n"
-            ."                'compose',\n"
-            ."            ],\n"
-            ."            \\FinityLabs\\FinMail\\Resources\\EmailThemeResource\\EmailThemeResource::class => [\n"
-            ."                'viewAny',\n"
-            ."                'view',\n"
-            ."                'create',\n"
-            ."                'update',\n"
-            ."                'delete',\n"
-            ."            ],\n"
-            ."            \\FinityLabs\\FinMail\\Resources\\SentEmailResource\\SentEmailResource::class => [\n"
-            ."                'viewAny',\n"
-            ."                'view',\n"
-            ."                'resend',\n"
-            ."            ],\n";
-
-        $managePos = strpos($content, "'manage' => [");
-
-        if ($managePos === false) {
-            $this->components->warn('Could not find the manage array in Shield config. Add FinMail resources manually.');
-
-            return;
-        }
-
-        $openBracket = strpos($content, '[', $managePos + strlen("'manage' => "));
-
-        if ($openBracket === false) {
-            $this->components->warn('Could not parse Shield config. Add FinMail resources manually.');
-
-            return;
-        }
-
-        // Count brackets to find the matching ]
-        $depth = 1;
-        $pos = $openBracket + 1;
-        $len = strlen($content);
-
-        while ($pos < $len && $depth > 0) {
-            if ($content[$pos] === '[') {
-                $depth++;
-            } elseif ($content[$pos] === ']') {
-                $depth--;
-            }
-
-            if ($depth > 0) {
-                $pos++;
-            }
-        }
-
-        // Insert entries before the closing ] of the manage array
-        $insertPos = strrpos(substr($content, 0, $pos), "\n");
-
-        if ($insertPos === false) {
-            $this->components->warn('Could not parse Shield config. Add FinMail resources manually.');
-
-            return;
-        }
-
-        $insertPos++;
-
-        $content = substr($content, 0, $insertPos).$entries.substr($content, $insertPos);
-
-        file_put_contents($configPath, $content);
         $this->info('  FinMail resources registered in Shield config');
 
         $this->generateShieldPermissions();

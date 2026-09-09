@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.14.0] - 2026-09-09
+
+### Changed
+
+- The shared plumbing moved to [fin-support](https://github.com/finity-labs/fin-support) and [lin-support](https://github.com/finity-labs/lin-support), which FinMail now requires (`finity-labs/fin-support ^0.1`): policy registration goes through `PolicyRegistrar` (the FinMail policy map stays in `Helpers\PolicyRegistration`), the install and uninstall commands edit panel providers and the Shield config through the support concerns, the language step of `fin-mail:install` is lin-support's locale prompt over its 60-locale map, and the settings pages use fin-support's `HasPageShieldSupport`. Behaviour is unchanged. `Traits\HasPageShieldSupport`, `Commands\Concerns\CanRegisterPlugin`, `CanDeregisterPlugin` and `DiscoversPanelProviders` are gone from this package; a host page that used the trait imports `FinityLabs\FinSupport\Pages\Concerns\HasPageShieldSupport` instead, which behaves the same.
+
 ## [1.13.2] - 2026-09-08
 
 ### Fixed

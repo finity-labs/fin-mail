@@ -25,5 +25,3 @@ parameters:
         # Public API trait for consumers — unused within the package itself
         - '#Trait FinityLabs\\FinMail\\Traits\\HasEmailTemplates is used zero times#'
 
-        # Shield facade is only called after class_exists guard
-        - '#BezhanSalleh\\FilamentShield\\#'

@@ -17,7 +17,7 @@ use Filament\Support\Icons\Heroicon;
 use FinityLabs\FinMail\Clusters\FinMailSettings\FinMailSettings;
 use FinityLabs\FinMail\Enums\CleanupFrequency;
 use FinityLabs\FinMail\Settings\LoggingSettings;
-use FinityLabs\FinMail\Traits\HasPageShieldSupport;
+use FinityLabs\FinSupport\Pages\Concerns\HasPageShieldSupport;
 
 class ManageLoggingSettings extends SettingsPage
 {

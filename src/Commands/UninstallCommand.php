@@ -10,17 +10,20 @@ use FinityLabs\FinMail\Clusters\FinMailSettings\Pages\ManageAuthEmailSettings;
 use FinityLabs\FinMail\Clusters\FinMailSettings\Pages\ManageBrandingSettings;
 use FinityLabs\FinMail\Clusters\FinMailSettings\Pages\ManageGeneralSettings;
 use FinityLabs\FinMail\Clusters\FinMailSettings\Pages\ManageLoggingSettings;
-use FinityLabs\FinMail\Commands\Concerns\CanDeregisterPlugin;
-use FinityLabs\FinMail\Commands\Concerns\DiscoversPanelProviders;
 use FinityLabs\FinMail\Commands\Concerns\ManagesThemeStyles;
+use FinityLabs\FinMail\FinMailPlugin;
+use FinityLabs\FinSupport\Console\Concerns\DiscoversPanelProviders;
+use FinityLabs\FinSupport\Console\Concerns\EditsPanelProviders;
+use FinityLabs\FinSupport\Console\Concerns\EditsShieldConfig;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class UninstallCommand extends Command
 {
-    use CanDeregisterPlugin;
     use DiscoversPanelProviders;
+    use EditsPanelProviders;
+    use EditsShieldConfig;
     use ManagesThemeStyles;
 
     private const DATABASE_TABLES = [
@@ -85,7 +88,7 @@ class UninstallCommand extends Command
 
             if ($content !== false && str_contains($content, 'FinMailPlugin')) {
                 $this->comment("Removing FinMailPlugin from {$panelId} panel...");
-                $this->deregisterPlugin($path);
+                $this->deregisterPlugin($path, FinMailPlugin::class);
             }
         }
     }
@@ -101,30 +104,17 @@ class UninstallCommand extends Command
 
     protected function removeShieldConfig(): void
     {
-        $configPath = config_path('filament-shield.php');
-
-        if (! file_exists($configPath)) {
-            return;
-        }
-
-        $content = file_get_contents($configPath);
-
-        if ($content === false || ! str_contains($content, 'FinityLabs\\FinMail')) {
+        if (! $this->hasShieldConfig()) {
             return;
         }
 
         $this->comment('Removing FinMail resources from Shield config...');
 
-        $content = preg_replace(
-            '#[ \t]*\\\\FinityLabs\\\\FinMail\\\\[^\n]+::class\s*=>\s*\[\n(?:[ \t]+\'[^\']+\',?\n)*[ \t]*\],?\n#',
-            '',
-            $content,
-        );
-
-        if ($content !== null) {
-            file_put_contents($configPath, $content);
-            $this->info('  FinMail resources removed from Shield config');
+        if (! $this->unregisterShieldResources('FinityLabs\\FinMail')) {
+            return;
         }
+
+        $this->info('  FinMail resources removed from Shield config');
 
         $this->removeShieldPolicies();
     }
