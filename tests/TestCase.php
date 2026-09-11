@@ -7,6 +7,7 @@ namespace FinityLabs\FinMail\Tests;
 use FinityLabs\FinMail\FinMailServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\LaravelSettings\LaravelSettingsServiceProvider;
 
@@ -58,7 +59,16 @@ class TestCase extends Orchestra
         $migration = include __DIR__.'/../database/migrations/create_sent_emails_table.php';
         $migration->up();
 
-        // Create a users table for foreign keys
+        $this->createUsersTable($app);
+    }
+
+    /**
+     * Create the users table the package foreign keys point at.
+     *
+     * @param  Application  $app
+     */
+    protected function createUsersTable($app): void
+    {
         $app['db']->connection()->getSchemaBuilder()->create('users', function ($table) {
             $table->id();
             $table->string('name', 255);

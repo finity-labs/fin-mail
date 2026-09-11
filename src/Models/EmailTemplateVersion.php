@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
  * @property array<string, string> $subject
  * @property array<string, string>|null $preheader
  * @property array<string, string> $body
- * @property int|null $created_by
+ * @property int|string|null $created_by
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */

@@ -298,7 +298,7 @@ class EmailTemplate extends Model
     /**
      * Save a version snapshot of the current state (all translations).
      */
-    public function saveVersion(?int $userId = null): EmailTemplateVersion
+    public function saveVersion(int|string|null $userId = null): EmailTemplateVersion
     {
         if (! config('fin-mail.versioning.enabled')) {
             return new EmailTemplateVersion;

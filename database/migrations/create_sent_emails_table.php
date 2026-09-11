@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use FinityLabs\FinMail\Models\EmailTemplate;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,7 +12,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create(config('fin-mail.table_names.sent') ?? 'sent_emails', function (Blueprint $table) {
+        /** @var class-string<Model> $userModel */
+        $userModel = config('auth.providers.users.model');
+        $usersTable = (new $userModel)->getTable();
+
+        Schema::create(config('fin-mail.table_names.sent') ?? 'sent_emails', function (Blueprint $table) use ($userModel, $usersTable) {
             $table->id();
 
             // Template reference
@@ -37,7 +42,10 @@ return new class extends Migration
             $table->json('metadata')->nullable();
 
             // Who sent it
-            $table->foreignId('sent_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignIdFor($userModel, 'sent_by')
+                ->nullable()
+                ->constrained($usersTable)
+                ->nullOnDelete();
 
             // Polymorphic: what model this email relates to
             $table->nullableMorphs('sendable');

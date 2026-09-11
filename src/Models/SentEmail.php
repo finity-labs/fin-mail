@@ -24,7 +24,7 @@ use Illuminate\Support\Carbon;
  * @property EmailStatus $status
  * @property Carbon|null $sent_at
  * @property array<string, mixed>|null $metadata
- * @property int|null $sent_by
+ * @property int|string|null $sent_by
  * @property string|null $sendable_type
  * @property int|string|null $sendable_id
  * @property Carbon|null $created_at

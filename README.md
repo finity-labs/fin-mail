@@ -561,6 +561,24 @@ Preview changes without applying them:
 php artisan fin-mail:upgrade --dry-run
 ```
 
+### UUID or ULID user models
+
+Since 1.14.1 the migrations size the `email_template_versions.created_by` and `sent_emails.sent_by` columns from your auth user model, so a fresh install on a `HasUuids` or `HasUlids` user works out of the box. An install that ran the earlier migrations on such a model has integer columns that cannot hold the key. Migrate them once:
+
+```php
+Schema::table('email_template_versions', function (Blueprint $table) {
+    $table->dropConstrainedForeignId('created_by');
+    $table->foreignIdFor(User::class, 'created_by')->nullable()->constrained()->nullOnDelete();
+});
+
+Schema::table('sent_emails', function (Blueprint $table) {
+    $table->dropConstrainedForeignId('sent_by');
+    $table->foreignIdFor(User::class, 'sent_by')->nullable()->constrained()->nullOnDelete();
+});
+```
+
+Installs on the default integer user model need nothing.
+
 ## Uninstalling
 
 Run the uninstall command **before** removing the package:

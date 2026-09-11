@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.14.1] - 2026-09-11
+
+### Fixed
+
+- Apps whose user model uses a string primary key (`HasUuids`, `HasUlids`) could not save a template or log a sent email. `EmailTemplate::saveVersion()` was typed `?int`, so the Filament edit page threw a `TypeError` on save, and even past that the `created_by` and `sent_by` columns were unsigned big integers with a foreign key to a literal `users` table. Both migrations now build the column with `foreignIdFor()` on the configured auth user model, so it comes out as a bigint, ULID or UUID to match, and the constraint targets that model's table. `saveVersion()` accepts `int|string|null`. Existing installs on a string-keyed user model need to alter the two columns by hand, see the README's Upgrading section (#28)
+
 ## [1.14.0] - 2026-09-09
 
 ### Changed
