@@ -11,7 +11,7 @@ parameters:
         - '#Unsafe usage of new static#'
 
         # Package views are registered at runtime — PHPStan can't validate view-string
-        - '#Parameter \#1 \$view .* expects view-string\|null, string given#'
+        - '#Parameter (\#1 )?\$view .* expects view-string\|null, string given#'
 
         # EditorContract returns base Component; actual editors have required()/label() via form traits
         - '#Call to an undefined method Filament\\Schemas\\Components\\Component::(required|label)\(\)#'
