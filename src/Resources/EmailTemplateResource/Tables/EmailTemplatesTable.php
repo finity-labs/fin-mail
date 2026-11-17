@@ -7,6 +7,7 @@ namespace FinityLabs\FinMail\Resources\EmailTemplateResource\Tables;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -27,6 +28,9 @@ use Filament\Tables\Table;
 use FinityLabs\FinMail\Actions\EmailSender;
 use FinityLabs\FinMail\FinMailPlugin;
 use FinityLabs\FinMail\Helpers\TokenValue;
+use FinityLabs\FinMail\Mail\EmailLayout;
+use FinityLabs\FinMail\Models\EmailTemplate;
+use FinityLabs\FinMail\Models\EmailTheme;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
 use FinityLabs\FinMail\Settings\GeneralSettings;
 use Illuminate\Database\Eloquent\Collection;
@@ -144,9 +148,11 @@ class EmailTemplatesTable
                         ->modalHeading(fn ($record): string => __('fin-mail::fin-mail.template.actions.preview_heading', ['record' => $record->name]))
                         ->modalContent(fn ($record) => view('fin-mail::components.email-preview', [
                             'subject' => $record->subject,
-                            'preheader' => $record->preheader,
+                            'preheader' => $record->preheaderIn(app()->getLocale()),
                             'html' => $record->body,
                             'theme' => $record->theme?->resolvedColors(),
+                            'template' => $record,
+                            'locale' => app()->getLocale(),
                         ]))
                         ->modalWidth(Width::FourExtraLarge)
                         ->modalSubmitAction(false)
@@ -269,13 +275,13 @@ class EmailTemplatesTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make()
-                        ->authorizeIndividualRecords(function () {
-                            /** @var FinMailPlugin $plugin */
-                            $plugin = filament('fin-mail');
+                    static::setThemeBulkAction(),
+                    static::setLayoutBulkAction(),
 
-                            return $plugin->isShieldAvailable() ? 'delete' : true;
-                        })
+                    DeleteBulkAction::make()
+                        // The closure is asked once per record and its answer
+                        // is the verdict: it has to check the record itself.
+                        ->authorizeIndividualRecords(fn (EmailTemplate $record): bool => static::canDeleteRecord($record))
                         ->before(function (DeleteBulkAction $action, Collection $records): void {
                             $lockedCount = $records->where('is_locked', true)->count();
                             if ($lockedCount > 0) {
@@ -294,6 +300,95 @@ class EmailTemplatesTable
                 ]),
             ])
             ->defaultSort('updated_at', 'desc');
+    }
+
+    /**
+     * Put the selected templates on one theme, or back on the default theme.
+     */
+    protected static function setThemeBulkAction(): BulkAction
+    {
+        return BulkAction::make('set_theme')
+            ->label(__('fin-mail::fin-mail.template.actions.set_theme'))
+            ->icon(Heroicon::OutlinedSwatch)
+            ->modalHeading(__('fin-mail::fin-mail.template.actions.set_theme'))
+            ->modalSubmitActionLabel(__('fin-mail::fin-mail.template.actions.apply'))
+            ->schema([
+                Select::make('email_theme_id')
+                    ->label(__('fin-mail::fin-mail.template.fields.theme'))
+                    ->options(fn (): array => EmailTheme::query()->orderBy('name')->pluck('name', 'id')->all())
+                    ->placeholder(__('fin-mail::fin-mail.template.fields.theme_placeholder'))
+                    ->native(false),
+            ])
+            ->authorizeIndividualRecords(fn (EmailTemplate $record): bool => static::canEditRecord($record))
+            ->action(function (Collection $records, array $data): void {
+                $themeId = filled($data['email_theme_id'] ?? null) ? (int) $data['email_theme_id'] : null;
+
+                foreach ($records as $record) {
+                    $record->update(['email_theme_id' => $themeId]);
+                }
+
+                Notification::make()
+                    ->title(trans_choice('fin-mail::fin-mail.template.notifications.theme_set', $records->count(), ['count' => $records->count()]))
+                    ->success()
+                    ->send();
+            })
+            ->deselectRecordsAfterCompletion();
+    }
+
+    /**
+     * Put the selected templates on one of the configured layouts, or back
+     * on the default layout. Shown only when config fin-mail.layouts lists
+     * layouts.
+     */
+    protected static function setLayoutBulkAction(): BulkAction
+    {
+        return BulkAction::make('set_layout')
+            ->label(__('fin-mail::fin-mail.template.actions.set_layout'))
+            ->icon(Heroicon::OutlinedRectangleGroup)
+            ->modalHeading(__('fin-mail::fin-mail.template.actions.set_layout'))
+            ->modalSubmitActionLabel(__('fin-mail::fin-mail.template.actions.apply'))
+            ->schema([
+                Select::make('view_path')
+                    ->label(__('fin-mail::fin-mail.template.fields.layout'))
+                    ->options(fn (): array => EmailLayout::options())
+                    ->placeholder(__('fin-mail::fin-mail.template.fields.layout_placeholder'))
+                    ->native(false),
+            ])
+            ->authorizeIndividualRecords(fn (EmailTemplate $record): bool => static::canEditRecord($record))
+            ->action(function (Collection $records, array $data): void {
+                $viewPath = filled($data['view_path'] ?? null) ? (string) $data['view_path'] : null;
+
+                foreach ($records as $record) {
+                    $record->update(['view_path' => $viewPath]);
+                }
+
+                Notification::make()
+                    ->title(trans_choice('fin-mail::fin-mail.template.notifications.layout_set', $records->count(), ['count' => $records->count()]))
+                    ->success()
+                    ->send();
+            })
+            ->deselectRecordsAfterCompletion()
+            ->visible(fn (): bool => EmailLayout::hasOptions());
+    }
+
+    protected static function canEditRecord(EmailTemplate $record): bool
+    {
+        /** @var FinMailPlugin $plugin */
+        $plugin = filament('fin-mail');
+
+        return $plugin->getEmailTemplateResource()::canEdit($record);
+    }
+
+    /**
+     * The resource's own delete check: the delete policy when there is one
+     * (Shield's or the host's), allowed otherwise.
+     */
+    protected static function canDeleteRecord(EmailTemplate $record): bool
+    {
+        /** @var FinMailPlugin $plugin */
+        $plugin = filament('fin-mail');
+
+        return $plugin->getEmailTemplateResource()::canDelete($record);
     }
 
     /**

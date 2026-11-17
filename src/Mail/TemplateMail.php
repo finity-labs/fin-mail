@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace FinityLabs\FinMail\Mail;
 
 use FinityLabs\FinMail\Enums\EmailStatus;
+use FinityLabs\FinMail\Helpers\MergeTagStripper;
+use FinityLabs\FinMail\Helpers\PreheaderFallback;
 use FinityLabs\FinMail\Helpers\TokenReplacer;
 use FinityLabs\FinMail\Models\EmailTemplate;
+use FinityLabs\FinMail\Models\EmailTheme;
 use FinityLabs\FinMail\Models\SentEmail;
-use FinityLabs\FinMail\Settings\BrandingSettings;
 use FinityLabs\FinMail\Settings\GeneralSettings;
 use FinityLabs\FinMail\Settings\LoggingSettings;
 use Illuminate\Bus\Queueable;
@@ -50,6 +52,13 @@ class TemplateMail extends Mailable implements ShouldQueue
     /** @var array{subject: string, preheader: string, body: string}|array{} */
     protected array $rendered = [];
 
+    /**
+     * The language $rendered was produced in. A mail made without a locale
+     * can be rendered in the request and sent by a worker in another
+     * language; the layout's lang and dir follow the body.
+     */
+    protected ?string $renderedLocale = null;
+
     protected ?SentEmail $sentEmailLog = null;
 
     /**
@@ -75,6 +84,8 @@ class TemplateMail extends Mailable implements ShouldQueue
     protected ?string $rawBody = null;
 
     protected ?string $overrideView = null;
+
+    protected ?EmailTheme $themeOverride = null;
 
     /** @var array{address: string, name: ?string}|null */
     protected ?array $overrideFrom = null;
@@ -201,6 +212,18 @@ class TemplateMail extends Mailable implements ShouldQueue
     }
 
     /**
+     * Render this one email with another theme's colors instead of the
+     * template's own. Nothing is saved.
+     */
+    public function overrideTheme(EmailTheme $theme): static
+    {
+        $this->themeOverride = $theme;
+        $this->rendered = [];
+
+        return $this;
+    }
+
+    /**
      * Override branding settings for this one email. Any key from the
      * branding settings works (logo, logo_width, logo_height, content_width,
      * primary_color, footer_links, customer_service_email/phone); unset keys
@@ -301,27 +324,47 @@ class TemplateMail extends Mailable implements ShouldQueue
         }
 
         $rendered = $this->getRendered();
-        $themeColors = $this->emailTemplate->resolvedThemeColors();
+        $themeColors = $this->resolvedThemeColors();
+        $locale = filled($this->locale) ? $this->locale : ($this->renderedLocale ?? app()->getLocale());
+        $replacer = app(TokenReplacer::class);
+
+        $body = $this->overrideBody
+            ? $replacer->replace(
+                EmailTemplate::renderCustomBlocks(
+                    $this->stripMergeTagSpans($this->overrideBody),
+                    $themeColors,
+                    $locale,
+                ),
+                $this->models,
+            )
+            : $rendered['body'];
+
+        if ($this->overridePreheader !== null) {
+            $preheader = $replacer->replace($this->overridePreheader, $this->models);
+        } elseif ($this->overrideBody) {
+            // $rendered['preheader'] may already be the stored body's first
+            // paragraph. Start from the template's own preheader, so an
+            // empty one falls back on the body that is actually sent.
+            $preheader = $replacer->replace($this->emailTemplate->preheaderIn($locale), $this->models);
+        } else {
+            $preheader = $rendered['preheader'];
+        }
+
+        if (trim($preheader) === '') {
+            $preheader = PreheaderFallback::fromBody($body);
+        }
 
         return new Content(
-            view: $this->overrideView ?? 'fin-mail::email.default',
+            view: EmailLayout::resolveView($this->emailTemplate->view_path, $this->overrideView),
             with: array_merge(
-                [
-                    'body' => $this->overrideBody
-                        ? app(TokenReplacer::class)->replace(
-                            EmailTemplate::renderCustomBlocks(
-                                $this->stripMergeTagSpans($this->overrideBody),
-                                $themeColors,
-                            ),
-                            $this->models,
-                        )
-                        : $rendered['body'],
-                    'preheader' => $this->overridePreheader !== null
-                        ? app(TokenReplacer::class)->replace($this->overridePreheader, $this->models)
-                        : $rendered['preheader'],
-                    'theme' => $themeColors,
-                    'branding' => $this->resolveBranding(),
-                ],
+                EmailLayout::viewData(
+                    $body,
+                    $preheader,
+                    $themeColors,
+                    $this->resolveBranding(),
+                    $locale,
+                    $this->emailTemplate,
+                ),
                 $this->viewData
             )
         );
@@ -496,18 +539,18 @@ class TemplateMail extends Mailable implements ShouldQueue
      */
     protected function resolveBranding(): array
     {
-        $branding = app(BrandingSettings::class);
+        return EmailLayout::branding($this->brandingOverrides);
+    }
 
-        return array_merge([
-            'logo' => $branding->resolvedLogo(),
-            'logo_width' => $branding->logo_width,
-            'logo_height' => $branding->logo_height,
-            'content_width' => $branding->content_width,
-            'primary_color' => $branding->primary_color,
-            'footer_links' => $branding->footer_links,
-            'customer_service_email' => $branding->customer_service_email,
-            'customer_service_phone' => $branding->customer_service_phone,
-        ], $this->brandingOverrides);
+    /**
+     * The theme colors of this email: the overriding theme's, or the
+     * template's own (falling back to the default theme).
+     *
+     * @return array<string, string>
+     */
+    protected function resolvedThemeColors(): array
+    {
+        return $this->themeOverride?->resolvedColors() ?? $this->emailTemplate->resolvedThemeColors();
     }
 
     /**
@@ -516,7 +559,8 @@ class TemplateMail extends Mailable implements ShouldQueue
     protected function getRendered(): array
     {
         if (empty($this->rendered)) {
-            $this->rendered = $this->emailTemplate->render($this->models);
+            $this->rendered = $this->emailTemplate->render($this->models, theme: $this->resolvedThemeColors());
+            $this->renderedLocale = $this->emailTemplate->getLocale();
         }
 
         return $this->rendered;
@@ -529,22 +573,6 @@ class TemplateMail extends Mailable implements ShouldQueue
 
     protected function stripMergeTagSpans(string $html): string
     {
-        return preg_replace_callback(
-            '/<span\s[^>]*data-type="mergeTag"[^>]*>(.*?)<\/span>/s',
-            function (array $matches): string {
-                $inner = trim($matches[1]);
-
-                if ($inner !== '') {
-                    return $inner;
-                }
-
-                if (preg_match('/data-id="([^"]+)"/', $matches[0], $idMatch)) {
-                    return '{{ '.$idMatch[1].' }}';
-                }
-
-                return '';
-            },
-            $html,
-        ) ?? $html;
+        return MergeTagStripper::strip($html);
     }
 }

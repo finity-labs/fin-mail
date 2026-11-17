@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.0] - 2026-11-17
+
+Upgrading: run `php artisan migrate` right after `composer update`. See the README's "Upgrading to 1.15" section.
+
+### Added
+
+- Layouts per template. `layout` in the config sets the view every email renders in (`fin-mail::email.default` by default), and `layouts` lists views editors can pick per template. The pick is stored in the template's `view_path` column, which nothing read before. A "Set layout" bulk action joins the template list once layouts are configured
+- "Set theme" bulk action on the template list
+- `TemplateMail::overrideTheme()` renders one email in another theme's colors without saving anything
+- Layouts receive `$locale`, `$direction` (`ltr`/`rtl`) and `$template` (key and category) next to the existing variables. The default layout prints `lang` and `dir` from them instead of a fixed `lang="en"`
+- `theme_colors` in the config adds color keys of your own to every theme, edited in a new "Other" section of the theme form
+- Callout colors (info, warning and success pairs) on every theme, with defaults for themes saved before the update
+- Blocks: summary, credentials, callout, divider and small print, plus a secondary (outline) style on the button. Their ids are `emailSummary`, `emailCredentials`, `emailCallout`, `emailDivider` and `emailSmallPrint`; a block you already register under one of those ids keeps replacing the built-in one
+- Every built-in block renders through a Blade view, `fin-mail::blocks.{id}`, which `block_views` in the config can point at your own view. `hidden_blocks` takes blocks out of the editor's menu
+- Block `toHtml()` receives the email's `locale` and the block's `id` in `$data`, next to `theme`
+- `element_styles` in the config adds inline styles to the elements of the body (`p`, `h2`, `td`, …) with theme colors as placeholders, plus two optional rules: no bottom margin on the last element, and line breaks anywhere in a link that shows a bare URL. Block markup is left alone, and `InlineStyler::protect()` keeps the styles off HTML of your own. Nothing changes until you configure it
+- Preheader fallback, off by default: a template without a preheader in the email's language uses the body's first paragraph after the greeting
+- Social links on the branding page, printed in the default layout's footer as black or white icons (Facebook, Instagram, X, YouTube, TikTok, from Simple Icons) or as text links. The icons publish with the new `fin-mail-assets` tag and Laravel's `laravel-assets` tag, and `fin-mail:install` publishes them
+
+### Changed
+
+- Every preview (template list, view and edit pages, version history, Compose) renders through the same layout, theme and language the email goes out with, instead of always using the default layout in the admin's language
+- The default layout paints the footer in the theme's `footer_bg`. Default themes look the same; a theme with its own `footer_bg` now shows it
+- The new settings migration runs from the package with a plain `php artisan migrate`; there's nothing to publish. It skips the value if it already exists
+- `fin-mail:uninstall` also removes the record of that migration, so a reinstall runs it again, and deletes the published icons
+- `EmailTemplate::render()` takes an optional `$theme`, and `EmailTemplate::renderCustomBlocks()` and `TipTapConverter::toHtml()` an optional `$locale`. `ButtonBlock` now extends the new `EmailBlock` base class
+
+### Fixed
+
+- Bulk delete on the template list now checks the delete policy for each selected template. The check returned the ability's name where Filament expects the verdict, so every template passed
+- An `>` inside an attribute value (`title="a > b"`) no longer breaks the link when the body's links get their inline color, and a `data-style` attribute is no longer taken for the link's `style`
+
 ## [1.14.2] - 2026-09-11
 
 ### Fixed

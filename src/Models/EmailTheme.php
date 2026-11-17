@@ -76,11 +76,27 @@ class EmailTheme extends Model
     */
 
     /**
-     * Default color schema.
+     * Default color schema: the built-in colors, the callout colors and the
+     * extra colors from config fin-mail.theme_colors.
      *
      * @return array<string, string>
      */
     public static function defaultColors(): array
+    {
+        $extra = array_map(
+            fn (array $definition): string => $definition['default'],
+            static::extraColorDefinitions(),
+        );
+
+        return array_merge(static::builtInColors(), static::calloutColors(), $extra);
+    }
+
+    /**
+     * The colors every theme has had since the first release.
+     *
+     * @return array<string, string>
+     */
+    public static function builtInColors(): array
     {
         return [
             'background' => '#f4f4f7',
@@ -96,6 +112,51 @@ class EmailTheme extends Model
             'button_text' => '#ffffff',
             'border' => '#e8e8e8',
         ];
+    }
+
+    /**
+     * Default colors of the callout block's info, warning and success boxes.
+     *
+     * @return array<string, string>
+     */
+    public static function calloutColors(): array
+    {
+        return [
+            'info_bg' => '#eff6ff',
+            'info_text' => '#1e3a8a',
+            'warning_bg' => '#fffbeb',
+            'warning_text' => '#78350f',
+            'success_bg' => '#f0fdf4',
+            'success_text' => '#14532d',
+        ];
+    }
+
+    /**
+     * The extra colors a host's layouts or block views read, from config
+     * fin-mail.theme_colors. A value may be a definition array with label
+     * and default, or just the default color.
+     *
+     * @return array<string, array{label: string, default: string}>
+     */
+    public static function extraColorDefinitions(): array
+    {
+        $definitions = [];
+        $reserved = array_merge(static::builtInColors(), static::calloutColors());
+
+        foreach ((array) config('fin-mail.theme_colors', []) as $key => $definition) {
+            if (! is_string($key) || preg_match('/^[a-z0-9_]+$/i', $key) !== 1 || array_key_exists($key, $reserved)) {
+                continue;
+            }
+
+            $definition = is_array($definition) ? $definition : ['default' => $definition];
+
+            $definitions[$key] = [
+                'label' => is_string($definition['label'] ?? null) && $definition['label'] !== '' ? $definition['label'] : $key,
+                'default' => is_string($definition['default'] ?? null) ? $definition['default'] : '#000000',
+            ];
+        }
+
+        return $definitions;
     }
 
     public static function getDefault(): ?static

@@ -22,7 +22,7 @@ class DefaultEditor implements EditorContract
                 'codeBlock', 'customBlocks', 'mergeTags',
                 'redo', 'undo',
             ])
-            ->customBlocks(FinMailPlugin::getCustomBlockClasses())
+            ->customBlocks(FinMailPlugin::getEditorBlockClasses())
             ->columnSpanFull();
     }
 

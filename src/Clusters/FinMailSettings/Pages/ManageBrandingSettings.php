@@ -7,6 +7,7 @@ namespace FinityLabs\FinMail\Clusters\FinMailSettings\Pages;
 use BackedEnum;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\SettingsPage;
 use Filament\Schemas\Components\Grid;
@@ -14,6 +15,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use FinityLabs\FinMail\Clusters\FinMailSettings\FinMailSettings;
+use FinityLabs\FinMail\Helpers\SocialLinks;
 use FinityLabs\FinMail\Settings\BrandingSettings;
 use FinityLabs\FinSupport\Pages\Concerns\HasPageShieldSupport;
 
@@ -115,6 +117,30 @@ class ManageBrandingSettings extends SettingsPage
                         ->maxLength(50),
                 ])
                 ->columns(2),
+
+            Section::make(__('fin-mail::fin-mail.settings.sections.social_links'))
+                ->description(__('fin-mail::fin-mail.settings.sections.social_links_description'))
+                ->schema([
+                    Repeater::make('social_links')
+                        ->hiddenLabel()
+                        ->schema([
+                            Select::make('platform')
+                                ->label(__('fin-mail::fin-mail.settings.fields.social_platform'))
+                                ->options(fn (): array => SocialLinks::platforms())
+                                ->required()
+                                ->native(false),
+                            TextInput::make('url')
+                                ->label(__('fin-mail::fin-mail.settings.fields.social_url'))
+                                ->url()
+                                ->required()
+                                ->maxLength(500),
+                        ])
+                        ->columns(2)
+                        ->defaultItems(0)
+                        ->reorderable()
+                        ->addActionLabel(__('fin-mail::fin-mail.settings.sections.add_social_links'))
+                        ->itemLabel(fn (array $state): ?string => SocialLinks::platforms()[$state['platform'] ?? ''] ?? null),
+                ]),
         ]);
     }
 }

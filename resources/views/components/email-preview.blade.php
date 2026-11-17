@@ -1,46 +1,15 @@
 @php
-    $content = $html ?? '';
-
-    // Use passed theme or fall back to the configured default theme (then hardcoded defaults)
-    $resolvedTheme = $theme ?? \FinityLabs\FinMail\Models\EmailTheme::resolvedDefaultColors();
-
-    if (is_array($content)) {
-        // Tiptap JSON document (has 'type' key) — convert to HTML via Filament's renderer
-        if (isset($content['type']) || (isset($content[0]['type']))) {
-            $content = \FinityLabs\FinMail\Helpers\TipTapConverter::toHtml($content, $resolvedTheme);
-        } else {
-            // Translatable array — pick current locale
-            $content = $content[app()->getLocale()] ?? reset($content) ?: '';
-        }
-    }
-
-    // Resolve branding from settings
-    $brandingSettings = app(\FinityLabs\FinMail\Settings\BrandingSettings::class);
-    $resolvedBranding = [
-        'logo' => $brandingSettings->resolvedLogo(),
-        'logo_width' => $brandingSettings->logo_width,
-        'logo_height' => $brandingSettings->logo_height,
-        'content_width' => $brandingSettings->content_width,
-        'primary_color' => $brandingSettings->primary_color,
-        'footer_links' => $brandingSettings->footer_links,
-        'customer_service_email' => $brandingSettings->customer_service_email,
-        'customer_service_phone' => $brandingSettings->customer_service_phone,
-    ];
-
-    // Render custom blocks (e.g. buttons) in stored HTML
-    if (is_string($content) && str_contains($content, 'data-type="customBlock"')) {
-        $content = \FinityLabs\FinMail\Models\EmailTemplate::renderCustomBlocks($content, $resolvedTheme);
-    }
-
-    // Render through the full email layout
-    $fullHtml = $content
-        ? view('fin-mail::email.default', [
-            'body' => $content,
-            'preheader' => $preheader ?? '',
-            'theme' => $resolvedTheme,
-            'branding' => $resolvedBranding,
-        ])->render()
-        : '';
+    // Rendered through the same layout, theme and language as the email
+    // itself (FinityLabs\FinMail\Mail\EmailLayout). Tokens stay as they
+    // are written: a preview has no models.
+    $fullHtml = \FinityLabs\FinMail\Mail\EmailLayout::renderPreview(
+        content: $html ?? '',
+        preheader: $preheader ?? '',
+        theme: $theme ?? null,
+        template: $template ?? null,
+        locale: $locale ?? null,
+        viewPath: $viewPath ?? null,
+    );
 @endphp
 
 <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg space-y-3">

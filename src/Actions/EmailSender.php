@@ -56,7 +56,11 @@ class EmailSender
             $body = $this->data['body'];
 
             if (is_array($body)) {
-                $body = TipTapConverter::toHtml($body, $this->resolveTemplateModel()?->resolvedThemeColors());
+                $body = TipTapConverter::toHtml(
+                    $body,
+                    $this->resolveTemplateModel()?->resolvedThemeColors(),
+                    $this->data['locale'] ?? null,
+                );
             }
 
             $mail = TemplateMail::make($templateKey, $this->data['locale'] ?? null)

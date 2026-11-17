@@ -83,6 +83,13 @@ class InstallCommand extends Command
             $this->info('  Migrations complete');
         }
 
+        $this->comment('Publishing social icons...');
+        $this->callSilently('vendor:publish', [
+            '--tag' => 'fin-mail-assets',
+            '--force' => true,
+        ]);
+        $this->info('  Social icons published to public/vendor/fin-mail/');
+
         $this->configureLocales();
 
         if ($this->option('seed') || $this->confirm('Seed default email templates?', true)) {

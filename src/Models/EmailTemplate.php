@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace FinityLabs\FinMail\Models;
 
 use FinityLabs\FinMail\FinMailPlugin;
+use FinityLabs\FinMail\Helpers\MergeTagStripper;
+use FinityLabs\FinMail\Helpers\PreheaderFallback;
 use FinityLabs\FinMail\Helpers\TokenReplacer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -208,10 +210,11 @@ class EmailTemplate extends Model
      * @param  bool  $renderBlocks  When false, custom blocks (e.g. buttons) are left as their
      *                              editor markup instead of being expanded to final HTML. Use this
      *                              when seeding an editable RichEditor so the blocks round-trip.
+     * @param  array<string, string>|null  $theme  Theme colors for the blocks; the template's own when null
      *
      * @return array{subject: string, preheader: string, body: string}
      */
-    public function render(array $models = [], ?string $locale = null, bool $renderBlocks = true): array
+    public function render(array $models = [], ?string $locale = null, bool $renderBlocks = true, ?array $theme = null): array
     {
         if ($locale) {
             $this->setLocale($locale);
@@ -219,18 +222,42 @@ class EmailTemplate extends Model
 
         $replacer = app(TokenReplacer::class);
 
-        $theme = $this->resolvedThemeColors();
+        $theme ??= $this->resolvedThemeColors();
         $body = self::stripMergeTagSpans($this->body);
 
         if ($renderBlocks) {
-            $body = self::renderCustomBlocks($body, $theme);
+            $body = self::renderCustomBlocks($body, $theme, $this->getLocale());
+        }
+
+        $body = $replacer->replace($body, $models);
+
+        $preheader = $replacer->replace($this->preheaderIn(), $models);
+
+        if (trim($preheader) === '' && $renderBlocks) {
+            $preheader = PreheaderFallback::fromBody($body);
         }
 
         return [
             'subject' => $replacer->replace($this->subject, $models),
-            'preheader' => $replacer->replace($this->preheader ?? '', $models),
-            'body' => $replacer->replace($body, $models),
+            'preheader' => $preheader,
+            'body' => $body,
         ];
+    }
+
+    /**
+     * The template's own preheader in one language (the template's current
+     * one when null), before any fallback from the body. With the preheader
+     * fallback on, only that language counts: spatie's fallback locale would
+     * otherwise hand a Hungarian email the English preheader instead of its
+     * own first paragraph.
+     */
+    public function preheaderIn(?string $locale = null): string
+    {
+        return (string) $this->getTranslation(
+            'preheader',
+            $locale ?? $this->getLocale(),
+            ! PreheaderFallback::isEnabled(),
+        );
     }
 
     /**
@@ -239,38 +266,29 @@ class EmailTemplate extends Model
      */
     protected static function stripMergeTagSpans(string $html): string
     {
-        return preg_replace_callback(
-            '/<span\s[^>]*data-type="mergeTag"[^>]*>(.*?)<\/span>/s',
-            function (array $matches): string {
-                $inner = trim($matches[1]);
-
-                if ($inner !== '') {
-                    return $inner;
-                }
-
-                // Atom node with no content — reconstruct {{ token }} from data-id
-                if (preg_match('/data-id="([^"]+)"/', $matches[0], $idMatch)) {
-                    return '{{ '.$idMatch[1].' }}';
-                }
-
-                return '';
-            },
-            $html,
-        ) ?? $html;
+        return MergeTagStripper::strip($html);
     }
 
     /**
      * Replace custom block divs in stored HTML with their rendered output.
      *
+     * Each block's toHtml() receives the theme colors, the email's locale
+     * and its own block id as $data.
+     *
      * @param  array<string, string>  $theme
      */
-    public static function renderCustomBlocks(string $html, array $theme): string
+    public static function renderCustomBlocks(string $html, array $theme, ?string $locale = null): string
     {
+        if (! str_contains($html, 'customBlock')) {
+            return $html;
+        }
+
         $blocks = FinMailPlugin::getCustomBlocks();
+        $locale ??= app()->getLocale();
 
         return preg_replace_callback(
             '/<div\s[^>]*data-type="customBlock"[^>]*>.*?<\/div>/s',
-            function (array $matches) use ($blocks, $theme): string {
+            function (array $matches) use ($blocks, $theme, $locale): string {
                 $tag = $matches[0];
 
                 if (! preg_match('/data-id="([^"]+)"/', $tag, $idMatch)) {
@@ -289,7 +307,12 @@ class EmailTemplate extends Model
                     $config = json_decode(html_entity_decode($configMatch[1]), true) ?? [];
                 }
 
-                return $blockClass::toHtml($config, ['theme' => $theme]) ?? '';
+                // Merge-tag spans inside a block's rich-text config are
+                // entity-encoded in the stored body and survive the body's
+                // strip, so strip the block's output as well.
+                return MergeTagStripper::strip(
+                    $blockClass::toHtml($config, ['theme' => $theme, 'locale' => $locale, 'id' => $blockId]) ?? '',
+                );
             },
             $html,
         ) ?? $html;

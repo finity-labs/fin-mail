@@ -15,8 +15,9 @@ class TipTapConverter
      *
      * @param  array<string, mixed>  $content
      * @param  array<string, string>|null  $theme  Theme colors for custom blocks
+     * @param  string|null  $locale  The email's locale, passed to the custom blocks
      */
-    public static function toHtml(array $content, ?array $theme = null): string
+    public static function toHtml(array $content, ?array $theme = null, ?string $locale = null): string
     {
         $document = isset($content['type']) ? $content : ['type' => 'doc', 'content' => $content];
 
@@ -25,13 +26,19 @@ class TipTapConverter
         // replaces the mergeTag nodes with plain token text.
         $mergeTags = static::extractMergeTagIds($document);
 
+        $blocks = [];
+
+        foreach (FinMailPlugin::getCustomBlocks() as $blockId => $blockClass) {
+            $blocks[$blockClass] = [
+                'theme' => $theme,
+                'locale' => $locale ?? app()->getLocale(),
+                'id' => $blockId,
+            ];
+        }
+
         $renderer = RichContentRenderer::make()
             ->content($document)
-            ->customBlocks(
-                collect(FinMailPlugin::getCustomBlockClasses())
-                    ->mapWithKeys(fn (string $blockClass) => [$blockClass => ['theme' => $theme]])
-                    ->all()
-            );
+            ->customBlocks($blocks);
 
         if (! empty($mergeTags)) {
             $renderer->mergeTags($mergeTags);
@@ -73,24 +80,7 @@ class TipTapConverter
      */
     protected static function stripMergeTagSpans(string $html): string
     {
-        return preg_replace_callback(
-            '/<span\s[^>]*data-type="mergeTag"[^>]*>(.*?)<\/span>/s',
-            function (array $matches): string {
-                $inner = trim($matches[1]);
-
-                if ($inner !== '') {
-                    return $inner;
-                }
-
-                // Atom node with no content — reconstruct {{ token }} from data-id
-                if (preg_match('/data-id="([^"]+)"/', $matches[0], $idMatch)) {
-                    return '{{ '.$idMatch[1].' }}';
-                }
-
-                return '';
-            },
-            $html,
-        ) ?? $html;
+        return MergeTagStripper::strip($html);
     }
 
     /**

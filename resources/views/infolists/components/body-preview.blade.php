@@ -7,7 +7,9 @@
         $locale = app()->getLocale();
         $body = $record->getTranslation('body', $locale);
         $theme = $record->resolvedThemeColors();
-        $body = \FinityLabs\FinMail\Models\EmailTemplate::renderCustomBlocks($body, $theme);
+        $body = \FinityLabs\FinMail\Helpers\InlineStyler::removeMarkers(
+            \FinityLabs\FinMail\Models\EmailTemplate::renderCustomBlocks($body, $theme, $locale)
+        );
     @endphp
 
     <iframe

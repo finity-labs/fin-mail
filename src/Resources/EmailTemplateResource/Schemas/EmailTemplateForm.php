@@ -19,6 +19,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use FinityLabs\FinMail\Contracts\EditorContract;
 use FinityLabs\FinMail\FinMailPlugin;
+use FinityLabs\FinMail\Mail\EmailLayout;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Models\EmailTheme;
 use FinityLabs\FinMail\Settings\GeneralSettings;
@@ -128,6 +129,18 @@ class EmailTemplateForm
                                             }
                                         }
                                     }),
+
+                                Select::make('view_path')
+                                    ->label(__('fin-mail::fin-mail.template.fields.layout'))
+                                    ->options(fn (): array => EmailLayout::options())
+                                    ->placeholder(__('fin-mail::fin-mail.template.fields.layout_placeholder'))
+                                    ->helperText(__('fin-mail::fin-mail.template.fields.layout_helper'))
+                                    // A layout since removed from the config falls back to the
+                                    // default when sending; show it as such instead of failing
+                                    // the select's validation on save.
+                                    ->formatStateUsing(fn (?string $state): ?string => array_key_exists((string) $state, EmailLayout::options()) ? $state : null)
+                                    ->native(false)
+                                    ->visible(fn (): bool => EmailLayout::hasOptions()),
 
                                 Toggle::make('is_active')
                                     ->label(__('fin-mail::fin-mail.template.fields.is_active'))

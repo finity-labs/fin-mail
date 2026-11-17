@@ -18,7 +18,8 @@ A powerful email template manager and composer for Filament. Build, manage, and 
 - **Dynamic Templates** — No need for separate Mailable classes per template. One universal `TemplateMail` handles everything
 - **Token Replacement** — `{{ user.name }}`, `{{ config.app.name }}`, conditionals `{% if user.is_premium %}`, and fallbacks `{{ user.name | 'Customer' }}`
 - **Merge Tags** — Tokens are available as merge tags directly in the RichEditor toolbar for easy insertion
-- **CTA Button Block** — Insert styled call-to-action buttons from the editor with configurable label, URL, and alignment
+- **Blocks** — Button (primary or outline), summary, credentials, callout, divider and small print, each drawn from a Blade view you can replace
+- **Layouts** — Pick the frame (header, footer, styles) per template from a list in the config, in the email's language and text direction
 - **Template Versioning** — Automatic version history with preview and one-click restore
 - **Email Logging** — Every sent email is logged with status tracking, rendered body storage, and polymorphic model association
 - **Translatable** — Templates support multiple languages via `spatie/laravel-translatable`, all locales stored in a single record
@@ -55,7 +56,7 @@ php artisan fin-mail:install
 ```
 
 The install command will:
-- Publish config and migrations
+- Publish config and migrations, and the social icons to `public/vendor/fin-mail`
 - Configure supported locales (auto-detects from your `lang/` directory)
 - Optionally run migrations and seed default templates
 - Optionally register the plugin in your Filament panel
@@ -223,7 +224,7 @@ After publishing the package views (`php artisan vendor:publish --tag=fin-mail-v
 @endforeach
 ```
 
-The default keys (`body`, `preheader`, `theme`, `branding`) remain available — extra data is merged on top.
+The default keys (`body`, `preheader`, `theme`, `branding`, `locale`, `direction`, `template`) remain available — extra data is merged on top.
 
 #### Overriding branding per email
 
@@ -242,13 +243,21 @@ TemplateMail::make('partner-newsletter')
     ]);
 ```
 
-Any key from the branding settings works (`logo`, `logo_width`, `logo_height`, `content_width`, `primary_color`, `footer_links`, `customer_service_email`, `customer_service_phone`); keys you don't pass fall through to the saved settings.
+Any key from the branding settings works (`logo`, `logo_width`, `logo_height`, `content_width`, `primary_color`, `footer_links`, `customer_service_email`, `customer_service_phone`, `social_links`); keys you don't pass fall through to the saved settings.
+
+#### Rendering in another theme
+
+`overrideTheme()` renders one email with another theme's colors instead of the template's own. Nothing is saved, so it suits a page that previews every template in each theme:
+
+```php
+$html = TemplateMail::make('order-shipped')
+    ->overrideTheme(EmailTheme::where('name', 'Admin copy')->firstOrFail())
+    ->render();
+```
 
 #### Using a custom email view
 
-By default, FinMail renders emails using the built-in `fin-mail::email.default` view.
-
-You can override the view on a per-email basis:
+`overrideView()` renders one email in a view of your choice, ahead of the template's layout (see [Layouts](#layouts)):
 
 ```php
 TemplateMail::make('welcome-email')
@@ -256,7 +265,49 @@ TemplateMail::make('welcome-email')
     ->overrideView('emails.custom-layout');
 ```
 
-The custom view receives the same variables as the default view (`$body`, `$preheader`, `$theme`, `$branding`) as well as any data provided via `with()` or `extraData()`.
+The view receives the same variables as any layout, plus whatever you pass with `with()` or `extraData()`.
+
+### Layouts
+
+The layout is the Blade view around the template body: the head, the header, the content box and the footer. The body staff edit in the template form is printed inside it as `$body`. FinMail ships `fin-mail::email.default`; your app can draw its own and let editors pick one per template.
+
+```php
+// config/fin-mail.php
+'layout' => 'mail.layouts.site',   // templates without a layout of their own
+
+'layouts' => [
+    'mail.layouts.site' => 'Customer mail',   // view => label, a translation key works
+    'mail.layouts.admin' => 'Admin copy',
+],
+```
+
+Once `layouts` has entries, the template form shows a Layout field (stored in the template's `view_path` column) and the template list gets a "Set layout" bulk action next to "Set theme". An email renders in the `overrideView()` view if one was given, then in the template's layout while that layout is still in the list, then in `layout`. Every preview, Send test and Compose use the same order. Resend sends the stored HTML as it went out.
+
+A layout receives:
+
+| Variable | Contents |
+|----------|----------|
+| `$body` | The rendered body: blocks drawn, tokens filled |
+| `$preheader` | The preheader text |
+| `$theme` | The theme's colors, keyed by name (`background`, `link`, `button_bg`, …) |
+| `$branding` | The branding settings, with `overrideBranding()` merged on top |
+| `$locale` | The email's locale, e.g. `hu` |
+| `$direction` | `ltr` or `rtl` for that locale |
+| `$template` | `['key' => …, 'category' => …]` of the template |
+
+Data you pass with `with()` arrives too, but previews in the admin have no such data and no models, so give your own variables a fallback (`$hasAccount ?? true`).
+
+A few things the default layout does that your own should copy:
+
+- `{!! \FinityLabs\FinMail\Helpers\InlineStyler::apply($body, $theme) !!}` prints the body with the [element styles](#element-styles) and the theme's link color inlined. Many mail clients drop `<style>` blocks.
+- The summary block's "Stack on phones" option needs the `.fm-stack` media query from the default layout's `<style>` block.
+- `<html lang="{{ str_replace('_', '-', $locale) }}" dir="{{ $direction }}">`.
+
+Outlook for Windows ignores `padding-left` on lists. If your layout styles `ul` and `ol`, add this to its `<head>`:
+
+```html
+<!--[if mso]><style>ul,ol{margin-left:24px!important}</style><![endif]-->
+```
 
 ### Adding "Send Email" to any resource
 
@@ -329,15 +380,33 @@ $invoice->sentEmailsCount();                  // Count
 
 When editing a template, any tokens defined in the Tokens tab are available as merge tags in the RichEditor toolbar. Click the merge tags button to browse and insert them directly into the email body.
 
-### CTA Button block
+### Blocks
 
-The editor includes a built-in Button custom block. Click the custom blocks button (squares-plus icon) in the toolbar, select "Button", and configure:
+The editor's custom blocks button (squares-plus icon) inserts these blocks:
 
-- **Button Text** — The label displayed on the button
-- **URL** — The link destination
-- **Alignment** — Left, center, or right
+| Block | Id | What it draws |
+|-------|----|---------------|
+| Button | `emailButton` | A link button. Primary uses `button_bg`/`button_text`; secondary is an outline in `primary` on `content_bg` |
+| Summary | `emailSummary` | Label and value rows in a bordered box, with a bold flag per row, value alignment and an option to stack on phones |
+| Credentials | `emailCredentials` | Login details or a one-time code: each label above its value, a Normal or Monospace font per row, and an optional copy chip that selects on one tap |
+| Callout | `emailCallout` | A tinted box around a notice. Info, warning and success take their colors from the theme; custom has its own two colors |
+| Divider | `emailDivider` | A one-pixel rule in the theme's `border` color |
+| Small print | `emailSmallPrint` | Smaller text in `text_light`, with links |
 
-The button automatically uses your theme's button colors (`button_bg` and `button_text`) in both preview and sent emails, with full inline styling for email client compatibility.
+Tokens work inside block settings the same way as in the body.
+
+Credential values (passwords, one-time codes) end up in the Sent Emails log with the rest of the body. Send such emails with `withoutStoringRenderedBody()`.
+
+Each block renders through `fin-mail::blocks.{id}`. To change a block's markup, point its id at your own view; it receives `$config`, `$theme`, `$locale` and `$id`:
+
+```php
+// config/fin-mail.php
+'block_views' => [
+    'emailButton' => 'mail.blocks.button',
+],
+```
+
+To keep a block out of the editor's menu, list its id in `hidden_blocks`. Emails that already use it still render it, but the editor can't edit a block it doesn't know, so hide a block only while no template uses it.
 
 ### Custom blocks
 
@@ -351,7 +420,7 @@ FinMailPlugin::make()
     ]),
 ```
 
-Registered blocks automatically appear in the editor's custom blocks toolbar, render in preview mode, and convert to HTML when emails are sent. ButtonBlock is always included by default.
+Registered blocks automatically appear in the editor's custom blocks toolbar, render in preview mode, and convert to HTML when emails are sent. The built-in blocks are always included. A block you register under the id of a built-in one (`emailDivider`, say) replaces it, in the editor and in sent emails.
 
 Each custom block needs to implement:
 
@@ -362,6 +431,19 @@ Each custom block needs to implement:
 - `toHtml()` — HTML for the actual sent email
 
 If your block uses theme colors, add a static `setPreviewTheme(?array $theme)` method and it will receive theme updates automatically when the user changes the template theme.
+
+`toHtml()` receives the theme colors, the email's locale and the block's id in `$data` (`theme`, `locale`, `id`). If you configure [element styles](#element-styles), wrap your block's HTML in `InlineStyler::protect()` so they leave its markup alone. The same goes for HTML you pass in as a token value, such as a listing card:
+
+```php
+use FinityLabs\FinMail\Helpers\InlineStyler;
+use FinityLabs\FinMail\Helpers\TokenValue;
+
+TemplateMail::make('new-listings')->models([
+    'cards' => new TokenValue(InlineStyler::protect(view('mail.listing-cards', $data)->render())),
+]);
+```
+
+The built-in blocks mark themselves the same way while element styles or the [preheader fallback](#preheader-fallback) are on. The marker is an HTML comment (`<!--fm-block-->…<!--/fm-block-->`): the element styles skip what's inside it, and the fallback doesn't take block text for the first paragraph. `InlineStyler::apply()` removes the markers in the layout. If you use the output of `EmailTemplate::render()` or of a block's `toHtml()` somewhere else, strip them with `InlineStyler::removeMarkers()`. With neither feature on, block HTML carries no marker.
 
 ## Events
 
@@ -536,6 +618,59 @@ FinMail::dateFormat();     // string|null for current locale
 FinMail::dateTimeFormat(); // string|null for current locale
 ```
 
+### Theme colors
+
+A theme stores twelve colors, plus the callout block's info, warning and success pairs. If your layout or block views need more, such as a header band, list them in `theme_colors`. Each gets a picker in the "Other" section of the theme form, its value is saved on the theme, and a theme without a value uses the default:
+
+```php
+'theme_colors' => [
+    'header_bg' => ['label' => 'Header background', 'default' => '#0b2545'],
+    'accent' => ['label' => 'mail.colors.accent', 'default' => '#f5b700'],
+],
+```
+
+Your layout reads them as `$theme['header_bg']`.
+
+### Element styles
+
+The body staff type carries no styles. `element_styles` adds inline styles to its elements, with theme colors as `{key}`:
+
+```php
+'element_styles' => [
+    'p' => 'margin: 0 0 16px; color: {text};',
+    'h2' => 'margin: 24px 0 8px; font-size: 22px; color: {heading};',
+    'a' => 'color: {link};',
+    'td' => 'padding: 8px; border-bottom: 1px solid {border};',
+],
+
+'element_style_rules' => [
+    'last_element_margin' => true,  // the body's last element gets margin-bottom: 0
+    'bare_url_break' => true,       // a link showing a bare URL gets word-break: break-all
+],
+```
+
+Only properties an element doesn't already have are added, and they go in front of the ones it has, so a style typed into the body wins. Block markup is left alone. Nothing changes until you configure something.
+
+The editor writes a list item as `<li><p>…</p></li>`. That inner paragraph gets the `p` style without its margins, so the `li` margin is what spaces the items.
+
+The last-element rule follows a list down to its last item, and gives empty paragraphs at the end of the body the same zero margin as the element before them. It leaves a margin typed into the body alone, and does nothing when the body ends with a block.
+
+### Preheader fallback
+
+With `preheader_fallback.enabled`, a template whose preheader is empty in the email's language uses the body's first paragraph after the greeting instead (a first paragraph of up to 60 characters that ends in a comma, exclamation mark or colon counts as the greeting), cut at a word boundary to `preheader_fallback.length` characters (110 by default). It reads only the email's own language: a Hungarian email with no Hungarian preheader gets its own first paragraph, not the English preheader. It's off by default because it changes the inbox preview of every template without a preheader.
+
+### Social links
+
+The branding page has a list of social profiles. The default layout prints them in the footer: Facebook, Instagram, X, YouTube and TikTok as icons, any other platform (LinkedIn included) as a text link. `social_platforms` in the config sets the platforms offered.
+
+The icons are 48 px PNGs, in black and in white; the layout picks whichever stands out on the footer background. Mail clients need an absolute URL, so the icons are published to `public/vendor/fin-mail`. `fin-mail:install` publishes them, and Laravel's default `post-update-cmd` copies them again on every `composer update` through the `laravel-assets` tag. Without that hook, run:
+
+```bash
+php artisan vendor:publish --tag=fin-mail-assets
+```
+
+Until they're published, the footer prints text links. The icons are the brand marks from [Simple Icons](https://simpleicons.org) (CC0), unmodified. The logos remain their owners' trademarks, so show them according to each brand's guidelines.
+
 Other publish tags:
 
 | Tag | Description |
@@ -544,6 +679,7 @@ Other publish tags:
 | `fin-mail-migrations` | Database migrations |
 | `fin-mail-settings-migrations` | Spatie Settings migrations |
 | `fin-mail-views` | Email template views |
+| `fin-mail-assets` | Social icons, to `public/vendor/fin-mail` |
 
 ## Upgrading
 
@@ -560,6 +696,26 @@ Preview changes without applying them:
 ```bash
 php artisan fin-mail:upgrade --dry-run
 ```
+
+### Upgrading to 1.15
+
+Run the migrations right after `composer update`:
+
+```bash
+php artisan migrate
+```
+
+FinMail loads the new settings migration (the branding page's social links) from the package, so there's nothing to publish. Until it has run, saving the branding page fails, and on `spatie/laravel-settings` older than 3.4.2 **every email fails** to render, because the branding settings miss the new value. There's no schema migration in this release.
+
+What else changes for an existing install:
+
+- The default layout now paints the footer in the theme's `footer_bg`. Default themes see no difference, since `footer_bg` equals `background`; a theme with its own `footer_bg` now shows it.
+- The template's `view_path` column is read now. It only matters if you list layouts in `layouts`; a value that isn't in the list falls back to the default layout.
+- The new blocks show in every editor's block menu. Hide the ones you don't want with `hidden_blocks`. If you already register a block of your own under one of the new ids (`emailSummary`, `emailCredentials`, `emailCallout`, `emailDivider`, `emailSmallPrint`), yours keeps winning.
+- The social icons are copied by `composer update` if your app has Laravel's default `post-update-cmd`; otherwise run `php artisan vendor:publish --tag=fin-mail-assets`.
+- A published copy of `default.blade.php` keeps working but misses the new footer, `lang` and `dir`. Compare it with the package's view, or move your changes into a layout of your own (see [Layouts](#layouts)).
+- A published copy of `components/email-preview.blade.php` keeps the old preview: the default layout, in the admin's language. Delete it from `resources/views/vendor/fin-mail` unless you changed it on purpose.
+- If you migrate with `--path` (some multi-tenant setups do), Laravel skips migrations a package loads. Run the new one by its path: `php artisan migrate --path=vendor/finity-labs/fin-mail/database/settings/upgrades`.
 
 ### UUID or ULID user models
 
@@ -594,6 +750,7 @@ The uninstall command will:
 - Remove FinMail entries from Shield config and clean up permissions from the database
 - Optionally drop all FinMail database tables and settings entries
 - Optionally delete published migrations, config, views, and translations
+- Delete the published social icons (`public/vendor/fin-mail`)
 - Clear settings and application caches
 
 ## Testing

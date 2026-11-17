@@ -12,6 +12,7 @@ use FinityLabs\FinMail\Clusters\FinMailSettings\Pages\ManageGeneralSettings;
 use FinityLabs\FinMail\Clusters\FinMailSettings\Pages\ManageLoggingSettings;
 use FinityLabs\FinMail\Commands\Concerns\ManagesThemeStyles;
 use FinityLabs\FinMail\FinMailPlugin;
+use FinityLabs\FinMail\FinMailServiceProvider;
 use FinityLabs\FinSupport\Console\Concerns\DiscoversPanelProviders;
 use FinityLabs\FinSupport\Console\Concerns\EditsPanelProviders;
 use FinityLabs\FinSupport\Console\Concerns\EditsShieldConfig;
@@ -65,6 +66,7 @@ class UninstallCommand extends Command
         $this->cleanupPublishedConfig();
         $this->cleanupPublishedViews();
         $this->cleanupPublishedTranslations();
+        $this->cleanupPublishedAssets();
         $this->clearCaches();
 
         $this->newLine();
@@ -236,7 +238,7 @@ class UninstallCommand extends Command
             $allMigrations = [...self::MIGRATION_FILES, ...self::SETTINGS_MIGRATION_FILES];
             $migrationNames = array_map(
                 fn (string $file) => pathinfo($file, PATHINFO_FILENAME),
-                $allMigrations,
+                [...$allMigrations, ...(glob(FinMailServiceProvider::upgradeMigrationsPath().'/*.php') ?: [])],
             );
 
             $deleted = DB::table('migrations')
@@ -354,6 +356,22 @@ class UninstallCommand extends Command
 
         $this->deleteDirectory($translationsPath);
         $this->info('  Deleted: lang/vendor/fin-mail/');
+    }
+
+    /**
+     * The social icons in public/vendor/fin-mail are copies of package
+     * files and hold nothing of the host's, so they go without a question.
+     */
+    protected function cleanupPublishedAssets(): void
+    {
+        $assetsPath = public_path('vendor/fin-mail');
+
+        if (! is_dir($assetsPath)) {
+            return;
+        }
+
+        $this->deleteDirectory($assetsPath);
+        $this->info('  Deleted: public/vendor/fin-mail/');
     }
 
     protected function clearCaches(): void

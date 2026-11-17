@@ -24,6 +24,13 @@
                     Get Started
                 </span>
             </div>
+
+            {{-- Callouts --}}
+            @foreach(['info', 'warning', 'success'] as $variant)
+                <div style="background-color: {{ $theme[$variant.'_bg'] ?? '#f4f4f7' }}; color: {{ $theme[$variant.'_text'] ?? '#333333' }}; padding: 8px 12px; border-radius: 6px; font-size: 12px; line-height: 1.5; margin: 0 0 6px 0;">
+                    {{ __('fin-mail::fin-mail.template.blocks.variant_'.$variant) }}
+                </div>
+            @endforeach
         </div>
 
         {{-- Footer --}}
@@ -34,5 +41,18 @@
                 <a href="#" style="color: {{ $theme['link'] ?? '#4F46E5' }}; text-decoration: none;">Privacy Policy</a>
             </p>
         </div>
+
+        {{-- Extra colors from config fin-mail.theme_colors --}}
+        @php($extraColors = \FinityLabs\FinMail\Models\EmailTheme::extraColorDefinitions())
+        @if($extraColors !== [])
+            <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px 14px;">
+                @foreach($extraColors as $key => $definition)
+                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: {{ $theme['text_light'] ?? '#666666' }};">
+                        <span style="display: inline-block; width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0, 0, 0, 0.15); background-color: {{ $theme[$key] ?? $definition['default'] }};"></span>
+                        {{ __($definition['label']) }}
+                    </span>
+                @endforeach
+            </div>
+        @endif
     </div>
 </div>

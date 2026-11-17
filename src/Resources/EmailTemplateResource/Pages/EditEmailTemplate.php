@@ -15,6 +15,7 @@ use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use FinityLabs\FinMail\Editors\Blocks\ButtonBlock;
 use FinityLabs\FinMail\FinMailPlugin;
+use FinityLabs\FinMail\Helpers\PreheaderFallback;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Models\EmailTemplateVersion;
 use FinityLabs\FinMail\Models\EmailTheme;
@@ -151,6 +152,10 @@ class EditEmailTemplate extends EditRecord
                         'preheader' => $this->data['preheader'] ?? '',
                         'html' => $this->data['body'] ?? '',
                         'theme' => $theme,
+                        'template' => $this->record,
+                        'locale' => $this->activeLocale,
+                        // The layout picked on the form, saved or not.
+                        'viewPath' => (string) ($this->data['view_path'] ?? ''),
                     ]);
                 })
                 ->modalWidth(Width::FourExtraLarge)
@@ -209,9 +214,11 @@ class EditEmailTemplate extends EditRecord
 
                                                 return view('fin-mail::components.email-preview', [
                                                     'subject' => $record->subject[$locale] ?? collect($record->subject)->first() ?? '',
-                                                    'preheader' => $record->preheader[$locale] ?? collect($record->preheader)->first() ?? '',
+                                                    'preheader' => $this->versionPreheader($record, $locale),
                                                     'html' => $record->body[$locale] ?? collect($record->body)->first() ?? '',
                                                     'theme' => $this->record->theme?->resolvedColors(),
+                                                    'template' => $this->record,
+                                                    'locale' => $locale,
                                                 ]);
                                             })
                                             ->modalWidth(Width::FourExtraLarge)
@@ -264,9 +271,11 @@ class EditEmailTemplate extends EditRecord
 
                     return view('fin-mail::components.email-preview', [
                         'subject' => $version->subject[$locale] ?? collect($version->subject)->first() ?? '',
-                        'preheader' => $version->preheader[$locale] ?? collect($version->preheader)->first() ?? '',
+                        'preheader' => $this->versionPreheader($version, $locale),
                         'html' => $version->body[$locale] ?? collect($version->body)->first() ?? '',
                         'theme' => $this->record->theme?->resolvedColors(),
+                        'template' => $this->record,
+                        'locale' => $locale,
                     ]);
                 })
                 ->modalWidth(Width::FourExtraLarge)
@@ -280,6 +289,22 @@ class EditEmailTemplate extends EditRecord
                     return $plugin->hasDeleteActionOnEditPage() && $this->record->isDeletable();
                 }),
         ];
+    }
+
+    /**
+     * A version's preheader as its preview shows it. With the preheader
+     * fallback on, only the previewed language counts, as in the email
+     * itself; otherwise another language stands in for a missing one.
+     */
+    protected function versionPreheader(EmailTemplateVersion $version, string $locale): string
+    {
+        $preheaders = $version->preheader ?? [];
+
+        if (filled($preheaders[$locale] ?? null) || PreheaderFallback::isEnabled()) {
+            return (string) ($preheaders[$locale] ?? '');
+        }
+
+        return (string) (collect($preheaders)->first() ?? '');
     }
 
     protected function syncButtonPreviewTheme(): void

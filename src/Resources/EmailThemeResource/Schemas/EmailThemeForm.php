@@ -114,6 +114,34 @@ class EmailThemeForm
                     ])
                     ->columns(2),
 
+                Section::make(__('fin-mail::fin-mail.theme.sections.callouts'))
+                    ->description(__('fin-mail::fin-mail.theme.sections.callouts_description'))
+                    ->schema(
+                        collect(EmailTheme::calloutColors())
+                            ->map(fn (string $default, string $key): ColorPicker => ColorPicker::make("colors.{$key}")
+                                ->label(__("fin-mail::fin-mail.theme.fields.{$key}"))
+                                ->default($default)
+                                ->live())
+                            ->values()
+                            ->all()
+                    )
+                    ->columns(2)
+                    ->collapsible(),
+
+                Section::make(__('fin-mail::fin-mail.theme.sections.other'))
+                    ->description(__('fin-mail::fin-mail.theme.sections.other_description'))
+                    ->schema(
+                        collect(EmailTheme::extraColorDefinitions())
+                            ->map(fn (array $definition, string $key): ColorPicker => ColorPicker::make("colors.{$key}")
+                                ->label(__($definition['label']))
+                                ->default($definition['default'])
+                                ->live())
+                            ->values()
+                            ->all()
+                    )
+                    ->columns(3)
+                    ->visible(fn (): bool => EmailTheme::extraColorDefinitions() !== []),
+
                 Section::make(__('fin-mail::fin-mail.theme.sections.preview'))
                     ->schema([
                         TextEntry::make('preview')

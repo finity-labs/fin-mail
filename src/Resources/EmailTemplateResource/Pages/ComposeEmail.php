@@ -15,7 +15,6 @@ use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use FinityLabs\FinMail\Actions\EmailSender;
 use FinityLabs\FinMail\Editors\Blocks\ButtonBlock;
-use FinityLabs\FinMail\Helpers\TipTapConverter;
 use FinityLabs\FinMail\Models\EmailTemplate;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\Schemas\ComposeEmailForm;
@@ -135,17 +134,6 @@ class ComposeEmail extends Page
         return __('fin-mail::fin-mail.compose.title_with_name', ['name' => $this->record->name]);
     }
 
-    private function getPreviewHtml(): string
-    {
-        $body = $this->data['body'] ?? '';
-
-        if (is_array($body)) {
-            return TipTapConverter::toHtml($body);
-        }
-
-        return $body;
-    }
-
     private function hasMultipleRecipients(): bool
     {
         return count(array_filter($this->data['to'] ?? [])) > 1;
@@ -204,8 +192,10 @@ class ComposeEmail extends Page
                 ->modalContent(fn () => view('fin-mail::components.email-preview', [
                     'subject' => $this->data['subject'] ?? '',
                     'preheader' => $this->data['preheader'] ?? '',
-                    'html' => $this->getPreviewHtml(),
+                    'html' => $this->data['body'] ?? '',
                     'theme' => $this->record->theme?->resolvedColors(),
+                    'template' => $this->record,
+                    'locale' => $this->data['locale'] ?? app()->getLocale(),
                 ]))
                 ->modalWidth(Width::FourExtraLarge)
                 ->modalSubmitAction(false)

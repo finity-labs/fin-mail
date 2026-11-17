@@ -1,0 +1,1 @@
+<html lang="{{ $locale }}" dir="{{ $direction }}"><body>LAYOUT:plain|{{ $template['key'] ?? '' }}|{{ $template['category'] ?? '' }}|{{ $hasAccount ?? 'no-host-data' }}|{{ $theme['header_bg'] ?? '' }}|{!! $body !!}</body></html>

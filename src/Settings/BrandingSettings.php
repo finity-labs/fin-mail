@@ -24,6 +24,14 @@ class BrandingSettings extends Settings
 
     public ?string $customer_service_phone;
 
+    /**
+     * Social profile links, each ['platform' => key, 'url' => string]. The
+     * default keeps emails sending on spatie/laravel-settings 3.4.2 and later
+     * until the settings migration that adds the row has run. The type stays
+     * out of this docblock: spatie reads property docblocks to pick casts.
+     */
+    public array $social_links = [];
+
     public static function group(): string
     {
         return 'fin-mail-branding';
@@ -64,6 +72,7 @@ class BrandingSettings extends Settings
             'footer_links' => [],
             'customer_service_email' => null,
             'customer_service_phone' => null,
+            'social_links' => [],
         ];
     }
 }

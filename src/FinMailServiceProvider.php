@@ -69,6 +69,36 @@ class FinMailServiceProvider extends PackageServiceProvider
         $this->registerPolicies();
         $this->registerAuthEmailOverrides();
         $this->registerScheduledCommands();
+        $this->registerUpgradeMigrations();
+        $this->registerAssets();
+    }
+
+    /**
+     * Settings migrations added after 1.14 run from the package itself, so
+     * the host's usual `php artisan migrate` picks them up without a
+     * vendor:publish step. Each one tolerates a row that already exists.
+     */
+    protected function registerUpgradeMigrations(): void
+    {
+        $this->loadMigrationsFrom(static::upgradeMigrationsPath());
+    }
+
+    public static function upgradeMigrationsPath(): string
+    {
+        return __DIR__.'/../database/settings/upgrades';
+    }
+
+    /**
+     * The social icons, published to public/vendor/fin-mail. The
+     * laravel-assets tag lets the skeleton's post-update-cmd copy them on
+     * every `composer update`.
+     */
+    protected function registerAssets(): void
+    {
+        $this->publishes(
+            [__DIR__.'/../resources/dist' => public_path('vendor/fin-mail')],
+            ['fin-mail-assets', 'laravel-assets'],
+        );
     }
 
     /**

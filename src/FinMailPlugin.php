@@ -10,6 +10,12 @@ use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use FinityLabs\FinMail\Editors\Blocks\ButtonBlock;
+use FinityLabs\FinMail\Editors\Blocks\CalloutBlock;
+use FinityLabs\FinMail\Editors\Blocks\CredentialsBlock;
+use FinityLabs\FinMail\Editors\Blocks\DividerBlock;
+use FinityLabs\FinMail\Editors\Blocks\EmailBlock;
+use FinityLabs\FinMail\Editors\Blocks\SmallPrintBlock;
+use FinityLabs\FinMail\Editors\Blocks\SummaryBlock;
 use FinityLabs\FinMail\Enums\NavigationGroup;
 use FinityLabs\FinMail\Helpers\PolicyRegistration;
 use FinityLabs\FinMail\Resources\EmailTemplateResource\EmailTemplateResource;
@@ -335,27 +341,65 @@ class FinMailPlugin implements Plugin
     }
 
     /**
-     * Get all registered custom blocks keyed by their ID.
-     * Always includes ButtonBlock as the default.
+     * The blocks fin-mail ships.
+     *
+     * @return list<class-string<EmailBlock>>
+     */
+    public static function getBuiltInBlockClasses(): array
+    {
+        return [
+            ButtonBlock::class,
+            SummaryBlock::class,
+            CredentialsBlock::class,
+            CalloutBlock::class,
+            DividerBlock::class,
+            SmallPrintBlock::class,
+        ];
+    }
+
+    /**
+     * Get all registered custom blocks keyed by their ID: the built-in
+     * blocks plus the ones registered with customBlocks(). Every one of them
+     * renders in emails, hidden or not.
      *
      * @return array<string, class-string>
      */
     public static function getCustomBlocks(): array
     {
-        return array_merge(
-            [ButtonBlock::getId() => ButtonBlock::class],
-            static::$customBlocks,
-        );
+        $builtIn = [];
+
+        foreach (static::getBuiltInBlockClasses() as $blockClass) {
+            $builtIn[$blockClass::getId()] = $blockClass;
+        }
+
+        return array_merge($builtIn, static::$customBlocks);
     }
 
     /**
-     * Get registered block classes as a flat array (for editor customBlocks()).
+     * Get registered block classes as a flat array.
      *
      * @return array<class-string>
      */
     public static function getCustomBlockClasses(): array
     {
         return array_values(static::getCustomBlocks());
+    }
+
+    /**
+     * The blocks offered in the editor's block menu: every registered block
+     * except the ids listed in config fin-mail.hidden_blocks.
+     *
+     * @return array<class-string>
+     */
+    public static function getEditorBlockClasses(): array
+    {
+        $hidden = array_filter((array) config('fin-mail.hidden_blocks', []), 'is_string');
+
+        return array_values(array_filter(
+            static::getCustomBlocks(),
+            fn (string $blockId): bool => ! in_array($blockId, $hidden, true),
+            ARRAY_FILTER_USE_KEY,
+        ));
     }
 
     public static function isShieldAvailable(): bool
